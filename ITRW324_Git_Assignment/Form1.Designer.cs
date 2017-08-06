@@ -45,6 +45,7 @@
             this.btnVorster.TabIndex = 0;
             this.btnVorster.Text = "Vorster";
             this.btnVorster.UseVisualStyleBackColor = true;
+            this.btnVorster.Click += new System.EventHandler(this.btnVorster_Click);
             // 
             // btnPhilip
             // 

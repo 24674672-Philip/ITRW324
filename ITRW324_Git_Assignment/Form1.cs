@@ -16,5 +16,11 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
+
+        private void btnVorster_Click(object sender, EventArgs e)
+        {
+            Vorster frmVorster = new Vorster();
+            frmVorster.ShowDialog();
+        }
     }
 }

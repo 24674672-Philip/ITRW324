@@ -26,8 +26,9 @@ namespace ITRW324_Git_Assignment
                 int[] randomNumbers = new int[n];
                 for(int i =0; i<n; i++)
                 {
-                    randomNumbers[i] = random.Next();
+                    randomNumbers[i] = random.Next(0,200);
                 }
+                Standard_Dev_Class standardDev = new Standard_Dev_Class(randomNumbers);
             }
         }
     }
