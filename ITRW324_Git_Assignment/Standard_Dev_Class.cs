@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace ITRW324_Git_Assignment
 {
@@ -11,12 +11,7 @@ namespace ITRW324_Git_Assignment
     {
         
 
-        public Standard_Dev_Class(int[] data)
-        {          
-            Show(CalculateStandardDeviation(data));
-        }
-
-        private double CalculateStandardDeviation(int[] pData)
+        public double CalculateStandardDeviation(int[] pData)
         {
             double total = 0;
             double ave;
@@ -41,10 +36,7 @@ namespace ITRW324_Git_Assignment
             return standardDev;
         }
 
-        public void Show(double standardDev)
-        {
-            MessageBox.Show("Standard Deviation of n randomly generated numbers is:\n" + Math.Round(standardDev,3));
-        }
+        
 
     }
 }

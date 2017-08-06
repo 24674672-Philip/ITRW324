@@ -28,7 +28,8 @@ namespace ITRW324_Git_Assignment
                 {
                     randomNumbers[i] = random.Next(0,200);
                 }
-                Standard_Dev_Class standardDev = new Standard_Dev_Class(randomNumbers);
+                Standard_Dev_Class standardDev = new Standard_Dev_Class();
+                MessageBox.Show("Standard Deviation of n randomly generated numbers is:\n" + Math.Round(standardDev.CalculateStandardDeviation(randomNumbers), 3));
             }
         }
     }
