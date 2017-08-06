@@ -39,7 +39,7 @@
             // 
             // btnVorster
             // 
-            this.btnVorster.Location = new System.Drawing.Point(112, 27);
+            this.btnVorster.Location = new System.Drawing.Point(135, 27);
             this.btnVorster.Name = "btnVorster";
             this.btnVorster.Size = new System.Drawing.Size(173, 29);
             this.btnVorster.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // btnPhilip
             // 
-            this.btnPhilip.Location = new System.Drawing.Point(112, 69);
+            this.btnPhilip.Location = new System.Drawing.Point(135, 69);
             this.btnPhilip.Name = "btnPhilip";
             this.btnPhilip.Size = new System.Drawing.Size(173, 29);
             this.btnPhilip.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // btnZander
             // 
-            this.btnZander.Location = new System.Drawing.Point(112, 119);
+            this.btnZander.Location = new System.Drawing.Point(135, 119);
             this.btnZander.Name = "btnZander";
             this.btnZander.Size = new System.Drawing.Size(173, 29);
             this.btnZander.TabIndex = 2;
@@ -66,7 +66,7 @@
             // 
             // btnBrendan
             // 
-            this.btnBrendan.Location = new System.Drawing.Point(112, 167);
+            this.btnBrendan.Location = new System.Drawing.Point(135, 167);
             this.btnBrendan.Name = "btnBrendan";
             this.btnBrendan.Size = new System.Drawing.Size(173, 29);
             this.btnBrendan.TabIndex = 3;
@@ -75,7 +75,7 @@
             // 
             // btnTheunnis
             // 
-            this.btnTheunnis.Location = new System.Drawing.Point(112, 210);
+            this.btnTheunnis.Location = new System.Drawing.Point(135, 210);
             this.btnTheunnis.Name = "btnTheunnis";
             this.btnTheunnis.Size = new System.Drawing.Size(173, 29);
             this.btnTheunnis.TabIndex = 4;
@@ -84,7 +84,7 @@
             // 
             // btnJoy
             // 
-            this.btnJoy.Location = new System.Drawing.Point(112, 254);
+            this.btnJoy.Location = new System.Drawing.Point(135, 254);
             this.btnJoy.Name = "btnJoy";
             this.btnJoy.Size = new System.Drawing.Size(173, 29);
             this.btnJoy.TabIndex = 5;
@@ -93,7 +93,7 @@
             // 
             // btnKeagan
             // 
-            this.btnKeagan.Location = new System.Drawing.Point(112, 302);
+            this.btnKeagan.Location = new System.Drawing.Point(135, 302);
             this.btnKeagan.Name = "btnKeagan";
             this.btnKeagan.Size = new System.Drawing.Size(173, 29);
             this.btnKeagan.TabIndex = 6;
