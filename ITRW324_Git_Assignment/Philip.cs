@@ -19,8 +19,15 @@ namespace ITRW324_Git_Assignment
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            int n = Convert.ToInt16(textBox2.Text);
-            GCD calc = new GCD(n);
+            try
+            {
+                int n = Convert.ToInt16(textBox2.Text);
+                GCD calc = new GCD(n);
+            }
+            catch (Exception dex)
+            {
+                MessageBox.Show(dex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
     }
 }

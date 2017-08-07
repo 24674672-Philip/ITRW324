@@ -11,8 +11,8 @@ namespace ITRW324_Git_Assignment
     {
         private int n { get; set; }
         private int[] number { get; set; }
-
         private int gcd { get; set; }
+        private string num { get; set; }
 
         public GCD ()
         {
@@ -24,7 +24,8 @@ namespace ITRW324_Git_Assignment
             n = inc;
             initRandom();
             gcd = calcGCD(number);
-            MessageBox.Show("GCD = " + Convert.ToString(gcd), "GCD", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            initNum();
+            MessageBox.Show("Numbers: " + num + "GCD = " + Convert.ToString(gcd), "GCD", MessageBoxButtons.OK, MessageBoxIcon.Information);
         } 
 
         private void initRandom()
@@ -34,7 +35,7 @@ namespace ITRW324_Git_Assignment
 
             for (int i = 0; i < n; i++)
             {
-                number[i] = rand.Next();
+                number[i] = rand.Next(1,100);
             }
 
         }
@@ -47,6 +48,14 @@ namespace ITRW324_Git_Assignment
         static int calcGCD(int a, int b)
         {
             return b == 0 ? a : calcGCD(b, a % b);
+        }
+
+        private void initNum()
+        {
+            for (int i = 0; i < n; i++)
+            {
+                num += Convert.ToString(number[i]) + " ";
+            }
         }
 
     }

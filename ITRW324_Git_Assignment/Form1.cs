@@ -16,5 +16,11 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
+
+        private void btnPhilip_Click(object sender, EventArgs e)
+        {
+            Philip tempFrm = new Philip();
+            tempFrm.ShowDialog();
+        }
     }
 }
