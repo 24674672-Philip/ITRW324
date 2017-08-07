@@ -16,5 +16,11 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
+
+        private void btnZander_Click(object sender, EventArgs e)
+        {
+            Zander tempform = new Zander();
+            tempform.ShowDialog();
+        }
     }
 }
