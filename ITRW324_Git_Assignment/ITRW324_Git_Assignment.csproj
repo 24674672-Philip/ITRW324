@@ -61,6 +61,13 @@
     <Compile Include="Theunnis.Designer.cs">
       <DependentUpon>Theunnis.cs</DependentUpon>
     </Compile>
+    <Compile Include="Standard_Dev_Class.cs" />
+    <Compile Include="Vorster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vorster.Designer.cs">
+      <DependentUpon>Vorster.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -75,6 +82,9 @@
     </Compile>
     <EmbeddedResource Include="Theunnis.resx">
       <DependentUpon>Theunnis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vorster.resx">
+      <DependentUpon>Vorster.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
