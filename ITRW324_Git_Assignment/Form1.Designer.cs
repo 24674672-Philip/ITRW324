@@ -1,4 +1,4 @@
-namespace ITRW324_Git_Assignment
+﻿namespace ITRW324_Git_Assignment
 {
     partial class Form1
     {
@@ -40,31 +40,26 @@ namespace ITRW324_Git_Assignment
             // btnVorster
             // 
             this.btnVorster.Location = new System.Drawing.Point(135, 27);
-            this.btnVorster.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVorster.Name = "btnVorster";
-            this.btnVorster.Size = new System.Drawing.Size(173, 30);
+            this.btnVorster.Size = new System.Drawing.Size(173, 29);
             this.btnVorster.TabIndex = 0;
             this.btnVorster.Text = "Vorster";
             this.btnVorster.UseVisualStyleBackColor = true;
-            this.btnVorster.Click += new System.EventHandler(this.btnVorster_Click);
             // 
             // btnPhilip
             // 
             this.btnPhilip.Location = new System.Drawing.Point(135, 69);
-            this.btnPhilip.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPhilip.Name = "btnPhilip";
-            this.btnPhilip.Size = new System.Drawing.Size(173, 30);
+            this.btnPhilip.Size = new System.Drawing.Size(173, 29);
             this.btnPhilip.TabIndex = 1;
             this.btnPhilip.Text = "Philip";
             this.btnPhilip.UseVisualStyleBackColor = true;
-            this.btnPhilip.Click += new System.EventHandler(this.btnPhilip_Click);
             // 
             // btnZander
             // 
             this.btnZander.Location = new System.Drawing.Point(135, 119);
-            this.btnZander.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnZander.Name = "btnZander";
-            this.btnZander.Size = new System.Drawing.Size(173, 30);
+            this.btnZander.Size = new System.Drawing.Size(173, 29);
             this.btnZander.TabIndex = 2;
             this.btnZander.Text = "Zander";
             this.btnZander.UseVisualStyleBackColor = true;
@@ -72,20 +67,17 @@ namespace ITRW324_Git_Assignment
             // btnBrendan
             // 
             this.btnBrendan.Location = new System.Drawing.Point(135, 167);
-            this.btnBrendan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBrendan.Name = "btnBrendan";
-            this.btnBrendan.Size = new System.Drawing.Size(173, 30);
+            this.btnBrendan.Size = new System.Drawing.Size(173, 29);
             this.btnBrendan.TabIndex = 3;
             this.btnBrendan.Text = "Theunnis";
             this.btnBrendan.UseVisualStyleBackColor = true;
-            this.btnBrendan.Click += new System.EventHandler(this.btnBrendan_Click);
             // 
             // btnTheunnis
             // 
             this.btnTheunnis.Location = new System.Drawing.Point(135, 210);
-            this.btnTheunnis.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTheunnis.Name = "btnTheunnis";
-            this.btnTheunnis.Size = new System.Drawing.Size(173, 30);
+            this.btnTheunnis.Size = new System.Drawing.Size(173, 29);
             this.btnTheunnis.TabIndex = 4;
             this.btnTheunnis.Text = "Brendan";
             this.btnTheunnis.UseVisualStyleBackColor = true;
@@ -93,9 +85,8 @@ namespace ITRW324_Git_Assignment
             // btnJoy
             // 
             this.btnJoy.Location = new System.Drawing.Point(135, 254);
-            this.btnJoy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnJoy.Name = "btnJoy";
-            this.btnJoy.Size = new System.Drawing.Size(173, 30);
+            this.btnJoy.Size = new System.Drawing.Size(173, 29);
             this.btnJoy.TabIndex = 5;
             this.btnJoy.Text = "Joy";
             this.btnJoy.UseVisualStyleBackColor = true;
@@ -103,9 +94,8 @@ namespace ITRW324_Git_Assignment
             // btnKeagan
             // 
             this.btnKeagan.Location = new System.Drawing.Point(135, 302);
-            this.btnKeagan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnKeagan.Name = "btnKeagan";
-            this.btnKeagan.Size = new System.Drawing.Size(173, 30);
+            this.btnKeagan.Size = new System.Drawing.Size(173, 29);
             this.btnKeagan.TabIndex = 6;
             this.btnKeagan.Text = "Keagan";
             this.btnKeagan.UseVisualStyleBackColor = true;
@@ -114,7 +104,7 @@ namespace ITRW324_Git_Assignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(477, 393);
+            this.ClientSize = new System.Drawing.Size(478, 393);
             this.Controls.Add(this.btnKeagan);
             this.Controls.Add(this.btnJoy);
             this.Controls.Add(this.btnTheunnis);
@@ -122,7 +112,6 @@ namespace ITRW324_Git_Assignment
             this.Controls.Add(this.btnZander);
             this.Controls.Add(this.btnPhilip);
             this.Controls.Add(this.btnVorster);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

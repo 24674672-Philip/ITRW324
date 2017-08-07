@@ -16,26 +16,5 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
-
-      
-        
-
-        private void btnPhilip_Click(object sender, EventArgs e)
-        {
-            Philip tempFrm = new Philip();
-            tempFrm.ShowDialog();
-        }
-
-        private void btnVorster_Click(object sender, EventArgs e)
-        {
-            Vorster frmVorster = new Vorster();
-            frmVorster.ShowDialog();
-        }
-
-        private void btnBrendan_Click(object sender, EventArgs e)
-        {
-            Theunnis frmTheunnis = new Theunnis();
-            frmTheunnis.Show();
-        }
     }
 }
