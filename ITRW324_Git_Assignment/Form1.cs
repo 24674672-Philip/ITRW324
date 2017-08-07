@@ -16,5 +16,11 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
+
+        private void btnBrendan_Click(object sender, EventArgs e)
+        {
+            Theunnis frmTheunnis = new Theunnis();
+            frmTheunnis.Show();
+        }
     }
 }
