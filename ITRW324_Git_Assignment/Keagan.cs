@@ -15,7 +15,7 @@ namespace ITRW324_Git_Assignment
         public Keagan()
         {
             InitializeComponent();
-            richTextBox1.Text = "My name is Keagan Du Toit, I am a third year IT student studying at NWU pukke, I am orginally from Johannesburg. I am learning git.";
+            richTextBox1.Text = "My name is Keagan Du Toit, I am a third year IT student studying at NWU pukke. I enjoy playing computer games and listening to music. I work as a bartender at Bourbons Street.";
             this.ActiveControl = txtNO;
         }
 
@@ -44,6 +44,10 @@ namespace ITRW324_Git_Assignment
                 Median_Class median = new Median_Class();
 
                 MessageBox.Show("Numbers Generated\n" + printNum + "\n\nMedian (To the nearest INT)\n" + Math.Round(median.ClacMedian(numAR)));
+            }
+            else
+            {
+                MessageBox.Show("Number cannot be 0");
             }
         }
     }
