@@ -16,5 +16,11 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
+
+        private void btnJoy_Click(object sender, EventArgs e)
+        {
+            JoyForm form = new JoyForm();
+            form.Show();
+        }
     }
 }

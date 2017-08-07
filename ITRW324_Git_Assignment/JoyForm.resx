@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label5.Text" xml:space="preserve">
+    <value>I am 3rd year IT and Computer Science student at the NWU-PUK.
+I am currently aiming to carry on with my studies next year. 
+I've been a competitive swimmer since the age of 6, and have a
+passion for drawing, music (flute), and computers.
+I'm sure that all my classmates knows that I am an anime freak.
+I have been living in Potch since primary school, and hope to move 
+elsewhere by 2020. </value>
+  </data>
 </root>
