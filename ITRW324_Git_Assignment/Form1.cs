@@ -18,10 +18,12 @@ namespace ITRW324_Git_Assignment
         }
 
       
-        private void btnTheunnis_Click(object sender, EventArgs e)
+        
+
+        private void btnPhilip_Click(object sender, EventArgs e)
         {
-            Theunnis frmTheunnis = new Theunnis();
-            frmTheunnis.Show();
+            Philip tempFrm = new Philip();
+            tempFrm.ShowDialog();
         }
 
         private void btnVorster_Click(object sender, EventArgs e)
@@ -29,12 +31,11 @@ namespace ITRW324_Git_Assignment
             Vorster frmVorster = new Vorster();
             frmVorster.ShowDialog();
         }
-        }
 
-        private void btnPhilip_Click(object sender, EventArgs e)
+        private void btnBrendan_Click(object sender, EventArgs e)
         {
-            Philip tempFrm = new Philip();
-            tempFrm.ShowDialog();
+            Theunnis frmTheunnis = new Theunnis();
+            frmTheunnis.Show();
         }
     }
 }

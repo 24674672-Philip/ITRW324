@@ -1,4 +1,33 @@
+namespace ITRW324_Git_Assignment
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.btnVorster = new System.Windows.Forms.Button();
             this.btnPhilip = new System.Windows.Forms.Button();
             this.btnZander = new System.Windows.Forms.Button();
@@ -28,6 +57,7 @@
             this.btnPhilip.TabIndex = 1;
             this.btnPhilip.Text = "Philip";
             this.btnPhilip.UseVisualStyleBackColor = true;
+            this.btnPhilip.Click += new System.EventHandler(this.btnPhilip_Click);
             // 
             // btnZander
             // 
@@ -46,8 +76,9 @@
             this.btnBrendan.Name = "btnBrendan";
             this.btnBrendan.Size = new System.Drawing.Size(173, 30);
             this.btnBrendan.TabIndex = 3;
-            this.btnBrendan.Text = "Brendan";
+            this.btnBrendan.Text = "Theunnis";
             this.btnBrendan.UseVisualStyleBackColor = true;
+            this.btnBrendan.Click += new System.EventHandler(this.btnBrendan_Click);
             // 
             // btnTheunnis
             // 
@@ -56,9 +87,8 @@
             this.btnTheunnis.Name = "btnTheunnis";
             this.btnTheunnis.Size = new System.Drawing.Size(173, 30);
             this.btnTheunnis.TabIndex = 4;
-            this.btnTheunnis.Text = "Theunnis";
+            this.btnTheunnis.Text = "Brendan";
             this.btnTheunnis.UseVisualStyleBackColor = true;
-            this.btnTheunnis.Click += new System.EventHandler(this.btnTheunnis_Click);
             // 
             // btnJoy
             // 
@@ -97,4 +127,17 @@
             this.Text = "Form1";
             this.ResumeLayout(false);
 
-            this.btnPhilip.Click += new System.EventHandler(this.btnPhilip_Click);
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnVorster;
+        private System.Windows.Forms.Button btnPhilip;
+        private System.Windows.Forms.Button btnZander;
+        private System.Windows.Forms.Button btnBrendan;
+        private System.Windows.Forms.Button btnTheunnis;
+        private System.Windows.Forms.Button btnJoy;
+        private System.Windows.Forms.Button btnKeagan;
+    }
+}
+
