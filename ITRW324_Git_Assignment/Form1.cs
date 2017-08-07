@@ -16,5 +16,11 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
+
+        private void btnKeagan_Click(object sender, EventArgs e)
+        {
+            Keagan keagNew = new Keagan();
+            keagNew.ShowDialog();
+        }
     }
 }
