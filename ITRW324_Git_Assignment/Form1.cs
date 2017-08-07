@@ -16,5 +16,11 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
+
+        private void btnTheunnis_Click(object sender, EventArgs e)
+        {
+            BrendanForm myForm = new BrendanForm();
+            myForm.ShowDialog();
+        }
     }
 }

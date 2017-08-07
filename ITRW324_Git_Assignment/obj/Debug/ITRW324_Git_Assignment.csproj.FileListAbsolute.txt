@@ -1,2 +1,12 @@
 C:\Users\Vorster\Desktop\Repositories\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\Vorster\Desktop\Assignments\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.pdb
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csprojResolveAssemblyReference.cache
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.BrendanForm.resources
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Form1.resources
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Properties.Resources.resources
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csproj.GenerateResource.Cache
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.exe
+C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb

@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>I am a final year IT student at North-West University, I am a top performing student that wishes to continue my studies to an honours degree. The reason for this is I wish to work internationally. I've been inlovwe with technology ever since I was a little kid when my dad braught home a T.V. Games console. I've been keeping my self updated ever since with the latest and greatest tech avalible. My hobbies include Gaming, Digital art creation, reading, and cooking.  I am a curious person and love to stay upto date with current events and thinking of questions that will need answers in the future. </value>
+  </data>
 </root>
