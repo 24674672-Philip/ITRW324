@@ -16,6 +16,7 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
             richTextBox1.Text = "My name is Keagan Du Toit, I am a third year IT student studying at NWU pukke, I am orginally from Johannesburg. I am learning git.";
+            this.ActiveControl = txtNO;
         }
 
         private void btnCalc_Click(object sender, EventArgs e)
@@ -24,21 +25,26 @@ namespace ITRW324_Git_Assignment
             string printNum = "";
             Random rand = new Random();
             int[] numAR = new int[n];
+
             //Test for 5 to 20 method..
-            for (int i = 0; i < n; i++)
+            if(n > 0)
             {
-                numAR[i] = rand.Next(0, 200);
-            }
-            Array.Sort(numAR);
-            for (int i = 0; i < n; i++)
-            {
-                printNum = printNum + numAR[i] + " ";
-            }
-            //string displayNo = string.Join(Environment.NewLine, numAR);
+                for (int i = 0; i < n; i++)
+                {
+                    numAR[i] = rand.Next(0, 200);
+                }
 
-            Median_Class median = new Median_Class();
+                Array.Sort(numAR);
 
-            MessageBox.Show("Numbers Generated\n" + printNum + "\nMedian (To the nearest INT)\n" + Math.Round(median.ClacMedian(numAR)));
+                for (int i = 0; i < n; i++)
+                {
+                    printNum = printNum + numAR[i] + " ";
+                }
+
+                Median_Class median = new Median_Class();
+
+                MessageBox.Show("Numbers Generated\n" + printNum + "\n\nMedian (To the nearest INT)\n" + Math.Round(median.ClacMedian(numAR)));
+            }
         }
     }
 }
