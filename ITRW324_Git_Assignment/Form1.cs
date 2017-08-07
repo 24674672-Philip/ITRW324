@@ -17,17 +17,17 @@ namespace ITRW324_Git_Assignment
             InitializeComponent();
         }
 
+      
+        private void btnTheunnis_Click(object sender, EventArgs e)
+        {
+            Theunnis frmTheunnis = new Theunnis();
+            frmTheunnis.Show();
+        }
+
         private void btnVorster_Click(object sender, EventArgs e)
         {
             Vorster frmVorster = new Vorster();
             frmVorster.ShowDialog();
         }
-        }
-
-        private void btnBrendan_Click(object sender, EventArgs e)
-        {
-            Theunnis frmTheunnis = new Theunnis();
-            frmTheunnis.Show();
-        }
     }
 }

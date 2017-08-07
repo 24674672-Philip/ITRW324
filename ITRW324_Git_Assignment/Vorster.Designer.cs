@@ -55,11 +55,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 218);
+            this.label2.Location = new System.Drawing.Point(55, 218);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(290, 17);
+            this.label2.Size = new System.Drawing.Size(264, 17);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Please enter a number for statistical analysis";
+            this.label2.Text = "Please enter n to see standard deviation";
             // 
             // tbxN
             // 

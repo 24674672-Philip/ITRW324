@@ -10,3 +10,14 @@ C:\Users\tcjvr\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_
 C:\Users\tcjvr\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csproj.GenerateResource.Cache
 C:\Users\tcjvr\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.exe
 C:\Users\tcjvr\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.pdb
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csprojResolveAssemblyReference.cache
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Form1.resources
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Properties.Resources.resources
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Vorster.resources
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csproj.GenerateResource.Cache
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.exe
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Theunnis.resources
