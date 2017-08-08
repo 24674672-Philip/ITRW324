@@ -10,6 +10,36 @@ namespace ITRW324_Git_Assignment
     class stat
     {
 
+        public void GCD(int n)
+        {
+            int[] num = initRandom(n);
+            int gcd = calcGCD(num);
+            MessageBox.Show("GCD = " + Convert.ToString(gcd), "GCD", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private int calcGCD(int[] numbers)
+        {
+            return numbers.Aggregate(calcGCD);
+        }
+
+        private int calcGCD(int a, int b)
+        {
+            return b == 0 ? a : calcGCD(b, a % b);
+        }
+
+        private int[] initRandom(int n)
+        {
+            Random rand = new Random();
+            int[] number = new int[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                number[i] = rand.Next(1, 100);
+            }
+
+            return number;
+        }
+
         public void max(int n)
         {
             int max;

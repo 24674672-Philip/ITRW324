@@ -26,7 +26,8 @@ namespace ITRW324_Git_Assignment
                 int flag = cN.validateN();
                 if (flag == 1)
                 {
-                       GCD calc = new GCD(n);
+                    stat calc = new stat();
+                    calc.GCD(n);
                 }
                 else
                     MessageBox.Show("Please check if the number you entered is between 5 and 20.");

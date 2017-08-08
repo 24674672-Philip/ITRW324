@@ -107,3 +107,9 @@ C:\Users\tcjvr\Desktop\Git 2\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Gi
 C:\Users\tcjvr\Desktop\Git 2\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Zander.resources
 C:\Users\tcjvr\Desktop\Git 2\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csproj.GenerateResource.Cache
 >>>>>>> 1.0.0
+D:\werk\ITRW324\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.BrendanForm.resources
+D:\werk\ITRW324\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Keagan.resources
+D:\werk\ITRW324\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.JoyForm.resources
+D:\werk\ITRW324\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Theunnis.resources
+D:\werk\ITRW324\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Vorster.resources
+D:\werk\ITRW324\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Zander.resources

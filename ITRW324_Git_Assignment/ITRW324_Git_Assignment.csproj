@@ -59,7 +59,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCD.cs" />
     <Compile Include="Keagan.cs">
       <SubType>Form</SubType>
     </Compile>
