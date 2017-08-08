@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Average.cs" />
+    <Compile Include="BrendanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrendanForm.Designer.cs">
+      <DependentUpon>BrendanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,10 @@
     <Compile Include="Vorster.Designer.cs">
       <DependentUpon>Vorster.cs</DependentUpon>
     </Compile>
+    <Compile Include="RandomNumbersN.cs" />
+    <EmbeddedResource Include="BrendanForm.resx">
+      <DependentUpon>BrendanForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

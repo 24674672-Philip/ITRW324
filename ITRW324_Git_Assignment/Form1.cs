@@ -37,5 +37,12 @@ namespace ITRW324_Git_Assignment
             Theunnis frmTheunnis = new Theunnis();
             frmTheunnis.Show();
         }
+        }
+
+        private void btnTheunnis_Click(object sender, EventArgs e)
+        {
+            BrendanForm myForm = new BrendanForm();
+            myForm.ShowDialog();
+        }
     }
 }
