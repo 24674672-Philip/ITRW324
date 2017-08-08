@@ -57,7 +57,7 @@
             this.btnPhilip.TabIndex = 1;
             this.btnPhilip.Text = "Philip";
             this.btnPhilip.UseVisualStyleBackColor = true;
-            //this.btnPhilip.Click += new System.EventHandler(this.btnPhilip_Click);
+            this.btnPhilip.Click += new System.EventHandler(this.btnPhilip_Click);
             // 
             // btnZander
             // 

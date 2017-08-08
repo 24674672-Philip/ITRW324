@@ -55,6 +55,10 @@ namespace ITRW324_Git_Assignment
             tempform.ShowDialog();
         }
 
-        
+        private void btnPhilip_Click(object sender, EventArgs e)
+        {
+            Philip newPhil = new Philip();
+            newPhil.ShowDialog();
+        }
     }
 }
