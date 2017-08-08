@@ -21,12 +21,12 @@ namespace ITRW324_Git_Assignment
         {
             double average;
             int num = Convert.ToInt32(textBox1.Text);
-            CheckN check = new CheckN();
+            CheckN check = new CheckN(num);
             int iflag = check.validateN();
             if (iflag == 1)
             {
-                Average cAverage = new Average(num);
-                average = cAverage.getAverage();
+                stat cAverage = new stat();
+                average = cAverage.average(num);
                 lblAnswer.Text = "The mean of the random numbers are: " + average;
             }
             else

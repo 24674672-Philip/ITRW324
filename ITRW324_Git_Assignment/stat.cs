@@ -9,6 +9,7 @@ namespace ITRW324_Git_Assignment
 {
     class stat
     {
+
         public void max(int n)
         {
             int max;
@@ -29,5 +30,21 @@ namespace ITRW324_Git_Assignment
             }
             MessageBox.Show("The randomed numbers are " + sNumbers + "and the Max number is: " + max);
         }// end max
+
+        public double average(int n)
+        {
+            double sum = 0;
+            double avg = 0;
+            RandomNumbersN rN = new RandomNumbersN();
+            rN = new RandomNumbersN(n);
+            int[] randoms = rN.randomNumbers();
+            for (int i = 0; i < n; i++)
+            {
+                sum += randoms[i];
+            }
+
+            avg = sum / n;
+            return avg;
+        }
     }
 }
