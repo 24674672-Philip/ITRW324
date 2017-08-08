@@ -127,6 +127,7 @@ namespace ITRW324_Git_Assignment
             this.Text = "Form1";
             this.ResumeLayout(false);
 
+            this.btnJoy.Click += new System.EventHandler(this.btnJoy_Click);
         }
 
         #endregion

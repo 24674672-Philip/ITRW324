@@ -66,6 +66,13 @@
     <Compile Include="Philip.Designer.cs">
       <DependentUpon>Philip.cs</DependentUpon>
     </Compile>
+    <Compile Include="JoyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JoyForm.Designer.cs">
+      <DependentUpon>JoyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nRandomNumber.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Theunnis.cs">
@@ -90,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Philip.resx">
       <DependentUpon>Philip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JoyForm.resx">
+      <DependentUpon>JoyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
