@@ -92,6 +92,12 @@
     <EmbeddedResource Include="BrendanForm.resx">
       <DependentUpon>BrendanForm.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Zander.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zander.Designer.cs">
+      <DependentUpon>Zander.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vorster.resx">
       <DependentUpon>Vorster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zander.resx">
+      <DependentUpon>Zander.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

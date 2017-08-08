@@ -51,5 +51,11 @@ namespace ITRW324_Git_Assignment
             JoyForm form = new JoyForm();
             form.Show();
         }
+
+        private void btnZander_Click(object sender, EventArgs e)
+        {
+            Zander tempform = new Zander();
+            tempform.ShowDialog();
+        }
     }
 }

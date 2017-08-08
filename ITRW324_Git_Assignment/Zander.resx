@@ -117,4 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox2.Text" xml:space="preserve">
+    <value>Hello my name is Zander van Vuuren student number: 24678317, I study at the Potchefstroom campus of the North-West University. 
+I am studying my B.Sc in Information Technology and Computer Science, I plan to finish this year and start working next year.</value>
+  </data>
 </root>

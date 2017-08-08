@@ -68,6 +68,7 @@ namespace ITRW324_Git_Assignment
             this.btnZander.TabIndex = 2;
             this.btnZander.Text = "Zander";
             this.btnZander.UseVisualStyleBackColor = true;
+            this.btnZander.Click += new System.EventHandler(this.btnZander_Click);
             // 
             // btnBrendan
             // 
@@ -114,7 +115,7 @@ namespace ITRW324_Git_Assignment
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 393);
             this.Controls.Add(this.btnKeagan);
