@@ -61,6 +61,28 @@ namespace ITRW324_Git_Assignment
             MessageBox.Show("The randomed numbers are " + sNumbers + "and the Max number is: " + max);
         }// end max
 
+
+        public void min(int n)
+        {
+            int min;
+            string num = "";
+            RandomNumbersN rN = new RandomNumbersN();
+
+            rN = new RandomNumbersN(n);
+            int[] numbers = rN.randomNumbers();
+            min = numbers[0];
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] < min)
+                    min = numbers[i];
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                num = num + numbers[i] + ", ";
+            }
+            MessageBox.Show("The random numbers generated are: " + num + " \nof which the Min is: " + min);  
+        }
+
         //<<<<<<< HEAD
         public void modus(int n)
         {
