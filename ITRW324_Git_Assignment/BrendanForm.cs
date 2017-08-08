@@ -16,9 +16,7 @@ namespace ITRW324_Git_Assignment
         {
             InitializeComponent();
         }
-        int max;
-        string sNumbers = "";
-        RandomNumbersN rN = new RandomNumbersN();
+        
         private void button1_Click(object sender, EventArgs e)
         {
             int n = Convert.ToInt32(textBox2.Text);
@@ -26,19 +24,8 @@ namespace ITRW324_Git_Assignment
             int flag = cN.validateN();
             if (flag == 1)
             {
-                rN = new RandomNumbersN(n);
-                int[] numbers = rN.randomNumbers();
-                max = numbers[0];
-                for (int i = 0; i < numbers.Length; i++)
-                {
-                    if (numbers[i] > max)
-                        max = numbers[i];
-                }
-                for (int i = 0; i < numbers.Length; i++)
-                {
-                    sNumbers = sNumbers + numbers[i] + ", ";
-                }
-                MessageBox.Show("The randomed numbers are " + sNumbers + "and the Max number is: " + max);
+                stat myStat = new stat();
+                myStat.max(n);
             }
             else
                 MessageBox.Show("Please check if the number you entered is between 5 and 20.");
