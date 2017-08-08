@@ -1,5 +1,6 @@
 C:\Users\Vorster\Desktop\Repositories\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\Vorster\Desktop\Assignments\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
+<<<<<<< HEAD
 C:\Users\tcjvr\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\tcjvr\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe
 C:\Users\tcjvr\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.pdb
@@ -65,3 +66,15 @@ D:\GitKraken Repo\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignmen
 D:\GitKraken Repo\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.exe
 D:\GitKraken Repo\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb
 C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Zander.resources
+=======
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.exe
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.pdb
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Form1.resources
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Keagan.resources
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.Properties.Resources.resources
+C:\Users\User\Documents\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csproj.GenerateResource.Cache
+>>>>>>> Median

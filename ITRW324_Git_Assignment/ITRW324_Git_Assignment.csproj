@@ -59,12 +59,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GCD.cs" />
-    <Compile Include="Philip.cs">
+    <Compile Include="Keagan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Philip.Designer.cs">
-      <DependentUpon>Philip.cs</DependentUpon>
+    <Compile Include="Keagan.Designer.cs">
+      <DependentUpon>Keagan.cs</DependentUpon>
     </Compile>
     <Compile Include="JoyForm.cs">
       <SubType>Form</SubType>
@@ -73,6 +72,7 @@
       <DependentUpon>JoyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="nRandomNumber.cs" />
+    <Compile Include="Median_Class.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Theunnis.cs">
@@ -101,8 +101,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Philip.resx">
-      <DependentUpon>Philip.cs</DependentUpon>
+    <EmbeddedResource Include="Keagan.resx">
+      <DependentUpon>Keagan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JoyForm.resx">
       <DependentUpon>JoyForm.cs</DependentUpon>

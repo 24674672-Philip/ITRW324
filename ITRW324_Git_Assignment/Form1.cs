@@ -17,13 +17,10 @@ namespace ITRW324_Git_Assignment
             InitializeComponent();
         }
 
-      
-        
-
-        private void btnPhilip_Click(object sender, EventArgs e)
+        private void btnKeagan_Click(object sender, EventArgs e)
         {
-            Philip tempFrm = new Philip();
-            tempFrm.ShowDialog();
+            Keagan keagNew = new Keagan();
+            keagNew.ShowDialog();
         }
 
         private void btnVorster_Click(object sender, EventArgs e)
