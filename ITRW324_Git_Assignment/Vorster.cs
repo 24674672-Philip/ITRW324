@@ -22,14 +22,21 @@ namespace ITRW324_Git_Assignment
             if(tbxN.Text.Length > 0)
             {
                 int n = Convert.ToInt32(tbxN.Text);
-                Random random = new Random();
-                int[] randomNumbers = new int[n];
-                for(int i =0; i<n; i++)
+                CheckN cN = new CheckN(n);
+                int flag = cN.validateN();
+                if (flag == 1)
                 {
-                    randomNumbers[i] = random.Next(0,200);
+                    Random random = new Random();
+                    int[] randomNumbers = new int[n];
+                    for(int i =0; i<n; i++)
+                    {
+                        randomNumbers[i] = random.Next(0,200);
+                    }
+                    Standard_Dev_Class standardDev = new Standard_Dev_Class();
+                    MessageBox.Show("Standard Deviation of n randomly generated numbers is:\n" + Math.Round(standardDev.CalculateStandardDeviation(randomNumbers), 3));
                 }
-                Standard_Dev_Class standardDev = new Standard_Dev_Class();
-                MessageBox.Show("Standard Deviation of n randomly generated numbers is:\n" + Math.Round(standardDev.CalculateStandardDeviation(randomNumbers), 3));
+                else
+                    MessageBox.Show("Please check if the number you entered is between 5 and 20.");
             }
         }
     }

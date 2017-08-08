@@ -21,48 +21,54 @@ namespace ITRW324_Git_Assignment
          private void button1_Click(object sender, EventArgs e)
          {
             int temp = Convert.ToInt32(numericUpDown2.Value);
-            if (temp == 0)
+            CheckN cN = new CheckN(temp);
+            int flag = cN.validateN();
+            if (flag == 1)
             {
-                MessageBox.Show("The amount cannot be 0!");
-                return;
-            }
-            else
-            {
-                amount = temp;
-            }
-            Random rnd = new Random();
-            int[] values = new int[amount];
-            for (int i = 0; i < amount; i++)
-            {
-                int rng = rnd.Next(1, 10);
-                values[i] = rng;
-                textBox1.Text += (Convert.ToInt32(values[i]) + "\r\n");
-            }
-            Dictionary<int, int> searchMode = new Dictionary<int, int>();
-            foreach (int x in values)
-            {
-                if (searchMode.ContainsKey(x))
+                if (temp == 0)
                 {
-                    searchMode[x] = searchMode[x] + 1;
+                    MessageBox.Show("The amount cannot be 0!");
+                    return;
                 }
                 else
                 {
-                    searchMode[x] = 1;
+                    amount = temp;
                 }
-            }
-
-            int final = int.MinValue;
-            int max = int.MinValue;
-            foreach (int y in searchMode.Keys)
-            {
-                if (searchMode[y] > max)
+                Random rnd = new Random();
+                int[] values = new int[amount];
+                for (int i = 0; i < amount; i++)
                 {
-                    max = searchMode[y];
-                    final = y;
+                    int rng = rnd.Next(1, 10);
+                    values[i] = rng;
+                    textBox1.Text += (Convert.ToInt32(values[i]) + "\r\n");
                 }
-            }
-            MessageBox.Show("The mode is: " + final + " that occurred " + max + " times");
+                Dictionary<int, int> searchMode = new Dictionary<int, int>();
+                foreach (int x in values)
+                {
+                    if (searchMode.ContainsKey(x))
+                    {
+                        searchMode[x] = searchMode[x] + 1;
+                    }
+                    else
+                    {
+                        searchMode[x] = 1;
+                    }
+                }
 
+                int final = int.MinValue;
+                int max = int.MinValue;
+                foreach (int y in searchMode.Keys)
+                {
+                    if (searchMode[y] > max)
+                    {
+                        max = searchMode[y];
+                        final = y;
+                    }
+                }
+                MessageBox.Show("The mode is: " + final + " that occurred " + max + " times");
+            }
+            else
+                MessageBox.Show("Please check if the number you entered is between 5 and 20.");
         }
     }
 }

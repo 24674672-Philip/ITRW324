@@ -27,21 +27,28 @@ namespace ITRW324_Git_Assignment
             try
             {
                 int number = Convert.ToInt32(textBox2.Text);
-                random = new nRandomNumber(number);
-                int[] numbers = random.randomNumberGenerate();
-                min = numbers[0];
-
-                for (int i = 0; i < numbers.Length; i++)
+                CheckN cN = new CheckN(number);
+                int flag = cN.validateN();
+                if (flag == 1)
                 {
-                    if (numbers[i] < min)
-                        min = numbers[i];
-                }
+                    random = new nRandomNumber(number);
+                    int[] numbers = random.randomNumberGenerate();
+                    min = numbers[0];
 
-                for (int i = 0; i < numbers.Length; i++)
-                {
+                    for (int i = 0; i < numbers.Length; i++)
+                    {
+                        if (numbers[i] < min)
+                            min = numbers[i];
+                    }
+
+                    for (int i = 0; i < numbers.Length; i++)
+                    {
                     input = input + numbers[i] + ", ";
+                    }
+                        MessageBox.Show("The random numbers generated are: " + input + " \nof which the Min is: " + min);
                 }
-                MessageBox.Show("The random numbers generated are: " + input + " \nof which the Min is: " + min);
+                else
+                    MessageBox.Show("Please check if the number you entered is between 5 and 20.");
             }
             catch (FormatException)
             {

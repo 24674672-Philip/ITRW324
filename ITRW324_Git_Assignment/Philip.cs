@@ -22,7 +22,14 @@ namespace ITRW324_Git_Assignment
             try
             {
                 int n = Convert.ToInt16(textBox2.Text);
-                GCD calc = new GCD(n);
+                CheckN cN = new CheckN(n);
+                int flag = cN.validateN();
+                if (flag == 1)
+                {
+                       GCD calc = new GCD(n);
+                }
+                else
+                    MessageBox.Show("Please check if the number you entered is between 5 and 20.");
             }
             catch (Exception dex)
             {

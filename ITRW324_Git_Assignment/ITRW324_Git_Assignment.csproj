@@ -53,6 +53,7 @@
     <Compile Include="BrendanForm.Designer.cs">
       <DependentUpon>BrendanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckN.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
