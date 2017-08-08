@@ -21,16 +21,16 @@ namespace ITRW324_Git_Assignment
         {
             double average;
             int num = Convert.ToInt32(textBox1.Text);
-            CheckN cN = new CheckN(num);
-            int flag = cN.validateN();
-            if (flag == 1)
+            CheckN check = new CheckN();
+            int iflag = check.validateN();
+            if (iflag == 1)
             {
                 Average cAverage = new Average(num);
                 average = cAverage.getAverage();
                 lblAnswer.Text = "The mean of the random numbers are: " + average;
             }
             else
-                MessageBox.Show("Please check if the number you entered is between 5 and 20.");
+                MessageBox.Show("Please make sure that number you entered is between 5 and 20.");
         }
     }
 }
