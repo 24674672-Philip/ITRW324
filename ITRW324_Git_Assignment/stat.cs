@@ -31,7 +31,7 @@ namespace ITRW324_Git_Assignment
             MessageBox.Show("The randomed numbers are " + sNumbers + "and the Max number is: " + max);
         }// end max
 
-<<<<<<< HEAD
+        //<<<<<<< HEAD
         public void modus(int n)
         {
             CheckN cN = new CheckN(n);
@@ -73,8 +73,9 @@ namespace ITRW324_Git_Assignment
             {
                 MessageBox.Show("Please check if the number you entered is between 5 and 20.");
             }
+        }
                 
-=======
+//=======
         public double average(int n)
         {
             double sum = 0;
@@ -89,7 +90,7 @@ namespace ITRW324_Git_Assignment
 
             avg = sum / n;
             return avg;
->>>>>>> 1.0.0
+//>>>>>>> 1.0.0
         }
     }
 }
