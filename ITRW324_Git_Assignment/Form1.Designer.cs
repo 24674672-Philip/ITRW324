@@ -57,6 +57,7 @@ namespace ITRW324_Git_Assignment
             this.btnPhilip.TabIndex = 1;
             this.btnPhilip.Text = "Philip";
             this.btnPhilip.UseVisualStyleBackColor = true;
+            this.btnPhilip.Click += new System.EventHandler(this.btnPhilip_Click);
             // 
             // btnZander
             // 
@@ -99,6 +100,7 @@ namespace ITRW324_Git_Assignment
             this.btnJoy.TabIndex = 5;
             this.btnJoy.Text = "Joy";
             this.btnJoy.UseVisualStyleBackColor = true;
+            this.btnJoy.Click += new System.EventHandler(this.btnJoy_Click);
             // 
             // btnKeagan
             // 
@@ -127,7 +129,6 @@ namespace ITRW324_Git_Assignment
             this.Text = "Form1";
             this.ResumeLayout(false);
 
-            this.btnJoy.Click += new System.EventHandler(this.btnJoy_Click);
         }
 
         #endregion
