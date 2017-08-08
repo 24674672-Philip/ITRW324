@@ -43,8 +43,6 @@ C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_
 C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb
 C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csprojResolveAssemblyReference.cache
 C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.BrendanForm.resources
-C:\Users\Vorster\Desktop\Repositories\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
-C:\Users\Vorster\Desktop\Assignments\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\삼성\Desktop\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\삼성\Desktop\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe
 C:\Users\삼성\Desktop\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.pdb
@@ -55,3 +53,4 @@ C:\Users\삼성\Desktop\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Ass
 C:\Users\삼성\Desktop\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.exe
 C:\Users\삼성\Desktop\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb
 C:\Users\삼성\Desktop\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.JoyForm.resources
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.JoyForm.resources
