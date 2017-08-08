@@ -34,15 +34,16 @@ namespace ITRW324_Git_Assignment
 
         private void btnBrendan_Click(object sender, EventArgs e)
         {
-            Theunnis frmTheunnis = new Theunnis();
-            frmTheunnis.Show();
+            BrendanForm myForm = new BrendanForm();
+            myForm.ShowDialog();
         }
-        }
+        
 
         private void btnTheunnis_Click(object sender, EventArgs e)
         {
-            BrendanForm myForm = new BrendanForm();
-            myForm.ShowDialog();
+            Theunnis frmTheunnis = new Theunnis();
+            frmTheunnis.Show();
+            
         }
     }
 }

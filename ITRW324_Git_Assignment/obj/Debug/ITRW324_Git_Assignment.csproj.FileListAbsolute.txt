@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\Vorster\Desktop\Repositories\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\Vorster\Desktop\Assignments\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\tcjvr\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
@@ -32,9 +31,6 @@ C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\bin\Debug\I
 C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.pdb
 C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.exe
 C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb
-=======
-C:\Users\Vorster\Desktop\Repositories\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
-C:\Users\Vorster\Desktop\Assignments\ITRW324_Git_Assignment\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe.config
 C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.exe
 C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\bin\Debug\ITRW324_Git_Assignment.pdb
@@ -45,4 +41,5 @@ C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_
 C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csproj.GenerateResource.Cache
 C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.exe
 C:\Users\bigda\Desktop\Git\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.pdb
->>>>>>> MAX
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.csprojResolveAssemblyReference.cache
+C:\Users\Vorster\Desktop\Repositories\ITRW324\ITRW324_Git_Assignment\obj\Debug\ITRW324_Git_Assignment.BrendanForm.resources
