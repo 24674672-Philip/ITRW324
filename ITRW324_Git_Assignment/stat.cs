@@ -97,7 +97,6 @@ namespace ITRW324_Git_Assignment
             }
         }
 
-        //<<<<<<< HEAD
         public void modus(int n)
         {
             CheckN cN = new CheckN(n);
@@ -133,7 +132,12 @@ namespace ITRW324_Git_Assignment
                         final = y;
                     }
                 }
-                MessageBox.Show("The mode is: " + final + " that occurred " + max + " times");
+                string numbers = "";
+                for (int q = 0; q < n; q++)
+                {
+                    numbers = numbers + ", " + Convert.ToString(values[q]);
+                }
+                MessageBox.Show("The randomly generated numbers are " + numbers + " and the mode is: " + final + " that occurred " + max + " times");
             }
             else
             {

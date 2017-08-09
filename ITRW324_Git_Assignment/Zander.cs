@@ -19,9 +19,16 @@ namespace ITRW324_Git_Assignment
 
          private void button1_Click(object sender, EventArgs e)
          {
-            int temp = Convert.ToInt32(numericUpDown2.Value);
-            stat newstat = new ITRW324_Git_Assignment.stat();
-            newstat.modus(temp); 
+            try
+            {
+                int temp = Convert.ToInt32(textBox1.Text);
+                stat newstat = new ITRW324_Git_Assignment.stat();
+                newstat.modus(temp);
+            }
+            catch (Exception dex)
+            {
+                MessageBox.Show("Please enter a valid integer.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
