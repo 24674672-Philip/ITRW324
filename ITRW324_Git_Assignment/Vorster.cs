@@ -17,26 +17,38 @@ namespace ITRW324_Git_Assignment
             InitializeComponent();
         }
 
+        //Exception was added by D.Kim as Vorster was in hospital
         private void btnAnalyse_Click(object sender, EventArgs e)
         {
-            if(tbxN.Text.Length > 0)
+            try
             {
-                int n = Convert.ToInt32(tbxN.Text);
-                CheckN cN = new CheckN(n);
-                int flag = cN.validateN();
-                if (flag == 1)
+                if (tbxN.Text.Length > 0)
                 {
-                    Random random = new Random();
-                    int[] randomNumbers = new int[n];
-                    for(int i =0; i<n; i++)
+                    int n = Convert.ToInt32(tbxN.Text);
+                    CheckN cN = new CheckN(n);
+                    int flag = cN.validateN();
+                    if (flag == 1)
                     {
-                        randomNumbers[i] = random.Next(0,200);
+                        Random random = new Random();
+                        int[] randomNumbers = new int[n];
+                        for (int i = 0; i < n; i++)
+                        {
+                            randomNumbers[i] = random.Next(0, 200);
+                        }
+                        Standard_Dev_Class standardDev = new Standard_Dev_Class();
+                        MessageBox.Show("Standard Deviation of n randomly generated numbers is:\n" + Math.Round(standardDev.CalculateStandardDeviation(randomNumbers), 3));
                     }
-                    Standard_Dev_Class standardDev = new Standard_Dev_Class();
-                    MessageBox.Show("Standard Deviation of n randomly generated numbers is:\n" + Math.Round(standardDev.CalculateStandardDeviation(randomNumbers), 3));
+                    else
+                        MessageBox.Show("Please check if the number you entered is between 5 and 20.");
                 }
-                else
-                    MessageBox.Show("Please check if the number you entered is between 5 and 20.");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Please make sure that you have entered an integer value.");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something whent erong, please try again.");
             }
         }
     }
