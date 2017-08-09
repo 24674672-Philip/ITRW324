@@ -34,7 +34,7 @@ namespace ITRW324_Git_Assignment
             }
             catch (Exception dex)
             {
-                MessageBox.Show(dex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Please enter an integer.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
     }
