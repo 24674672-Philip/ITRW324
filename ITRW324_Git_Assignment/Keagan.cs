@@ -21,9 +21,17 @@ namespace ITRW324_Git_Assignment
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            int n = Convert.ToInt32(txtNO.Text);
-            stat medianStat = new ITRW324_Git_Assignment.stat();
-            medianStat.median(n);
+            try
+            {
+                int n = Convert.ToInt32(txtNO.Text);
+                stat medianStat = new ITRW324_Git_Assignment.stat();
+                medianStat.median(n);
+            }
+            catch (Exception dex)
+            {
+                MessageBox.Show("Input must be an Intager", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }
