@@ -20,17 +20,25 @@ namespace ITRW324_Git_Assignment
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int num = Convert.ToInt32(textBox2.Text);
-            CheckN check = new CheckN(num);
-            int flag = check.validateN();
-            if (flag == 1)
+            try
             {
-                stat myStat = new stat();
-                myStat.min(num);
+                int num = Convert.ToInt32(textBox2.Text);
+                CheckN check = new CheckN(num);
+                int flag = check.validateN();
+                if (flag == 1)
+                {
+                    stat myStat = new stat();
+                    myStat.min(num);
+                }
+                else
+                    MessageBox.Show("Please check if the number you entered is between 5 and 20.");
             }
-            else
-                MessageBox.Show("Please check if the number you entered is between 5 and 20.");
+            catch (FormatException)
+            {
+                MessageBox.Show("Please make sure that you have entered an integer value.");
+            }
         }
+        
     }
     }
 

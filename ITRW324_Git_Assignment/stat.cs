@@ -64,23 +64,37 @@ namespace ITRW324_Git_Assignment
 
         public void min(int n)
         {
-            int min;
-            string num = "";
-            RandomNumbersN rN = new RandomNumbersN();
+            try
+            {
+                CheckN cN = new CheckN(n);
+                int flag = cN.validateN();
+                if (flag == 1)
+                {
+                    int min;
+                    string num = "";
+                    RandomNumbersN rN = new RandomNumbersN();
 
-            rN = new RandomNumbersN(n);
-            int[] numbers = rN.randomNumbers();
-            min = numbers[0];
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                if (numbers[i] < min)
-                    min = numbers[i];
+                    rN = new RandomNumbersN(n);
+                    int[] numbers = rN.randomNumbers();
+                    min = numbers[0];
+                    for (int i = 0; i < numbers.Length; i++)
+                    {
+                        if (numbers[i] < min)
+                            min = numbers[i];
+                    }
+                    for (int i = 0; i < numbers.Length; i++)
+                    {
+                        num = num + numbers[i] + ", ";
+                    }
+                    MessageBox.Show("The random numbers generated are: " + num + " \nof which the Min is: " + min);
+                }
+                else
+                    MessageBox.Show("Please check if the number you entered is between 5 and 20.");
             }
-            for (int i = 0; i < numbers.Length; i++)
+            catch (FormatException)
             {
-                num = num + numbers[i] + ", ";
+                MessageBox.Show("Please check that you have inserted an interger.");
             }
-            MessageBox.Show("The random numbers generated are: " + num + " \nof which the Min is: " + min);  
         }
 
         //<<<<<<< HEAD
