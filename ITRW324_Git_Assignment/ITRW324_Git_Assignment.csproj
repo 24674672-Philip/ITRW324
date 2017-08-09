@@ -46,16 +46,76 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrendanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrendanForm.Designer.cs">
+      <DependentUpon>BrendanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckN.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Keagan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Keagan.Designer.cs">
+      <DependentUpon>Keagan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JoyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JoyForm.Designer.cs">
+      <DependentUpon>JoyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nRandomNumber.cs" />
+    <Compile Include="Median_Class.cs" />
+    <Compile Include="Philip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Philip.Designer.cs">
+      <DependentUpon>Philip.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="stat.cs" />
+    <Compile Include="Theunnis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Theunnis.Designer.cs">
+      <DependentUpon>Theunnis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Standard_Dev_Class.cs" />
+    <Compile Include="Vorster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vorster.Designer.cs">
+      <DependentUpon>Vorster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RandomNumbersN.cs" />
+    <EmbeddedResource Include="BrendanForm.resx">
+      <DependentUpon>BrendanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Zander.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zander.Designer.cs">
+      <DependentUpon>Zander.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Keagan.resx">
+      <DependentUpon>Keagan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JoyForm.resx">
+      <DependentUpon>JoyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Philip.resx">
+      <DependentUpon>Philip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,6 +126,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Theunnis.resx">
+      <DependentUpon>Theunnis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vorster.resx">
+      <DependentUpon>Vorster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zander.resx">
+      <DependentUpon>Zander.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
