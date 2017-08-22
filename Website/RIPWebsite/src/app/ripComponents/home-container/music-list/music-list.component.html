@@ -1,3 +1,9 @@
-<p>
-  music-list works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"
+         *ngFor="let item of musicItems">
+      <app-music-item
+        [musicitem]="item"></app-music-item>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,24 @@
-<p>
-  music-item works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="panel box-shadow text-center" style="height: 250px">
+      <div class="panel-heading text-center">
+        <img class="img-responsive"
+             [src]="musicitem.imagePath"
+             style="min-height: 50%; max-height: 125px">
+      </div>
+      <div class="panel-body" style="padding-top: 0;">
+        <div class="row">
+          <a><h3>{{musicitem.album}}</h3></a>
+        </div>
+
+        <div class="row">
+          <a>{{musicitem.artist}}</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
