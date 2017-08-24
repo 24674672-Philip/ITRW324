@@ -1,6 +1,14 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
+var mysql = require('mysql');
 const app = express();
+
+var con = mysql.createConnection({
+  host: '52.15.226.85',
+  username: 'philip',
+  password: 'blockchain',
+  database: 'blockchaindb'
+});
 
 app.get('/api', function(req, res){
   res.json({
@@ -10,15 +18,23 @@ app.get('/api', function(req, res){
 
 app.post('/api/login', function(req, res){
   //auth user
+  
+  var sql = 'SELECT * FROM users';
+  
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+  
   const user = { id: 3 };
-  const token = jwt.sign({ user }, 'my_secret_key');
+  const token = jwt.sign({ user }, 'blockchain');
   res.json({
     token: token
   });
 });
 
 app.get('/api/protected', ensureToken, function(req, res){
-  jwt.verify(req.token, 'my_secret_key', function(err, data){
+  jwt.verify(req.token, 'blockchain', function(err, data){
     if(err){
       res.sendStatus(403);
     }
@@ -32,7 +48,7 @@ app.get('/api/protected', ensureToken, function(req, res){
 });
 
 function ensureToken(req, res, next){
-  const bearerHeader = req.headers["authentication"];
+  const bearerHeader = req.headers["Auth"];
   if(typeof bearerHeader !== 'undefined'){
     const bearer = bearerHeader.split(" ");
     const bearerToken = bearer[1];
@@ -44,6 +60,6 @@ function ensureToken(req, res, next){
   }
 }
 
-app.listen(8080, function(){
+app.listen(3030, function(){
   console.log('App is listening on port 8080!');
 });
