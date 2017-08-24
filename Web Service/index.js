@@ -4,28 +4,55 @@ var mysql = require('mysql');
 const app = express();
 
 var con = mysql.createConnection({
-  host: '52.15.226.85',
-  username: 'philip',
-  password: 'blockchain',
-  database: 'blockchaindb'
+  host: "52.15.226.85",
+  user: "philip",
+  password: "blockchain",
+  database: "blockchainDB"
 });
 
 app.get('/api', function(req, res){
-  res.json({
-    text: 'my api!'
+  var sql = 'SELECT * FROM users';
+
+  con.query(sql, function (err, result, fields, rows) {
+    if (err) throw err;
+    console.log(result);
+    res.json({
+      text: 'my api!',
+    });
   });
+
 });
 
 app.post('/api/login', function(req, res){
   //auth user
-  
-  var sql = 'SELECT * FROM users';
-  
-  con.query(sql, function (err, result) {
+
+  var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
+  var valP = "Philip";
+  var valU = '123';
+
+  con.query(sql, [valP, valU], function (err, result) {
+    if (err) throw err;
+    console.log(result[0].name);
+    const user = { id: 3 };
+    const token = jwt.sign({ user }, 'blockchain');
+    res.json({
+      token: token,
+      user: result[0].name
+    });
+  });
+});
+
+app.post('/api/register', function(req, res){
+  //auth user
+
+  var sql = 'INSERT INTO users (name, surname, password) VALUES ?';
+  var val = '';
+
+  con.query(sql, [val], function (err, result) {
     if (err) throw err;
     console.log(result);
   });
-  
+
   const user = { id: 3 };
   const token = jwt.sign({ user }, 'blockchain');
   res.json({
