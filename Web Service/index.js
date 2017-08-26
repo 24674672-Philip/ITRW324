@@ -24,7 +24,6 @@ app.get('/api', function(req, res){
 });
 
 app.post('/api/login', function(req, res){
-  //auth user
 
   var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
   var valP = "Philip";
@@ -33,7 +32,7 @@ app.post('/api/login', function(req, res){
   con.query(sql, [valP, valU], function (err, result) {
     if (err) throw err;
     console.log(result[0].name);
-    const user = { id: 3 };
+    const user = { id: result[0].name };
     const token = jwt.sign({ user }, 'blockchain');
     res.json({
       token: token,
@@ -68,14 +67,13 @@ app.get('/api/protected', ensureToken, function(req, res){
     else {
       res.json({
         text: 'this is protected',
-        data: data
       });
     }
   })
 });
 
 function ensureToken(req, res, next){
-  const bearerHeader = req.headers["Auth"];
+  const bearerHeader = req.headers["authentication"];
   if(typeof bearerHeader !== 'undefined'){
     const bearer = bearerHeader.split(" ");
     const bearerToken = bearer[1];
