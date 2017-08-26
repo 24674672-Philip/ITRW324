@@ -26,8 +26,8 @@ app.get('/api', function(req, res){
 app.post('/api/login', function(req, res){
 
   var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
-  var valP = "Philip";
-  var valU = '123';
+  var valP = req.query.name;
+  var valU = req.query.pass;
 
   con.query(sql, [valP, valU], function (err, result) {
     if (err) throw err;
@@ -35,6 +35,7 @@ app.post('/api/login', function(req, res){
     const user = { id: result[0].name };
     const token = jwt.sign({ user }, 'blockchain');
     res.json({
+      login: 'Success!',
       token: token,
       user: result[0].name
     });
@@ -43,19 +44,15 @@ app.post('/api/login', function(req, res){
 
 app.post('/api/register', function(req, res){
   //auth user
-
   var sql = 'INSERT INTO users (name, surname, password) VALUES ?';
-  var val = '';
+  var val = [[req.query.name , req.query.sur , req.query.pass]];
 
   con.query(sql, [val], function (err, result) {
     if (err) throw err;
-    console.log(result);
-  });
-
-  const user = { id: 3 };
-  const token = jwt.sign({ user }, 'blockchain');
-  res.json({
-    token: token
+    console.log('inserted val: ' + val);
+    res.json({
+      registered: 'Success!'
+    });
   });
 });
 
@@ -66,7 +63,7 @@ app.get('/api/protected', ensureToken, function(req, res){
     }
     else {
       res.json({
-        text: 'this is protected',
+        text: 'this is protected'
       });
     }
   })
