@@ -12,7 +12,6 @@ var con = mysql.createConnection({
 
 app.get('/api', function(req, res){
   var sql = 'SELECT * FROM users';
-
   con.query(sql, function (err, result, fields, rows) {
     if (err) throw err;
     console.log(result);
@@ -26,10 +25,10 @@ app.get('/api', function(req, res){
 app.post('/api/login', function(req, res){
 
   var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
-  var valP = req.query.name;
-  var valU = req.query.pass;
+  var valP = req.headers["name"];
+  var valU = req.headers["pass"];
   console.log('name: ' + valP, ' pass: ' + valU);
-  
+
   con.query(sql, [valP, valU], function (err, result) {
     if (err) res.json({result: 'Something went wrong (error)'});
     if(result[0] == undefined) res.json({Login: 'Failed!'});
@@ -41,7 +40,7 @@ app.post('/api/login', function(req, res){
         login: 'Success!',
         token: token,
         user: result[0].name
-      });	
+      });
 	}
   });
 });
@@ -72,7 +71,6 @@ app.get('/api/protected', ensureToken, function(req, res){
 		  result: result
         });
 	  });
-      
     }
   })
 });
