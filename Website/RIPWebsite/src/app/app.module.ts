@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule} from "@angular/http";
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { BannerComponent } from './loginComponents/banner/banner.component';
 import { InputformComponent } from './loginComponents/inputform/inputform.component';
@@ -9,6 +9,8 @@ import { NavBarComponent } from './ripComponents/home-container/nav-bar/nav-bar.
 import { MusicListComponent } from './ripComponents/home-container/music-list/music-list.component';
 import { MusicItemComponent } from './ripComponents/home-container/music-list/music-item/music-item.component';
 import { HomeContainerComponent } from './ripComponents/home-container/home-container.component';
+import {ServerService} from "./server.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { HomeContainerComponent } from './ripComponents/home-container/home-cont
     NavBarComponent,
     MusicListComponent,
     MusicItemComponent,
-    HomeContainerComponent
+    HomeContainerComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

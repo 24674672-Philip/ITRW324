@@ -12,7 +12,7 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Insert a valid email address" style="text-align: center;" class="form-control"/>
+              <input placeholder="Insert a valid email address" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -20,7 +20,7 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Insert username" style="text-align: center;" class="form-control"/>
+              <input placeholder="Insert username" [(ngModel)]="username" style="text-align: center;" class="form-control"/>
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -28,7 +28,7 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Must be longer than 8 characters" style="text-align: center;" class="form-control" type="password"/>
+              <input placeholder="Must be longer than 8 characters" [(ngModel)]="password" style="text-align: center;" class="form-control" type="password"/>
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -36,13 +36,14 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Retype password" style="text-align: center;" class="form-control" type="password"/>
+              <input placeholder="Retype password" [(ngModel)]="confirmPassword"  style="text-align: center;" class="form-control" type="password"/>
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
           <div class="row">
-            <button class="btn btn-success" style="margin: 20px 0 0 0;">Create Account</button>
+            <button class="btn btn-success" (click)="loginClicked()"  style="margin: 20px 0 0 0;">Create Account</button>
           </div>
+          <div class="panel-success" *ngIf="success">Login was successful. Well done you programming genius  {{token}}</div>
         </div>
       </div>
       <div class=" col-sm3 col-md-4 col-lg-4"></div>
