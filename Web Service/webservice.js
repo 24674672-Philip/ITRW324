@@ -25,8 +25,10 @@ app.get('/api', function(req, res){
 app.post('/api/login', function(req, res){
 
   var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
-  var valP = req.headers["name"];
-  var valU = req.headers["pass"];
+  const userDetailsHeader = req.headers["user_details"];
+  const userDetails = userDetailsHeader.split("-");
+  var valP = userDetails[1];
+  var valU = userDetails[3];
   console.log('name: ' + valP, ' pass: ' + valU);
 
   con.query(sql, [valP, valU], function (err, result) {
@@ -51,7 +53,10 @@ app.post('/api/register', function(req, res){
   var val = [[req.query.name , req.query.sur , req.query.pass]];
 
   con.query(sql, [val], function (err, result) {
-    if (err) throw err;
+    if (err) res.json({
+		  registered: 'failed',
+		  error: err
+        });
     console.log('inserted val: ' + val);
     res.json({
       registered: 'Success!'
@@ -65,8 +70,11 @@ app.get('/api/protected', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-	  var sql = 'SELECT name, surname FROM users';
+	  var sql = 'SELECT name, surname FROM users WHERE NOT name IS NULL;';
 	  con.query(sql, function (err, result, fields, rows){
+		if (err) res.json({
+		  result: err
+        }); 
 		res.json({
 		  result: result
         });
