@@ -28,17 +28,21 @@ app.post('/api/login', function(req, res){
   var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
   var valP = req.query.name;
   var valU = req.query.pass;
-
+  console.log('name: ' + valP, ' pass: ' + valU);
+  
   con.query(sql, [valP, valU], function (err, result) {
-    if (err) throw err;
-    console.log(result[0].name);
-    const user = { id: result[0].name };
-    const token = jwt.sign({ user }, 'blockchain');
-    res.json({
-      login: 'Success!',
-      token: token,
-      user: result[0].name
-    });
+    if (err) res.json({result: 'Something went wrong (error)'});
+    if(result[0] == undefined) res.json({Login: 'Failed!'});
+	else{
+	  console.log(result[0].name);
+      const user = { id: result[0].name };
+      const token = jwt.sign({ user }, 'blockchain');
+      res.json({
+        login: 'Success!',
+        token: token,
+        user: result[0].name
+      });	
+	}
   });
 });
 
@@ -62,9 +66,13 @@ app.get('/api/protected', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-      res.json({
-        text: 'this is protected'
-      });
+	  var sql = 'SELECT name, surname FROM users';
+	  con.query(sql, function (err, result, fields, rows){
+		res.json({
+		  result: result
+        });
+	  });
+      
     }
   })
 });
