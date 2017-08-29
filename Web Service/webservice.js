@@ -24,9 +24,9 @@ app.get('/api', function(req, res){
 
 app.post('/api/login', function(req, res){
 
-  var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
-  var valP = req.headers["username"];;
-  var valU = req.headers["password"];;
+  var sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
+  var valP = req.headers["username"];
+  var valU = req.headers["password"];
   console.log('name: ' + valP, ' pass: ' + valU);
 
   con.query(sql, [valP, valU], function (err, result) {
@@ -47,8 +47,17 @@ app.post('/api/login', function(req, res){
 
 app.post('/api/register', function(req, res){
   //auth user
-  var sql = 'INSERT INTO users (name, surname, password) VALUES ?';
-  var val = [[req.query.name , req.query.sur , req.query.pass]];
+  var sql = 'INSERT INTO users (user_id, name, surname, email, dateOfBirth, password,username,cellphone) VALUES ?';
+  var val = [[
+    req.headers["id"],
+    req.headers["fname"],
+    req.headers["lname"],
+    req.headers["email"],
+    req.headers["birthdate"],
+    req.headers["password"],
+    req.headers["username"],
+    req.headers["cellphone"]
+  ]];
 
   con.query(sql, [val], function (err, result) {
     if (err) res.json({
