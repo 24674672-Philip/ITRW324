@@ -25,10 +25,8 @@ app.get('/api', function(req, res){
 app.post('/api/login', function(req, res){
 
   var sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
-  const userDetailsHeader = req.headers["user_details"];
-  const userDetails = userDetailsHeader.split("-");
-  var valP = userDetails[1];
-  var valU = userDetails[3];
+  var valP = req.headers["username"];;
+  var valU = req.headers["password"];;
   console.log('name: ' + valP, ' pass: ' + valU);
 
   con.query(sql, [valP, valU], function (err, result) {
@@ -74,7 +72,7 @@ app.get('/api/protected', ensureToken, function(req, res){
 	  con.query(sql, function (err, result, fields, rows){
 		if (err) res.json({
 		  result: err
-        }); 
+        });
 		res.json({
 		  result: result
         });
