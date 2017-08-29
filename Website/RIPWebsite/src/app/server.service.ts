@@ -11,9 +11,11 @@ export class ServerService {
 
   login(username: string, password: string, callback){
     let result = 'unauthed';
-    let loginString = 'name-'+username+'-pass-'+password;
-    const header = new Headers({'user_details':loginString})
-    let returnString = 'Failed';
+    const header = new Headers();
+    header.set('username',username);
+    header.append('password',password);
+
+    console.log(header.keys());
     this.http.post(this.url+'login', null, { headers: header})
       .subscribe(
         (response) => {
@@ -27,10 +29,32 @@ export class ServerService {
 
   }
 
-  register(email: string, username: string, password: string ){
-    let headers: Headers = new Headers([{'username':username}, {'password': password}, {'email':email}]);
+  register(fname: string, lname: string, birthdate: string, cellphone: string, country: string, city: string, adressline1: string
+           ,addressline2: string,postalcode: string, email: string, username: string, password: string, callback ){
+    let headers: Headers = new Headers();
+    headers.set('fName',fname.trim());
+    headers.append('lName',lname.trim());
+    headers.append('username',username.trim());
+    headers.append('email',email);//TODO: email validation on the input form component itself
+    headers.append('password',password);
+    headers.append('birthdate',birthdate);
+    headers.append('cellphone',cellphone.trim());
+    headers.append('country',country.trim());
+    headers.append('city',city.trim());
+    headers.append('addressline1',adressline1.trim());
+    headers.append('addressline2',addressline2.trim());
+    headers.append('postalcode',postalcode.trim());
     this.http.post(this.url+'register', null, {headers: headers})
       .subscribe();
+  }
+
+  protected(token : string){
+    const header = new Headers();
+    header.set('authentication', token);
+    this.http.get(this.url+'protected', {headers: header})
+      .subscribe(
+        (response) => console.log(response)
+      )
   }
 
 }

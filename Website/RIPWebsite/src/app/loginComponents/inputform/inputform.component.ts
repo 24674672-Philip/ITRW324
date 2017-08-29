@@ -35,7 +35,6 @@ export class InputformComponent implements OnInit {
       }else{
         this.loginFailed();
       }
-
     });
   }
 
@@ -43,6 +42,7 @@ export class InputformComponent implements OnInit {
     this.success = true;
     this.token = token;
     console.log('Login was successful'+' '+ token);
+    this.serverService.protected(this.token);
   }
 
   loginFailed(){
