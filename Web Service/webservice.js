@@ -1,7 +1,7 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var mysql = require('mysql');
-var email = require('./app/email');
+var randtoken = require('rand-token');
 
 const app = express();
 
@@ -13,7 +13,6 @@ var con = mysql.createConnection({
 });
 
 app.get('/api', function(req, res){
-  email();
   var sql = 'SELECT * FROM users';
   con.query(sql, function (err, result, fields, rows) {
     if (err) throw err;
@@ -50,7 +49,8 @@ app.post('/api/login', function(req, res){
 
 app.post('/api/register', function(req, res){
   //auth user
-  var sql = 'INSERT INTO users (user_id, name, surname, email, dateOfBirth, password,username,cellphone) VALUES ?';
+  var hash = randtoken.generate(16);
+  var sql = 'INSERT INTO users (user_id, name, surname, email, dateOfBirth, password,username,cellphone,isActivated,emailHash) VALUES ?';
   var val = [[
     req.headers["id"],
     req.headers["fname"],
@@ -59,7 +59,9 @@ app.post('/api/register', function(req, res){
     req.headers["birthdate"],
     req.headers["password"],
     req.headers["username"],
-    req.headers["cellphone"]
+    req.headers["cellphone"],
+    0,
+    hash
   ]];
 
   con.query(sql, [val], function (err, result) {
@@ -68,6 +70,9 @@ app.post('/api/register', function(req, res){
 		  error: err
         });
     console.log('inserted val: ' + val);
+    var link = hash;
+    var emailAddress = req.headers['email'];
+    var email = require('./app/email')(link,emailAddress);
     res.json({
       registered: 'Success!'
     });
@@ -91,6 +96,31 @@ app.get('/api/protected', ensureToken, function(req, res){
 	  });
     }
   })
+});
+
+app.get('/api/activate', function(req, res){
+  var hash = req.query.hash;
+  var email = req.query.email;
+  var sql = 'SELECT emailHash FROM users WHERE email = ?;';
+  con.query(sql, email, function(err, result){
+    if(err) res.json({
+		  result: err
+    });
+    else if (result[0].emailHash === hash){
+      sql = 'UPDATE users SET isActivated = 1 WHERE email = ?';
+      con.query(sql,email,function(err, result){
+      if(err) res.json({
+  		  result: err
+      });
+      else res.json({
+        result: 'Successfully verified account!'
+      });
+      });
+    }
+    else res.json({
+		  result: 'Something went wrong',
+    });
+  });
 });
 
 function ensureToken(req, res, next){

@@ -13,7 +13,8 @@ module.exports = function(link, emailAddress){
     from: 'rip.donotreply@gmail.com',
     to: emailAddress,
     subject: 'RIP-Email verification',
-	text: 'To verify your account, please go to this link: ' + link
+	  text: 'To verify your account, please go to this link: http://52.15.226.85:8080/api/register?hash='
+    + link + '&email=' + emailAddress
   };
 
   transporter.sendMail(mailOptions, function(error, info){
