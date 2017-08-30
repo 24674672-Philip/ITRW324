@@ -1,6 +1,8 @@
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var mysql = require('mysql');
+var email = require('./app/email');
+
 const app = express();
 
 var con = mysql.createConnection({
@@ -11,6 +13,7 @@ var con = mysql.createConnection({
 });
 
 app.get('/api', function(req, res){
+  email();
   var sql = 'SELECT * FROM users';
   con.query(sql, function (err, result, fields, rows) {
     if (err) throw err;
