@@ -7,7 +7,7 @@ var fs = require('fs');
 const app = express();
 
 var con = mysql.createConnection({
-  host: "52.15.226.85",
+  host: "localhost",
   user: "philip",
   password: "blockchain",
   database: "blockchainDB"
@@ -150,8 +150,10 @@ app.get('/api/activate', function(req, res){
 
 app.get('/music', function(req,res){
 
-	var fileId = req.query.id;
-	var file = __dirname + '/music/' + fileId;
+	var songName = req.query.song;
+  var songAlbum = req.query.album;
+  var songArtist = req.query.artist;
+	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
 	fs.exists(file,function(exists){
 		if(exists)
 		{
@@ -181,6 +183,6 @@ function ensureToken(req, res, next){
   }
 }
 
-app.listen(3030, function(){
+app.listen(8080, function(){
   console.log('App is listening on port 8080!');
 });
