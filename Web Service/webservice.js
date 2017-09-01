@@ -2,6 +2,7 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var mysql = require('mysql');
 var randtoken = require('rand-token');
+var fs = require('fs');
 
 const app = express();
 
@@ -122,6 +123,50 @@ app.get('/api/activate', function(req, res){
     });
   });
 });
+
+/*app.get('/api/music', ensureToken, function(req, res){
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var fileId = req.query.id;
+	    var file = __dirname + '/music/' + fileId;
+	     fs.exists(file,function(exists){
+		     if(exists)
+		     {
+			   var rstream = fs.createReadStream(file);
+			   rstream.pipe(res);
+		     }
+		     else
+		     {
+			   res.send("Its a 404");
+		     res.end();
+		     }
+	     });
+     }
+  })
+});*/
+
+app.get('/music', function(req,res){
+
+	var fileId = req.query.id;
+	var file = __dirname + '/music/' + fileId;
+	fs.exists(file,function(exists){
+		if(exists)
+		{
+			var rstream = fs.createReadStream(file);
+			rstream.pipe(res);
+		}
+		else
+		{
+			res.send("Its a 404");
+			res.end();
+		}
+
+	});
+});
+
 
 function ensureToken(req, res, next){
   const bearerHeader = req.headers["authentication"];
