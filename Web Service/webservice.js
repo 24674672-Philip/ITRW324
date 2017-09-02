@@ -42,7 +42,10 @@ app.post('/api/login', function(req, res){
       res.json({
         login: 'Success!',
         token: token,
-        user: result[0].name
+        user: result[0].username,
+        fname: result[0].name,
+        lname: result[0].surname,
+        email: result[0].email
       });
 	}
   });
