@@ -6,9 +6,67 @@
     <div class="row">
       <div class=" col-sm3 col-md-4 col-lg-4"></div>
       <div class="panel col-sm-6 col-md-4 col-lg-4 box-shadow">
+
         <div class="panel-heading"><h2>Please Register an Account</h2></div>
+
         <div class="panel-body">
-          <h2>Email:</h2>
+
+<!--TODO: Reformat the layout of inputs -->
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <h2>First Name</h2>
+              <input placeholder="Insert Your First Name" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <h2>Last Name</h2>
+              <input placeholder="Insert Your Last Name" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <h2>Country</h2>
+              <input class="form-control" placeholder="Insert Your Country">
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <h2>City</h2>
+              <input class="form-control" placeholder="Input Your City">
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <h2>Postal Code</h2>
+              <input class="form-control" placeholder="Input Your Postal Code">
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <h2>Date of Birth</h2>
+              <input class="form-control" type="date">
+            </div>
+          </div>
+
+          <h2>Address Line 1</h2>
+          <div class="row">
+            <div class=" col-sm2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Insert Your Address" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
+            </div>
+            <div class=" col-sm2 col-md-2 col-lg-2"></div>
+          </div>
+
+
+          <h2>Address Line 2</h2>
+          <div class="row">
+            <div class=" col-sm2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Insert Your Address" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
+            </div>
+            <div class=" col-sm2 col-md-2 col-lg-2"></div>
+          </div>
+
+
+          <h2>Email</h2>
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
@@ -16,6 +74,8 @@
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
+
+
           <h2>Username</h2>
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
@@ -24,6 +84,8 @@
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
+
+
           <h2>Password</h2>
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
@@ -32,6 +94,8 @@
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
+
+
           <h2>Confirm Password</h2>
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
@@ -40,8 +104,10 @@
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
+
+
           <div class="row">
-            <button class="btn btn-success" (click)="loginClicked()"  style="margin: 20px 0 0 0;">Create Account</button>
+            <button class="btn btn-success" (click)="registerClicked()"  style="margin: 20px 0 0 0;">Create Account</button>
           </div>
           <div class="panel-success" *ngIf="success">Login was successful. Well done you programming genius  {{token}}</div>
         </div>

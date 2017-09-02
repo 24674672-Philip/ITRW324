@@ -9,9 +9,20 @@ import { NavBarComponent } from './ripComponents/home-container/nav-bar/nav-bar.
 import { MusicListComponent } from './ripComponents/home-container/music-list/music-list.component';
 import { MusicItemComponent } from './ripComponents/home-container/music-list/music-item/music-item.component';
 import { HomeContainerComponent } from './ripComponents/home-container/home-container.component';
-import {ServerService} from "./server.service";
-import {FormsModule} from "@angular/forms";
+import { ServerService } from "./server.service";
+import { FormsModule } from "@angular/forms";
+import { RegisterContainerComponent } from './loginComponents/register-container/register-container.component';
+import { LoginContainerComponent } from "./loginComponents/login-container/login-container.component";
+import { Routes, RouterModule } from "@angular/router";
+import {AuthService} from "./auth.service";
 
+
+const router: Routes = [
+  {path: 'login', component: LoginContainerComponent},
+  {path: '', component: RegisterContainerComponent},
+  {path: 'home', component: HomeContainerComponent},
+
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +33,20 @@ import {FormsModule} from "@angular/forms";
     MusicListComponent,
     MusicItemComponent,
     HomeContainerComponent,
+    RegisterContainerComponent,
+    LoginContainerComponent
+
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(router),
   ],
-  providers: [ServerService],
+  providers: [
+    ServerService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

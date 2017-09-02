@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServerService} from "../../server.service";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-inputform',
@@ -14,7 +15,7 @@ export class InputformComponent implements OnInit {
   token : string;
   success = false;
 
-  constructor(private serverService: ServerService) {
+  constructor(private serverService: ServerService, private authService: AuthService) {
     this.username='';
     this.email='';
     this.password='';
@@ -27,15 +28,8 @@ export class InputformComponent implements OnInit {
   }
 
 //This code is needed for the login inputform and not for the register form
-  loginClicked(){
-
-    this.serverService.login(this.username, this.password, (response)=>{
-      if(response['login'] === 'Success!'){
-        this.loginSuccess('bearer '+response['token'].toString());
-      }else{
-        this.loginFailed();
-      }
-    });
+  registerClicked(){
+    //TODO: Get all register info from form and call register from server.service
   }
 
   loginSuccess(token: string){
