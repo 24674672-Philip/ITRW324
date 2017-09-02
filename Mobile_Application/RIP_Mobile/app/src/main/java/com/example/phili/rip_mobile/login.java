@@ -32,10 +32,6 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     EditText etUsername, etPass;
     TextView tvReturn;
     Context contxt;
-    private RequestQueue reqQ;
-    private StringRequest stringReq;
-    private String url = "http://52.15.226.85:8080";
-    private static final String TAG = login.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,65 +54,18 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v){
         if(v.getId() == R.id.btnSend) {
             try {
-                sendPost();
+                serverLink conn = new serverLink(this);
+                if(conn.sendLogin(etUsername.getText().toString(),etPass.getText().toString())){
+                    tvReturn.setText("Login Success!");
+                }
+                else{
+                    tvReturn.setText("Login failed!");
+                }
             }
             catch (Exception e){
 
             }
         }
-    }
-
-    private void sendGet(){
-        reqQ = Volley.newRequestQueue(this);
-        stringReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i(TAG,"Response: " + response.toString());
-                tvReturn.setText(response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i(TAG,"Error: " + error.toString());
-            }
-        });
-
-        reqQ.add(stringReq);
-
-    }
-
-    private void sendPost(){
-        reqQ = Volley.newRequestQueue(this);
-        stringReq = new StringRequest(Request.Method.POST, url + "/api/login", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i(TAG,"Response: " + response.toString());
-                tvReturn.setText(results(response.toString()));
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i(TAG,"Error: " + error.toString());
-            }
-        }){
-            @Override
-            public Map<String,String> getHeaders(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("username",etUsername.getText().toString());
-                params.put("password",etPass.getText().toString());
-                return params;
-        }};
-        reqQ.add(stringReq);
-    }
-
-    private String results(String in){
-        String temp = "";
-
-        String[] result = in.split(",");
-
-        temp = result[0];
-
-        return temp;
     }
 
 }
