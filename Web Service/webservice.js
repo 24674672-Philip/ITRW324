@@ -22,7 +22,13 @@ app.get('/api', function(req, res){
       text: 'my api!',
     });
   });
+});
 
+app.get('/test', function(req, res){
+  console.log('test');
+  res.json({
+    text: 'my api!',
+  });
 });
 
 app.post('/api/login', function(req, res){
