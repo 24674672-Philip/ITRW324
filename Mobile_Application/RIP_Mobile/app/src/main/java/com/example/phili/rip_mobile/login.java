@@ -22,6 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +59,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         if(v.getId() == R.id.btnSend) {
             try {
                 tvReturn.setText("loading");
-                downloadData();
+                sendLoginRequest();
             }
             catch (Exception e){
 
@@ -64,12 +67,17 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    private void downloadData(){
-        final serverLink downloader = new serverLink(this);
-        downloader.sendLogin(etUsername.getText().toString(),etPass.getText().toString() ,new serverLink.OnDownloadTaskCompleted() {
+    private void sendLoginRequest(){
+        final serverLink sender = new serverLink(this);
+        sender.sendLogin(etUsername.getText().toString(),etPass.getText().toString() ,new serverLink.OnDownloadTaskCompleted() {
             @Override
-            public void onTaskCompleted(String result, boolean error, String message) {
-                tvReturn.setText(result);
+            public void onTaskCompleted(JSONObject result, boolean error, String message) {
+                try {
+                    tvReturn.setText(result.getString("login"));
+                }
+                catch (JSONException e){
+                    tvReturn.setText("Welp");
+                }
             }
         });
     }

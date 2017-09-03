@@ -1,12 +1,14 @@
 package com.example.phili.rip_mobile;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
@@ -21,65 +23,90 @@ import java.util.Map;
 public class serverLink{
 
     private RequestQueue reqQ;
-    private StringRequest stringReq;
+    private JsonObjectRequest jsonReq;
     private String url = "http://52.15.226.85:8080";
-    private static final String TAG = login.class.getName();
     private Context contxt;
-    private String temp;
-
 
     public serverLink(Context inContext){
         contxt=inContext;
     }
 
-    private void sendGet(){
-        temp = "";
+    public void sendLogin(final String username, final String password, final OnDownloadTaskCompleted taskCompleted){
         reqQ = Volley.newRequestQueue(contxt);
-        stringReq = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i(TAG,"Response: " + response.toString());
-                temp = response.toString();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i(TAG,"Error: " + error.toString());
-            }
-        });
 
-        reqQ.add(stringReq);
-
-    }
-
-    public String sendLogin(final String username, final String password, final OnDownloadTaskCompleted taskCompleted){
-        boolean bTemp = false;
-        temp = "";
-        reqQ = Volley.newRequestQueue(contxt);
-        stringReq = new StringRequest(Request.Method.POST, url + "/api/login", new Response.Listener<String>() {
+        jsonReq = new JsonObjectRequest(Request.Method.POST,url + "/api/login",null ,
+                new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(JSONObject response) {
                 taskCompleted.onTaskCompleted(response,false,null);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                taskCompleted.onTaskCompleted(error.toString(),false,null);
+                taskCompleted.onTaskCompleted(null,false,error.getMessage());
             }
-        }){//Headers
+        }){
             @Override
             public Map<String,String> getHeaders(){
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("username",username);
                 params.put("password",password);
                 return params;
-            }};
-        reqQ.add(stringReq);
-        return temp;
+            }
+        };
+        reqQ.add(jsonReq);
+    }
+
+    public void sendRegister(final String[] headers, final OnDownloadTaskCompleted taskCompleted){
+        reqQ = Volley.newRequestQueue(contxt);
+
+        jsonReq = new JsonObjectRequest(Request.Method.POST,url + "/api/register",null ,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        taskCompleted.onTaskCompleted(response,false,null);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                taskCompleted.onTaskCompleted(null,false,error.getMessage());
+            }
+        }){
+            @Override
+            public Map<String,String> getHeaders(){
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("fname",headers[0]);
+                params.put("lname",headers[1]);
+                params.put("email",headers[2]);
+                params.put("dob",headers[3]);
+                params.put("password",headers[4]);
+                params.put("username",headers[5]);
+                return params;
+            }
+        };
+        reqQ.add(jsonReq);
+    }
+
+    public void sendTest(final OnDownloadTaskCompleted taskCompleted){
+        reqQ = Volley.newRequestQueue(contxt);
+
+        jsonReq = new JsonObjectRequest(Request.Method.POST,url + "/test",null ,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        taskCompleted.onTaskCompleted(response,false,null);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                taskCompleted.onTaskCompleted(null,false,error.getMessage());
+            }
+        });
+        reqQ.add(jsonReq);
     }
 
     public interface OnDownloadTaskCompleted {
-        public void onTaskCompleted(String result, boolean error, String message);
+        public void onTaskCompleted(JSONObject result, boolean error, String message);
     }
 
 }
