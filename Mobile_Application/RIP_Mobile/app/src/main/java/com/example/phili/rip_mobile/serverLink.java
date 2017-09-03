@@ -9,15 +9,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
+import org.json.JSONObject;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by phili on 02-Sep-17.
  */
 
-public class serverLink {
+public class serverLink{
 
     private RequestQueue reqQ;
     private StringRequest stringReq;
@@ -51,20 +52,19 @@ public class serverLink {
 
     }
 
-    public boolean sendLogin(final String username, final String password){
+    public String sendLogin(final String username, final String password, final OnDownloadTaskCompleted taskCompleted){
         boolean bTemp = false;
         temp = "";
         reqQ = Volley.newRequestQueue(contxt);
         stringReq = new StringRequest(Request.Method.POST, url + "/api/login", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i(TAG,"Response: " + response.toString());
-                temp = response.toString();
+                taskCompleted.onTaskCompleted(response,false,null);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i(TAG,"Error: " + error.toString());
+                taskCompleted.onTaskCompleted(error.toString(),false,null);
             }
         }){//Headers
             @Override
@@ -75,17 +75,11 @@ public class serverLink {
                 return params;
             }};
         reqQ.add(stringReq);
-        bTemp = loginRes(temp);
-        return bTemp;
+        return temp;
     }
 
-    private boolean loginRes(String in){
-        boolean loginRe = false;
-
-        if(in.contains("Success")) {loginRe = true;}
-
-        return loginRe;
+    public interface OnDownloadTaskCompleted {
+        public void onTaskCompleted(String result, boolean error, String message);
     }
-
 
 }

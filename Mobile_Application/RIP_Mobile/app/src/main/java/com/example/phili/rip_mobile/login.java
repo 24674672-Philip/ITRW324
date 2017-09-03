@@ -23,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -32,6 +33,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     EditText etUsername, etPass;
     TextView tvReturn;
     Context contxt;
+    private static boolean temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +56,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v){
         if(v.getId() == R.id.btnSend) {
             try {
-                serverLink conn = new serverLink(this);
-                if(conn.sendLogin(etUsername.getText().toString(),etPass.getText().toString())){
+                if(downloadData()){
                     tvReturn.setText("Login Success!");
                 }
                 else{
@@ -66,6 +67,19 @@ public class login extends AppCompatActivity implements View.OnClickListener{
 
             }
         }
+    }
+
+    private boolean downloadData(){
+        temp = false;
+        final serverLink downloader = new serverLink(this);
+        downloader.sendLogin(etUsername.getText().toString(),etPass.getText().toString() ,new serverLink.OnDownloadTaskCompleted() {
+            @Override
+            public void onTaskCompleted(String result, boolean error, String message) {
+                tvReturn.setText(result);
+            }
+        });
+
+        return temp;
     }
 
 }
