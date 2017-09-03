@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http} from "@angular/http";
 
+
 @Injectable()
 export class ServerService {
 
@@ -44,8 +45,8 @@ export class ServerService {
     headers.append('postalcode',postalcode.trim());
     this.http.post(this.url+'register', null, {headers: headers})
       .subscribe(
-        (response) => callback(JSON.parse(response.toString())), //TODO: Fix this pls
-        (error) => callback(JSON.parse(error))
+        (response) => callback(response.json()),
+        (error) => callback(error.json())
       );
   }
 

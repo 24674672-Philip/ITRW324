@@ -74,7 +74,7 @@ export class RegisterInputFormComponent implements OnInit {
   }
 
   valid(): boolean{
-    if(this.passwordValid && this.emailValid && this.emailAvailable && this.usernameAvailable){
+    if(this.passwordValid && this.emailValid && this.emailAvailable && this.usernameAvailable && this.noFieldsNull()){
       return true
     }
     return false;
@@ -99,6 +99,7 @@ export class RegisterInputFormComponent implements OnInit {
   registerSuccess(){
     this.success = true;
     this.router.navigate(['']); //Navigates back to the login page for the user to log in after verifying email address
+
   }
 
   registerFailed(){
@@ -107,7 +108,6 @@ export class RegisterInputFormComponent implements OnInit {
 
   checkUsername(){
     this.serverService.checkUsernameAvailibility(this.username, (response)=>{
-      console.log(response['username']);
       if(response['username'] == 'available'){
         this.usernameAvailable = true;
       }
@@ -125,6 +125,25 @@ export class RegisterInputFormComponent implements OnInit {
         this.emailAvailable = false;
       }
     });
+  }
+
+  noFieldsNull(): boolean{
+    if(this.email == '' ||
+      this.fName== '' ||
+      this.lName== '' ||
+      this.dob== '' ||
+      this.country== '' ||
+      this.city== '' ||
+      this.postal== '' ||
+      this.adLine1== '' ||
+      this.adLine2== '' ||
+      this.username== '' ||
+      this.password== '' ||
+      this.confirmPassword== ''){
+      return false;
+    }else{
+      return true;
+    }
   }
 
 }
