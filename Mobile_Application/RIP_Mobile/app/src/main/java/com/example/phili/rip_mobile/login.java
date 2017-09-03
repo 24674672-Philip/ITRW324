@@ -33,7 +33,6 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     EditText etUsername, etPass;
     TextView tvReturn;
     Context contxt;
-    private static boolean temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +55,8 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v){
         if(v.getId() == R.id.btnSend) {
             try {
-                if(downloadData()){
-                    tvReturn.setText("Login Success!");
-                }
-                else{
-                    tvReturn.setText("Login failed!");
-                }
+                tvReturn.setText("loading");
+                downloadData();
             }
             catch (Exception e){
 
@@ -69,8 +64,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    private boolean downloadData(){
-        temp = false;
+    private void downloadData(){
         final serverLink downloader = new serverLink(this);
         downloader.sendLogin(etUsername.getText().toString(),etPass.getText().toString() ,new serverLink.OnDownloadTaskCompleted() {
             @Override
@@ -78,8 +72,6 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                 tvReturn.setText(result);
             }
         });
-
-        return temp;
     }
 
 }
