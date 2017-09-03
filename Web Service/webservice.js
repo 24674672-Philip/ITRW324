@@ -6,7 +6,7 @@ var fs = require('fs');
 
 const app = express();
 
-var con = mysql.createConnection({
+var con = mysql.createPool({
   host: "localhost",
   user: "philip",
   password: "blockchain",
@@ -16,10 +16,12 @@ var con = mysql.createConnection({
 app.get('/api', function(req, res){
   var sql = 'SELECT * FROM users';
   con.query(sql, function (err, result, fields, rows) {
-    if (err) throw err;
+    if (err) res.json({
+      error: err
+    });
     console.log(result);
     res.json({
-      text: 'my api!',
+      text: 'my api!'
     });
   });
 });
@@ -59,17 +61,16 @@ app.post('/api/login', function(req, res){
 
 app.post('/api/register', function(req, res){
   //auth user
+  var emailAddress = req.headers['email'];
   var hash = randtoken.generate(16);
-  var sql = 'INSERT INTO users (user_id, name, surname, email, dateOfBirth, password,username,cellphone,isActivated,emailHash) VALUES ?';
+  var sql = 'INSERT INTO users (name, surname, email, dateOfBirth, password,username,isActivated,emailHash) VALUES ?';
   var val = [[
-    req.headers["id"],
     req.headers["fname"],
     req.headers["lname"],
     req.headers["email"],
-    req.headers["birthdate"],
+    req.headers["dob"],
     req.headers["password"],
     req.headers["username"],
-    req.headers["cellphone"],
     0,
     hash
   ]];
@@ -81,7 +82,6 @@ app.post('/api/register', function(req, res){
         });
     console.log('inserted val: ' + val);
     var link = hash;
-    var emailAddress = req.headers['email'];
     var email = require('./app/email')(link,emailAddress);
     res.json({
       registered: 'Success!'
@@ -178,6 +178,45 @@ app.get('/music', function(req,res){
 	});
 });
 
+app.post('/api/checkusername', function(req, res){
+  var uName = req.headers["username"];
+  var sql = 'SELECT username FROM users WHERE username = ?';
+  con.query(sql, uName, function (err, result) {
+    if (err)  res.json({
+          error: err
+        });
+    if(result[0] === undefined){
+      res.json({
+        username: 'available'
+      });
+    }
+    else {
+      res.json({
+        username: 'taken'
+      });
+    }
+  });
+});
+
+app.post('/api/checkemail', function(req, res){
+  var uName = req.headers["email"];
+  var sql = 'SELECT email FROM users WHERE email = ?';
+  con.query(sql, uName, function (err, result) {
+    if (err)  res.json({
+          error: err
+        });
+    if(result[0] === undefined){
+      res.json({
+        username: 'available'
+      });
+    }
+    else {
+      res.json({
+        username: 'taken'
+      });
+    }
+  });
+});
 
 function ensureToken(req, res, next){
   const bearerHeader = req.headers["authentication"];

@@ -13,7 +13,7 @@ module.exports = function(link, emailAddress){
     from: 'rip.donotreply@gmail.com',
     to: emailAddress,
     subject: 'RIP-Email verification',
-	  text: 'To verify your account, please go to this link: http://52.15.226.85:8080/api/register?hash='
+	  text: 'To verify your account, please go to this link: http://52.15.226.85:8080/api/activate?hash='
     + link + '&email=' + emailAddress
   };
 
