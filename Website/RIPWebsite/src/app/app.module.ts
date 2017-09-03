@@ -19,8 +19,8 @@ import {AuthService} from "./services/auth.service";
 
 
 const router: Routes = [
-  {path: 'login', component: LoginContainerComponent},
-  {path: '', component: RegisterContainerComponent},
+  {path: '', component: LoginContainerComponent},
+  {path: 'register', component: RegisterContainerComponent},
   {path: 'home', component: HomeContainerComponent},
 
 ];

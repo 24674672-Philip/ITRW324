@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServerService} from "../../services/server.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register-inputform',
@@ -22,9 +23,11 @@ export class RegisterInputFormComponent implements OnInit {
   success: boolean;
   passwordValid: boolean;
   emailValid: boolean;
+  emailAvailable:boolean;
+  usernameAvailable: boolean;
 
 
-  constructor(private serverService: ServerService) {
+  constructor(private serverService: ServerService, private router: Router) {
     this.username='';
     this.email='';
     this.password='';
@@ -39,6 +42,8 @@ export class RegisterInputFormComponent implements OnInit {
     this.lName = '';
     this.fName = '';
     this.country = '';
+    this.emailAvailable=true;
+    this.usernameAvailable=true;
 
   }
 
@@ -69,7 +74,7 @@ export class RegisterInputFormComponent implements OnInit {
   }
 
   valid(): boolean{
-    if(this.passwordValid && this.emailValid){
+    if(this.passwordValid && this.emailValid && this.emailAvailable && this.usernameAvailable){
       return true
     }
     return false;
@@ -79,7 +84,47 @@ export class RegisterInputFormComponent implements OnInit {
 
 //This code is needed for the login inputform and not for the register form
   registerClicked(){
-  //TODO: Send register request to service and handle the response. Reroute user to login page
+    this.serverService.register(this.fName,this.lName,this.dob,this.country,this.city,
+      this.adLine1,this.adLine2,this.postal,this.email,this.username,this.password,(response: JSON)=>
+      {
+        if(response['registered'] != 'Success!'){
+          this.registerFailed();
+        }
+        else{
+          this.registerSuccess();
+        }
+      });
+  }
+
+  registerSuccess(){
+    this.success = true;
+    this.router.navigate(['']); //Navigates back to the login page for the user to log in after verifying email address
+  }
+
+  registerFailed(){
+
+  }
+
+  checkUsername(){
+    this.serverService.checkUsernameAvailibility(this.username, (response)=>{
+      console.log(response['username']);
+      if(response['username'] == 'available'){
+        this.usernameAvailable = true;
+      }
+      else{
+        this.usernameAvailable = false;
+      }
+    });
+  }
+  checkEmail(){
+    this.serverService.checkEmailAvailibility(this.email, (response)=>{
+      if(response['email'] == 'available'){
+        this.emailAvailable = true;
+      }
+      else{
+        this.emailAvailable = false;
+      }
+    });
   }
 
 }

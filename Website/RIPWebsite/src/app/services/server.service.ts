@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http} from "@angular/http";
 
-
 @Injectable()
 export class ServerService {
 
@@ -29,32 +28,46 @@ export class ServerService {
 
   }
 
-  register(fname: string, lname: string, birthdate: string, cellphone: string, country: string, city: string, adressline1: string
+  register(fname: string, lname: string, birthdate: string, country: string, city: string, adressline1: string
            ,addressline2: string,postalcode: string, email: string, username: string, password: string, callback ){
     let headers: Headers = new Headers();
     headers.set('fName',fname.trim());
     headers.append('lName',lname.trim());
     headers.append('username',username.trim());
-    headers.append('email',email);//TODO: email validation on the input form component itself
+    headers.append('email',email);
     headers.append('password',password);
     headers.append('birthdate',birthdate);
-    headers.append('cellphone',cellphone.trim());
     headers.append('country',country.trim());
     headers.append('city',city.trim());
     headers.append('addressline1',adressline1.trim());
     headers.append('addressline2',addressline2.trim());
     headers.append('postalcode',postalcode.trim());
     this.http.post(this.url+'register', null, {headers: headers})
-      .subscribe();
+      .subscribe(
+        (response) => callback(JSON.parse(response.toString())), //TODO: Fix this pls
+        (error) => callback(JSON.parse(error))
+      );
   }
 
-  protected(token : string){
-    const header = new Headers();
-    header.set('authentication', token);
-    this.http.get(this.url+'protected', {headers: header})
+  checkUsernameAvailibility(username: string, callback){
+    let headers = new Headers();
+    headers.set('username',username);
+    this.http.post(this.url+'checkusername', null, {headers: headers})
       .subscribe(
-        (response) => console.log(response)
-      )
+        (response)=>callback(response.json()),
+        (error)=>callback(error.json())
+      );
+
+  }
+
+  checkEmailAvailibility(email: string, callback){
+    let headers = new Headers();
+    headers.set('email',email);
+    this.http.post(this.url+'checkemail', null, {headers: headers})
+      .subscribe(
+        (response)=>callback(response.json()),
+        (error)=>callback(error.json())
+      );
   }
 
 }
