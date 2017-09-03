@@ -85,31 +85,28 @@ app.post('/api/register', function(req, res){
     console.log('inserted val: ' + val);
     var link = hash;
     var email = require('./app/email')(link,emailAddress);
-    res.json({
-      registered: 'Success!'
-    });
     var userid = '';
     con.query('SELECT user_id FROM user WHERE email = ' + emailAddress + ';', function(err, result){
       if (err) res.json({
   		  error: err
           });
       userid = result[0].user_id;
-    });
-    var sql2 = 'INSERT INTO user_address (Country, City, AddressLine1, AddressLine2, PostalCode, userid) VALUES ?';
-    var valAddress = [[
-      req.headers["country"],
-      req.headers["city"],
-      req.headers["addline1"],
-      req.headers["addline2"],
-      req.headers["postalcode"],
-      userid
-    ]];
-    con.query(sql2, [valAddress], function(err, result){
-      if (err) res.json({
-  		  error: err
-          });
-      res.json({
-        address: 'Added'
+      var sql2 = 'INSERT INTO user_address (Country, City, AddressLine1, AddressLine2, PostalCode, userid) VALUES ?';
+      var valAddress = [[
+        req.headers["country"],
+        req.headers["city"],
+        req.headers["addline1"],
+        req.headers["addline2"],
+        req.headers["postalcode"],
+        userid
+      ]];
+      con.query(sql2, [valAddress], function(err, result){
+        if (err) res.json({
+          error: err
+            });
+        res.json({
+        registered: 'Success!'
+        });
       });
     });
   });
