@@ -7,18 +7,17 @@
       <div class=" col-sm3 col-md-4 col-lg-4"></div>
       <div class="panel col-sm-6 col-md-4 col-lg-4 box-shadow">
 
-        <div class="panel-heading"><h2>Please Register an Account</h2></div>
+        <div class="panel-heading"><h2>Register A New Account</h2></div>
 
         <div class="panel-body">
 
-<!--TODO: Reformat the layout of inputs -->
 
           <h2 style="text-align: center;">Holder Information</h2>
           <h3>First Name</h3>
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class="col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Insert Your First Name" [(ngModel)]="email" style="text-align: center;" class="form-control"/>
+              <input placeholder="Insert Your First Name" [(ngModel)]="fName" style="text-align: center;" class="form-control"/>
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -27,16 +26,16 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class="col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Insert Your Last Name" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
+              <input placeholder="Insert Your Last Name" [(ngModel)]="lName"  style="text-align: center;" class="form-control"/>
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
 
           <h3>Date of Birth</h3>
-          <div class="row">
+          <div class="row text-center">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class="col-sm-8 col-md-8 col-lg-8">
-              <input class="form-control" type="date">
+              <input class="form-control" type="date" [(ngModel)]="dob">
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -48,7 +47,7 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class="col-sm-8 col-md-8 col-lg-8">
-              <input class="form-control" placeholder="Insert Your Country">
+              <input class="form-control" placeholder="Insert Your Country" [(ngModel)]="country">
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -57,7 +56,7 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class="col-sm-8 col-md-8 col-lg-8">
-              <input class="form-control" placeholder="Input Your City">
+              <input class="form-control" placeholder="Input Your City" [(ngModel)]="city">
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -66,7 +65,7 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class="col-sm-8 col-md-8 col-lg-8">
-              <input class="form-control" placeholder="Input Your Postal Code">
+              <input class="form-control" placeholder="Input Your Postal Code" [(ngModel)]="postal">
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -75,7 +74,7 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Insert Your Address" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
+              <input placeholder="Insert Your Address" [(ngModel)]="adLine1"  style="text-align: center;" class="form-control"/>
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -84,7 +83,7 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Insert Your Address" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
+              <input placeholder="Insert Your Address" [(ngModel)]="adLine2"  style="text-align: center;" class="form-control"/>
             </div>
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
           </div>
@@ -96,9 +95,12 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Insert a valid email address" [(ngModel)]="email"  style="text-align: center;" class="form-control"/>
+              <input placeholder="Insert a valid email address" [(ngModel)]="email" (input)="validateEmail($event)" style="text-align: center;" class="form-control"/>
             </div>
-            <div class=" col-sm2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm2 col-md-2 col-lg-2">
+              <p *ngIf="!emailValid" style="text-wrap: none">Invalid</p>
+              <p *ngIf="emailValid" style="text-wrap: none">Valid</p>
+            </div>
           </div>
 
 
@@ -116,9 +118,12 @@
           <div class="row">
             <div class=" col-sm2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Must be longer than 8 characters" [(ngModel)]="password" style="text-align: center;" class="form-control" type="password"/>
+              <input placeholder="Must be longer than 8 characters" [(ngModel)]="password" (input)="validatePassword($event)" style="text-align: center;" class="form-control" type="password"/>
             </div>
-            <div class=" col-sm2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm2 col-md-2 col-lg-2">
+              <p *ngIf="!passwordValid" style="text-wrap: none">Invalid</p>
+              <p *ngIf="passwordValid" style="text-wrap: none">Valid</p>
+            </div>
           </div>
 
 
@@ -133,9 +138,9 @@
 
 
           <div class="row">
-            <button class="btn btn-success" (click)="registerClicked()"  style="margin: 20px 0 0 0;">Create Account</button>
+            <button class="btn btn-success" (click)="registerClicked()" [disabled]="!valid()"  style="margin: 20px 0 0 0;">Create New Account</button>
           </div>
-          <div class="panel-success" *ngIf="success">Login was successful. Well done you programming genius  {{token}}</div>
+          <div class="panel-success" *ngIf="success">Registration was successful. If you are not redirected <a href="../login-container/login-container.component.html">click here.</a>></div>
         </div>
       </div>
       <div class=" col-sm3 col-md-4 col-lg-4"></div>
