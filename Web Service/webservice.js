@@ -207,10 +207,10 @@ app.post('/api/checkusername', function(req, res){
 
 app.post('/api/checkemail', function(req, res){
   console.log("/api/checkemail");
-  var uName = req.headers["username"];
+  var emailA = req.headers["email"];
   var sql = 'SELECT email FROM users WHERE email = ?';
-  if (uName !== undefined) {
-    con.query(sql, uName, function (err, result) {
+  if (emailA !== undefined) {
+    con.query(sql, emailA, function (err, result) {
       if (err)  res.json({
             error: err
           });
@@ -221,7 +221,7 @@ app.post('/api/checkemail', function(req, res){
       }
       else {
         res.json({
-          username: 'taken'
+          email: 'taken'
         });
       }
     });
