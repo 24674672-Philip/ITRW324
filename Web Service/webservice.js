@@ -203,6 +203,11 @@ app.post('/api/checkusername', function(req, res){
       }
     });
   }
+  else {
+    res.json({
+          error: "error"
+    });
+  }
 });
 
 app.post('/api/checkemail', function(req, res){
@@ -224,6 +229,11 @@ app.post('/api/checkemail', function(req, res){
           email: 'taken'
         });
       }
+    });
+  }
+  else {
+    res.json({
+          error: "error"
     });
   }
 });
