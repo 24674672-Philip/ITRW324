@@ -191,6 +191,28 @@ app.get('/api/activate', function(req, res){
   })
 });*/
 
+app.get('/download', function(req,res){
+  console.log("/api/download");
+	var songName = req.query.song;
+  var songAlbum = req.query.album;
+  var songArtist = req.query.artist;
+	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
+  fs.exists(file,function(exists){
+		if(exists)
+		{
+			res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
+			res.setHeader('Content-Type', 'application/audio/mpeg3')
+			var rstream = fs.createReadStream(file);
+			rstream.pipe(res);
+		}
+		else
+		{
+			res.send("Its a 404");
+			res.end();
+		}
+	});
+});
+
 app.get('/music', function(req,res){
   console.log("/api/music");
 	var songName = req.query.song;
