@@ -3,7 +3,7 @@ import { HttpModule} from "@angular/http";
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BannerComponent } from './loginComponents/banner/banner.component';
-import {RegisterInputFormComponent} from './loginComponents/register-inputform/register-inputform.component';
+import {RegisterInputFormComponent} from './loginComponents/register-container/register-inputform/register-inputform.component';
 import { ServerstatusComponent } from './loginComponents/serverstatus/serverstatus.component';
 import { NavBarComponent } from './ripComponents/home-container/nav-bar/nav-bar.component';
 import { MusicListComponent } from './ripComponents/home-container/music-list/music-list.component';
@@ -15,6 +15,7 @@ import { RegisterContainerComponent } from './loginComponents/register-container
 import { LoginContainerComponent } from "./loginComponents/login-container/login-container.component";
 import { Routes, RouterModule } from "@angular/router";
 import {AuthService} from "./services/auth.service";
+import { LoginInputformComponent } from './loginComponents/login-container/login-inputform/login-inputform.component';
 
 
 
@@ -36,6 +37,7 @@ const router: Routes = [
     HomeContainerComponent,
     RegisterContainerComponent,
     LoginContainerComponent,
+    LoginInputformComponent,
 
   ],
   imports: [

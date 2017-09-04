@@ -6,9 +6,6 @@
 .container-styles{
   padding: 0;
   margin: 0;
-  background-image: url("../../../assets/shipwreck.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+  background: url("../../../../assets/shipwreck.jpg") no-repeat fixed center;
   background-size: cover;
 }
