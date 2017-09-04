@@ -47,9 +47,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         etUsername  = (EditText) findViewById(R.id.etUsername);
         etPass  = (EditText) findViewById(R.id.etPass);
         tvReturn = (TextView) findViewById(R.id.tvReturnMessage);
-
         tvReturn.setText("");
-
         btnSend.setOnClickListener(this);
 
     }

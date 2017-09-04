@@ -35,7 +35,6 @@
         android:textColorHighlight="@color/colorGray"
         android:textColorHint="@color/colorWhite"
         android:textCursorDrawable="@color/colorWhite"
-        android:textIsSelectable="true"
         android:textSelectHandle="@color/colorWhite"
         android:textSelectHandleLeft="@color/colorWhite"
         android:textSelectHandleRight="@color/colorWhite" />
@@ -58,7 +57,6 @@
         android:textSelectHandle="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:textColorHighlight="@color/colorGray"
-        android:textIsSelectable="true"
         android:textSelectHandleLeft="@color/colorWhite"
         android:textSelectHandleRight="@color/colorWhite"/>
 
