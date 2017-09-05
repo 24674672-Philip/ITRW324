@@ -48,6 +48,9 @@ export class AuthService {
     return this.email;
   }
 
+  toString(){
+    console.log(this.authToken+'\n'+this.username+'\n'+this.email+'\n'+this.lName+'\n'+this.fName+'\n');
+  }
 
 
 }

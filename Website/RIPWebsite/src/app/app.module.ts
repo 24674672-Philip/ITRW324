@@ -16,6 +16,7 @@ import { LoginContainerComponent } from "./loginComponents/login-container/login
 import { Routes, RouterModule } from "@angular/router";
 import {AuthService} from "./services/auth.service";
 import { LoginInputformComponent } from './loginComponents/login-container/login-inputform/login-inputform.component';
+import { PopupShadowDirective } from './directives/popup-shadow.directive';
 
 
 
@@ -38,6 +39,7 @@ const router: Routes = [
     RegisterContainerComponent,
     LoginContainerComponent,
     LoginInputformComponent,
+    PopupShadowDirective,
 
   ],
   imports: [

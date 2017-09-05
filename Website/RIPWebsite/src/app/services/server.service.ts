@@ -5,7 +5,7 @@ import {Headers, Http} from "@angular/http";
 @Injectable()
 export class ServerService {
 
-  url: string = 'http://52.15.226.85:8080/api/';
+  url: string = 'http://52.211.85.57:8080/api/';
   constructor(private http: Http) { }
 
 
@@ -18,37 +18,46 @@ export class ServerService {
     console.log(header.keys());
     this.http.post(this.url+'login', null, { headers: header})
       .subscribe(
-        (response) => {
-          result = response.json();
-          callback(result);
-        },
-        (error) =>{
-          result = error.json();
-          callback(result);
-        });
+        (response) => callback(response.json())
+        ,
+        (error) => callback(error.json()));
 
   }
+
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //Register transaction start
 
   register(fname: string, lname: string, birthdate: string, country: string, city: string, adressline1: string
-           ,addressline2: string,postalcode: string, email: string, username: string, password: string, callback ){
-    let headers: Headers = new Headers();
-    headers.set('fName',fname.trim());
-    headers.append('lName',lname.trim());
-    headers.append('username',username.trim());
-    headers.append('email',email);
-    headers.append('password',password);
-    headers.append('birthdate',birthdate);
-    headers.append('country',country.trim());
-    headers.append('city',city.trim());
-    headers.append('addressline1',adressline1.trim());
-    headers.append('addressline2',addressline2.trim());
-    headers.append('postalcode',postalcode.trim());
-    this.http.post(this.url+'register', null, {headers: headers})
+    ,addressline2: string,postalcode: string, email: string, username: string, password: string, callback){
+    let userHeaders: Headers = new Headers();
+    userHeaders.set('fname',fname.trim());
+    userHeaders.append('lname',lname.trim());
+    userHeaders.append('username',username.trim());
+    userHeaders.append('email',email);
+    userHeaders.append('password',password);
+    userHeaders.append('birthdate',birthdate);
+    this.http.post(this.url+'registeruser', null, {headers: userHeaders})
       .subscribe(
-        (response) => callback(response.json()),
-        (error) => callback(error.json())
-      );
+        (response) =>{
+          let resJson = response.json();
+          let locationHeaders = new Headers();
+          locationHeaders.append('userid',resJson['userid']);
+          locationHeaders.append('country',country.trim());
+          locationHeaders.append('city',city.trim());
+          locationHeaders.append('addline1',adressline1.trim());
+          locationHeaders.append('addline2',addressline2.trim());
+          locationHeaders.append('postalcode',postalcode.trim());
+          this.http.post(this.url+'registeraddress', null, {headers: locationHeaders})
+            .subscribe(
+              (response) => callback(response.json()),
+              (error) => callback(error.json())
+            );
+        }
+      )
   }
+
+
 
   checkUsernameAvailibility(username: string, callback){
     let headers = new Headers();
@@ -70,5 +79,17 @@ export class ServerService {
         (error)=>callback(error.json())
       );
   }
+
+  resendEmail(username: string, callback){
+    let headers = new Headers();
+    headers.set('username',username);
+    this.http.post(this.url+'resendemail', null, {headers: headers})
+      .subscribe(
+        (response) => callback(response.json()),
+        (error) => callback(error.json())
+      );
+  }
+
+
 
 }
