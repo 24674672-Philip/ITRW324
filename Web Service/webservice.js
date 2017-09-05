@@ -60,16 +60,17 @@ app.post('/api/login', function(req, res){
       }
       else {
         res.json({
-          login: "email not registered"
+          login: "email not registered",
+          username: result[0].username
         });
       }
 	  }
   });
 });
 
-app.post('/api/register', function(req, res){
-  console.log("/api/register");
-  //auth user
+app.post('/api/registeruser', function(req, res){
+  console.log("/api/registeruser");
+
   var emailAddress = req.headers['email'];
   var hash = randtoken.generate(16);
   var sql = 'INSERT INTO users (name, surname, email, dateOfBirth, password,username,isActivated,emailHash) VALUES ?';
@@ -77,7 +78,7 @@ app.post('/api/register', function(req, res){
     req.headers["fname"],
     req.headers["lname"],
     req.headers["email"],
-    req.headers["dob"],
+    req.headers["birthdate"],
     req.headers["password"],
     req.headers["username"],
     0,
@@ -90,44 +91,44 @@ app.post('/api/register', function(req, res){
 		  error: err
         });
     console.log('inserted val: ' + val);
+
+    var link = hash;
+    var email = require('./app/email')(link,emailAddress);
+    var sql2 = 'SELECT user_id FROM users WHERE emailHash = ?'
+
+    con.query(sql2,hash,function(err, res){
+      console.log(res);
+      res.json({
+  	  register: "success",
+  	  userid: res[0].user_id
+      });
+    });
   });
 
-  var link = hash;
-  var email = require('./app/email')(link,emailAddress);
-  var userid = '';
 
-  con.query('SELECT user_id FROM user WHERE email = ' + emailAddress + ';', function(err, result){
-    if (err) res.json({
-      error: err
-        });
-    if(result[0] == undefined) {res.json({error: "something went wrong"})}
-    else {
-      userid = result[0].user_id;
-      console.log('user_id: ' + userid);
-    }
-  });
+});
 
-  var sql2 = 'INSERT INTO user_address (Country, City, AddressLine1, AddressLine2, PostalCode, userid) VALUES ?';
+app.get('api/registeraddress', function(req, res){
+  console.log("/api/registeruser");
+
+  var sql2 = 'INSERT INTO user_address (Country, City, AddressLine1, AddressLine2, PostalCode, user_id) VALUES ?';
   var valAddress = [[
     req.headers["country"],
     req.headers["city"],
     req.headers["addline1"],
     req.headers["addline2"],
     req.headers["postalcode"],
-    userid
+    req.headers["userid"]
   ]];
 
   con.query(sql2, [valAddress], function(err, result){
-    if (err) res.json({
-      error: err
-        });
+    if (err) res.json({ error: err });
     res.json({
-    registered: 'Success!'
+    registered: 'success'
     });
   });
 
 });
-
 app.get('/api/protected', ensureToken, function(req, res){
   console.log("/api/protected");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -299,17 +300,20 @@ app.post('/api/checkemail', function(req, res){
 
 app.post('/api/resendemail', function(req, res){
   console.log("/api/resendemail");
-  var emailA = req.headers["email"];
-  var sql = 'SELECT hash FROM users WHERE email = ?';
-  con.query(sql, emailA, function(err, result){
+  var user = req.headers["username"];
+  var sql = 'SELECT emailHash, email FROM users WHERE username = ?';
+  if(user !== undefined || user !== ""){
+	con.query(sql, user, function(err, result){
     if (err) {res.json({error: err});}
-    if (result[0] == undefined) {res.json({error: "user doesn't exist"});}
+    if (result[0] === undefined) {res.json({error: "user doesn't exist"});}
     else {
       var link = result[0].hash;
-      var resend = require('./app/email')(link,emailA);
+      var resend = require('./app/email')(link,result[0].email);
       res.json({status: "email send"});
     }
   });
+  }
+  else {res.json({error: "welp"});}
 })
 
 app.get('/image', function (req, res, next) {
