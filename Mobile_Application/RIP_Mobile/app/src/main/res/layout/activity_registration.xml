@@ -1,6 +1,275 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img1"
+            android:orientation="vertical"
+            android:weightSum="1">
 
-</LinearLayout>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Please enter your details for registration:\n"
+                android:textColor="@color/colorWhite" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center_horizontal"
+                android:text="Personal Details:"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Name:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Surname:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etSurname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Date of Birth:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etDOB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:inputType="date"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center_horizontal"
+                android:text="Address Details:"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Country:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="City:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Postal Code:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etPostalCodes"
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:inputType="number"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Address Line 1:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etAdl1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Address Line 2:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etAdl2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="center_horizontal"
+                android:text="Login Details:"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Username:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Email:"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:inputType="textWebEmailAddress"
+                android:backgroundTint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray"
+                android:textColorHint="@color/colorWhite" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Password:"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/etPass"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorWhite"
+                android:backgroundTint="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="Retype Password:"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/etRetypePass"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorWhite"
+                android:backgroundTint="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textColorHighlight="@color/colorGray" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"></LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:text="Register
+" />
+        </LinearLayout>
+
+
+</ScrollView>

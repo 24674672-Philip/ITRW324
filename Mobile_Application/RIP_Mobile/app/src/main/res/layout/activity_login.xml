@@ -11,9 +11,6 @@
     android:weightSum="1"
     >
 
-
-
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -38,10 +35,7 @@
         android:textColor="@color/colorWhite"
         android:textColorHighlight="@color/colorGray"
         android:textColorHint="@color/colorWhite"
-        android:textCursorDrawable="@color/colorWhite"
-        android:textSelectHandle="@color/colorWhite"
-        android:textSelectHandleLeft="@color/colorWhite"
-        android:textSelectHandleRight="@color/colorWhite" />
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,12 +52,8 @@
         android:layout_gravity="center_horizontal"
         android:textColor="@color/colorWhite"
         android:backgroundTint="@color/colorWhite"
-        android:textCursorDrawable="@color/colorWhite"
-        android:textSelectHandle="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
-        android:textColorHighlight="@color/colorGray"
-        android:textSelectHandleLeft="@color/colorWhite"
-        android:textSelectHandleRight="@color/colorWhite"/>
+        android:textColorHighlight="@color/colorGray" />
 
     <Button
         android:id="@+id/btnSend"
