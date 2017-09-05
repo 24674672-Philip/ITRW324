@@ -1,39 +1,58 @@
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@drawable/img3">
+
         <LinearLayout
             android:id="@+id/LinearLayout01"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/img1"
+
             android:orientation="vertical"
-            android:weightSum="1">
+            android:weightSum="20">
 
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:layout_gravity="center_horizontal"
-                android:text="Please enter your details for registration:\n"
-                android:textColor="@color/colorWhite" />
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="REGISTER"
+                android:textSize="25sp"
+                android:background="#B3a19c9c"
+                android:textStyle="bold"
+                android:typeface="serif"
+                android:textColor="@color/colorBlack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp">
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#B3a19c9c">
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:text="Personal Details:"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Name:"
                 android:layout_height="wrap_content" />
 
@@ -43,14 +62,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
+                android:layout_weight="0.30"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite"
                 />
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Surname:"
                 android:layout_height="wrap_content" />
 
@@ -60,14 +84,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite"
                 />
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Date of Birth:"
                 android:layout_height="wrap_content" />
 
@@ -77,25 +106,38 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:inputType="date"
-                android:textColor="@color/colorWhite"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite" />
-
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
             </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#B3a19c9c">
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:text="Address Details:"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Country:"
                 android:layout_height="wrap_content" />
 
@@ -105,13 +147,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite" />
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="City:"
                 android:layout_height="wrap_content" />
 
@@ -121,13 +168,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite" />
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Postal Code:"
                 android:layout_height="wrap_content" />
 
@@ -137,14 +189,19 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:inputType="number"
-                android:textColor="@color/colorWhite"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite" />
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Address Line 1:"
                 android:layout_height="wrap_content" />
 
@@ -154,13 +211,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite" />
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Address Line 2:"
                 android:layout_height="wrap_content" />
 
@@ -170,40 +232,60 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite" />
-
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
             </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#B3a19c9c">
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:text="Login Details:"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Username:"
                 android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/etUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
-                android:textColorHighlight="@color/colorGray"
-                android:textColorHint="@color/colorWhite" />
-            <TextView
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.25"
+            android:background="#e6edf7"
+            android:backgroundTint="#CCeeeeee"
+            android:textColor="@color/colorBlack"
+            android:textColorHighlight="@color/colorGray"
+            android:textColorHint="@color/colorWhite" />
+
+        <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Email:"
                 android:layout_height="wrap_content" />
 
@@ -213,15 +295,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:inputType="textWebEmailAddress"
-                android:backgroundTint="@color/colorWhite"
-                android:textColor="@color/colorWhite"
                 android:textColorHighlight="@color/colorGray"
                 android:textColorHint="@color/colorWhite" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Password:"
                 android:layout_height="wrap_content"/>
 
@@ -231,15 +318,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/colorWhite"
-                android:backgroundTint="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textColorHighlight="@color/colorGray" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
+                android:typeface="serif"
+                android:textSize="18dp"
+                android:textStyle="bold"
                 android:text="Retype Password:"
                 android:layout_height="wrap_content"/>
 
@@ -249,12 +341,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:layout_weight="0.25"
+                android:background="#e6edf7"
+                android:backgroundTint="#CCeeeeee"
+                android:textColor="@color/colorBlack"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/colorWhite"
-                android:backgroundTint="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textColorHighlight="@color/colorGray" />
-
+    </LinearLayout>
 
 
             <LinearLayout
@@ -265,10 +359,10 @@
                 android:id="@+id/btnRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
+                android:textSize="18sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:text="Register
-" />
+                android:text="Register" />
         </LinearLayout>
 
 
