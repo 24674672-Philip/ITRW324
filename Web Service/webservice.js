@@ -96,11 +96,12 @@ app.post('/api/registeruser', function(req, res){
     var email = require('./app/email')(link,emailAddress);
     var sql2 = 'SELECT user_id FROM users WHERE emailHash = ?'
 
-    con.query(sql2,hash,function(err, res){
-      console.log(res);
+    con.query(sql2,hash,function(err, resul){
+      if (err) { res.json({error: err}); }
+      console.log(resul);
       res.json({
   	  register: "success",
-  	  userid: res[0].user_id
+  	  userid: resul[0].user_id
       });
     });
   });
@@ -108,7 +109,7 @@ app.post('/api/registeruser', function(req, res){
 
 });
 
-app.get('api/registeraddress', function(req, res){
+app.post('/api/registeraddress', function(req, res){
   console.log("/api/registeruser");
 
   var sql2 = 'INSERT INTO user_address (Country, City, AddressLine1, AddressLine2, PostalCode, user_id) VALUES ?';
