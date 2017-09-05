@@ -24,7 +24,7 @@ public class serverLink{
 
     private RequestQueue reqQ;
     private JsonObjectRequest jsonReq;
-    private String url = "http://52.15.226.85:8080";
+    private String url = "http://52.211.85.57:8080";
     private Context contxt;
 
     public serverLink(Context inContext){
@@ -81,6 +81,11 @@ public class serverLink{
                 params.put("dob",headers[3]);
                 params.put("password",headers[4]);
                 params.put("username",headers[5]);
+                params.put("country",headers[6]);
+                params.put("addline1",headers[7]);
+                params.put("addline2",headers[8]);
+                params.put("postalcode",headers[9]);
+                params.put("city",headers[10]);
                 return params;
             }
         };
