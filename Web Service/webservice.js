@@ -43,20 +43,27 @@ app.post('/api/login', function(req, res){
 
   con.query(sql, [valP, valU], function (err, result) {
     if (err) res.json({result: 'Something went wrong (error)'});
-    if(result[0] == undefined) res.json({Login: 'Failed!'});
-	else{
-	  console.log(result[0].name);
-      const user = { id: result[0].name };
-      const token = jwt.sign({ user }, 'blockchain');
-      res.json({
-        login: 'Success!',
-        token: token,
-        user: result[0].username,
-        fname: result[0].name,
-        lname: result[0].surname,
-        email: result[0].email
-      });
-	}
+    if(result[0] == undefined) res.json({login: "failed"});
+	  else{
+      if (result[0].isActivated !== 0) {
+        console.log(result[0].name);
+          const user = { id: result[0].name };
+          const token = jwt.sign({ user }, 'blockchain');
+          res.json({
+            login: 'success',
+            token: token,
+            user: result[0].username,
+            fname: result[0].name,
+            lname: result[0].surname,
+            email: result[0].email
+          });
+      }
+      else {
+        res.json({
+          login: "email not registered"
+        });
+      }
+	  }
   });
 });
 
@@ -289,6 +296,22 @@ app.post('/api/checkemail', function(req, res){
     });
   }
 });
+
+app.post('/api/resendemail', function(req, res){
+  console.log("/api/resendemail");
+  var emailA = req.headers["email"];
+  var sql = 'SELECT hash FROM users WHERE email = ?';
+  con.query(sql, emailA, function(err, result){
+    if (err) {res.json({error: err});}
+    if (result[0] == undefined) {res.json({error: "user doesn't exist"});}
+    else {
+      var link = result[0].hash;
+      var resend = require('./app/email')(link,emailA);
+      res.json({status: "email send"});
+    }
+  });
+
+})
 
 function ensureToken(req, res, next){
   const bearerHeader = req.headers["authentication"];
