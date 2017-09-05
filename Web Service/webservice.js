@@ -7,7 +7,7 @@ var fs = require('fs');
 const app = express();
 
 var con = mysql.createPool({
-  host: "localhost",
+  host: "52.211.85.57",
   user: "philip",
   password: "blockchain",
   database: "blockchainDB"
@@ -310,8 +310,20 @@ app.post('/api/resendemail', function(req, res){
       res.json({status: "email send"});
     }
   });
-
 })
+
+app.get('/image', function (req, res, next) {
+  console.log('/image');
+  var fileName = req.headers["imagename"];
+  console.log("filename: " + fileName);
+  res.sendFile(__dirname + '\\images\\' + fileName, function (err) {
+    if (err) {
+      next(err);
+    } else {
+      console.log('Sent:', fileName);
+    }
+  });
+});
 
 function ensureToken(req, res, next){
   const bearerHeader = req.headers["authentication"];
