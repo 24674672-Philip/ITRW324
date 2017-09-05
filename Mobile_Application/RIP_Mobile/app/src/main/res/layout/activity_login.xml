@@ -2,74 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
-    android:padding="10dp"
     android:layout_height="match_parent"
-    android:background="@drawable/img1"
-    android:baselineAligned="false"
+    android:background="@drawable/img2"
     android:orientation="vertical"
-    android:weightSum="1"
-    >
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="28dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Please enter your login details:\n"
-        android:textColor="@color/colorWhite" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:text="Username:"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/etUsername"
+    android:weightSum="1">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
-        android:textColorHighlight="@color/colorGray"
-        android:textColorHint="@color/colorWhite"
-        />
+        android:layout_height="120dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:text="RIP"
+            android:gravity="center"
+            android:textSize="80sp"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:text="Password:"
-        android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/etPass"
-        android:inputType="textPassword"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/colorWhite"
-        android:backgroundTint="@color/colorWhite"
-        android:textColorHint="@color/colorWhite"
-        android:textColorHighlight="@color/colorGray" />
+        android:layout_height="209dp"
+        android:layout_weight="0.21"
+        android:background="#B3a19c9c"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:text="Login" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
 
-    <TextView
-        android:id="@+id/tvReturnMessage"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text=""
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold" />
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.25"
+            android:background="#e6edf7"
+            android:backgroundTint="#CCeeeeee"
+            android:textColor="@color/colorBlack"
+            android:textColorHighlight="@color/colorGray"
+            android:textColorHint="@color/colorBlack" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password:"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/etPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.25"
+            android:background="#e6edf7"
+            android:backgroundTint="#CCEEEEEE"
+            android:inputType="textPassword"
+            android:textColor="@color/colorBlack"
+            android:textColorHighlight="@color/colorGray"
+            android:textColorHint="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:text="Login" />
+
+        <TextView
+            android:id="@+id/tvReturnMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+    </LinearLayout>
 </LinearLayout>

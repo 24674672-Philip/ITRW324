@@ -56,7 +56,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v){
         if(v.getId() == R.id.btnSend) {
             try {
-                tvReturn.setText("Loading..");
+                tvReturn.setText("Loading...");
                 sendLoginRequest();
             }
             catch (Exception e){
