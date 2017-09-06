@@ -29,9 +29,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.android.volley.VolleyLog.TAG;
+
 
 public class login extends AppCompatActivity implements View.OnClickListener{
 
+    public String TOKEN = "";
     Button btnSend;
     EditText etUsername, etPass;
     TextView tvReturn;
@@ -66,15 +69,23 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void sendLoginRequest(){
+
+        String[] headersType = new String[2];
+        String[] headersVal = new String[2];
+        headersType[0] = "username";
+        headersType[1] = "password";
+        headersVal[0] = etUsername.getText().toString();
+        headersVal[1] = etPass.getText().toString();
+
         final serverLink sender = new serverLink(this);
-        sender.sendLogin(etUsername.getText().toString(),etPass.getText().toString() ,new serverLink.OnDownloadTaskCompleted() {
+        sender.sendServerRequest(headersType, headersVal, "/api/login", true,new serverLink.OnDownloadTaskCompleted() {
             @Override
             public void onTaskCompleted(JSONObject result, boolean error, String message) {
                 try {
                     tvReturn.setText(result.getString("login"));
                 }
                 catch (JSONException e){
-                    tvReturn.setText("Welp");
+                    tvReturn.setText(e.getMessage());
                 }
             }
         });

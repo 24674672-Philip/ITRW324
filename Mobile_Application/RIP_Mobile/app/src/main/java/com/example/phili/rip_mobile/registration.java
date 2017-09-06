@@ -49,8 +49,7 @@ public class registration extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         if(v.getId() == R.id.btnRegister) {
             try {
-                String[] tempDetails = new String[10]; //Sit al die values in die array, check serverlink class vir watse waarde in watse plek
-                sendRegisterRequest(tempDetails);
+                sendRegisterRequest();
             }
             catch (Exception e){
 
@@ -58,21 +57,24 @@ public class registration extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void sendRegisterRequest(String[] registerDetails){
+    private void sendRegisterRequest(){
         final serverLink sender = new serverLink(this);
-        sender.sendRegister(registerDetails ,new serverLink.OnDownloadTaskCompleted() {
+        /*sender.sendServerRequest(,,"",true,new serverLink.OnDownloadTaskCompleted() {
             @Override
             public void onTaskCompleted(JSONObject result, boolean error, String message) {
                 try {
-                    //result.getString("login") gebruik die om json se values te kry, maar kort jsonException handling vir dit
+                    if (result.getString("register").equals("success")){
+
+                    }
                 }
                 /*catch (JSONException e){
                     //tvReturn.setText("Welp");
-                }*/
+                }
                 catch(Exception e){
 
                 }
             }
-        });
+        });*/
     }
+
 }
