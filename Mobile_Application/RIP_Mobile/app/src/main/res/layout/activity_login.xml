@@ -3,40 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img2"
+    android:background="@drawable/img1"
     android:orientation="vertical"
-    android:weightSum="1">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:text="RIP"
-            android:gravity="center"
-            android:textSize="80sp"
-            />
+    android:weightSum="1"
+    android:padding="1dp">
 
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="159dp"
+        android:weightSum="1"
+        android:layout_weight="0.17">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="190dp"
+            android:layout_height="150dp"
+            android:layout_weight="0.10"
+            android:background="@drawable/logo"
+            android:foregroundGravity=""
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+        </ImageView>
+
+    </RelativeLayout>
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="209dp"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="0.21"
-        android:background="#B3a19c9c"
+        android:background="@drawable/rounded_borders"
         android:baselineAligned="false"
         android:orientation="vertical"
         android:padding="10dp"
         android:weightSum="1">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username:"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:typeface="serif" />
 
         <EditText
             android:id="@+id/etUsername"
@@ -44,54 +47,77 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
-            android:layout_weight="0.25"
-            android:background="#e6edf7"
-            android:backgroundTint="#CCeeeeee"
-            android:textColor="@color/colorBlack"
+            android:layout_marginTop="10dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/rounded_edttext"
+            android:drawableLeft="@drawable/iconuser"
+            android:paddingLeft="10dp"
+            android:text="Username"
+            android:textColor="#36454f"
             android:textColorHighlight="@color/colorGray"
             android:textColorHint="@color/colorBlack" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Password:"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:typeface="serif" />
 
         <EditText
             android:id="@+id/etPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/iconpassword"
             android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="0.25"
-            android:background="#e6edf7"
-            android:backgroundTint="#CCEEEEEE"
-            android:inputType="textPassword"
-            android:textColor="@color/colorBlack"
+            android:background="@drawable/rounded_edttext"
+            android:paddingLeft="10dp"
+            android:text="Password"
+            android:textColor="#36454f"
             android:textColorHighlight="@color/colorGray"
             android:textColorHint="@color/colorWhite" />
 
         <Button
             android:id="@+id/btnSend"
-            android:layout_width="220dp"
-            android:layout_height="46dp"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_button"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Login" />
+            android:text="Sign in"
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvReturnMessage"
-            android:layout_width="match_parent"
+            android:id="@+id/txForgot"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:typeface="serif" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Forgot password"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="Create new account"
+            android:textColor="@color/colorWhite"
+            android:textSize="17sp" />
 
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvReturnMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
 </LinearLayout>

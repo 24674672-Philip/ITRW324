@@ -1,6 +1,7 @@
 package com.example.phili.rip_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,7 +38,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public String TOKEN = "";
     Button btnSend;
     EditText etUsername, etPass;
-    TextView tvReturn;
+    TextView tvReturn,tvNew;
     Context contxt;
 
     @Override
@@ -51,7 +52,14 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         etPass  = (EditText) findViewById(R.id.etPass);
         tvReturn = (TextView) findViewById(R.id.tvReturnMessage);
         tvReturn.setText("");
+        tvNew = (TextView)  findViewById(R.id.txNew);
         btnSend.setOnClickListener(this);
+        tvNew.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(new Intent(login.this,registration.class));
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -67,6 +75,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
             }
         }
     }
+
 
     private void sendLoginRequest(){
 
