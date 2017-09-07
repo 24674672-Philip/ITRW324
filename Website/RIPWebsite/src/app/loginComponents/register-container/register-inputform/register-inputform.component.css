@@ -3,9 +3,3 @@
   background: rgba(225, 225, 225, .8);
 }
 
-.container-styles{
-  padding: 0;
-  margin: 0;
-  background: url("../../../../assets/shipwreck.jpg") no-repeat fixed center;
-  background-size: cover;
-}

@@ -8,11 +8,23 @@ import {Router} from "@angular/router";
   styleUrls: ['./banner.component.css']
 })
 export class BannerComponent implements OnInit {
-  constructor() {
+  registering: boolean;
+  action: string;
+
+  constructor(private router: Router) {
+    this.registering = false;
+    this.action = 'Register'
   }
 
   ngOnInit() {
   }
+
+  registerClicked(){
+
+
+
+  }
+
 
 
 }

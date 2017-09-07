@@ -1,11 +1,19 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" >Rip</a>
+      <a class="navbar-brand" style="font-size: 2.5em">RIP</a>
     </div>
-    <div class="nav navbar-text">Registered Intellectual Property</div>
+    <div class="navbar-text" style="font-size: 1.5em">Registered Intellectual Property</div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a routerLink="register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+      <li style="font-size: 1.5em" (click)="registerClicked()">
+        <a (click)="registerClicked()">
+          <span class="glyphicon glyphicon-user" >
+
+          </span>
+          Login
+        </a>
+      </li>
+
     </ul>
   </div>
 </nav>

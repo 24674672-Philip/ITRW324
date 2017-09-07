@@ -21,7 +21,7 @@ import { PopupShadowDirective } from './directives/popup-shadow.directive';
 
 
 const router: Routes = [
-  {path: '', component: LoginContainerComponent},
+  {path: 'login', component: LoginContainerComponent},
   {path: 'register', component: RegisterContainerComponent},
   {path: 'home', component: HomeContainerComponent},
 

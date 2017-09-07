@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ServerstatusComponent implements OnInit {
 
   constructor() { }
-
+//TODO: Setup server status with a http request to represent true server status
   ngOnInit() {
   }
 
