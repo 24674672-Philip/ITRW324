@@ -2,6 +2,8 @@ package com.example.phili.rip_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -92,6 +94,10 @@ public class login extends AppCompatActivity implements View.OnClickListener{
             public void onTaskCompleted(JSONObject result, boolean error, String message) {
                 try {
                     tvReturn.setText(result.getString("login"));
+                    if(result.getString("login").contains("success")){
+                        Intent intent = new Intent(new Intent(login.this,main.class));
+                        startActivity(intent);
+                    }
                 }
                 catch (JSONException e){
                     tvReturn.setText(e.getMessage());

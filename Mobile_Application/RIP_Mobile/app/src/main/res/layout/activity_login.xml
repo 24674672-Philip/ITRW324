@@ -52,7 +52,7 @@
             android:background="@drawable/rounded_edttext"
             android:drawableLeft="@drawable/iconuser"
             android:paddingLeft="10dp"
-            android:text="Username"
+            android:hint="Username"
             android:textColor="#36454f"
             android:textColorHighlight="@color/colorGray"
             android:textColorHint="@color/colorBlack" />
@@ -69,7 +69,7 @@
             android:layout_weight="0.25"
             android:background="@drawable/rounded_edttext"
             android:paddingLeft="10dp"
-            android:text="Password"
+            android:hint="Password"
             android:textColor="#36454f"
             android:textColorHighlight="@color/colorGray"
             android:textColorHint="@color/colorWhite" />
