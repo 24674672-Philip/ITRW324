@@ -18,6 +18,7 @@ import {AuthService} from "./services/auth.service";
 import { LoginInputformComponent } from './loginComponents/login-container/login-inputform/login-inputform.component';
 import { PopupShadowDirective } from './directives/popup-shadow.directive';
 import { DropdowntoggleDirective } from './directives/dropdowntoggle.directive';
+import { MusicFooterComponent } from './ripComponents/music-footer/music-footer.component';
 
 
 
@@ -42,6 +43,7 @@ const router: Routes = [
     LoginInputformComponent,
     PopupShadowDirective,
     DropdowntoggleDirective,
+    MusicFooterComponent,
 
   ],
   imports: [

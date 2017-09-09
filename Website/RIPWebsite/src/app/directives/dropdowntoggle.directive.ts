@@ -5,9 +5,14 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
 })
 export class DropdowntoggleDirective {
   @HostBinding('class.open') isOpen = false;
-  
-    @HostListener('click') toggleOpen(){
-        this.isOpen = !this.isOpen;
+
+
+    @HostListener('mouseover') mouseOverOpen(){
+      this.isOpen = true;
+    }
+
+    @HostListener('mouseleave') mouseLeaveClose(){
+      this.isOpen = false;
     }
   constructor() { }
 

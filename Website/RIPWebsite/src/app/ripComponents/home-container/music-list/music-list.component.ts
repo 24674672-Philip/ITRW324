@@ -16,6 +16,8 @@ export class MusicListComponent implements OnInit {
                 {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
                 {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
                 {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'}];
+
+
   constructor() { }
 
   ngOnInit() {

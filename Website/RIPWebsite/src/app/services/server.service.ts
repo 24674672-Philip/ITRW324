@@ -10,7 +10,6 @@ export class ServerService {
 
 
   login(username: string, password: string, callback){
-    let result = 'unauthed';
     const header = new Headers();
     header.set('username',username);
     header.append('password',password);
@@ -58,7 +57,6 @@ export class ServerService {
   }
 
 
-
   checkUsernameAvailibility(username: string, callback){
     let headers = new Headers();
     headers.set('username',username);
@@ -90,6 +88,10 @@ export class ServerService {
       );
   }
 
-
+  requestSong(callback){
+    this.http.get(this.url+'music?song=new divide')
+      .subscribe(
+        (response)=> callback(response));
+  }
 
 }
