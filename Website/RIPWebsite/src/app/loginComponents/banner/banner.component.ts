@@ -8,21 +8,30 @@ import {Router} from "@angular/router";
   styleUrls: ['./banner.component.css']
 })
 export class BannerComponent implements OnInit {
-  registering: boolean;
   action: string;
 
   constructor(private router: Router) {
-    this.registering = false;
-    this.action = 'Register'
+
   }
 
   ngOnInit() {
+
+  }
+
+  registerText(): string{
+    if(this.router.url.includes('register')){
+      return 'Login';
+    }else{
+      return 'Register';
+    }
   }
 
   registerClicked(){
-
-
-
+    if(this.router.url.includes('register')){
+      this.router.navigate(['login']);
+    }else{
+      this.router.navigate(['register']);
+    }
   }
 
 

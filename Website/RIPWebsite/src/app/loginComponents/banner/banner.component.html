@@ -5,12 +5,12 @@
     </div>
     <div class="navbar-text" style="font-size: 1.5em">Registered Intellectual Property</div>
     <ul class="nav navbar-nav navbar-right">
-      <li style="font-size: 1.5em" (click)="registerClicked()">
+      <li style="font-size: 1.5em; cursor: pointer" (click)="registerClicked()">
         <a (click)="registerClicked()">
           <span class="glyphicon glyphicon-user" >
 
           </span>
-          Login
+          {{registerText()}}
         </a>
       </li>
 
