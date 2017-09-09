@@ -176,71 +176,59 @@ app.get('/api/activate', function(req, res){
   });
 });
 
-/*app.get('/api/music', ensureToken, function(req, res){
+app.get('/api/music', ensureToken, function(req, res){
   jwt.verify(req.token, 'blockchain', function(err, data){
     if(err){
       res.sendStatus(403);
     }
     else {
-      var fileId = req.query.id;
-	    var file = __dirname + '/music/' + fileId;
-	     fs.exists(file,function(exists){
-		     if(exists)
-		     {
-			   var rstream = fs.createReadStream(file);
-			   rstream.pipe(res);
-		     }
-		     else
-		     {
-			   res.send("Its a 404");
-		     res.end();
-		     }
-	     });
+      var songName = req.query.song;
+      var songAlbum = req.query.album;
+      var songArtist = req.query.artist;
+    	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
+    	fs.exists(file,function(exists){
+    		if(exists)
+    		{
+    			var rstream = fs.createReadStream(file);
+    			rstream.pipe(res);
+    		}
+    		else
+    		{
+    			res.send("Its a 404");
+    			res.end();
+    		}
+
+    	});
      }
   })
-});*/
-
-app.get('/download', function(req,res){
-  console.log("/api/download");
-	var songName = req.query.song;
-  var songAlbum = req.query.album;
-  var songArtist = req.query.artist;
-	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
-  fs.exists(file,function(exists){
-		if(exists)
-		{
-			res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
-			res.setHeader('Content-Type', 'application/audio/mpeg3')
-			var rstream = fs.createReadStream(file);
-			rstream.pipe(res);
-		}
-		else
-		{
-			res.send("Its a 404");
-			res.end();
-		}
-	});
 });
 
-app.get('/music', function(req,res){
-  console.log("/api/music");
-	var songName = req.query.song;
-  var songAlbum = req.query.album;
-  var songArtist = req.query.artist;
-	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
-	fs.exists(file,function(exists){
-		if(exists)
-		{
-			var rstream = fs.createReadStream(file);
-			rstream.pipe(res);
-		}
-		else
-		{
-			res.send("Its a 404");
-			res.end();
-		}
-
-	});
+app.get('/api/download', ensureToken, function(req, res){
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var songName = req.query.song;
+      var songAlbum = req.query.album;
+      var songArtist = req.query.artist;
+    	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
+      fs.exists(file,function(exists){
+    		if(exists)
+    		{
+    			res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
+    			res.setHeader('Content-Type', 'application/audio/mpeg3')
+    			var rstream = fs.createReadStream(file);
+    			rstream.pipe(res);
+    		}
+    		else
+    		{
+    			res.send("Its a 404");
+    			res.end();
+    		}
+    	});
+     }
+  })
 });
 
 app.post('/api/checkusername', function(req, res){
@@ -317,17 +305,23 @@ app.post('/api/resendemail', function(req, res){
   else {res.json({error: "welp"});}
 })
 
-app.get('/image', function (req, res, next) {
-  console.log('/image');
-  var fileName = req.headers["imagename"];
-  console.log("filename: " + fileName);
-  res.sendFile(__dirname + '\\images\\' + fileName, function (err) {
-    if (err) {
-      next(err);
-    } else {
-      console.log('Sent:', fileName);
+app.get('/api/image', ensureToken, function(req, res){
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
     }
-  });
+    else {
+      var fileName = req.headers["imagename"];
+      console.log("filename: " + fileName);
+      res.sendFile(__dirname + '\\images\\' + fileName, function (err) {
+        if (err) {
+          next(err);
+        } else {
+          console.log('Sent:', fileName);
+        }
+      });
+     }
+  })
 });
 
 function ensureToken(req, res, next){
@@ -342,6 +336,17 @@ function ensureToken(req, res, next){
     res.sendStatus(403);
   }
 }
+
+app.post('/api/getsongs', function(req, res){
+
+  var sql = 'SELECT Title, Artist, Album, Explicit FROM music LIMIT 20;'
+
+  con.query(sql, function(err, result){
+    if(err) res.json({result: err});
+    res.json({result: result});
+  });
+
+});
 
 app.listen(8080, function(){
   console.log('App is listening on port 8080!');
