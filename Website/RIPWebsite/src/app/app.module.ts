@@ -17,6 +17,7 @@ import { Routes, RouterModule } from "@angular/router";
 import {AuthService} from "./services/auth.service";
 import { LoginInputformComponent } from './loginComponents/login-container/login-inputform/login-inputform.component';
 import { PopupShadowDirective } from './directives/popup-shadow.directive';
+import { DropdowntoggleDirective } from './directives/dropdowntoggle.directive';
 
 
 
@@ -40,6 +41,7 @@ const router: Routes = [
     LoginContainerComponent,
     LoginInputformComponent,
     PopupShadowDirective,
+    DropdowntoggleDirective,
 
   ],
   imports: [
