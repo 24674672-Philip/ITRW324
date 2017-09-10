@@ -88,10 +88,10 @@ export class ServerService {
       );
   }
 
-  requestSong(callback){
-    this.http.get('http://52.211.85.57:8080/music?song=new%20divide.mp3')
+  getTopSongs(callback){
+    this.http.post(this.url+'getsongs', null)
       .subscribe(
-        (response) => callback(response)
+        (response) => callback(response.json())
       );
   }
 

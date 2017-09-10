@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Song} from "../../../classes/song.class";
+import {ServerService} from "../../../services/server.service";
 
 @Component({
   selector: 'app-music-list',
@@ -7,20 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MusicListComponent implements OnInit {
 
-  musicItems = [{artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
-                {artist: 'Bring Me The Horizon', album: 'That\'s the Spirit', imagePath: 'https://truetimbre.files.wordpress.com/2015/09/58f92-bmth2b-2bthat2527s2bthe2bspirit.png'},
-                {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
-                {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
-                {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
-                {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
-                {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
-                {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'},
-                {artist: 'Linkin Park', album: 'New Divide', imagePath: 'http://i.axs.com/2014/11/promoted-media-optimized_545bb90b3fc9a.jpg'}];
+  topSongs  = new Array<Song>();
 
 
-  constructor() { }
+  constructor(private serverService: ServerService) { }
 
   ngOnInit() {
+
+
+
+    this.serverService.getTopSongs((response)=>{
+      let tempObject = response['result'];
+      console.log(tempObject);
+      for(let x of tempObject){
+        let tempSong = new Song(x['Artist'],x['Album'],x['Title'],'http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/e538ae1f-2e32-4bec-9079-1638f8e72043/md/2074838-1442777420860-profile.jpg',null);
+        this.topSongs.push(tempSong);
+      }
+    });
+
   }
 
 }

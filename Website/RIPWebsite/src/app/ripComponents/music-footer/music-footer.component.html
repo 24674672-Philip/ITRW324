@@ -17,8 +17,10 @@
 
     <div class="row">
       <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4">
-        <img class="img-responsive" style="max-height: 50px" [src]="currentlyPlaying.imagePath">
+        <img class="img-responsive" style="max-height: 50px" [src]="currentlyPlaying.getImagePath()">
       </div>
+
+      <!--TODO: Insert dynamic artist album and track name from currentlyPlaying-->
 
       <!--Hidden audio track that connects with music footer-->
       <audio controls id="music" (timeupdate)="timeUpdated()" (loadedmetadata)="displayMetaData()" hidden>

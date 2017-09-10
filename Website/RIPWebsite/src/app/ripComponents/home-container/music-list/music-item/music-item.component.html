@@ -3,17 +3,17 @@
     <div class="panel  text-center" appPopupShadow style="height: 250px">
       <div class="panel-heading text-center">
         <img class="img-responsive"
-             [src]="musicitem.imagePath"
+             [src]="musicitem.getImagePath()"
              style="min-height: 50%; max-height: 125px">
       </div>
 
-      <div class="panel-body" style="padding-top: 0;">
+      <div class="panel-body" style="padding-top: 0; cursor: pointer">
         <div class="row">
-          <h3><a style="text-emphasis: none; color: grey;">{{musicitem.album}}</a></h3>
+          <h3><a style="text-emphasis: none; color: grey; cursor: pointer">{{musicitem.getSongName()}}</a></h3>
         </div>
 
         <div class="row" >
-          <a style="text-emphasis: none; color: grey;">{{musicitem.artist}}</a>
+          <a style="text-emphasis: none; color: grey; cursor: pointer">{{musicitem.getArtist()}}</a>
         </div>
 
       </div>

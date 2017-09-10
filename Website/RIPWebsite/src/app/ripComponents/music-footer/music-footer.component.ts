@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ServerService} from "../../services/server.service";
 import {element} from "protractor";
+import {Song} from "../../classes/song.class";
 
 @Component({
   selector: 'app-music-footer',
@@ -8,7 +9,7 @@ import {element} from "protractor";
   styleUrls: ['./music-footer.component.css']
 })
 export class MusicFooterComponent implements OnInit {
-  @Input() currentlyPlaying: {artist, album, song, imagePath};
+  @Input() currentlyPlaying: Song;
   duration: any;
   currentTime: number;
   progress: number;
@@ -21,7 +22,6 @@ export class MusicFooterComponent implements OnInit {
     this.audio.src='http://52.211.85.57:8080/music?song=new%20divide.mp3';
     this.audio.load();
   }
-
 
   displayMetaData(){
     this.duration = this.audio.duration;
@@ -58,7 +58,7 @@ export class MusicFooterComponent implements OnInit {
 
   playPressed() {
     this.audio.pause();
-    document.getElementById('playButton').className = 'glyphicon glyphicon-play'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pause
+    document.getElementById('playButton').className = 'glyphicon glyphicon-play'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pausengs
   }
 
   forwardPressed(){

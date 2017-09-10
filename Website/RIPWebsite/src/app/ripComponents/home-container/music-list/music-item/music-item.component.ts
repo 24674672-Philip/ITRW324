@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MusicItemModel} from './music-item.model';
+import {Song} from "../../../../classes/song.class";
 
 @Component({
   selector: 'app-music-item',
@@ -8,7 +9,7 @@ import {MusicItemModel} from './music-item.model';
 })
 export class MusicItemComponent implements OnInit {
 
-  @Input() musicitem: {artist: string, album: string , imagePath: string};
+  @Input() musicitem: Song;
 
   constructor() {
 
