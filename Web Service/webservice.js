@@ -3,6 +3,7 @@ var jwt = require('jsonwebtoken');
 var mysql = require('mysql');
 var randtoken = require('rand-token');
 var fs = require('fs');
+var ms = require('mediaserver');
 
 const app = express();
 
@@ -105,8 +106,6 @@ app.post('/api/registeruser', function(req, res){
       });
     });
   });
-
-
 });
 
 app.post('/api/registeraddress', function(req, res){
@@ -189,15 +188,12 @@ app.get('/api/music', ensureToken, function(req, res){
     	fs.exists(file,function(exists){
     		if(exists)
     		{
-    			var rstream = fs.createReadStream(file);
-    			rstream.pipe(res);
+          ms.pipe(req,res,file);
     		}
     		else
     		{
-    			res.send("Its a 404");
-    			res.end();
+    			res.json({error: "Its a 404"});
     		}
-
     	});
      }
   })
@@ -345,7 +341,6 @@ app.post('/api/getsongs', function(req, res){
     if(err) res.json({result: err});
     res.json({result: result});
   });
-
 });
 
 app.listen(8080, function(){
