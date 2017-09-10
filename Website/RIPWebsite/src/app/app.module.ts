@@ -19,6 +19,7 @@ import { LoginInputformComponent } from './loginComponents/login-container/login
 import { PopupShadowDirective } from './directives/popup-shadow.directive';
 import { DropdowntoggleDirective } from './directives/dropdowntoggle.directive';
 import { MusicFooterComponent } from './ripComponents/music-footer/music-footer.component';
+import { ProgressSelectorDirective } from './directives/progress-selector.directive';
 
 
 
@@ -44,6 +45,7 @@ const router: Routes = [
     PopupShadowDirective,
     DropdowntoggleDirective,
     MusicFooterComponent,
+
 
   ],
   imports: [

@@ -88,10 +88,6 @@ export class ServerService {
       );
   }
 
-  requestSong(callback){
-    this.http.get(this.url+'music?song=new divide')
-      .subscribe(
-        (response)=> callback(response));
-  }
+
 
 }
