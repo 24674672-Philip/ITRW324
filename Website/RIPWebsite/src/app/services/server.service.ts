@@ -88,6 +88,12 @@ export class ServerService {
       );
   }
 
+  requestSong(callback){
+    this.http.get('http://52.211.85.57:8080/music?song=new%20divide.mp3')
+      .subscribe(
+        (response) => callback(response)
+      );
+  }
 
 
 }

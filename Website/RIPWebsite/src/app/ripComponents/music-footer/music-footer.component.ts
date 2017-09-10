@@ -18,9 +18,10 @@ export class MusicFooterComponent implements OnInit {
 
   ngOnInit() {
     this.audio = (<HTMLAudioElement>document.getElementById('music'));
-    this.audio.src = 'http://52.211.85.57:8080/api/music?song=new%20divide'; //TODO: build a url that gets the correct song from the server and sets the source to it. Do this in the server class
+    this.audio.src='http://52.211.85.57:8080/music?song=new%20divide.mp3';
     this.audio.load();
   }
+
 
   displayMetaData(){
     this.duration = this.audio.duration;
@@ -49,6 +50,19 @@ export class MusicFooterComponent implements OnInit {
     let percentage = clickedX / elementSize;
     this.setCurrentTime(percentage*this.duration);
     console.log(percentage +  ' ' + this.duration + ' ' + percentage*this.duration);
+  }
+
+  rewindPressed(){
+    //set source to previous track.. The list will be kept in the musicplayer service
+  }
+
+  playPressed() {
+    this.audio.pause();
+    document.getElementById('playButton').className = 'glyphicon glyphicon-play'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pause
+  }
+
+  forwardPressed(){
+    //set source to next track.. The list will be kept in the musicplayer service
   }
 
 
