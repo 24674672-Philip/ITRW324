@@ -20,14 +20,19 @@ import { PopupShadowDirective } from './directives/popup-shadow.directive';
 import { DropdowntoggleDirective } from './directives/dropdowntoggle.directive';
 import { MusicFooterComponent } from './ripComponents/music-footer/music-footer.component';
 import {MusicPlayerService} from "./services/music-player.service";
+import { ArtistsContainerComponent } from './ripComponents/artists-container/artists-container.component';
+import { AlbumContainerComponent } from './ripComponents/album-container/album-container.component';
+import { AlbumDescriptionComponent } from './ripComponents/album-container/album-description/album-description.component';
 
 
 
 
 const router: Routes = [
-  {path: 'login', component: LoginContainerComponent},
+  {path: '', component: LoginContainerComponent},
   {path: 'register', component: RegisterContainerComponent},
   {path: 'home', component: HomeContainerComponent},
+  {path: 'artist', component: ArtistsContainerComponent},
+  {path: 'album', component: AlbumContainerComponent}
 
 ];
 @NgModule({
@@ -46,6 +51,9 @@ const router: Routes = [
     PopupShadowDirective,
     DropdowntoggleDirective,
     MusicFooterComponent,
+    ArtistsContainerComponent,
+    AlbumContainerComponent,
+    AlbumDescriptionComponent,
 
 
   ],

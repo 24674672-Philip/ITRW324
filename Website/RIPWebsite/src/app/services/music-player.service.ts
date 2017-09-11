@@ -4,7 +4,7 @@ import {Song} from "../classes/song.class";
 @Injectable()
 export class MusicPlayerService {
 
-  currentPlaylist: Song[];
+  currentPlaylist = new Array<Song>();
   currentSong: Song = new Song('Default', 'Default', 'Default','../../favicon.ico','Default');
   constructor() { }
 
@@ -12,13 +12,13 @@ export class MusicPlayerService {
     this.currentPlaylist.push(song);
   }
 
-  getNext(): Song{
+  getNextSong(): Song{
     this.currentSong = this.currentPlaylist.pop();
     return this.currentSong;
   }
 
   addToBack(song: Song){
-    let temp: Song[];
+    let temp = new Array<Song>();
     temp.push(song);
     this.currentPlaylist.concat(temp);
   }

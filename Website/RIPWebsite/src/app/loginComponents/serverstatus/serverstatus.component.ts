@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ServerService} from "../../services/server.service";
 
 @Component({
   selector: 'app-serverstatus',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServerstatusComponent implements OnInit {
 
-  constructor() { }
-//TODO: Setup server status with a http request to represent true server status
+  serverOnline: boolean;
+  constructor(private serverService: ServerService) { }
+
   ngOnInit() {
+    this.serverService.testServer((response)=>{
+      if(response['test'] == 'test success'){
+        this.serverOnline = true;
+      }
+      else {
+        this.serverOnline = false;
+      }
+    });
   }
 
 }

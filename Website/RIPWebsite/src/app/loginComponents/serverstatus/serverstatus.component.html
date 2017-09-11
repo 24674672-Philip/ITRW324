@@ -1,7 +1,12 @@
 <div class="panel-footer backColor center-block text-center" style="height: 35px;">
   <div class="row">
     <div class="panel-info" style="background: transparent">
-      <p><span style="font-size: 1.2em; font-weight: bold; top:50%">Server Status: <span style="color: green">Online</span></span></p>
+      <p>
+        <span style="font-size: 1.2em; font-weight: bold; top:50%">Server Status:
+          <span *ngIf="serverOnline" style="color: green">Online</span>
+          <span *ngIf="!serverOnline" style="color: red">Offline</span>
+        </span>
+      </p>
     </div>
   </div>
 </div>

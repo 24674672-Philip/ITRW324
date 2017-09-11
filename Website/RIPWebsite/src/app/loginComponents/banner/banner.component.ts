@@ -28,7 +28,7 @@ export class BannerComponent implements OnInit {
 
   registerClicked(){
     if(this.router.url.includes('register')){
-      this.router.navigate(['login']);
+      this.router.navigate(['']);
     }else{
       this.router.navigate(['register']);
     }

@@ -56,7 +56,6 @@ export class ServerService {
       )
   }
 
-
   checkUsernameAvailibility(username: string, callback){
     let headers = new Headers();
     headers.set('username',username);
@@ -93,6 +92,13 @@ export class ServerService {
       .subscribe(
         (response) => callback(response.json())
       );
+  }
+
+  testServer(callback){
+    this.http.get('http://52.211.85.57:8080/test', null)
+      .subscribe(
+        (response)=>callback(response.json())
+      )
   }
 
 
