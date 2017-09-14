@@ -24,17 +24,14 @@ import { ArtistsContainerComponent } from './ripComponents/artists-container/art
 import { AlbumContainerComponent } from './ripComponents/album-container/album-container.component';
 import { AlbumDescriptionComponent } from './ripComponents/album-container/album-description/album-description.component';
 
-
-
-
 const router: Routes = [
   {path: '', component: LoginContainerComponent},
   {path: 'register', component: RegisterContainerComponent},
   {path: 'home', component: HomeContainerComponent},
   {path: 'artist', component: ArtistsContainerComponent},
   {path: 'album', component: AlbumContainerComponent}
-
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,8 +51,6 @@ const router: Routes = [
     ArtistsContainerComponent,
     AlbumContainerComponent,
     AlbumDescriptionComponent,
-
-
   ],
   imports: [
     BrowserModule,

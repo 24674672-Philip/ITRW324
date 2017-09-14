@@ -1,5 +1,5 @@
 <div class="container-fluid"  style="bottom: 0; position: fixed; width: 100%">
-  <div class="panel-footer">
+  <div class="panel-footer" style="border-left: 1px; border-bottom-right: 1px;">
     <div class="row">
       <div class="progress" (click)="progressChanged($event)" id="progressContainer">
         <div
@@ -16,8 +16,17 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4">
-        <img class="img-responsive" style="max-height: 50px" [src]="currentlyPlaying.getImagePath()">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <img class="img-responsive" style="max-height: 100px" [src]="currentlyPlaying.getImagePath()">
+      </div>
+
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="row">
+          <h2 *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getSongName()}}</h2>
+        </div>
+        <div class="row">
+          <h3 *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getArtist()}}</h3>
+        </div>
       </div>
 
       <!--TODO: Insert dynamic artist album and track name from currentlyPlaying-->
@@ -27,10 +36,10 @@
         <source src="" type="audio/mp3" />
       </audio>
 
-      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center center-block" style="font-size: 2em; letter-spacing: 10px">
-        <span class="glyphicon glyphicon-backward" (click)="rewindPressed()" ></span>
-        <span class="glyphicon glyphicon-pause" style="font-size: 1.3em"  (click)="playPressed()" id="playButton"></span>
-        <span class="glyphicon glyphicon-forward" (click)="forwardPressed()"></span>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 " style="font-size: 2em; letter-spacing: 10px">
+        <span class="glyphicon glyphicon-backward" style="cursor: pointer" (click)="rewindPressed()" ></span>
+        <span class="glyphicon glyphicon-play" style="font-size: 1.3em" style="cursor: pointer"  (click)="playPressed()" id="playButton"></span>
+        <span class="glyphicon glyphicon-forward" style="cursor: pointer" (click)="forwardPressed()"></span>
       </div>
     </div>
 

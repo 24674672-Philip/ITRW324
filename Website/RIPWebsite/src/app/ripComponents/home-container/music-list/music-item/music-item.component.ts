@@ -15,6 +15,8 @@ export class MusicItemComponent implements OnInit {
 
   }
 
+  //TODO: Create a on click event that sends the clicked track to music footer and updates the current track in the music server
+
   ngOnInit() {
   }
 

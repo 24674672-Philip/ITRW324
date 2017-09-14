@@ -5,15 +5,30 @@ import {Song} from "../classes/song.class";
 export class MusicPlayerService {
 
   currentPlaylist = new Array<Song>();
-  currentSong: Song = new Song('Default', 'Default', 'Default','../../favicon.ico','Default');
-  constructor() { }
+  //currentSong: Song = new Song('Default', 'Default', 'Default','../../favicon.ico','Default');
+  currentSong: Song = new Song('Jack Parow', 'Cooler as ekke', 'Parow to Paarl', 'http://images.genius.com/165ba96222b44eaf259801336390a18c.640x640x1.jpg','');
+  constructor() {
+
+  }
 
   addToFront(song: Song){
     this.currentPlaylist.push(song);
   }
 
   getNextSong(): Song{
-    this.currentSong = this.currentPlaylist.pop();
+    if(this.currentPlaylist.length != 0){
+      let indexSearch: number = 0;
+      let index: number = 0;
+      for(let x of this.currentPlaylist){
+        if(x==this.currentSong){
+          index = indexSearch;
+          break;
+        }
+        indexSearch++;
+      }
+      this.currentSong = this.currentPlaylist[index+1];
+    }
+
     return this.currentSong;
   }
 
@@ -22,7 +37,4 @@ export class MusicPlayerService {
     temp.push(song);
     this.currentPlaylist.concat(temp);
   }
-
-
-
 }

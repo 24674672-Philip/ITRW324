@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ServerService} from "../../services/server.service";
 import {element} from "protractor";
 import {Song} from "../../classes/song.class";
+import {MusicPlayerService} from "../../services/music-player.service";
 
 @Component({
   selector: 'app-music-footer',
@@ -9,23 +10,26 @@ import {Song} from "../../classes/song.class";
   styleUrls: ['./music-footer.component.css']
 })
 export class MusicFooterComponent implements OnInit {
-  @Input() currentlyPlaying: Song;
+  currentlyPlaying: Song;
   duration: any;
   currentTime: number;
   progress: number;
   audio : HTMLAudioElement;
-  constructor(private serverService: ServerService) {
+  isPlaying: boolean;
+  constructor(private serverService: ServerService, private musicServer: MusicPlayerService) {
   }
 
   ngOnInit() {
+    this.currentlyPlaying = this.musicServer.currentSong;
     this.audio = (<HTMLAudioElement>document.getElementById('music'));
     this.audio.src='http://52.211.85.57:8080/music?song=new%20divide.mp3';
     this.audio.load();
   }
 
+
+
   displayMetaData(){
     this.duration = this.audio.duration;
-    this.audio.play(); //ensures the duration is set only after the metadata has been loaded
   }
 
   setProgress(){
@@ -57,8 +61,14 @@ export class MusicFooterComponent implements OnInit {
   }
 
   playPressed() {
-    this.audio.pause();
-    document.getElementById('playButton').className = 'glyphicon glyphicon-play'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pausengs
+    if(this.isPlaying){
+      this.audio.pause();
+      document.getElementById('playButton').className = 'glyphicon glyphicon-play'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pausengs
+    }else{
+      this.audio.play();
+      document.getElementById('playButton').className = 'glyphicon glyphicon-pause'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pausengs
+    }
+    this.isPlaying = !this.isPlaying;
   }
 
   forwardPressed(){
