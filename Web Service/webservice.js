@@ -16,6 +16,19 @@ var con = mysql.createPool({
   database: "blockchainDB"
 });
 
+function ensureToken(req, res, next){
+  const bearerHeader = req.headers["authentication"];
+  if(typeof bearerHeader !== 'undefined'){
+    const bearer = bearerHeader.split(" ");
+    const bearerToken = bearer[1];
+    req.token = bearerToken;
+    next();
+  }
+  else {
+    res.sendStatus(403);
+  }
+}
+
 app.get('/api', function(req, res){
   console.log("/api");
   var qry = require('./app/api')('SELECT * FROM users','',con, res);
@@ -62,47 +75,19 @@ app.get('/api/protected', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-	  var sql = 'SELECT name, surname FROM users WHERE NOT name IS NULL;';
-	  con.query(sql, function (err, result, fields, rows){
-		if (err) res.json({
-		  result: err
-        });
-		res.json({
-		  result: result
-        });
-	  });
+      var qry = require('./app/api')('SELECT * FROM users','',con, res);
     }
   })
 });
 
 app.get('/api/activate', function(req, res){
   console.log("/api/activate");
-  var hash = req.query.hash;
-  var email = req.query.email;
-  var sql = 'SELECT emailHash FROM users WHERE email = ?;';
-  con.query(sql, email, function(err, result){
-    if(err) res.json({
-		  result: err
-    });
-    else if (result[0].emailHash === hash){
-      sql = 'UPDATE users SET isActivated = 1 WHERE email = ?';
-      con.query(sql,email,function(err, result){
-      if(err) res.json({
-  		  result: err
-      });
-      else res.json({
-        result: 'Successfully verified account!'
-      });
-      });
-    }
-    else res.json({
-		  result: 'Something went wrong',
-    });
-  });
+  var qry = require('./app/activate')(con, res);
 });
 
-app.get('/api/music', ensureToken, function(req, res){
-  jwt.verify(req.token, 'blockchain', function(err, data){
+app.get('/api/music', function(req, res){
+  var token = req.query.token;
+  jwt.verify(token, 'blockchain', function(err, data){
     if(err){
       res.sendStatus(403);
     }
@@ -125,8 +110,9 @@ app.get('/api/music', ensureToken, function(req, res){
   })
 });
 
-app.get('/api/download', ensureToken, function(req, res){
-  jwt.verify(req.token, 'blockchain', function(err, data){
+app.get('/api/download', function(req, res){
+  var token = req.query.token;
+  jwt.verify(token, 'blockchain', function(err, data){
     if(err){
       res.sendStatus(403);
     }
@@ -158,21 +144,7 @@ app.post('/api/checkusername', function(req, res){
   var uName = req.headers["username"];
   var sql = 'SELECT username FROM users WHERE username = ?';
   if (uName !== undefined) {
-    con.query(sql, uName, function (err, result) {
-      if (err)  res.json({
-            error: err
-          });
-      if(result[0] === undefined){
-        res.json({
-          username: 'available'
-        });
-      }
-      else {
-        res.json({
-          username: 'taken'
-        });
-      }
-    });
+    var qry = require('./app/api')(sql,uName,con, res);
   }
   else {
     res.json({
@@ -186,21 +158,7 @@ app.post('/api/checkemail', function(req, res){
   var emailA = req.headers["email"];
   var sql = 'SELECT email FROM users WHERE email = ?';
   if (emailA !== undefined) {
-    con.query(sql, emailA, function (err, result) {
-      if (err)  res.json({
-            error: err
-          });
-      if(result[0] === undefined){
-        res.json({
-          email: 'available'
-        });
-      }
-      else {
-        res.json({
-          email: 'taken'
-        });
-      }
-    });
+    var qry = require('./app/api')(sql,emailA,con, res);
   }
   else {
     res.json({
@@ -214,15 +172,7 @@ app.post('/api/resendemail', function(req, res){
   var user = req.headers["username"];
   var sql = 'SELECT emailHash, email FROM users WHERE username = ?';
   if(user !== undefined || user !== ""){
-	con.query(sql, user, function(err, result){
-    if (err) {res.json({error: err});}
-    if (result[0] === undefined) {res.json({error: "user doesn't exist"});}
-    else {
-      var link = result[0].hash;
-      var resend = require('./app/email')(link,result[0].email);
-      res.json({status: "email send"});
-    }
-  });
+    var qry = require('./app/api')(sql,user,con, res);
   }
   else {res.json({error: "welp"});}
 })
@@ -246,27 +196,9 @@ app.get('/api/image', ensureToken, function(req, res){
   })
 });
 
-function ensureToken(req, res, next){
-  const bearerHeader = req.headers["authentication"];
-  if(typeof bearerHeader !== 'undefined'){
-    const bearer = bearerHeader.split(" ");
-    const bearerToken = bearer[1];
-    req.token = bearerToken;
-    next();
-  }
-  else {
-    res.sendStatus(403);
-  }
-}
-
 app.post('/api/getsongs', function(req, res){
-
-  var sql = 'SELECT Title, Artist, Album, musicID, Explicit FROM music LIMIT 20;'
-
-  con.query(sql, function(err, result){
-    if(err) res.json({result: err});
-    res.json({result: result});
-  });
+  var sql = 'SELECT Title, Artist, Album, musicID, Explicit FROM song LIMIT 20;'
+  var qry = require('./app/api')(sql,'',con, res);
 });
 
 app.listen(8080, function(){

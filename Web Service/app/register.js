@@ -24,9 +24,9 @@ module.exports = function(req, res, con){
       console.log('connected as id ' + connection.threadId);
 
       connection.query(sql,val,function(err,result){
-        if(!err) {
-          res.json({register: "success",
-      	  userid: resul[0].user_id});
+        if(err) {
+          res.json({register: "Failed",
+      	  error: err});
         }
         console.log('inserted val: ' + val);
         var link = hash;
