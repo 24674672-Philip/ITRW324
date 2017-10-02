@@ -5,9 +5,11 @@ var randtoken = require('rand-token');
 var fs = require('fs');
 var ms = require('mediaserver');
 
+
 const app = express();
 
 var con = mysql.createPool({
+  connectionLimit : 30,
   host: "52.211.85.57",
   user: "philip",
   password: "blockchain",
@@ -16,16 +18,7 @@ var con = mysql.createPool({
 
 app.get('/api', function(req, res){
   console.log("/api");
-  var sql = 'SELECT * FROM users';
-  con.query(sql, function (err, result, fields, rows) {
-    if (err) res.json({
-      error: err
-    });
-    console.log(result);
-    res.json({
-      text: 'my api!'
-    });
-  });
+  var qry = require('./app/api')('SELECT * FROM users','',con, res);
 });
 
 app.get('/test', function(req, res){
@@ -37,75 +30,12 @@ app.get('/test', function(req, res){
 
 app.post('/api/login', function(req, res){
   console.log("/api/login");
-  var sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
-  var valP = req.headers["username"];
-  var valU = req.headers["password"];
-  console.log('name: ' + valP, ' pass: ' + valU);
-
-  con.query(sql, [valP, valU], function (err, result) {
-    if (err) res.json({result: 'Something went wrong (error)'});
-    if(result[0] == undefined) res.json({login: "failed"});
-	  else{
-      if (result[0].isActivated !== 0) {
-        console.log(result[0].name);
-          const user = { id: result[0].name };
-          const token = jwt.sign({ user }, 'blockchain');
-          res.json({
-            login: 'success',
-            token: token,
-            user: result[0].username,
-            fname: result[0].name,
-            lname: result[0].surname,
-            email: result[0].email
-          });
-      }
-      else {
-        res.json({
-          login: "email not registered",
-          username: result[0].username
-        });
-      }
-	  }
-  });
+  var qry = require('./app/login')(req, res, con, jwt);
 });
 
 app.post('/api/registeruser', function(req, res){
   console.log("/api/registeruser");
-
-  var emailAddress = req.headers['email'];
-  var hash = randtoken.generate(16);
-  var sql = 'INSERT INTO users (name, surname, email, dateOfBirth, password,username,isActivated,emailHash) VALUES ?';
-  var val = [[
-    req.headers["fname"],
-    req.headers["lname"],
-    req.headers["email"],
-    req.headers["birthdate"],
-    req.headers["password"],
-    req.headers["username"],
-    0,
-    hash
-  ]];
-
-  con.query(sql, [val], function (err, result) {
-    if (err) res.json({
-		  registered: 'failed',
-		  error: err
-        });
-    console.log('inserted val: ' + val);
-
-    var link = hash;
-    var email = require('./app/email')(link,emailAddress);
-    var sql2 = 'SELECT user_id FROM users WHERE emailHash = ?'
-
-    con.query(sql2,hash,function(err, resul){
-      if (err) { res.json({error: err}); }
-      console.log(resul);
-      res.json({
-  	  register: "success",
-  	  userid: resul[0].user_id
-      });
-    });
-  });
+  var qry = require('./app/register')(req, res, con);
 });
 
 app.post('/api/registeraddress', function(req, res){
@@ -121,14 +51,10 @@ app.post('/api/registeraddress', function(req, res){
     req.headers["userid"]
   ]];
 
-  con.query(sql2, [valAddress], function(err, result){
-    if (err) res.json({ error: err });
-    res.json({
-    registered: 'success'
-    });
-  });
+  var qry = require('./app/api')(sql2,valAddress,con, res);
 
 });
+
 app.get('/api/protected', ensureToken, function(req, res){
   console.log("/api/protected");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -335,7 +261,7 @@ function ensureToken(req, res, next){
 
 app.post('/api/getsongs', function(req, res){
 
-  var sql = 'SELECT Title, Artist, Album, Explicit FROM music LIMIT 20;'
+  var sql = 'SELECT Title, Artist, Album, musicID, Explicit FROM music LIMIT 20;'
 
   con.query(sql, function(err, result){
     if(err) res.json({result: err});
