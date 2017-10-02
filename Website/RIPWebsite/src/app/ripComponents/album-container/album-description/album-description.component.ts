@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-album-description',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlbumDescriptionComponent implements OnInit {
 
-  constructor() { }
+  private albumID: number;
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.albumID = this.activatedRoute.snapshot.queryParams["albumid"];
+    //TODO: retrieve all album songs
   }
 
 }

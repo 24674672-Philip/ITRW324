@@ -1,11 +1,20 @@
 export class Song {
 
-  public constructor(private artist: string,
-  private album: string,
-  private songName: string,
-  private imagePath: string,
-  private songUrl: string){
+  public constructor(private songID: number,
+                    private albumID: number,
+                    private artist: string,
+                    private album: string,
+                    private songName: string,
+                    private imagePath: string,
+                    private songUrl: string){
+  }
 
+  getSongID(): number{
+    return this.songID;
+  }
+
+  getAlbumID(): number{
+    return this.albumID;
   }
 
   getArtist(){
@@ -28,7 +37,7 @@ export class Song {
     return this.songUrl;
   }
 
-  //TODO: Possibly build the source url in a setUrl method?
+
 
 
 

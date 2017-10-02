@@ -47,7 +47,7 @@
 
             <!--Only shows if login failed due to email not verified-->
             <div class="panel panel-warning" *ngIf="loginNotVerifiedFlag">
-              <p>Email not verified yet. Please check your email or if you did not receive the email</p>>
+              <p>Email not verified yet. Please check your email or if you did not receive the email</p>
               <button class="btn btn-primary" (click)="resendVerificationEmail()">Resend Email</button> <!--TODO: implement resend email method-->
               <p *ngIf="verificationSent">Email verification sent again</p>
             </div>

@@ -18,7 +18,8 @@ export class MusicListComponent implements OnInit {
       let tempObject = response['result'];
       console.log(tempObject);
       for(let x of tempObject){
-        let tempSong = new Song(x['Artist'],x['Album'],x['Title'],'http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/e538ae1f-2e32-4bec-9079-1638f8e72043/md/2074838-1442777420860-profile.jpg',null);//TODO: get image path from server and insert it dynamically per track
+        //TODO: get song id and album id from response as well
+        let tempSong = new Song(1,1,x['Artist'],x['Album'],x['Title'],'http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/e538ae1f-2e32-4bec-9079-1638f8e72043/md/2074838-1442777420860-profile.jpg',null);//TODO: get image path from server and insert it dynamically per track
         this.topSongs.push(tempSong);
       }
     });

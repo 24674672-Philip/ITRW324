@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {MusicItemModel} from './music-item.model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Song} from "../../../../classes/song.class";
+import {MusicPlayerService} from "../../../../services/music-player.service";
+import {Router} from "@angular/router";
+import {AuthService} from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-music-item',
@@ -11,11 +13,22 @@ export class MusicItemComponent implements OnInit {
 
   @Input() musicitem: Song;
 
-  constructor() {
+  constructor(private router: Router, private musicService: MusicPlayerService, authService: AuthService) {
 
   }
 
   //TODO: Create a on click event that sends the clicked track to music footer and updates the current track in the music server
+  artworkClicked(){
+    this.router.navigate(["../../../album"], {queryParams:{albumid: this.musicitem.getAlbumID()}});
+  }
+  songNameClicked(){
+
+  }
+
+  artistClicked(){
+
+  }
+
 
   ngOnInit() {
   }

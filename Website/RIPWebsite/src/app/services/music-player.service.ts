@@ -6,7 +6,8 @@ export class MusicPlayerService {
 
   currentPlaylist = new Array<Song>();
   //currentSong: Song = new Song('Default', 'Default', 'Default','../../favicon.ico','Default');
-  currentSong: Song = new Song('Jack Parow', 'Cooler as ekke', 'Parow to Paarl', 'http://images.genius.com/165ba96222b44eaf259801336390a18c.640x640x1.jpg','');
+  //TODO: replace with server data
+  currentSong: Song = new Song(1,1,'Jack Parow', 'Cooler as ekke', 'Parow to Paarl', 'http://images.genius.com/165ba96222b44eaf259801336390a18c.640x640x1.jpg','');
   constructor() {
 
   }
