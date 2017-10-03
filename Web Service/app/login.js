@@ -17,8 +17,9 @@ module.exports = function(req, res, con, jwt){
     else{
       if (result[0].isActivated !== 0) {
         console.log(result[0].name);
-          const user = { id: result[0].name };
-          const token = jwt.sign({ user }, 'blockchain');
+          const user = { name: result[0].name,
+                         id: result[0].id};
+          const token = jwt.sign({ user }, 'blockchain', { expiresIn: 18000 });
           res.json({
             login: 'success',
             token: token,
