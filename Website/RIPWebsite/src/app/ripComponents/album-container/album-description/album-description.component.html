@@ -1,32 +1,29 @@
 <!--TODO: replace with dynamic data and resolve any layout problems-->
 
-<div class="container-fluid">
+<div class="container-fluid" style="padding: 0; margin: 0">
   <div class="row text-center center-block">
-    <img class="img-responsive text-center center-block" style="min-width: 1vh; max-height: 100px" src="http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/e538ae1f-2e32-4bec-9079-1638f8e72043/md/2074838-1442777420860-profile.jpg"/>
+    <img class="img-responsive text-center center-block" style="width: 100%; max-height: 400px; padding: 0" [src]="albumObj.getArtistImagePath()"/>
   </div>
-  <div class="row">
+  <div class="row" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3">
-      <img class="img-responsive" style="max-height: 100px" src="http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/e538ae1f-2e32-4bec-9079-1638f8e72043/md/2074838-1442777420860-profile.jpg"/>
+      <img class="img-responsive" style="max-height: 100px; margin: 10px" [src]="albumObj.getAlbumArtworkPath()"/>
     </div>
     <div class="col-xs-10 col-sm-10 col-md-9 col-lg-9">
       <div class="row">
-        <h2>Album Name</h2>
+        <h2>{{albumObj.getAlbumName()}}</h2>
       </div>
       <div class="row">
-        <h3>Artist Name</h3>
+        <h3>{{albumObj.getAlbumArtist()}}</h3>
       </div>
       <div class="row">
-        <p>Release date <span class="glyphicon glyphicon-fire"></span></p>
+        <p>{{albumObj.getAlbumReleaseDate()}} <span class="glyphicon glyphicon-fire"></span></p>
       </div>
     </div>
   </div>
 
   <div class="row">
     <div class="list-group">
-      <a class="list-group-item">1 Test Track</a>
-      <a class="list-group-item">2 Test Track</a>
-      <a class="list-group-item">3 Test Track</a>
-      <a class="list-group-item">4 Test Track</a>
+      <app-track-list-item *ngFor="let x of albumObj.getSongs(); let i = index" [song]="x" [trackNumber]="i"></app-track-list-item>
     </div>
   </div>
 </div>

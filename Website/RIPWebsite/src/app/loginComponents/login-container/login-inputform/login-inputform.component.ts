@@ -52,7 +52,7 @@ export class LoginInputformComponent implements OnInit {
 
   loginSuccess(response){
     this.loginSuccessFlag = true;
-    this.authService.setAuthToken('bearer '+response['token'].toString());
+    this.authService.setAuthToken(response['token'].toString());
     this.authService.setEmail(response['email'].toString());
     this.authService.setFName(response['fname'].toString());
     this.authService.setLName(response['lname'].toString());

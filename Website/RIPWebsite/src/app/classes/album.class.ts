@@ -5,7 +5,10 @@ export class Album {
   private songs: Song[] = new Array<Song>();
   constructor(private albumID: number,
               private albumName: string,
-              private albumArtist: string,){
+              private albumArtist: string,
+              private albumReleaseDate: number,
+              private albumArtworkPath: string,
+              private artistImagePath: string){
   }
 
   setSongs(albumID: number){
@@ -28,5 +31,16 @@ export class Album {
     return this.songs;
   }
 
+  getAlbumReleaseDate(): number{
+    return this.albumReleaseDate;
+  }
+
+  getAlbumArtworkPath(): string{
+    return this.albumArtworkPath;
+  }
+
+  getArtistImagePath(): string{
+    return this.artistImagePath;
+  }
 
 }

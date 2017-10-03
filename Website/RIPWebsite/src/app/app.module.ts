@@ -23,6 +23,7 @@ import {MusicPlayerService} from "./services/music-player.service";
 import { ArtistsContainerComponent } from './ripComponents/artists-container/artists-container.component';
 import { AlbumContainerComponent } from './ripComponents/album-container/album-container.component';
 import { AlbumDescriptionComponent } from './ripComponents/album-container/album-description/album-description.component';
+import { TrackListItemComponent } from './ripComponents/album-container/album-description/track-list-item/track-list-item.component';
 
 const router: Routes = [
   {path: '', component: LoginContainerComponent},
@@ -51,6 +52,7 @@ const router: Routes = [
     ArtistsContainerComponent,
     AlbumContainerComponent,
     AlbumDescriptionComponent,
+    TrackListItemComponent,
   ],
   imports: [
     BrowserModule,

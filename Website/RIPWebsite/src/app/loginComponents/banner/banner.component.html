@@ -1,19 +1,20 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" style="font-size: 2.5em">RIP</a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#hamMenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand hidden-xs hidden-sm" href="#">Registered Intellectual Property</a>
+      <a class="navbar-brand hidden-md hidden-lg" href="#">RIP</a>
     </div>
-    <div class="navbar-text" style="font-size: 1.5em">Registered Intellectual Property</div>
-    <ul class="nav navbar-nav navbar-right">
-      <li style="font-size: 1.5em; cursor: pointer" (click)="registerClicked()">
-        <a (click)="registerClicked()">
-          <span class="glyphicon glyphicon-user" >
 
-          </span>
-          {{registerText()}}
-        </a>
-      </li>
-
-    </ul>
+    <div class="collapse navbar-collapse" id="hamMenu">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a routerLink="/register"><span class="glyphicon glyphicon-user" ></span> Register</a></li>
+        <li><a routerLink="../"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
