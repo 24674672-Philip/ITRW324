@@ -175,7 +175,7 @@ app.post('/api/resendemail', function(req, res){
     var qry = require('./app/api')(sql,user,con, res);
   }
   else {res.json({error: "welp"});}
-})
+});
 
 app.get('/api/image', ensureToken, function(req, res){
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -194,6 +194,17 @@ app.get('/api/image', ensureToken, function(req, res){
       });
      }
   })
+});
+
+app.get('/api/validtoken',ensureToken, function(req, res){
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if (err) {
+      res.json({tokenStatus: 'Invalid'});
+    }
+    else {
+      res.json({tokenStatus: data});
+    }
+  });
 });
 
 app.post('/api/getsongs', function(req, res){
