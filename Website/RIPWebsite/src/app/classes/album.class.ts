@@ -13,6 +13,7 @@ export class Album {
 
   setSongs(albumID: number){
     //TODO: request songs from server to populate array
+    //this.songs.push(new Song(1,1,"Linkin Park", "New Divide", "Numb", ))
   }
 
   getAlbumID(): number{

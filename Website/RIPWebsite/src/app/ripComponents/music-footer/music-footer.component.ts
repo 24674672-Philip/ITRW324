@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ServerService} from "../../services/server.service";
-import {element} from "protractor";
 import {Song} from "../../classes/song.class";
 import {MusicPlayerService} from "../../services/music-player.service";
+
 
 @Component({
   selector: 'app-music-footer',
@@ -12,6 +12,14 @@ import {MusicPlayerService} from "../../services/music-player.service";
 export class MusicFooterComponent implements OnInit {
   currentlyPlaying: Song;
   duration: any;
+  durationMinutes: number = 0;
+  durationSeconds: number =0;
+  durationMinutesString: string = "";
+  durationSecondsString: string = "";
+  progressMinutes: number = 0;
+  progressSeconds: number = 0;
+  progressMinutesString: string;
+  progressSecondsString: string;
   currentTime: number;
   progress: number;
   audio : HTMLAudioElement;
@@ -22,7 +30,7 @@ export class MusicFooterComponent implements OnInit {
   ngOnInit() {
     this.currentlyPlaying = this.musicServer.currentSong;
     this.audio = (<HTMLAudioElement>document.getElementById('music'));
-    this.audio.src='http://52.211.85.57:8080/music?song=new%20divide.mp3';
+    this.audio.src=this.currentlyPlaying.getSongUrl();
     this.audio.load();
   }
 
@@ -30,7 +38,12 @@ export class MusicFooterComponent implements OnInit {
 
   displayMetaData(){
     this.duration = this.audio.duration;
+    this.durationMinutes = Math.trunc(this.duration/60);
+    this.durationSeconds = Math.trunc(this.duration % 60);
+    this.durationMinutesString = ("0"+this.durationMinutes).slice(-2);
+    this.durationSecondsString = ("0"+this.durationSeconds).slice(-2);
   }
+
 
   setProgress(){
      this.progress = this.currentTime/this.duration *100;
@@ -38,7 +51,13 @@ export class MusicFooterComponent implements OnInit {
 
   timeUpdated(){
     this.currentTime = this.audio.currentTime;
+    console.log(this.audio.currentTime);
     this.setProgress();
+    this.progressMinutes = Math.trunc(this.currentTime/60);//TODO: fix the progress timer
+    this.progressSeconds = Math.trunc(this.currentTime % 60);
+    console.log(this.progressSeconds);
+    this.progressMinutesString = ( "0" + this.progressMinutes.toString()).slice(-2);
+    this.progressSecondsString = ( "0" + this.progressSeconds.toString()).slice(-2);
   }
 
   setCurrentTime(currentTime: number){

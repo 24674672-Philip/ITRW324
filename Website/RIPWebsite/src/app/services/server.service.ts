@@ -101,5 +101,14 @@ export class ServerService {
       )
   }
 
+  validateToken(){
+    let headers = new Headers();
+    headers.append("authentication","bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiUGhpbGlwIn0sImlhdCI6MTUwNzAyMTY2MX0.J-aLzyctvfAwz01UIm3tRtOcfdsfq28RiJvxhBdE2zA");
+    this.http.get(this.url+"validtoken",{headers: headers})
+      .subscribe(
+        (response)=> console.log(response.json())
+      );
+  }
+
 
 }

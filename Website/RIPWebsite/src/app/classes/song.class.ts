@@ -2,6 +2,7 @@ export class Song {
 
   public constructor(private songID: number,
                     private albumID: number,
+                    private artistID: number,
                     private artist: string,
                     private album: string,
                     private songName: string,

@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./register-inputform.component.css']
 })
 export class RegisterInputFormComponent implements OnInit {
+  //TODO: fix ugly form validation
   email : string;
   fName : string;
   lName : string;
