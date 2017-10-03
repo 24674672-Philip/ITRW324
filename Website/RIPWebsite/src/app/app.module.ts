@@ -24,6 +24,7 @@ import { ArtistsContainerComponent } from './ripComponents/artists-container/art
 import { AlbumContainerComponent } from './ripComponents/album-container/album-container.component';
 import { AlbumDescriptionComponent } from './ripComponents/album-container/album-description/album-description.component';
 import { TrackListItemComponent } from './ripComponents/album-container/album-description/track-list-item/track-list-item.component';
+import { LandingPageContainerComponent } from './landing-page/landing-page-container/landing-page-container.component';
 
 const router: Routes = [
   {path: '', component: LoginContainerComponent},
@@ -53,6 +54,7 @@ const router: Routes = [
     AlbumContainerComponent,
     AlbumDescriptionComponent,
     TrackListItemComponent,
+    LandingPageContainerComponent,
   ],
   imports: [
     BrowserModule,
