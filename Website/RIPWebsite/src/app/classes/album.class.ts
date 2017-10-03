@@ -11,9 +11,13 @@ export class Album {
               private artistImagePath: string){
   }
 
-  setSongs(albumID: number){
+  setSongs(/*albumID: number*/){
     //TODO: request songs from server to populate array
-    //this.songs.push(new Song(1,1,"Linkin Park", "New Divide", "Numb", ))
+    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
+    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
+    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
+    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
+    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
   }
 
   getAlbumID(): number{
