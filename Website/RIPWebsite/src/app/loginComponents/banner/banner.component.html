@@ -6,14 +6,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand hidden-xs hidden-sm" href="#">Registered Intellectual Property</a>
-      <a class="navbar-brand hidden-md hidden-lg" href="#">RIP</a>
+      <a class="navbar-brand hidden-xs hidden-sm">Registered Intellectual Property</a>
+      <a class="navbar-brand hidden-md hidden-lg">RIP</a>
     </div>
 
     <div class="collapse navbar-collapse" id="hamMenu">
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="/register"><span class="glyphicon glyphicon-user" ></span> Register</a></li>
-        <li><a routerLink="../"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a (click)="registerClicked()" style="cursor: pointer"><span class="glyphicon glyphicon-user" ></span> Register</a></li>
+        <li><a (click)="loginClicked()" style="cursor: pointer"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>

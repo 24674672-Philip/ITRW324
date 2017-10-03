@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -9,13 +9,32 @@ import {Router} from "@angular/router";
 })
 export class BannerComponent implements OnInit {
 
-  constructor() {
+  constructor(private actUrl: ActivatedRoute, private router: Router) {
 
   }
 
   ngOnInit() {
 
   }
+
+  loginClicked(){
+    if(this.actUrl.snapshot.toString().includes('login')){
+    }else if(this.actUrl.snapshot.toString().includes('register')){
+      this.router.navigate(['../login'])
+    }else{
+      this.router.navigate(['login']);
+    }
+  }
+
+    registerClicked(){
+      if(this.actUrl.snapshot.toString().includes('register')){
+      }else if(this.actUrl.snapshot.toString().includes('login')){
+        this.router.navigate(['../register'])
+      }else{
+        this.router.navigate(['register']);
+      }
+  }
+
 
 
 
