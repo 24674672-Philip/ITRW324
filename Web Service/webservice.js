@@ -179,8 +179,8 @@ app.post('/api/resendemail', function(req, res){
 
 app.get('/api/image', function(req, res){
   console.log("/api/image");
-  if (req.headers["imagetype"] == "users") {
-    var fileName = req.headers["imagename"];
+  if (req.headers["type"] == "users") {
+    var fileName = req.headers["image_name"];
     console.log("filename: " + fileName);
     res.sendFile(__dirname + '\\images\\users\\' + fileName, function (err) {
       if (err) {
@@ -189,8 +189,8 @@ app.get('/api/image', function(req, res){
         console.log('Sent:', fileName);
       }
     });
-  } else if (req.headers["imagetype"] == "albums") {
-    var fileName = req.headers["imagename"];
+  } else if (req.headers["type"] == "albums") {
+    var fileName = req.headers["image_name"];
     console.log("filename: " + fileName);
     res.sendFile(__dirname + '\\images\\albums\\' + fileName, function (err) {
       if (err) {
@@ -208,9 +208,9 @@ app.get('/api/image', function(req, res){
 app.get('/api/getimagename', function(req, res){
   console.log("/api/getimagename");
   if (req.headers["type"] == "albums") {
-    var qry = require('./app/api')('SELECT artwork_name FROM album WHERE albumID = ?',req.headers["id"],con, res);
+    var qry = require('./app/api')('SELECT image_name FROM album WHERE albumID = ?',req.headers["id"],con, res);
   } else if (req.headers["type"] == "users") {
-    var qry = require('./app/api')('SELECT profilepicture FROM users WHERE user_id = ?',req.headers["id"],con, res);
+    var qry = require('./app/apisend')('SELECT profilepicture AS image_name FROM users WHERE user_id = ?',req.headers["id"],con, res);
   } else {
     res.json({error: "no such picture"});
   }
