@@ -205,8 +205,8 @@ app.get('/api/image', function(req, res){
   }
 });
 
-app.get('/api/picture', function(req, res){
-  console.log("/api/picture");
+app.get('/api/getimagename', function(req, res){
+  console.log("/api/getimagename");
   if (req.headers["type"] == "albums") {
     var qry = require('./app/api')('SELECT artwork_name FROM album WHERE albumID = ?',req.headers["album"],con, res);
   } else if (req.headers["type"] == "users") {
