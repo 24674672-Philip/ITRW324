@@ -179,24 +179,32 @@ app.post('/api/resendemail', function(req, res){
 
 app.get('/api/image', function(req, res){
   console.log("/api/image");
-  if (req.headers["type"] == "users") {
-    var fileName = req.headers["image_name"];
+  if (req.query.type == "users") {
+    var fileName = req.query.image_name;
     console.log("filename: " + fileName);
-    res.sendFile(__dirname + '\\images\\users\\' + fileName, function (err) {
-      if (err) {
-        res.json({error: err})
-      } else {
-        console.log('Sent:', fileName);
+    var file = __dirname + '\\images\\users\\' + fileName;
+    fs.exists(file,function(exists){
+      if(exists)
+      {
+        ms.pipe(req,res,file);
       }
-    });
-  } else if (req.headers["type"] == "albums") {
-    var fileName = req.headers["image_name"];
+      else
+      {
+        res.json({error: "Its a 404"});
+      }
+  });
+} else if (req.query.type == "albums") {
+    var fileName = req.query.image_name;
     console.log("filename: " + fileName);
-    res.sendFile(__dirname + '\\images\\albums\\' + fileName, function (err) {
-      if (err) {
-        res.json({error: err})
-      } else {
-        console.log('Sent:', fileName);
+    var file = __dirname + '\\images\\albums\\' + fileName;
+    fs.exists(file,function(exists){
+      if(exists)
+      {
+        ms.pipe(req,res,file);
+      }
+      else
+      {
+        res.json({error: "Its a 404"});
       }
     });
   }
@@ -230,6 +238,16 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 app.post('/api/getsongs', function(req, res){
   var sql = 'SELECT Title, ArtistID, Album_ID, musicID, Explicit FROM song LIMIT 20;'
   var qry = require('./app/api')(sql,'',con, res);
+});
+
+app.post('/api/getsongdetails', function(req, res){
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit FROM song_details WHERE Title = ?;'
+  var qry = require('./app/api')(sql,req.headers["songname"],con, res);
+});
+
+app.post('/api/getalbumsongs', function(req, res){
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit, Released FROM song_details WHERE Album = ?;'
+  var qry = require('./app/api')(sql,req.headers["albumname"],con, res);
 });
 
 app.listen(8080, function(){

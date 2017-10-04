@@ -13,6 +13,8 @@ module.exports = function(sql, val, con, res){
             connection.release();
             if(!err) {
                 res.json({result: rows});
+            } else {
+              res.json({error: err});
             }
     });
 

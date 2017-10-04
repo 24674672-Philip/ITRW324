@@ -14,6 +14,9 @@ module.exports = function(sql, val, con, res){
             if(!err) {
                 res.json(rows);
             }
+            else {
+              res.json({error: err});
+            }
     });
 
     connection.on('error', function(err) {
