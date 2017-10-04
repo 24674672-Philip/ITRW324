@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout01"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/mplayerback2"
+    android:orientation="vertical"
+    android:weightSum="20"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/songdets"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp"
+       >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Song Title"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp"
+
+            android:typeface="sans" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Artist Name"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/albumartarea"
+        android:layout_width="320dp"
+        android:background="@drawable/rounded_borders_black"
+        android:layout_height="350dp"
+        android:layout_below="@+id/songdets"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            android:id="@+id/albumart"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:background="@drawable/defaultsong"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/playlist"
+            android:layout_marginEnd="21dp"
+            android:layout_marginBottom="17dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/imageView3" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textColor="@color/colorWhite"
+            android:textSize="25sp"
+            android:text="00:00/00:00"
+            android:layout_alignTop="@+id/imageView3"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+    <SeekBar
+        android:id="@id/seekBar"
+        android:layout_width="match_parent"
+        android:background="@drawable/border"
+        android:layout_height="15dp"
+        android:progressDrawable="@drawable/style"
+        android:progress="50"
+        android:thumb="@drawable/thumb"
+        android:layout_below="@+id/albumartarea"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:id="@+id/relativeLayout"
+        android:background="@drawable/border"
+        android:layout_below="@+id/seekBar"
+        android:layout_alignParentStart="true">
+
+            <ImageView
+                android:id="@+id/backwards"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/backorange"
+                android:layout_alignTop="@+id/fastforward"
+                android:layout_toStartOf="@+id/play2" />
+
+
+            <ImageView
+                android:id="@+id/play2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/playorange"
+                />
+
+
+
+            <ImageView
+                android:id="@+id/fastforward"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:padding="10dp"
+                android:background="@drawable/orangeff"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/play2" />
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
+
+
