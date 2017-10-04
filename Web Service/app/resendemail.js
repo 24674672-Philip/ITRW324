@@ -23,7 +23,7 @@ module.exports = function(sql, val, con, res){
     connection.query(sql,val,function(err,result){
       connection.release();
       if (err) {res.json({error: err});}
-      if (result[0] === undefined) {res.json({error: "user doesn't exist"});}
+      else if (result[0] === undefined) {res.json({error: "user doesn't exist"});}
       else {
         var link = result[0].hash;
         var resend = require('./app/email')(link,result[0].email);

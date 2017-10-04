@@ -28,17 +28,19 @@ module.exports = function(req, res, con){
           res.json({register: "Failed",
       	  error: err});
         }
-        console.log('inserted val: ' + val);
-        var link = hash;
-        var email = require('./app/email')(link,emailAddress);
-        var sql2 = 'SELECT user_id FROM users WHERE emailHash = ?'
-        connection.query(sql2,hash,function(err, resul){
-          connection.release();
-          if(!err) {
-            res.json({register: "success",
-        	  userid: resul[0].user_id});
-          }
-        });
+        else {
+          console.log('inserted val: ' + val);
+          var link = hash;
+          var email = require('./app/email')(link,emailAddress);
+          var sql2 = 'SELECT user_id FROM users WHERE emailHash = ?'
+          connection.query(sql2,hash,function(err, resul){
+            connection.release();
+            if(!err) {
+              res.json({register: "success",
+              userid: resul[0].user_id});
+            }
+          });
+        }
       });
 
       connection.on('error', function(err) {

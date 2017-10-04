@@ -177,23 +177,43 @@ app.post('/api/resendemail', function(req, res){
   else {res.json({error: "welp"});}
 });
 
-app.get('/api/image', ensureToken, function(req, res){
-  jwt.verify(req.token, 'blockchain', function(err, data){
-    if(err){
-      res.sendStatus(403);
-    }
-    else {
-      var fileName = req.headers["imagename"];
-      console.log("filename: " + fileName);
-      res.sendFile(__dirname + '\\images\\' + fileName, function (err) {
-        if (err) {
-          next(err);
-        } else {
-          console.log('Sent:', fileName);
-        }
-      });
-     }
-  })
+app.get('/api/image', function(req, res){
+  console.log("/api/image");
+  if (req.headers["imagetype"] == "users") {
+    var fileName = req.headers["imagename"];
+    console.log("filename: " + fileName);
+    res.sendFile(__dirname + '\\images\\users\\' + fileName, function (err) {
+      if (err) {
+        res.json({error: err})
+      } else {
+        console.log('Sent:', fileName);
+      }
+    });
+  } else if (req.headers["imagetype"] == "albums") {
+    var fileName = req.headers["imagename"];
+    console.log("filename: " + fileName);
+    res.sendFile(__dirname + '\\images\\albums\\' + fileName, function (err) {
+      if (err) {
+        res.json({error: err})
+      } else {
+        console.log('Sent:', fileName);
+      }
+    });
+  }
+  else {
+    res.sendStatus(403);
+  }
+});
+
+app.get('/api/picture', function(req, res){
+  console.log("/api/picture");
+  if (req.headers["type"] == "albums") {
+    var qry = require('./app/api')('SELECT artwork_name FROM album WHERE albumID = ?',req.headers["album"],con, res);
+  } else if (req.headers["type"] == "users") {
+    var qry = require('./app/api')('SELECT profilepicture FROM users WHERE user_id = ?',req.headers["user"],con, res);
+  } else {
+    res.json({error: "no such picture"});
+  }
 });
 
 app.get('/api/validtoken',ensureToken, function(req, res){

@@ -14,7 +14,7 @@ module.exports = function(sql, val, con, res){
       if(err) {
           res.json({error: err});
       }
-      if(result[0] === undefined){
+      else if(result[0] === undefined){
         res.json({
           username: 'available'
         });

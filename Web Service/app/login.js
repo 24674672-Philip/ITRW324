@@ -13,7 +13,7 @@ module.exports = function(req, res, con, jwt){
 
   connection.query(sql, [valP, valU], function (err, result) {
     if (err) res.json({result: err});
-    if(result[0] == undefined) res.json({login: "failed"});
+    else if(result[0] == undefined) res.json({login: "failed"});
     else{
       if (result[0].isActivated !== 0) {
         console.log(result[0].name);
