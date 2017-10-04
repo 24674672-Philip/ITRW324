@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".SplashScreen"
+            android:name=".musicexplorer"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -28,7 +28,12 @@
             android:name=".registration"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".main" />
-        <activity android:name=".musicplayer"></activity>
+        <activity android:name=".musicplayer"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
     </application>
 
 </manifest>

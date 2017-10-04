@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border"
+    android:orientation="vertical"
+    tools:context="com.example.phili.rip_mobile.musicexplorer"
+    android:weightSum="1">
+
+    <SearchView
+        android:id="@+id/searchsong"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:background="@color/colorWhite"
+       android:layout_margin="5dp"
+        android:layout_alignTop="@+id/imageView4"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/imageView4" />
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/playlist"
+        android:id="@+id/imageView4"
+        android:layout_margin="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <RelativeLayout
+    android:id="@+id/gridcontainer"
+        android:layout_below="@id/searchsong"
+
+    android:layout_width="match_parent"
+    android:layout_height="500dp">
+
+        <TabHost
+            android:id="@+id/tabHost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/rounded_borders"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:showDividers="none"
+                    android:tabStripEnabled="false"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    />
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <GridView
+                            android:id="@+id/artistsgrid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:horizontalSpacing="10dp"
+                            android:scrollbars="horizontal"
+                            android:verticalSpacing="10dp"
+                            android:numColumns="3">
+                        </GridView>
+
+
+
+
+                        <GridView
+                            android:id="@+id/genresgrid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scrollbars="horizontal"
+                            android:horizontalSpacing="10dp"
+                            android:verticalSpacing="10dp"
+                            android:numColumns="3"
+                            >
+
+                        </GridView>
+
+
+                        <GridView
+                            android:id="@+id/songsgrid"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:horizontalSpacing="10dp"
+                            android:scrollbars="horizontal"
+                            android:verticalSpacing="10dp"
+                            android:visibility="visible"
+                            android:numColumns="3"></GridView>
+
+                    <GridView
+                        android:id="@+id/albumsgrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="3"
+                        android:scrollbars="horizontal"
+                        android:verticalSpacing="10dp"
+                        android:visibility="visible">
+
+                    </GridView>
+
+
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/musicplayermin"
+        android:layout_below="@id/gridcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_borders_black"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        >
+    </RelativeLayout>
+
+</RelativeLayout>
