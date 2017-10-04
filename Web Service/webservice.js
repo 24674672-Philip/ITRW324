@@ -208,9 +208,9 @@ app.get('/api/image', function(req, res){
 app.get('/api/getimagename', function(req, res){
   console.log("/api/getimagename");
   if (req.headers["type"] == "albums") {
-    var qry = require('./app/api')('SELECT artwork_name FROM album WHERE albumID = ?',req.headers["album"],con, res);
+    var qry = require('./app/api')('SELECT artwork_name FROM album WHERE albumID = ?',req.headers["id"],con, res);
   } else if (req.headers["type"] == "users") {
-    var qry = require('./app/api')('SELECT profilepicture FROM users WHERE user_id = ?',req.headers["user"],con, res);
+    var qry = require('./app/api')('SELECT profilepicture FROM users WHERE user_id = ?',req.headers["id"],con, res);
   } else {
     res.json({error: "no such picture"});
   }
@@ -228,7 +228,7 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 });
 
 app.post('/api/getsongs', function(req, res){
-  var sql = 'SELECT Title, Artist, Album, musicID, Explicit FROM song LIMIT 20;'
+  var sql = 'SELECT Title, ArtistID, Album_ID, musicID, Explicit FROM song LIMIT 20;'
   var qry = require('./app/api')(sql,'',con, res);
 });
 
