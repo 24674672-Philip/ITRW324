@@ -20,7 +20,7 @@ module.exports = function(req, res, con){
       }
       else if (resul[0].emailHash === hash) {
         sql = 'UPDATE users SET isActivated = 1 WHERE email = ?';
-        connection.query(sql,val,function(err, result){
+        connection.query(sql,email,function(err, result){
           connection.release();
           if(err) res.redirect('http://reddit.com');
           else res.json({
