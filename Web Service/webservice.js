@@ -9,7 +9,7 @@ var cors = require('cors');
 
 const app = express();
 
-app.use(cors({origin: 'http://105.226.42.104:8081'}));
+app.use(cors({origin: 'http://52.208.193.120:8080'}));
 
 var con = mysql.createPool({
   connectionLimit : 30,
@@ -85,7 +85,7 @@ app.get('/api/protected', ensureToken, function(req, res){
 
 app.get('/api/activate', function(req, res){
   console.log("/api/activate");
-  var qry = require('./app/activate')(con, res);
+  var qry = require('./app/activate')(req, res, con);
 });
 
 app.get('/api/music', function(req, res){
@@ -177,7 +177,7 @@ app.post('/api/resendemail', function(req, res){
   var user = req.headers["username"];
   var sql = 'SELECT emailHash, email FROM users WHERE username = ?';
   if(user !== undefined || user !== ""){
-    var qry = require('./app/api')(sql,user,con, res);
+    var qry = require('./app/resendemail')(sql,user,con, res);
   }
   else {res.json({error: "welp"});}
 });

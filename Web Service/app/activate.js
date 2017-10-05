@@ -1,5 +1,5 @@
 
-module.exports = function(con, res){
+module.exports = function(req, res, con){
 
   var hash = req.query.hash;
   var email = req.query.email;
@@ -14,25 +14,24 @@ module.exports = function(con, res){
 
     console.log('connected as id ' + connection.threadId);
 
-    connection.query(sql,val,function(err,resul){
+    connection.query(sql,email,function(err,resul){
       if(err) {
-        res.json({error: err});
+        res.redirect('http://reddit.com');
       }
       else if (resul[0].emailHash === hash) {
         sql = 'UPDATE users SET isActivated = 1 WHERE email = ?';
         connection.query(sql,val,function(err, result){
           connection.release();
-          if(err) res.json({
-            result: err
-          });
+          if(err) res.redirect('http://reddit.com');
           else res.json({
             result: 'Successfully verified account!'
           });
+          //res.redirect('http://mydomain.com'+req.url)
         });
       }
     });
     connection.on('error', function(err) {
-          res.json({"code" : 100, "status" : "Error in connection database"});
+          res.redirect('http://reddit.com');
           return;
     });
   });
