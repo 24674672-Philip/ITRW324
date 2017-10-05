@@ -12,7 +12,7 @@ module.exports = function(sql, val, con, res){
     connection.query(sql,val,function(err,rows){
             connection.release();
             if(!err) {
-                res.json({result: rows});
+                res.json({result: rows[0]});
             } else {
               res.json({error: err});
             }
