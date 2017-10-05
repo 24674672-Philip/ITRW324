@@ -26,6 +26,8 @@ import { AlbumContainerComponent } from './ripComponents/album-container/album-c
 import { AlbumDescriptionComponent } from './ripComponents/album-container/album-description/album-description.component';
 import { TrackListItemComponent } from './ripComponents/album-container/album-description/track-list-item/track-list-item.component';
 import { LandingPageContainerComponent } from './landing-page/landing-page-container/landing-page-container.component';
+import { EmailSuccessAlertComponent } from './email-confirmation-alert/email-success-alert/email-success-alert.component';
+import { EmailWarningAlertComponent } from './email-confirmation-alert/email-warning-alert/email-warning-alert.component';
 
 const router: Routes = [
   {path: '', component: LandingPageContainerComponent},
@@ -57,6 +59,8 @@ const router: Routes = [
     AlbumDescriptionComponent,
     TrackListItemComponent,
     LandingPageContainerComponent,
+    EmailSuccessAlertComponent,
+    EmailWarningAlertComponent,
   ],
   imports: [
     BrowserModule,
