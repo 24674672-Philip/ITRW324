@@ -24,7 +24,7 @@ export class MusicListComponent implements OnInit {
       console.log(tempObject);
       for(let x of tempObject){
         let tempSong = new Song(x['musicID'],x['albumID'],x['artistID'],x['Artist'],x['Album'],x['Title'],this.authService.getAuthToken());
-        tempSong.setSongImagePath('albums',x['image_name']);
+        tempSong.setSongImagePath('albums',x['album_image']);
         this.topSongs.push(tempSong);
       }
     });

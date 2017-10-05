@@ -19,14 +19,14 @@ export class MusicItemComponent implements OnInit {
 
   //TODO: Create a on click event that sends the clicked track to music footer and updates the current track in the music server
   artworkClicked(){
-    this.router.navigate(["../../../album"], {queryParams:{albumid: this.musicitem.getAlbumID()}});
+    this.router.navigate(["../../../album"], {queryParams:{id: this.musicitem.getAlbumID()}});
   }
   songNameClicked(){
     this.musicService.currentSongChanged.emit(this.musicitem);
   }
 
   artistClicked(){
-
+    this.router.navigate(["../../../artist"], {queryParams:{id: this.musicitem.getArtistID()}});
   }
 
 

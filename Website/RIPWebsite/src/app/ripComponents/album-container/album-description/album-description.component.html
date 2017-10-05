@@ -2,11 +2,11 @@
 
 <div class="container-fluid" style="padding: 0; margin: 0">
   <div class="row text-center center-block">
-    <img class="img-responsive text-center center-block" style="width: 100%; max-height: 400px; padding: 0" [src]="albumObj.getArtistImagePath()"/>
+    <img id="artist_image" [src]="albumObj.getArtistImagePath()" class="img-responsive text-center center-block" style="width: 100%; max-height: 400px; padding: 0" />
   </div>
   <div class="row" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3">
-      <img class="img-responsive" style="max-height: 100px; margin: 10px" [src]="albumObj.getAlbumArtworkPath()"/>
+      <img id="album_image" [src]="albumObj.getAlbumImagePath()" class="img-responsive" style="max-height: 180px; margin: 10px" />
     </div>
     <div class="col-xs-10 col-sm-10 col-md-9 col-lg-9">
       <div class="row">
@@ -16,14 +16,21 @@
         <h3>{{albumObj.getAlbumArtist()}}</h3>
       </div>
       <div class="row">
-        <p>{{albumObj.getAlbumReleaseDate()}} <span class="glyphicon glyphicon-fire"></span></p>
+        <p>{{'Released:'+albumObj.getAlbumReleaseDate().toString().substr(0,4)}} <span class="glyphicon glyphicon-fire"></span></p>
       </div>
     </div>
   </div>
 
+  <div class="row text-center" style="padding: 40px 40px 0 40px;">
+    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-3 text-left" style="font-weight: bold">#</div>
+    <div class="col-xs-5 col-sm-5 col-md-4 col-lg-3" style="font-weight: bold">Title</div>
+    <div class="col-xs-5 col-sm-5 col-md-2 col-lg-3" style="font-weight: bold">Artist</div>
+    <div class="hidden-xs hidden-sm col-md-5 col-lg-3" style="font-weight: bold">Album</div>
+  </div>
+
   <div class="row">
-    <div class="list-group">
-      <app-track-list-item *ngFor="let x of albumObj.getSongs(); let i = index" [song]="x" [trackNumber]="i"></app-track-list-item>
+    <div class="list-group text-center">
+      <app-track-list-item *ngFor="let x of songList; let i = index" [song]="x" [trackNumber]="i"></app-track-list-item>
     </div>
   </div>
 </div>

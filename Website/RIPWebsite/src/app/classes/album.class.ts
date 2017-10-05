@@ -1,7 +1,6 @@
-import {Song} from "./song.class";
+
 export class Album {
 
-  private songs: Song[] = new Array<Song>();
   private albumImagePath: string;
   private artistImagePath: string;
   constructor(private albumID: number,
@@ -13,17 +12,13 @@ export class Album {
   }
 
   setAlbumImagePath(type: string, image_name: string){
-    //TODO: build image path url
+    this.albumImagePath = 'http://52.211.85.57:8080/api/image?type='+type.replace(' ','%20')+ '&image_name='+image_name.replace(' ', '%20');
   }
 
   setArtistImagePath(type: string, image_name: string){
-    //TODO: build image path url
+    this.artistImagePath = 'http://52.211.85.57:8080/api/image?type='+type.replace(' ','%20')+ '&image_name='+image_name.replace(' ', '%20');
   }
 
-  setSongs(albumID: number){
-    //TODO: request songs from server to populate array
-
-  }
 
   getAlbumID(): number{
     return this.albumID;
@@ -37,9 +32,6 @@ export class Album {
     return this.albumArtist;
   }
 
-  getSongs(): Song[]{
-    return this.songs;
-  }
 
   getAlbumReleaseDate(): number{
     return this.albumReleaseDate;
@@ -49,7 +41,7 @@ export class Album {
     return this.albumImagePath;
   }
 
-  getArtistImage(): string{
+  getArtistImagePath(): string{
     return this.artistImagePath;
   }
 

@@ -23,7 +23,6 @@ export class MusicFooterComponent implements OnInit {
   currentTime: number;
   progress: number;
   audio : HTMLAudioElement;
-  isPlaying: boolean;
 
   constructor(private serverService: ServerService, private musicServer: MusicPlayerService) {
     this.musicServer.currentSongChanged.subscribe(
@@ -38,8 +37,6 @@ export class MusicFooterComponent implements OnInit {
   ngOnInit() {
     this.audio = (<HTMLAudioElement>document.getElementById('music'));
   }
-
-
 
   displayMetaData(){
     this.duration = this.audio.duration;
@@ -90,14 +87,14 @@ export class MusicFooterComponent implements OnInit {
   }
 
   playPressed() {
-    if(this.isPlaying){
+    if(!this.audio.paused){
       this.audio.pause();
       document.getElementById('playButton').className = 'glyphicon glyphicon-play'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pausengs
     }else{
       this.audio.play();
       document.getElementById('playButton').className = 'glyphicon glyphicon-pause'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pausengs
     }
-    this.isPlaying = !this.isPlaying;
+
   }
 
   forwardPressed(){

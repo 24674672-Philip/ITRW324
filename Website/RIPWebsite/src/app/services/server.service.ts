@@ -121,6 +121,15 @@ export class ServerService {
       );
   }
 
+  getAlbumSongs(id: string, callback){
+    let headers = new Headers();
+    headers.append('albumid',id);
+    this.http.post(this.url +'getalbumsongs',null,{headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      );
+  }
+
   upload(formData: FormData){
     this.http.post(this.url+'upload', formData,{headers: new Headers({'Content-type': 'undefined'})})
       .subscribe(
