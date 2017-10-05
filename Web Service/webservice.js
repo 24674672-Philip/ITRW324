@@ -4,12 +4,13 @@ var mysql = require('mysql');
 var randtoken = require('rand-token');
 var fs = require('fs');
 var ms = require('mediaserver');
-var formidable = require('formidable');
 var cors = require('cors');
+var upload = require('express-fileupload')
 
 const app = express();
 
 app.use(cors({origin: 'http://52.208.193.120:8080'}));
+app.use(upload());
 
 var con = mysql.createPool({
   connectionLimit : 30,
@@ -254,21 +255,27 @@ app.post('/api/getsongdetails', function(req, res){
 
 app.post('/api/getalbumsongs', function(req, res){
   console.log("/api/getalbumsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit, Released FROM song_details WHERE Album = ?;'
-  var qry = require('./app/api')(sql,req.headers["albumname"],con, res);
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit, Released FROM song_details WHERE AlbumID = ?;'
+  var qry = require('./app/api')(sql,req.headers["albumid"],con, res);
 });
 
-app.post('api/upload', function(req, res){
-  var form = new formidable.IncomingForm();
-  form.parse(req, function (err, fields, files) {
-    var oldpath = files.filetoupload.path;
-    var newpath = 'C:/Users/Phili/' + files.filetoupload.name;
-    fs.rename(oldpath, newpath, function (err) {
-      if (err) throw err;
-      res.write('File uploaded and moved!');
-      res.end();
-    });
-  });
+app.post('/api/artistalbums', function(req, res){
+  console.log("/api/artistalbums");
+  var sql = 'SELECT AlbumID, ArtistID, Artist, Album, image_name, Released FROM artist_albums WHERE ArtistID = ?;'
+  var qry = require('./app/api')(sql,req.headers["artistID"],con, res);
+});
+
+app.post('/api/upload',function(req, res){
+  if(req.files){
+    var file = req.files.filetoupload;
+    var filename = file.name;
+    file.mv("./images/" + filename, function(err){
+      if(err) res.send('error');
+      else {
+        res.send('done');
+      }
+    })
+  }
 });
 
 app.listen(8080, function(){
