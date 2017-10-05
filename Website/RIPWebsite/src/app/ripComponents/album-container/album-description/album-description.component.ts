@@ -17,9 +17,9 @@ export class AlbumDescriptionComponent implements OnInit {
   ngOnInit() {
     //this.albumID = this.activatedRoute.snapshot.queryParams['albumid'];
     //TODO: retrieve all album songs
-    this.albumObj = new Album(1,"New Divide", "Linkin Park",2016,"https://upload.wikimedia.org/wikipedia/en/b/b4/LPND.jpg","https://wallpaperscraft.com/image/linkin_park_band_members_house_look_3652_1920x1080.jpg");
+    this.albumObj = new Album(1,"New Divide", "Linkin Park",2016);
     this.albumID = this.albumObj.getAlbumID();
-    this.albumObj.setSongs();
+    //this.albumObj.setSongs();
 
   }
 

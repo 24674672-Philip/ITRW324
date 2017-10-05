@@ -1,7 +1,7 @@
 <div class="container-fluid"  style="bottom: 0; position: fixed; width: 100%; padding:0">
   <div class="panel-footer" style="border-left: 1px; border-bottom-right: 1px;">
     <div class="row">
-      <div class="progress" (click)="progressChanged($event)" id="progressContainer" style="margin-bottom: 0">
+      <div class="progress" (click)="progressChanged($event)" id="progressContainer" style="margin-bottom: 0; border: solid rgba(1,1,1,.2) 1px">
         <div
              class="progress-bar"
              role="progressbar"
@@ -16,17 +16,17 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-top: 5px">
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         <img class="img-responsive" style="max-height: 100px" [src]="currentlyPlaying.getImagePath()">
       </div>
 
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         <div class="row">
-          <h2 *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getSongName()}}</h2>
+          <h3 *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getSongName()}}</h3>
         </div>
         <div class="row">
-          <h3 *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getArtist()}}</h3>
+          <p *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getArtist()}}</p>
         </div>
       </div>
 

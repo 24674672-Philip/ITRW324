@@ -1,25 +1,29 @@
-import {ServerService} from "../services/server.service";
-import {Inject, Injectable} from "@angular/core";
-
 export class Song {
 
-
   private songUrl: string;
+  private imagePath: string;
   public constructor(private songID: number,
                     private albumID: number,
                     private artistID: number,
                     private artist: string,
                     private album: string,
                     private songName: string,
-                    private imagePath: string,){
+
+                    private token: string){
+    this.setSongUrl(token);
   }
 
   setSongUrl(token: string){
-    this.songUrl = 'http://52.211.85.57:8080/api/music?token='+token+"&song="+this.songName+"&album="+this.getAlbum()+"&artist="+this.artist;
-    ///api/music?token=val&song=val1&album=val2&artist=val3
-
+    this.songUrl = 'http://52.211.85.57:8080/api/music?token='+token+"&song="+this.getSongName().replace(' ','%20')+"&album="+this.getAlbum().replace(' ','%20')+"&artist="+this.getArtist().replace(' ', '%20');
   }
 
+  setSongImagePath(type: string, imageName: number){
+    this.imagePath = 'http://52.211.85.57:8080/api/image?type='+type+'&'+'image_name='+imageName;
+  }
+
+  setSongImageString(imageUrl: string){
+    this.imagePath = imageUrl;
+  }
 
   getSongID(): number{
     return this.songID;

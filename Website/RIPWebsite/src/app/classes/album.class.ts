@@ -1,23 +1,28 @@
 import {Song} from "./song.class";
-
 export class Album {
 
   private songs: Song[] = new Array<Song>();
+  private albumImagePath: string;
+  private artistImagePath: string;
   constructor(private albumID: number,
               private albumName: string,
               private albumArtist: string,
               private albumReleaseDate: number,
-              private albumArtworkPath: string,
-              private artistImagePath: string){
+              ){
+
   }
 
-  setSongs(/*albumID: number*/){
+  setAlbumImagePath(type: string, image_name: string){
+    //TODO: build image path url
+  }
+
+  setArtistImagePath(type: string, image_name: string){
+    //TODO: build image path url
+  }
+
+  setSongs(albumID: number){
     //TODO: request songs from server to populate array
-    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
-    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
-    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
-    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
-    this.songs.push(new Song(1,1,1,"Linkin Park", "New Divide", "Numb","https://vignette3.wikia.nocookie.net/lyricwiki/images/b/be/Linkin_Park_-_New_Divide_-_Single.jpg" ));
+
   }
 
   getAlbumID(): number{
@@ -40,11 +45,11 @@ export class Album {
     return this.albumReleaseDate;
   }
 
-  getAlbumArtworkPath(): string{
-    return this.albumArtworkPath;
+  getAlbumImagePath(): string{
+    return this.albumImagePath;
   }
 
-  getArtistImagePath(): string{
+  getArtistImage(): string{
     return this.artistImagePath;
   }
 

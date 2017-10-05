@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http} from "@angular/http";
+import {HttpHeaders} from "@angular/common/http";
 
 
 @Injectable()
@@ -108,6 +109,23 @@ export class ServerService {
       .subscribe(
         (response)=> console.log(response.json())
       );
+  }
+
+  getImage(imageType: string, id: number, callback){
+    let headers = new Headers();
+    headers.append('type',imageType);
+    headers.append('id', id.toString());
+    this.http.get(this.url+'getimagename', {headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      );
+  }
+
+  upload(formData: FormData){
+    this.http.post(this.url+'upload', formData,{headers: new Headers({'Content-type': 'undefined'})})
+      .subscribe(
+      (response)=> console.log(response)
+    )
   }
 
 

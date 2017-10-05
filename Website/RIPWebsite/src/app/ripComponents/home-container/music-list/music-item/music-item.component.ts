@@ -22,7 +22,7 @@ export class MusicItemComponent implements OnInit {
     this.router.navigate(["../../../album"], {queryParams:{albumid: this.musicitem.getAlbumID()}});
   }
   songNameClicked(){
-
+    this.musicService.currentSongChanged.emit(this.musicitem);
   }
 
   artistClicked(){

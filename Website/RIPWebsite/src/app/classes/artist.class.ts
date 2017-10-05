@@ -2,12 +2,17 @@ import {Album} from "./album.class";
 
 export class Artist {
 
+  private artistImagePath: string;
   constructor(private artistID: number,
               private artistName: string,
               private artistBio: string,
               private albumList: Album[],
-              private artistImagePath: string){
+              private token: string){
+    this.setArtistImagePath(token);
+  }
 
+  setArtistImagePath(token: string){
+    //TODO: build image path url
   }
 
   getArtistID(): number {

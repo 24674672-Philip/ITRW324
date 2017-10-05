@@ -1,16 +1,24 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Song} from "../classes/song.class";
+import {AuthService} from "./auth.service";
+import {ServerService} from "./server.service";
 
 @Injectable()
 export class MusicPlayerService {
 
-  currentPlaylist = new Array<Song>();
-  //currentSong: Song = new Song('Default', 'Default', 'Default','../../favicon.ico','Default');
+  currentPlaylist: Array<Song> = new Array<Song>();
+  currentSongChanged: EventEmitter<Song> = new EventEmitter<Song>();
+  currentSong: Song = new Song(-1,-1,-1,'', '', '','');
+
   //TODO: replace with server data
-  currentSong: Song = new Song(1,1,1,'Jack Parow', 'Cooler as ekke', 'Parow to Paarl', 'http://images.genius.com/165ba96222b44eaf259801336390a18c.640x640x1.jpg') ;
-  constructor() {
+  constructor(private authService: AuthService, private serverService: ServerService) {
+    this.currentSong.setSongImageString('../../favicon.ico');
+    this.currentSongChanged.subscribe(
+      (emittedSong)=> this.currentSong = emittedSong
+    );
 
   }
+
 
   addToFront(song: Song){
     this.currentPlaylist.push(song);

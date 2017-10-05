@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Song} from "../../../classes/song.class";
 import {ServerService} from "../../../services/server.service";
+import {AuthService} from "../../../services/auth.service";
+
 
 @Component({
   selector: 'app-music-list',
@@ -11,19 +13,20 @@ export class MusicListComponent implements OnInit {
 
   topSongs  = new Array<Song>();
 
-  constructor(private serverService: ServerService) { }
+
+  constructor(private serverService: ServerService, private authService: AuthService) {
+  }
 
   ngOnInit() {
+
     this.serverService.getTopSongs((response)=>{
       let tempObject = response['result'];
       console.log(tempObject);
       for(let x of tempObject){
-        //TODO: get song id and album id from response as well
-        let tempSong = new Song(1,1,1,x['Artist'],x['Album'],x['Title'],'http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/e538ae1f-2e32-4bec-9079-1638f8e72043/md/2074838-1442777420860-profile.jpg');//TODO: get image path from server and insert it dynamically per track
+        let tempSong = new Song(x['musicID'],x['albumID'],x['artistID'],x['Artist'],x['Album'],x['Title'],this.authService.getAuthToken());
+        tempSong.setSongImagePath('albums',x['image_name']);
         this.topSongs.push(tempSong);
       }
     });
-
   }
-
 }

@@ -10,7 +10,7 @@ import {MusicPlayerService} from "../../services/music-player.service";
   styleUrls: ['./music-footer.component.css']
 })
 export class MusicFooterComponent implements OnInit {
-  currentlyPlaying: Song;
+  currentlyPlaying: Song = this.musicServer.currentSong;
   duration: any;
   durationMinutes: number = 0;
   durationSeconds: number =0;
@@ -24,13 +24,20 @@ export class MusicFooterComponent implements OnInit {
   progress: number;
   audio : HTMLAudioElement;
   isPlaying: boolean;
+
   constructor(private serverService: ServerService, private musicServer: MusicPlayerService) {
+    this.musicServer.currentSongChanged.subscribe(
+      (emittedSong) => {
+        this.currentlyPlaying = emittedSong;
+        this.audio.src=this.currentlyPlaying.getSongUrl();
+        this.audio.load();
+      }
+    )
   }
 
   ngOnInit() {
-    this.currentlyPlaying = this.musicServer.currentSong;
     this.audio = (<HTMLAudioElement>document.getElementById('music'));
-    this.audio.src=this.currentlyPlaying.getSongUrl();
+    this.audio.src = this.currentlyPlaying.getSongUrl();
     this.audio.load();
   }
 
