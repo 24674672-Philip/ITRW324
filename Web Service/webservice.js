@@ -4,7 +4,7 @@ var mysql = require('mysql');
 var randtoken = require('rand-token');
 var fs = require('fs');
 var ms = require('mediaserver');
-
+var formidable = require('formidable');
 
 const app = express();
 
@@ -239,7 +239,7 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 
 app.post('/api/getsongs', function(req, res){
   console.log("/api/getsongs");
-  var sql = 'SELECT Title, ArtistID, Album_ID, musicID, Explicit FROM song LIMIT 20;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit FROM song_details LIMIT 20;'
   var qry = require('./app/api')(sql,'',con, res);
 });
 
@@ -253,6 +253,19 @@ app.post('/api/getalbumsongs', function(req, res){
   console.log("/api/getalbumsongs");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit, Released FROM song_details WHERE Album = ?;'
   var qry = require('./app/api')(sql,req.headers["albumname"],con, res);
+});
+
+app.post('api/upload', function(req, res){
+  var form = new formidable.IncomingForm();
+  form.parse(req, function (err, fields, files) {
+    var oldpath = files.filetoupload.path;
+    var newpath = 'C:/Users/Phili/' + files.filetoupload.name;
+    fs.rename(oldpath, newpath, function (err) {
+      if (err) throw err;
+      res.write('File uploaded and moved!');
+      res.end();
+    });
+  });
 });
 
 app.listen(8080, function(){
