@@ -86,6 +86,7 @@ app.get('/api/activate', function(req, res){
 });
 
 app.get('/api/music', function(req, res){
+  console.log("/api/music");
   var token = req.query.token;
   jwt.verify(token, 'blockchain', function(err, data){
     if(err){
@@ -111,6 +112,7 @@ app.get('/api/music', function(req, res){
 });
 
 app.get('/api/download', function(req, res){
+  console.log("/api/download");
   var token = req.query.token;
   jwt.verify(token, 'blockchain', function(err, data){
     if(err){
@@ -216,7 +218,7 @@ app.get('/api/image', function(req, res){
 app.get('/api/getimagename', function(req, res){
   console.log("/api/getimagename");
   if (req.headers["type"] == "albums") {
-    var qry = require('./app/api')('SELECT image_name FROM album WHERE albumID = ?',req.headers["id"],con, res);
+    var qry = require('./app/apisend')('SELECT image_name FROM album WHERE albumID = ?',req.headers["id"],con, res);
   } else if (req.headers["type"] == "users") {
     var qry = require('./app/apisend')('SELECT profilepicture AS image_name FROM users WHERE user_id = ?',req.headers["id"],con, res);
   } else {
@@ -236,16 +238,19 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 });
 
 app.post('/api/getsongs', function(req, res){
+  console.log("/api/getsongs");
   var sql = 'SELECT Title, ArtistID, Album_ID, musicID, Explicit FROM song LIMIT 20;'
   var qry = require('./app/api')(sql,'',con, res);
 });
 
 app.post('/api/getsongdetails', function(req, res){
+  console.log("/api/getsongdetails");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit FROM song_details WHERE Title = ?;'
   var qry = require('./app/api')(sql,req.headers["songname"],con, res);
 });
 
 app.post('/api/getalbumsongs', function(req, res){
+  console.log("/api/getalbumsongs");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit, Released FROM song_details WHERE Album = ?;'
   var qry = require('./app/api')(sql,req.headers["albumname"],con, res);
 });
