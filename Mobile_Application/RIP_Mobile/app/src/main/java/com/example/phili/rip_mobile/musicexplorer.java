@@ -36,17 +36,19 @@ public class musicexplorer extends AppCompatActivity  {
                 .setContent(R.id.artistsgrid);
         mTabHost.addTab(spec);
 
-        //Genre
 
-        spec = mTabHost.newTabSpec("genre")
-                .setIndicator("Genres")
-                .setContent(R.id.genresgrid);
-        mTabHost.addTab(spec);
         //Songs
 
         spec = mTabHost.newTabSpec("songs")
                 .setIndicator("Songs")
                 .setContent(R.id.songsgrid);
+        mTabHost.addTab(spec);
+
+        //Genre
+
+        spec = mTabHost.newTabSpec("playlist")
+                .setIndicator("Playlist")
+                .setContent(R.id.genresgrid);
         mTabHost.addTab(spec);
 
 

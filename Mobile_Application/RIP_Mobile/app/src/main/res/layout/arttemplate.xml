@@ -6,13 +6,17 @@
 
     <ImageView
         android:id="@+id/Art"
-        android:layout_width="97dp"
+        android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_margin="11dp"
         app:srcCompat="@drawable/defaultsong" />
 
     <TextView
         android:id="@+id/Description"
-        android:layout_width="94dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="100dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
         android:layout_height="wrap_content"
         android:text="Name" />
 </LinearLayout>
