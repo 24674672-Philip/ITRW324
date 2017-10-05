@@ -37,8 +37,6 @@ export class MusicFooterComponent implements OnInit {
 
   ngOnInit() {
     this.audio = (<HTMLAudioElement>document.getElementById('music'));
-    this.audio.src = this.currentlyPlaying.getSongUrl();
-    this.audio.load();
   }
 
 
@@ -49,6 +47,11 @@ export class MusicFooterComponent implements OnInit {
     this.durationSeconds = Math.trunc(this.duration % 60);
     this.durationMinutesString = ("0"+this.durationMinutes).slice(-2);
     this.durationSecondsString = ("0"+this.durationSeconds).slice(-2);
+  }
+
+  canPlay(){
+    this.audio.play();
+
   }
 
 

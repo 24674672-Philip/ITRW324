@@ -33,13 +33,13 @@
       <!--TODO: Insert dynamic artist album and track name from currentlyPlaying-->
 
       <!--Hidden audio track that connects with music footer-->
-      <audio controls id="music" (timeupdate)="timeUpdated()" (loadedmetadata)="displayMetaData()" hidden>
+      <audio controls id="music" (timeupdate)="timeUpdated()" (loadedmetadata)="displayMetaData()" (canplay)="canPlay()" hidden>
         <source src="" type="audio/mp3" />
       </audio>
 
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 " style="font-size: 2em; letter-spacing: 10px">
         <span class="glyphicon glyphicon-backward" style="cursor: pointer" (click)="rewindPressed()" ></span>
-        <span class="glyphicon glyphicon-play" style="font-size: 1.3em" style="cursor: pointer"  (click)="playPressed()" id="playButton"></span>
+        <span class="glyphicon glyphicon-pause" style="font-size: 1.3em" style="cursor: pointer"  (click)="playPressed()" id="playButton"></span>
         <span class="glyphicon glyphicon-forward" style="cursor: pointer" (click)="forwardPressed()"></span>
       </div>
 
