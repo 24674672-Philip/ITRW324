@@ -5,8 +5,11 @@ var randtoken = require('rand-token');
 var fs = require('fs');
 var ms = require('mediaserver');
 var formidable = require('formidable');
+var cors = require('cors');
 
 const app = express();
+
+app.use(cors({origin: 'http://105.226.42.104:8081'}));
 
 var con = mysql.createPool({
   connectionLimit : 30,
