@@ -243,13 +243,13 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 
 app.post('/api/getsongs', function(req, res){
   console.log("/api/getsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit FROM song_details LIMIT 20;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details LIMIT 20;'
   var qry = require('./app/api')(sql,'',con, res);
 });
 
 app.post('/api/getsongdetails', function(req, res){
   console.log("/api/getsongdetails");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, image_name, Explicit FROM song_details WHERE Title = ?;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details WHERE Title = ?;'
   var qry = require('./app/api')(sql,req.headers["songname"],con, res);
 });
 
