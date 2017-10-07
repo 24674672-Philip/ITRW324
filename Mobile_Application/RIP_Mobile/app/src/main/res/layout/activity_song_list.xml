@@ -48,44 +48,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:id="@+id/gridcontainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/musicplayermin"
-        android:layout_marginRight="1dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="1dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginTop="5dp"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintHorizontal_bias="0.0"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintTop_toBottomOf="@id/songlistheader"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintVertical_bias="1.0">
-
-        <ListView
-            android:id="@+id/listsongs"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/rounded_borders_black"
-            android:divider="@drawable/border"
-            android:dividerHeight="2dp"
-            android:layout_alignParentStart="true">
-
-        </ListView>
-
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/musicplayermin"
         android:layout_width="0dp"
         android:layout_height="70dp"
@@ -159,6 +121,43 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/playmini"
             android:background="@drawable/forward" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/gridcontainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/musicplayermin"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/songlistheader"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+        <ListView
+            android:id="@+id/listsongs"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded_borders_black"
+            android:divider="@drawable/border"
+            android:dividerHeight="2dp">
+
+        </ListView>
+
 
     </RelativeLayout>
 

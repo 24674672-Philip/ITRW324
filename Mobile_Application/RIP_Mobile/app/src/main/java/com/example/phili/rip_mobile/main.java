@@ -46,7 +46,7 @@ public class main extends AppCompatActivity implements View.OnClickListener ,Med
     private void sendMusicRequest(){
         try {
             mp = new MediaPlayer(/*Your-Context*/);
-            mp.setDataSource("http://52.211.85.57:8080/api/music?song=new%20divide");
+            mp.setDataSource("");
             mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
                 @Override
                 public void onPrepared(MediaPlayer mp)

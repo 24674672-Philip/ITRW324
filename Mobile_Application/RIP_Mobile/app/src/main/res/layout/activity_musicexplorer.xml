@@ -84,19 +84,8 @@
 
 
                     <GridView
-                        android:id="@+id/albumsgrid"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:horizontalSpacing="5dp"
-                        android:numColumns="3"
-                        android:scrollbars="horizontal"
-                        android:verticalSpacing="10dp"
-                        android:visibility="visible">
-
-                    </GridView>
-
-                    <GridView
                         android:id="@+id/artistsgrid"
+                        android:paddingTop="30dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:horizontalSpacing="10dp"
@@ -124,6 +113,18 @@
                         android:scrollbars="horizontal"
                         android:verticalSpacing="10dp"
                         android:visibility="visible"></GridView>
+
+                    <GridView
+                        android:id="@+id/albumsgrid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:horizontalSpacing="5dp"
+                        android:numColumns="3"
+                        android:scrollbars="horizontal"
+                        android:verticalSpacing="10dp"
+                        android:visibility="visible">
+
+                    </GridView>
 
 
                 </FrameLayout>

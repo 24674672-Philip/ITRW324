@@ -44,15 +44,15 @@ public class Adapter extends BaseAdapter{
     public View getView(int pos, View convertView, ViewGroup parent) {
 
         LayoutInflater layoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-       if (convertView==null)
-       {
-           convertView = layoutInflater.inflate(R.layout.arttemplate,parent,false);
-       }
+        if (convertView==null)
+        {
+            convertView = layoutInflater.inflate(R.layout.arttemplate,parent,false);
+        }
 
         ImageView img =  convertView.findViewById(R.id.Art);
         TextView name = convertView.findViewById(R.id.Description);
 
-        img.setImageResource(albums.get(pos).getImg());
+        img.setImageBitmap(albums.get(pos).getImg());
         name.setText(albums.get(pos).getName());
         return convertView;
     }

@@ -1,16 +1,18 @@
 package com.example.phili.rip_mobile;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by tcjvr on 2017/10/04.
  */
 
 public class Albums {
     private String name;
-    private int img;
+    private Bitmap img;
 
-    public Albums(String n, int img) {
-        this.img = img;
-        this.name = n;
+    public Albums(String n, Bitmap img) {
+        setImg(img);
+        setName(n);
     }
     public String getName() {
         return name;
@@ -20,11 +22,11 @@ public class Albums {
         this.name = name;
     }
 
-    public int getImg() {
+    public Bitmap getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(Bitmap img) {
         this.img = img;
     }
 
