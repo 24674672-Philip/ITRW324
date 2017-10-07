@@ -28,12 +28,13 @@
             android:name=".registration"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".main" />
-        <activity android:name=".musicplayer"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-
+        <activity
+            android:name=".musicplayer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SongList"></activity>
     </application>
 
 </manifest>
