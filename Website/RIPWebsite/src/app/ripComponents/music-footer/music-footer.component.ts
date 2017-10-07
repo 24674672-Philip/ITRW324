@@ -23,6 +23,10 @@ export class MusicFooterComponent implements OnInit {
   currentTime: number;
   progress: number;
   audio : HTMLAudioElement;
+  volume: number = 0;
+  element: Element;
+  isMuted: boolean = false;
+
 
   constructor(private serverService: ServerService, private musicServer: MusicPlayerService) {
     this.musicServer.currentSongChanged.subscribe(
@@ -30,13 +34,24 @@ export class MusicFooterComponent implements OnInit {
         this.currentlyPlaying = emittedSong;
         this.audio.src=this.currentlyPlaying.getSongUrl();
         this.audio.load();
+        this.volume = this.audio.volume*100;
       }
     )
   }
 
+  isMuteVolume(): {width: string}{
+    return this.isMuted? {width: 0+'%'}:{width: this.volume+'%'};
+  }
+
+
+
   ngOnInit() {
     this.audio = (<HTMLAudioElement>document.getElementById('music'));
+    this.volume = this.audio.volume;
+    this.element = document.getElementById('volumeContainer');
   }
+
+
 
   displayMetaData(){
     this.duration = this.audio.duration;
@@ -80,6 +95,18 @@ export class MusicFooterComponent implements OnInit {
     let percentage = clickedX / elementSize;
     this.setCurrentTime(percentage*this.duration);
     console.log(percentage +  ' ' + this.duration + ' ' + percentage*this.duration);
+  }
+
+  volumeChanged(event: MouseEvent){
+    let element = document.getElementById('volumeContainer');
+    let leftx = element.getBoundingClientRect().left;
+    let rightx = element.getBoundingClientRect().right;
+    let clickedX = event.clientX - leftx;
+    let elementSize = rightx - leftx;
+    let percentage = clickedX / elementSize;
+    this.audio.volume = percentage;
+    this.volume = this.audio.volume*100;
+    this.isMuted = false;
   }
 
   rewindPressed(){

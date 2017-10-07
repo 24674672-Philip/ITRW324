@@ -28,6 +28,7 @@ import { TrackListItemComponent } from './ripComponents/album-container/album-de
 import { LandingPageContainerComponent } from './landing-page/landing-page-container/landing-page-container.component';
 import { EmailSuccessAlertComponent } from './email-confirmation-alert/email-success-alert/email-success-alert.component';
 import { EmailWarningAlertComponent } from './email-confirmation-alert/email-warning-alert/email-warning-alert.component';
+import { ShowVolumeDirective } from './directives/show-volume.directive';
 
 const router: Routes = [
   {path: '', component: LandingPageContainerComponent},
@@ -61,6 +62,7 @@ const router: Routes = [
     LandingPageContainerComponent,
     EmailSuccessAlertComponent,
     EmailWarningAlertComponent,
+    ShowVolumeDirective,
   ],
   imports: [
     BrowserModule,

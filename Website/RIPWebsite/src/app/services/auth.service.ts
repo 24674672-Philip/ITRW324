@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 
 @Injectable()
 export class AuthService {
 
+  @Output() isLoggedIn = new EventEmitter<boolean>();
   private authToken: string;
   private username: string;
   private fName: string;
@@ -28,6 +29,8 @@ export class AuthService {
     this.email = email;
   }
 
+
+
   getAuthToken(){
     return this.authToken;
   }
@@ -48,9 +51,7 @@ export class AuthService {
     return this.email;
   }
 
-  toString(){
-    console.log(this.authToken+'\n'+this.username+'\n'+this.email+'\n'+this.lName+'\n'+this.fName+'\n');
-  }
+
 
 
 }
