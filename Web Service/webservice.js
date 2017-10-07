@@ -243,8 +243,9 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 
 app.post('/api/getsongs', function(req, res){
   console.log("/api/getsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details LIMIT 20;'
-  var qry = require('./app/api')(sql,'',con, res);
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details LIMIT ?,20;'
+  var val = req.headers['page'] * 20;
+  var qry = require('./app/api')(sql,val,con, res);
 });
 
 app.post('/api/getsongdetails', function(req, res){
@@ -263,6 +264,18 @@ app.post('/api/artistalbums', function(req, res){
   console.log("/api/artistalbums");
   var sql = 'SELECT AlbumID, ArtistID, Artist, Album, image_name, Released FROM artist_albums WHERE ArtistID = ?;'
   var qry = require('./app/api')(sql,req.headers["artistid"],con, res);
+});
+
+app.post('/api/playlistitems', function(req, res){
+  console.log("/api/playlistitems");
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM playlist_items WHERE playlistid = ?;'
+  var qry = require('./app/api')(sql,req.headers["playlistid"],con, res);
+});
+
+app.post('/api/userplaylists', function(req, res){
+  console.log("/api/userplaylists");
+  var sql = 'SELECT Playlist, Created, Items_in_playlist, idplaylist_details AS playlistid FROM user_playlists WHERE Username = ? ORDER BY Created DESC;'
+  var qry = require('./app/api')(sql,req.headers["username"],con, res);
 });
 
 app.post('/api/upload',function(req, res){
