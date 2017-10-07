@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,120 +11,156 @@
 
     <SearchView
         android:id="@+id/searchsong"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
         android:background="@drawable/rounded_borders_white"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp"
 
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp" />
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
-        android:id="@+id/listheader"
-        android:layout_width="match_parent"
+        android:id="@+id/songlistheader"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:background="@drawable/border"
+        android:layout_marginTop="60dp"
+        android:text="Album/Artist/All Songs/Playlist"
+        android:paddingTop="6dp"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
         android:textColor="@color/colorWhite"
-        android:padding="8dp"
-        android:textSize="21sp"
-        android:text="Album/Artist/All Songs/Playlist name"
-        android:layout_below="@+id/searchsong"
-        android:layout_alignParentStart="true" />
+        android:background="@drawable/border"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
-        android:id="@+id/listcontainer"
-        android:layout_below="@id/listheader"
+        android:id="@+id/gridcontainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/musicplayermin"
+        android:layout_marginRight="1dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="5dp"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toBottomOf="@id/songlistheader"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintVertical_bias="1.0">
 
-        android:layout_width="match_parent"
-        android:layout_height="470dp">
+        <ListView
+            android:id="@+id/listsongs"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded_borders_black"
+            android:divider="@drawable/border"
+            android:dividerHeight="2dp"
+            android:layout_alignParentStart="true">
 
-       <ListView
-         android:id="@+id/listsongs"
-           android:layout_width="match_parent"
-           android:layout_height="fill_parent"
-           android:background="@drawable/rounded_borders_black"
-           android:layout_margin="10dp"
-           android:divider="@drawable/border"
-           android:dividerHeight="2dp"
-           >
+        </ListView>
 
-       </ListView>
 
 
     </RelativeLayout>
 
-
-
     <RelativeLayout
         android:id="@+id/musicplayermin"
-
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/gridcontainer"
         android:layout_margin="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         android:background="@drawable/border"
-        android:layout_below="@+id/listcontainer"
-        android:layout_alignParentStart="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1">
 
         <ImageView
             android:id="@+id/currentplayingimg"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/defaultsong"
-            android:layout_marginStart="21dp"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:layout_marginStart="21dp"
+            android:background="@drawable/defaultsong" />
+
         <TextView
             android:id="@+id/artistmin"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorWhite"
-            android:text="Artist"
-            android:layout_marginStart="16dp"
             android:layout_alignTop="@+id/currentplayingimg"
-            android:layout_toEndOf="@+id/currentplayingimg" />
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/currentplayingimg"
+            android:text="Artist"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/songmin"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:textSize="15sp"
-            android:textColor="@color/colorWhite"
-            android:text="Song"
+            android:layout_below="@id/artistmin"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/currentplayingimg"
-            android:layout_below="@id/artistmin"/>
+            android:text="Song"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/backmin"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/backwards"
             android:layout_alignTop="@+id/playmini"
-            android:layout_toStartOf="@+id/playmini" />
+            android:layout_toStartOf="@+id/playmini"
+            android:background="@drawable/backwards" />
+
         <ImageView
             android:id="@+id/playmini"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/play"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/imageView5" />
+            android:layout_toStartOf="@+id/imageView5"
+            android:background="@drawable/play" />
+
         <ImageView
+            android:id="@+id/imageView5"
             android:layout_width="50dp"
+
             android:layout_height="50dp"
 
-            android:background="@drawable/forward"
-
-            android:id="@+id/imageView5"
-            android:layout_marginEnd="36dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/playmini"
-            android:layout_alignParentEnd="true" />
+            android:background="@drawable/forward" />
 
     </RelativeLayout>
 
-</RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
