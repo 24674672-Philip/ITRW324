@@ -88,8 +88,8 @@ export class ServerService {
       );
   }
 
-  getTopSongs(callback){
-    this.http.post(this.url+'getsongs', null)
+  getTopSongs(page_num:number, callback){
+    this.http.post(this.url+'getsongs', null, {headers: new Headers({'page':page_num})})
       .subscribe(
         (response) => callback(response.json())
       );

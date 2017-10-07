@@ -19,7 +19,7 @@ export class MusicListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.serverService.getTopSongs((response)=>{
+    this.serverService.getTopSongs(1,(response)=>{//TODO: check page number
       let tempObject = response['result'];
       console.log(tempObject);
       for(let x of tempObject){

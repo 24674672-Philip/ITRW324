@@ -1,4 +1,4 @@
-<div class="container-fluid navbar-fixed-bottom"  style="bottom: 0;  width: 100%; padding:0; margin:0;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div class="container-fluid navbar-fixed-bottom"  style="max-height:120px; bottom: 0;  width: 100%; padding:0; margin:0;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
   <div class="panel-footer" style="border-left: 1px; border-bottom-right: 1px;">
     <div class="row">
       <div class="progress" (click)="progressChanged($event)" id="progressContainer" style="margin-bottom: 0; border: solid rgba(1,1,1,.2) 1px">
@@ -48,7 +48,7 @@
           <p class="pull-right" style="padding: 0 20px 0 0">{{progressMinutesString==undefined? '':progressMinutesString+":"+progressSecondsString+"/"+ durationMinutesString+":"+durationSecondsString}}</p>
         </div>
         <div class="row" appShowVolume [element]="element" >
-          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding: 0"><span (click)="isMuted=!isMuted" class="glyphicon" [ngClass]="{'glyphicon-volume-up':!isMuted,'glyphicon-volume-off' :isMuted}" style="font-size: 1.3em"></span></div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding: 0"><span (click)="mute()" class="glyphicon" [ngClass]="{'glyphicon-volume-up':!isMuted,'glyphicon-volume-off' :isMuted}" style="font-size: 1.3em"></span></div>
           <div class="progress col-xs-10 col-sm-10 col-md-10 col-lg-10" (click)="volumeChanged($event)" id="volumeContainer" style="margin-bottom: 0; border: solid rgba(1,1,1,.2) 1px; padding: 0; height: 5px; top:7px; visibility: hidden">
             <div
               class="progress-bar"

@@ -43,6 +43,16 @@ export class MusicFooterComponent implements OnInit {
     return this.isMuted? {width: 0+'%'}:{width: this.volume+'%'};
   }
 
+  mute(){
+    if(!this.isMuted){
+      this.isMuted = !this.isMuted;
+      this.audio.volume = 0;
+    }else{
+      this.audio.volume = this.volume/100;
+      this.isMuted = !this.isMuted;
+    }
+  }
+
 
 
   ngOnInit() {
