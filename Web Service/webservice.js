@@ -248,6 +248,20 @@ app.post('/api/getsongs', function(req, res){
   var qry = require('./app/api')(sql,val,con, res);
 });
 
+app.post('/api/getalbums', function(req, res){
+  console.log("/api/getsongs");
+  var sql = 'SELECT AlbumID, ArtistID, Artist, Album, image_name, profilepicture FROM artist_albums LIMIT ?,20;'
+  var val = req.headers['page'] * 20;
+  var qry = require('./app/api')(sql,val,con, res);
+});
+
+app.post('/api/getartists', function(req, res){
+  console.log("/api/getsongs");
+  var sql = 'SELECT DISTINCT ArtistID, Artist, profilepicture FROM artist_albums LIMIT ?,20;'
+  var val = req.headers['page'] * 20;
+  var qry = require('./app/api')(sql,val,con, res);
+});
+
 app.post('/api/getsongdetails', function(req, res){
   console.log("/api/getsongdetails");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details WHERE Title = ?;'
