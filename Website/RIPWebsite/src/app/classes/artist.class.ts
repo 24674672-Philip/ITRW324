@@ -1,18 +1,19 @@
-import {Album} from "./album.class";
-
 export class Artist {
 
   private artistImagePath: string;
   constructor(private artistID: number,
               private artistName: string,
               private artistBio: string,
-              private albumList: Album[],
               private token: string){
-    this.setArtistImagePath(token);
+
   }
 
-  setArtistImagePath(token: string){
-    //TODO: build image path url
+  setArtistImagePath(type: string, imageName: number){
+      this.artistImagePath = 'http://52.211.85.57:8080/api/image?type='+type+'&'+'image_name='+imageName;
+  }
+
+  setArtistImageUrl(url: string){
+    this.artistImagePath = url;
   }
 
   getArtistID(): number {
@@ -27,9 +28,6 @@ export class Artist {
     return this. artistBio;
   }
 
-  getAlbumList(): Album[]{
-    return this.albumList;
-  }
 
   getArtistImagePath(): string{
     return this.artistImagePath;

@@ -29,6 +29,9 @@ import { LandingPageContainerComponent } from './landing-page/landing-page-conta
 import { EmailSuccessAlertComponent } from './email-confirmation-alert/email-success-alert/email-success-alert.component';
 import { EmailWarningAlertComponent } from './email-confirmation-alert/email-warning-alert/email-warning-alert.component';
 import { ShowVolumeDirective } from './directives/show-volume.directive';
+import { ArtistDescriptionComponent } from './ripComponents/artists-container/artist-description.component/artist-description.component';
+import { AlbumListComponent } from './ripComponents/artists-container/album-list.component/album-list.component';
+import { AlbumListItemComponent } from './ripComponents/artists-container/album-list.component/album-list-item.component/album-list-item.component';
 
 const router: Routes = [
   {path: '', component: LandingPageContainerComponent},
@@ -63,6 +66,9 @@ const router: Routes = [
     EmailSuccessAlertComponent,
     EmailWarningAlertComponent,
     ShowVolumeDirective,
+    ArtistDescriptionComponent,
+    AlbumListComponent,
+    AlbumListItemComponent,
   ],
   imports: [
     BrowserModule,

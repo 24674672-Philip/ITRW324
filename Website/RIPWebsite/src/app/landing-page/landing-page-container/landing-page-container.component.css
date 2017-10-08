@@ -19,7 +19,7 @@
   }
 
   .box-shadow{
-    
+
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* background: rgba(23, 23, 23, 0.76); */
     background: rgba(225, 225, 225, .8);
@@ -35,25 +35,26 @@
   }
 
   h1{
-    text-align: left; 
+    text-align: left;
   }
 
   p{
       font-size: 17px;
       color: black;
       text-align: justify;
-      
-      
+
+
   }
 
   footer{
       padding: 10px;
   }
-  
+
  li{
      text-align: left;
      color: black;
      font-weight: Bold;
      font-size: 17px;
-     
+
  }
+
