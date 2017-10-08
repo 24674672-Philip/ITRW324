@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/mProfile"
+        android:title="My Profile"
+        android:icon="@drawable/icon_profile"
+        ></item>
+    <item android:id="@+id/mPlaylist"
+        android:title="My Playlist"
+        android:icon="@drawable/playlist"
+        >
+    </item>
+    <item android:id="@+id/mBrowse"
+        android:title="Browse Music"
+        android:icon="@drawable/icon_browse"
+        ></item>
+    <item android:id="@+id/mCart"
+        android:title="Cart"
+        android:icon="@drawable/icon_trolley"
+        ></item>
+    <item android:id="@+id/mRedeem"
+        android:title="Redeem Voucher"
+        android:icon="@drawable/icon_card"
+        ></item>
+    <item android:id="@+id/mLogout"
+        android:title="Logout"
+        ></item>
+</menu>

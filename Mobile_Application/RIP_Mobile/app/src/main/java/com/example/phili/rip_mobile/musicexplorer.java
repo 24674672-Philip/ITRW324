@@ -34,6 +34,14 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.widget.TextView;
+import android.widget.TabWidget;
+import android.widget.TextView;
+import android.view.View;
+import android.view.MenuItem;
 
 public class musicexplorer extends AppCompatActivity implements View.OnClickListener{
 
@@ -55,7 +63,17 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
     private String token, currentSong;
     private ImageView play, next, back, imageView;
     private TextView artistView, songView;
+    private DrawerLayout mDrawerlayout;
+    private ActionBarDrawerToggle mToggle;
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +88,12 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
 
         mTabHost = (TabHost)findViewById(R.id.tabHost);
         mTabHost.setup();
+
+        mDrawerlayout = (DrawerLayout)findViewById(R.id.drawerLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerlayout, R.string.open, R.string.close);
+        mDrawerlayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imageView = (ImageView) findViewById(R.id.currentplayingimg);
         play = (ImageView) findViewById(R.id.playmini);
@@ -115,6 +139,16 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
                 .setContent(R.id.genresgrid);
         mTabHost.addTab(spec);
 
+        //SETS THE TEXT SIZE OF THE TABS=================================
+        final TabWidget tw = mTabHost.findViewById(android.R.id.tabs);
+        for (int i = 0; i < tw.getChildCount(); ++i)
+        {
+            final View tabView = tw.getChildTabViewAt(i);
+            final TextView tv = tabView.findViewById(android.R.id.title);
+            tv.setTextSize(12);
+        }
+        //===============================================================
+
 
         mTabHost.setOnClickListener(this);
 
@@ -141,6 +175,19 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         });
         sendGetItems("songs");
 
+    }
+    //TAB CHANGE?? EKS NIE SEKER NIE
+    public void onResume() {
+
+        super.onResume();
+        mTabHost.getTabWidget().getChildAt(0).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTabHost.setCurrentTab(0);
+
+
+                }
+        });
     }
 
     private ArrayList<Albums> getAlbums()
