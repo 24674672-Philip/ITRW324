@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.NavigationView
+        app:headerLayout="@layout/menuheader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:menu="@menu/navigation_menu"
