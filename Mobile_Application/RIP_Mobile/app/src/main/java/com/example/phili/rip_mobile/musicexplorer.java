@@ -116,6 +116,8 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         mTabHost.addTab(spec);
 
 
+        mTabHost.setOnClickListener(this);
+
         gv1 = (GridView)findViewById(R.id.albumsgrid);
         gv2 = (GridView)findViewById(R.id.artistsgrid);
         gv3 = (GridView)findViewById(R.id.genresgrid);
@@ -137,7 +139,7 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
-        sendGetItems();
+        sendGetItems("songs");
 
     }
 
@@ -152,7 +154,7 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         return  albums;
     }
 
-    private void sendGetItems(){
+    private void sendGetItems(String type){
 
         String[] headersType = new String[1];
         String[] headersVal = new String[1];
@@ -160,7 +162,7 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         headersVal[0] = "0";
 
         final serverLink sender = new serverLink(this);
-        sender.sendServerRequest(headersType, headersVal, "/api/getsongs", true,new serverLink.OnDownloadTaskCompleted() {
+        sender.sendServerRequest(headersType, headersVal, (type.equals("songs"))?"/api/getsongs":"/api/getalbums", true,new serverLink.OnDownloadTaskCompleted() {
             @Override
             public void onTaskCompleted(JSONObject result, boolean error, String message) {
                 try {
@@ -235,19 +237,9 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
             else if (v.getId() == R.id.imageView5){
 
             }
-            else if (v.getId() == R.id.albumsgrid){
+            else if (v.getId() == R.id.tabHost){
 
             }
-            else if (v.getId() == R.id.artistsgrid){
-
-            }
-            else if (v.getId() == R.id.songsgrid){
-
-            }
-            else if (v.getId() == R.id.genresgrid){
-
-            }
-
         }
     }
 
@@ -256,28 +248,25 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
             if(mp != null){
                 mp.stop();
             }
-            if(!currentSong.equals(url)){
-                mp = new MediaPlayer(/*Your-Context*/);
-                mp.setDataSource(url);
-                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
-                    @Override
-                    public void onPrepared(MediaPlayer mp)
-                    {
-                        mp.start();
+            mp = new MediaPlayer(/*Your-Context*/);
+            mp.setDataSource(url);
+            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
+                @Override
+                public void onPrepared(MediaPlayer mp)
+                {
+                    mp.start();
 
-                        finalTime = mp.getDuration();
-                        startTime = mp.getCurrentPosition();
+                    finalTime = mp.getDuration();
+                    startTime = mp.getCurrentPosition();
 
-                        if (oneTimeOnly == 0) {
-                            //sBar.setMax((int) finalTime);
-                            oneTimeOnly = 1;
-                        }
-                        //sBar.setProgress((int)startTime);
+                    if (oneTimeOnly == 0) {
+                        //sBar.setMax((int) finalTime);
+                        oneTimeOnly = 1;
                     }
-                });
-                mp.prepareAsync();
-                currentSong = url;
-            }
+                    //sBar.setProgress((int)startTime);
+                }
+            });
+            mp.prepareAsync();
         } catch (Exception e) {
             Toast.makeText(this,e.getMessage().toString(),Toast.LENGTH_LONG);
         }
