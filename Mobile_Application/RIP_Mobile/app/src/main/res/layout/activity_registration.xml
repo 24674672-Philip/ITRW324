@@ -3,108 +3,95 @@
 
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
+    android:isScrollContainer="false"
     android:layout_height="wrap_content"
-    android:background="@drawable/img1">
+    android:background="@drawable/background_op3">
 
         <LinearLayout
             android:id="@+id/LinearLayout01"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="vertical">
 
-            android:orientation="vertical"
-            android:weightSum="20">
-
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="REGISTER"
-                android:textSize="25sp"
-                android:background="@drawable/rounded_borders"
-                android:textStyle="bold"
-                android:typeface="sans"
-                android:textColor="@color/colorWhite" />
 
             <LinearLayout
-                android:layout_width="252dp"
-                android:layout_height="wrap_content"
+                android:layout_width="288dp"
+                android:layout_height="240dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_borders"
+                android:background="@drawable/rounded_borders_black"
                 android:orientation="vertical"
-                android:padding="10dp"
-                android:layout_marginTop="60dp">
+                android:padding="20dp"
+                android:layout_marginTop="50dp">
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
                     android:text="Personal Details:"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20dp"
-
-                    android:typeface="sans" />
+                    android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/rounded_edttext"
+                    android:hint="Name"
                     android:paddingLeft="10dp"
-                    android:text="Name"
                     android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray"
-                    android:textColorHint="@color/colorBlack" />
+                    android:textColorHighlight="@color/colorGray" />
 
                 <EditText
                     android:id="@+id/etSurname"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/rounded_edttext"
                     android:paddingLeft="10dp"
-                    android:text="Surname"
+                    android:hint="Surname"
                     android:textColor="#36454f"
                     android:textColorHighlight="@color/colorGray"
-                    android:textColorHint="@color/colorBlack"/>
+                   />
 
 
                 <EditText
                     android:id="@+id/etDOB"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/rounded_edttext"
                     android:paddingLeft="10dp"
-                    android:text="Date of Birth"
+                    android:hint="Date of Birth"
                     android:inputType="date"
                     android:textColor="#36454f"
                     android:textColorHighlight="@color/colorGray"
-                    android:textColorHint="@color/colorBlack" />
+                />
             </LinearLayout>
 
 
 
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:layout_width="284dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_borders"
+        android:background="@drawable/rounded_borders_black"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_marginTop="60dp">
+        android:padding="20dp"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/textView3"
@@ -113,93 +100,94 @@
             android:layout_gravity="center_horizontal"
             android:text="Address Details:"
             android:textColor="@color/colorWhite"
-            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:textSize="25dp"
             android:typeface="sans" />
 
         <EditText
                 android:id="@+id/etCountry"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginVertical="10dp"
                 android:background="@drawable/rounded_edttext"
                 android:paddingLeft="10dp"
-                android:text="Country"
+                android:hint="Country"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-                android:textColorHint="@color/colorBlack"  />
+                 />
 
         <EditText
                 android:id="@+id/etCity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginVertical="10dp"
                 android:background="@drawable/rounded_edttext"
                 android:paddingLeft="10dp"
-                android:text="City"
+                android:hint="City"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-                android:textColorHint="@color/colorBlack" />
+           />
 
         <EditText
                 android:id="@+id/etPostalCodes"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginVertical="10dp"
                 android:background="@drawable/rounded_edttext"
                 android:paddingLeft="10dp"
-                android:text="Postal Code"
+                android:hint="Postal Code"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-                android:textColorHint="@color/colorBlack" />
+          />
 
         <EditText
                 android:id="@+id/etAdl1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginVertical="10dp"
                 android:background="@drawable/rounded_edttext"
                 android:paddingLeft="10dp"
-                android:text="Address Line 1"
+                android:hint="Address Line 1"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-                android:textColorHint="@color/colorBlack" />
+      />
 
         <EditText
                 android:id="@+id/etAdl2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginVertical="10dp"
                 android:background="@drawable/rounded_edttext"
                 android:paddingLeft="10dp"
-                android:text="Address Line 2"
+                android:hint="Address Line 2"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-                android:textColorHint="@color/colorBlack"/>
+         />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_width="282dp"
+                android:layout_height="300dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_borders"
+                android:background="@drawable/rounded_borders_black"
                 android:orientation="vertical"
-                android:padding="10dp"
-                android:layout_marginTop="60dp">
+                android:padding="20dp"
+                android:layout_marginTop="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -207,13 +195,14 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Login Details:"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20dp"
-                    android:typeface="sans" />
+                    android:layout_margin="10dp"
+                    android:textSize="25dp"
+                   />
 
                 <EditText
                     android:id="@+id/etUsername"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
@@ -221,15 +210,15 @@
                     android:background="@drawable/rounded_edttext"
                     android:drawableLeft="@drawable/iconuser"
                     android:paddingLeft="10dp"
-                    android:text="Username"
+                    android:hint="Username"
                     android:textColor="#36454f"
                     android:textColorHighlight="@color/colorGray"
-                    android:textColorHint="@color/colorBlack"/>
+                  />
 
                 <EditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:drawableLeft="@drawable/iconemail"
                     android:layout_marginBottom="10dp"
@@ -237,15 +226,15 @@
                     android:layout_weight="0.25"
                     android:background="@drawable/rounded_edttext"
                     android:paddingLeft="10dp"
-                    android:text="Email"
+                    android:hint="Email"
                     android:textColor="#36454f"
                     android:textColorHighlight="@color/colorGray"
-                    android:textColorHint="@color/colorWhite"  />
+                     />
 
                 <EditText
                     android:id="@+id/etPass"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:drawableLeft="@drawable/iconpassword"
                     android:layout_marginBottom="10dp"
@@ -253,15 +242,15 @@
                     android:layout_weight="0.25"
                     android:background="@drawable/rounded_edttext"
                     android:paddingLeft="10dp"
-                    android:text="Password"
+                    android:hint="Password"
                     android:textColor="#36454f"
                     android:textColorHighlight="@color/colorGray"
-                    android:textColorHint="@color/colorWhite"  />
+               />
 
                 <EditText
                     android:id="@+id/etRetypePass"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_gravity="center_horizontal"
                     android:drawableLeft="@drawable/iconpassword"
                     android:layout_marginBottom="10dp"
@@ -269,22 +258,23 @@
                     android:layout_weight="0.25"
                     android:background="@drawable/rounded_edttext"
                     android:paddingLeft="10dp"
-                    android:text="Retype Password"
+                    android:hint="Retype Password"
                     android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray"
-                    android:textColorHint="@color/colorWhite"  />
+                    android:textColorHighlight="@color/colorGray" />
             </LinearLayout>
 
 
-            <Button
+            <ImageView
                 android:id="@+id/btnRegister"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:textSize="18sp"
+                android:layout_margin="30dp"
+                android:layout_height="100dp"
+                android:src="@drawable/done"
+
+
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/rounded_button"
-                android:text="Register" />
+
+               />
         </LinearLayout>
 
 

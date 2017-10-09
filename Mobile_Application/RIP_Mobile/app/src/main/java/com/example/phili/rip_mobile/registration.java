@@ -1,6 +1,7 @@
 package com.example.phili.rip_mobile;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -33,7 +35,7 @@ import java.util.Map;
 public class registration extends AppCompatActivity implements View.OnClickListener{
 
     Context contxt;
-    Button btnRegister;
+    ImageView btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class registration extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_registration);
 
         contxt = this;
-        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnRegister = (ImageView) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(this);
     }
 
