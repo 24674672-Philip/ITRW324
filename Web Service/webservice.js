@@ -262,6 +262,11 @@ app.post('/api/getartists', function(req, res){
   var qry = require('./app/api')(sql,val,con, res);
 });
 
+app.post('/api/getartist', function(req, res){
+  console.log("/api/getsongs");
+  var qry = require('./app/artist')(con, res, req);
+});
+
 app.post('/api/getsongdetails', function(req, res){
   console.log("/api/getsongdetails");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details WHERE Title = ?;'
@@ -291,6 +296,13 @@ app.post('/api/userplaylists', function(req, res){
   var sql = 'SELECT Playlist, Created, Items_in_playlist, idplaylist_details AS playlistid FROM user_playlists WHERE Username = ? ORDER BY Created DESC;'
   var qry = require('./app/api')(sql,req.headers["username"],con, res);
 });
+
+app.post('/api/userplaylists', function(req, res){
+  console.log("/api/userplaylists");
+  var sql = 'SELECT Playlist, Created, Items_in_playlist, idplaylist_details AS playlistid FROM user_playlists WHERE Username = ? ORDER BY Created DESC;'
+  var qry = require('./app/api')(sql,req.headers["username"],con, res);
+});
+
 
 app.post('/api/upload',function(req, res){
   if(req.files){
