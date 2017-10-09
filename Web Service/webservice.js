@@ -9,7 +9,7 @@ var upload = require('express-fileupload')
 
 const app = express();
 
-app.use(cors({origin: 'http://52.208.193.120:8080'}));
+app.use(cors({origin: 'http://ripmusic.tk/'}));
 app.use(upload());
 
 var con = mysql.createPool({
@@ -17,7 +17,9 @@ var con = mysql.createPool({
   host: "52.211.85.57",
   user: "philip",
   password: "blockchain",
-  database: "blockchainDB"
+  database: "blockchainDB",
+  multipleStatements: true,
+  debug: true
 });
 
 function ensureToken(req, res, next){
@@ -249,21 +251,21 @@ app.post('/api/getsongs', function(req, res){
 });
 
 app.post('/api/getalbums', function(req, res){
-  console.log("/api/getsongs");
+  console.log("/api/getalbums");
   var sql = 'SELECT AlbumID, ArtistID, Artist, Album, image_name, profilepicture FROM artist_albums LIMIT ?,20;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
 });
 
 app.post('/api/getartists', function(req, res){
-  console.log("/api/getsongs");
+  console.log("/api/getartists");
   var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists LIMIT ?,20;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
 });
 
 app.post('/api/getartist', function(req, res){
-  console.log("/api/getsongs");
+  console.log("/api/getartist");
   var qry = require('./app/artist')(con, res, req);
 });
 
@@ -297,14 +299,76 @@ app.post('/api/userplaylists', function(req, res){
   var qry = require('./app/api')(sql,req.headers["username"],con, res);
 });
 
-app.post('/api/userplaylists', function(req, res){
-  console.log("/api/userplaylists");
-  var sql = 'SELECT Playlist, Created, Items_in_playlist, idplaylist_details AS playlistid FROM user_playlists WHERE Username = ? ORDER BY Created DESC;'
-  var qry = require('./app/api')(sql,req.headers["username"],con, res);
+app.post('/api/edituserbio', function(req, res){
+  console.log("/api/edituser");
+  var qry = require('./app/edituser')(req, res, con);
 });
 
+app.post('/api/createalbum', function(req, res){
+  console.log("/api/createalbum");
+  var sql = 'INSERT INTO album (album_name, userid) VALUES (?);';
+  var val = [[
+    req.headers["albumname"],
+    req.headers["userid"]
+  ]];
+  var qry = require('./app/update')(sql, val, con, res);
+});
+
+app.post('/api/editalbum', function(req, res){
+  var val3 = 0;
+  console.log("/api/editalbum");
+  var sql = "UPDATE album SET album_name = ?, price = ? WHERE albumID = ?;";
+  var val1 = req.headers["albumname"];
+  var val2 = req.headers["price"];
+  val3 = req.headers["id"];
+  var qry = require('./app/update')(sql, [val1, val2, val3], con, res);
+});
+
+app.post('/api/releasealbum', function(req, res){
+  console.log("/api/releasealbum");
+  var sql = "UPDATE album SET released = ?, `release date` = CURRENT_TIMESTAMP WHERE albumID = ?;";
+  var val1 = 1;
+  var val2 = req.headers["id"];
+  var qry = require('./app/update')(sql, [val1, val2], con, res);
+});
+
+app.post('/api/deletealbum', function(req, res){
+  console.log("/api/deletealbum");
+  var sql = "DELETE FROM album WHERE albumID = ?;";
+  var val = req.headers["id"];
+  var qry = require('./app/update')(sql, val, con, res);
+});
+
+app.post('/api/createsong', function(req, res){
+  console.log("/api/createsong");
+  var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID) VALUES (?);';
+  var val = [[
+    req.headers["title"],
+    req.headers["explicit"],
+    req.headers["albumid"],
+    req.headers["userid"]
+  ]];
+  var qry = require('./app/update')(sql, val, con, res);
+});
+
+app.post('/api/editsong', function(req, res){
+  console.log("/api/editsong");
+  var sql = "UPDATE song SET title = ?, price = ? WHERE musicID = ?;";
+  var val1 = req.headers["title"];
+  var val2 = req.headers["price"];
+  var val3 = req.headers["musicid"];
+  var qry = require('./app/update')(sql, [val1, val2, val3], con, res);
+});
+
+app.post('/api/deletesong', function(req, res){
+  console.log("/api/deletesong");
+  var sql = "DELETE FROM song WHERE musicID = ?;";
+  var val = req.headers["musicid"];
+  var qry = require('./app/update')(sql, val, con, res);
+});
 
 app.post('/api/upload',function(req, res){
+  console.log('/api/upload');
   if(req.files){
     var file = req.files.filetoupload;
     var filename = file.name;
