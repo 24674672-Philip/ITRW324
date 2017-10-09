@@ -24,23 +24,17 @@ module.exports = function(req, res, con){
       console.log('connected as id ' + connection.threadId);
 
       connection.query(sql,val,function(err,result){
-        if(err) {
-          res.json({register: "Failed",
-      	  error: err});
-        }
-        else {
-          console.log('inserted val: ' + val);
-          var link = hash;
-          var email = require('./app/email')(link,emailAddress);
-          var sql2 = 'SELECT user_id FROM users WHERE emailHash = ?'
-          connection.query(sql2,hash,function(err, resul){
-            connection.release();
-            if(!err) {
-              res.json({register: "success",
-              userid: resul[0].user_id});
-            }
-          });
-        }
+        console.log('inserted val: ' + val);
+        var link = hash;
+        var email = require('./app/email')(link,emailAddress);
+        var sql2 = 'SELECT user_id FROM users WHERE emailHash = ?'
+        connection.query(sql2,hash,function(err, resul){
+          connection.release();
+          if(!err) {
+            res.json({register: "success",
+            userid: resul[0].user_id});
+          }
+        });
       });
 
       connection.on('error', function(err) {

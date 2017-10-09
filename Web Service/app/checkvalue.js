@@ -11,10 +11,7 @@ module.exports = function(sql, val, con, res){
 
     connection.query(sql,val,function(err,result){
       connection.release();
-      if(err) {
-          res.json({error: err});
-      }
-      else if(result[0] === undefined){
+      if(result[0] === undefined){
         res.json({
           username: 'available'
         });

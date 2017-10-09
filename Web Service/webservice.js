@@ -257,7 +257,7 @@ app.post('/api/getalbums', function(req, res){
 
 app.post('/api/getartists', function(req, res){
   console.log("/api/getsongs");
-  var sql = 'SELECT DISTINCT ArtistID, Artist, profilepicture FROM artist_albums LIMIT ?,20;'
+  var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists LIMIT ?,20;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
 });
