@@ -53,6 +53,11 @@ export class MusicFooterComponent implements OnInit {
     }
   }
 
+  songFinished(){
+    this.musicServer.songFinished.emit(this.currentlyPlaying);
+  }
+
+
 
 
   ngOnInit() {

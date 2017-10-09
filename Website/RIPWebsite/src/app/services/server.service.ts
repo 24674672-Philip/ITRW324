@@ -137,5 +137,31 @@ export class ServerService {
     )
   }
 
+  getTopArtists(page: number, callback){
+    let headers = new Headers();
+    headers.append('page',page.toString());
+    this.http.post(this.url+'getartists',null, {headers: headers})
+      .subscribe(
+        (response)=>callback(response.json())
+      );
+  }
+
+  getArtistByID(id: string, callback){
+    let headers = new Headers();
+    headers.append('artistid',id);
+    this.http.post(this.url+'getartist',null,{headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      );
+  }
+
+  getArtistByName(name: string, callback){
+    let headers = new Headers();
+    headers.append('artistname',name);
+    this.http.post(this.url+'getartist',null,{headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      );
+  }
 
 }

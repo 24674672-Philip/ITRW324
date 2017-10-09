@@ -1,4 +1,4 @@
-<div class="container-fluid navbar-fixed-bottom"  style="max-height:120px; bottom: 0;  width: 100%; padding:0; margin:0;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div class="container-fluid navbar-fixed-bottom"  style="max-height:150px; bottom: 0;  width: 100%; padding:0; margin:0;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
   <div class="panel-footer" style="border-left: 1px; border-bottom-right: 1px;">
     <div class="row">
       <div class="progress" (click)="progressChanged($event)" id="progressContainer" style="margin-bottom: 0; border: solid rgba(1,1,1,.2) 1px">
@@ -33,7 +33,7 @@
       <!--TODO: Insert dynamic artist album and track name from currentlyPlaying-->
 
       <!--Hidden audio track that connects with music footer-->
-      <audio controls id="music" (timeupdate)="timeUpdated()" (loadedmetadata)="displayMetaData()" (canplay)="canPlay()" hidden>
+      <audio controls id="music" (timeupdate)="timeUpdated()" (loadedmetadata)="displayMetaData()" (canplay)="canPlay()" hidden (ended)="songFinished()">
         <source src="" type="audio/mp3" />
       </audio>
 

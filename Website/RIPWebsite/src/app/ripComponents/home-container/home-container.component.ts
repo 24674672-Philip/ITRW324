@@ -12,16 +12,14 @@ import {ServerService} from "../../services/server.service";
 })
 export class HomeContainerComponent implements OnInit {
 
- // @Input() currentlyPlaying: {artist, album, song, imagePath};
-  currentTrack: Song;
   private authToke: string;
-  constructor(private musicService: MusicPlayerService, private authService: AuthService, private serverService: ServerService) {
+  constructor(private authService: AuthService, private serverService: ServerService) {
     this.authToke = authService.getAuthToken();
     this.serverService.validateToken();
   }
 
   ngOnInit() {
-    this.currentTrack = this.musicService.currentSong;
+
   }
 
 }

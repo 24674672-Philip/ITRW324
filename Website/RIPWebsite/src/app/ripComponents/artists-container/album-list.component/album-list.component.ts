@@ -16,7 +16,15 @@ export class AlbumListComponent implements OnInit {
   }
 
   ngOnInit() {
-    //TODO: get albums from server + write method in server service
+    this.serverService.getArtistByID(this.artistID.toString(),(response)=>{
+      let artistJSON = response['artist']['0'];
+      let albumsJSON = response['albums'];
+      for(let y of albumsJSON){
+        let tempObj: Album = new Album(y['AlbumID'].toString(),y['Album'].toString(), artistJSON['Artist'].toString(),y['Released']);
+        tempObj.setAlbumImagePath('albums', y['image_name'].toString());
+        this.albums.push(tempObj);
+      }
+    });
   }
 
 

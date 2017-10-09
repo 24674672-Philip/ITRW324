@@ -17,7 +17,9 @@ export class AlbumDescriptionComponent implements OnInit {
   albumObj: Album = new Album(-1,'','',0);
   songList: Array<Song> = new Array<Song>();
 
-  constructor(private activatedRoute: ActivatedRoute, private serverService: ServerService, private authService: AuthService) { }
+  constructor(private activatedRoute: ActivatedRoute, private serverService: ServerService, private authService: AuthService) {
+
+  }
 
   ngOnInit() {
 

@@ -8,42 +8,37 @@ export class MusicPlayerService {
 
   currentPlaylist: Array<Song> = new Array<Song>();
   currentSongChanged: EventEmitter<Song> = new EventEmitter<Song>();
+  currentPlaylistChanged: EventEmitter<Song[]> = new EventEmitter<Song[]>();
   currentSong: Song = new Song(-1,-1,-1,'', '', '','');
+  songFinished: EventEmitter<Song> = new EventEmitter<Song>();
+  currentPlaylistIndex: number = 0;
 
-  //TODO: replace with server data
   constructor(private authService: AuthService, private serverService: ServerService) {
     this.currentSong.setSongImageString('../../favicon.ico');
+
     this.currentSongChanged.subscribe(
       (emittedSong)=> this.currentSong = emittedSong
     );
 
+    this.currentPlaylistChanged.subscribe(
+      (emittedPlaylist)=> this.currentPlaylist = emittedPlaylist
+    );
+
+    this.songFinished.subscribe(
+      ()=> this.getNextSong()
+    );
   }
 
 
-  addToFront(song: Song){
-    this.currentPlaylist.push(song);
-  }
-
-  getNextSong(): Song{
-    if(this.currentPlaylist.length != 0){
-      let indexSearch: number = 0;
-      let index: number = 0;
-      for(let x of this.currentPlaylist){
-        if(x==this.currentSong){
-          index = indexSearch;
-          break;
-        }
-        indexSearch++;
-      }
-      this.currentSong = this.currentPlaylist[index+1];
+  getNextSong(){
+    if(this.currentPlaylist.length != 0) {
+      this.currentSongChanged.emit(this.currentPlaylist[++this.currentPlaylistIndex]);
     }
-
-    return this.currentSong;
   }
 
-  addToBack(song: Song){
-    let temp = new Array<Song>();
-    temp.push(song);
-    this.currentPlaylist.concat(temp);
-  }
+ getPreviousSong(){
+    if(this.currentPlaylist.length != 0){
+      this.currentSongChanged.emit(this.currentPlaylist[--this.currentPlaylistIndex]);
+    }
+ }
 }

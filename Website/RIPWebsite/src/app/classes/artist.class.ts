@@ -3,8 +3,7 @@ export class Artist {
   private artistImagePath: string;
   constructor(private artistID: number,
               private artistName: string,
-              private artistBio: string,
-              private token: string){
+              private artistBio: string){
 
   }
 

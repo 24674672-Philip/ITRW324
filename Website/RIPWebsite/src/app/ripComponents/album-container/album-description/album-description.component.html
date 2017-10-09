@@ -30,7 +30,7 @@
 
   <div class="row">
     <div class="list-group text-center">
-      <app-track-list-item *ngFor="let x of songList; let i = index" [song]="x" [trackNumber]="i"></app-track-list-item>
+      <app-track-list-item *ngFor="let x of songList; let i = index" [song]="x" [trackNumber]="i" [potentialPlaylist]="songList" ></app-track-list-item>
     </div>
   </div>
 </div>
