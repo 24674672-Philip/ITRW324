@@ -107,6 +107,7 @@ app.get('/api/music', function(req, res){
     		if(exists)
     		{
           ms.pipe(req,res,file);
+          var qry = require('./app/songplayed')(con, res, req);
     		}
     		else
     		{
@@ -262,6 +263,30 @@ app.post('/api/getartists', function(req, res){
   var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists LIMIT ?,20;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
+});
+
+app.post('/api/searchsongs', function(req, res){
+  console.log("/api/searchsongs");
+  var val2 = req.headers['page'] * 20;
+  var val1 = req.headers['searchterm'];
+  var sql = "SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details WHERE Title LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,20;"
+  var qry = require('./app/api')(sql,val2,con, res);
+});
+
+app.post('/api/searchalbums', function(req, res){
+  console.log("/api/searchalbums");
+  var val2 = req.headers['page'] * 20;
+  var val1 = req.headers['searchterm'];
+  var sql = "SELECT AlbumID, ArtistID, Artist, Album, image_name, profilepicture FROM artist_albums WHERE Album LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,20;"
+  var qry = require('./app/api')(sql,[val1, val2],con, res);
+});
+
+app.post('/api/searchartists', function(req, res){
+  console.log("/api/searchartists");
+  var val2 = req.headers['page'] * 20;
+  var val1 = req.headers['searchterm'];
+  var sql = "SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists WHERE Artist LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,20;"
+  var qry = require('./app/api')(sql,[val1, val2],con, res);
 });
 
 app.post('/api/getartist', function(req, res){
