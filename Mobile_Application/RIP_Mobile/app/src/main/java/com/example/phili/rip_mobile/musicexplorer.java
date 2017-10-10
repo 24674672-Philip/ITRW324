@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.nfc.Tag;
 import android.support.design.widget.Snackbar;
@@ -34,6 +35,9 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -46,25 +50,23 @@ import android.view.MenuItem;
 public class musicexplorer extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "MyActivity";
-    private String[][] name;
-    private String[] img;
-    private int[] images = {R.drawable.defaultsong,R.drawable.defaultsong,R.drawable.defaultsong,
-            R.drawable.defaultsong,R.drawable.defaultsong,R.drawable.defaultsong,R.drawable.defaultsong,R.drawable.defaultsong,R.drawable.defaultsong,R.drawable.defaultsong,
-            R.drawable.defaultsong,R.drawable.defaultsong,R.drawable.defaultsong,R.drawable.defaultsong};
+    private String[][] song, artist, musicAlbum;
+    private String[] songImg, artistImg, musicAlbumImg;
     private TabHost mTabHost;
     private GridView gv1, gv2, gv3, gv4;
     private Context context;
-    private Bitmap[] albumImage;
-    private boolean loaded, paused;
+    private Bitmap[] albumImage, tempBitmap;
+    private boolean loaded, paused, loadSong, loadArt, loadAlb;
     private MediaPlayer mp;
     private double startTime = 0;
     private double finalTime = 0;
     public static int oneTimeOnly = 0;
     private String token, currentSong;
-    private ImageView play, next, back, imageView;
+    private ImageView play, next, back, imageView, currPlay;
     private TextView artistView, songView;
     private DrawerLayout mDrawerlayout;
     private ActionBarDrawerToggle mToggle;
+    private int gridCount, songPos;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -78,13 +80,23 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musicexplorer);
-        name = new String[20][3];
-        img = new String[20];
+        song = new String[20][3];
+        artist = new String[20][3];
+        musicAlbum = new String[20][3];
+        musicAlbumImg = new String[20];
+        songImg = new String[20];
+        artistImg = new String[20];
         albumImage = new Bitmap[20];
+        tempBitmap = new Bitmap[20];
         loaded = false;
         paused = false;
         token = getIntent().getExtras().getString("token");
         currentSong = null;
+        gridCount = 0;
+        loadSong = false;
+        loadArt = false;
+        loadAlb = false;
+        songPos = 0;
 
         mTabHost = (TabHost)findViewById(R.id.tabHost);
         mTabHost.setup();
@@ -101,7 +113,9 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         next = (ImageView) findViewById(R.id.imageView5);
         artistView = (TextView) findViewById(R.id.artistmin);
         songView = (TextView) findViewById(R.id.songmin);
+        currPlay = (ImageView) findViewById(R.id.currentplayingimg);
 
+        currPlay.setOnClickListener(this);
         play.setOnClickListener(this);
         back.setOnClickListener(this);
         next.setOnClickListener(this);
@@ -150,89 +164,61 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         //===============================================================
 
 
-        mTabHost.setOnClickListener(this);
-
-        gv1 = (GridView)findViewById(R.id.albumsgrid);
-        gv2 = (GridView)findViewById(R.id.artistsgrid);
-        gv3 = (GridView)findViewById(R.id.genresgrid);
-        gv4 = (GridView)findViewById(R.id.songsgrid);
-
-
-
-        gv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                if (loaded) {
-                    imageView.setImageBitmap(albumImage[position]);
-                    String songUrl = "http://52.211.85.57:8080/api/music?token=" + token + "&song=" + name[position][0] + "&artist=" + name[position][1] + "&album=" + name[position][2];
-                    songUrl = songUrl.replaceAll(" ","%20");
-                    playSong(songUrl);
-                    songView.setText(name[position][0]);
-                    artistView.setText(name[position][1]);
-                    Log.i(TAG,songUrl);
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
+                if(s.equals("artist")){
+                    if (!loadAlb){
+                        getArtists(gv2);
+                        loadAlb = !loadAlb;
+                    }
+                }
+                else if (s.equals("songs")){
+                    if(!loadSong){
+                        getSongs(gv3);
+                        loadSong = !loadSong;
+                    }
                 }
             }
         });
-        sendGetItems("songs");
 
-    }
-    //TAB CHANGE?? EKS NIE SEKER NIE
-    public void onResume() {
+        gv1 = (GridView)findViewById(R.id.albumsgrid);
+        gv2 = (GridView)findViewById(R.id.artistsgrid);
+        gv3 = (GridView)findViewById(R.id.songsgrid);
+        gv4 = (GridView)findViewById(R.id.genresgrid);
 
-        super.onResume();
-        mTabHost.getTabWidget().getChildAt(0).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTabHost.setCurrentTab(0);
-
-
+        gv3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                if (loaded) {
+                    sendSongRequest(position);
                 }
+            }
         });
+        getMusicAlbums(gv1);
     }
 
-    private ArrayList<Albums> getAlbums()
-    {
-        ArrayList<Albums> albums = new ArrayList<Albums>();
-        for (int i=0;i<20;i++)
-        {
-            albums.add(new Albums(name[i][0],albumImage[i]));
-        }
-
-        return  albums;
-    }
-
-    private void sendGetItems(String type){
-
+    private void getSongs(final GridView gv){
+        Log.i(TAG,"getSongs");
         String[] headersType = new String[1];
         String[] headersVal = new String[1];
         headersType[0] = "page";
         headersVal[0] = "0";
 
         final serverLink sender = new serverLink(this);
-        sender.sendServerRequest(headersType, headersVal, (type.equals("songs"))?"/api/getsongs":"/api/getalbums", true,new serverLink.OnDownloadTaskCompleted() {
+        sender.sendServerRequest(headersType, headersVal, "/api/getsongs", true,new serverLink.OnDownloadTaskCompleted() {
             @Override
             public void onTaskCompleted(JSONObject result, boolean error, String message) {
                 try {
                     JSONArray temp = result.getJSONArray("result");
                     for (int k = 0; k<temp.length(); k++){
                         Log.i(TAG,"" + k + ": " + temp.getJSONObject(k).toString());
-                        name[k][0] = temp.getJSONObject(k).getString("Title");
-                        name[k][1] = temp.getJSONObject(k).getString("Artist");
-                        name[k][2] = temp.getJSONObject(k).getString("Album");
-                        img[k] = temp.getJSONObject(k).getString("album_image");
-
-                        if(k>0||k==19){
-                            if(name[k][0].equals(name[k-1][0])&&k!=19){
-                                albumImage[k] = Bitmap.createBitmap(albumImage[k-1]);
-                            }
-                            else{
-                                getImageReq("http://52.211.85.57:8080/api/image?type=albums&image_name="+img[k],k);
-                            }
-                        }
-                        else{
-                            getImageReq("http://52.211.85.57:8080/api/image?type=albums&image_name="+img[k],k);
-                        }
+                        song[k][0] = temp.getJSONObject(k).getString("Title");
+                        song[k][1] = temp.getJSONObject(k).getString("Artist");
+                        song[k][2] = temp.getJSONObject(k).getString("Album");
+                        songImg[k] = temp.getJSONObject(k).getString("album_image");
                     }
+                    getAlbumArt(songImg, gv, temp.length(),song);
                 }
                 catch (Exception e){
                     Log.i(TAG,result.toString());
@@ -241,29 +227,139 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void setGridView(){
-        Adapter adapter = new Adapter(this,getAlbums());
-        gv1.setAdapter(adapter);
-        loaded = true;
+    private void getMusicAlbums(final GridView gv){
+        Log.i(TAG,"getMusicAlbums");
+        String[] headersType = new String[1];
+        String[] headersVal = new String[1];
+        headersType[0] = "page";
+        headersVal[0] = "0";
+
+        final serverLink sender = new serverLink(this);
+        sender.sendServerRequest(headersType, headersVal, "/api/getalbums", true,new serverLink.OnDownloadTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result, boolean error, String message) {
+                try {
+                    JSONArray temp = result.getJSONArray("result");
+                    for (int k = 0; k<temp.length(); k++){
+                        Log.i(TAG,"" + k + ": " + temp.getJSONObject(k).toString());
+                        musicAlbum[k][0] = temp.getJSONObject(k).getString("Album");
+                        musicAlbum[k][1] = temp.getJSONObject(k).getString("Artist");
+                        musicAlbumImg[k] = temp.getJSONObject(k).getString("image_name");
+                        Log.i(TAG,"" + k + ": " + " album: " + musicAlbum[k][0] + " img: " + musicAlbumImg[k]);
+                    }
+                    getMusicAlbumsImages(musicAlbumImg, gv, temp.length(),musicAlbum);
+                }
+                catch (Exception e){
+                    Log.i(TAG,result.toString());
+                }
+            }
+        });
     }
 
-    private void getImageReq(String imageUrl,final int k){
+    private void getArtists(final GridView gv){
+        Log.i(TAG,"getArtists");
+        String[] headersType = new String[1];
+        String[] headersVal = new String[1];
+        headersType[0] = "page";
+        headersVal[0] = "0";
 
+        final serverLink sender = new serverLink(this);
+        sender.sendServerRequest(headersType, headersVal, "/api/getartists", true,new serverLink.OnDownloadTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result, boolean error, String message) {
+                try {
+                    JSONArray temp = result.getJSONArray("result");
+                    for (int k = 0; k<temp.length(); k++){
+                        Log.i(TAG,"" + k + ": " + temp.getJSONObject(k).toString());
+                        artist[k][0] = temp.getJSONObject(k).getString("Artist");
+                        artistImg[k] = temp.getJSONObject(k).getString("profilepicture");
+                        Log.i(TAG,"" + k + ": " + " artist: " + artist[k][0]+ " img: " + artistImg[k]);
+                    }
+                    getProfilePicture(artistImg, gv, temp.length(),artist);
+                }
+                catch (Exception e){
+                    Log.i(TAG,result.toString());
+                }
+            }
+        });
+    }
+    //2
+    public void getProfilePicture(String[] img, GridView gv, int length, String[][] name){
+        Log.i(TAG,"getProfilePicture");
+        gridCount = 0;
+        String[] unique = new HashSet<String>(Arrays.asList(img)).toArray(new String[0]);
+        for (int k = 0; k < unique.length; k++){
+            Log.i(TAG,"unique length: " + img.length );
+            Log.i(TAG,img[gridCount]);
+            getImageReq("http://52.211.85.57:8080/api/image?type=users&image_name="+img[gridCount++],img[k],k, img, gv, length, name);
+        }
+    }
+    //2
+    public void getMusicAlbumsImages(String[] img, GridView gv, int length, String[][] name){
+        Log.i(TAG,"getProfilePicture");
+        gridCount = 0;
+        String[] unique = new HashSet<String>(Arrays.asList(img)).toArray(new String[0]);
+        for (int k = 0; k < unique.length; k++){
+            Log.i(TAG,"unique length: " + img.length );
+            Log.i(TAG,img[gridCount]);
+            getImageReq("http://52.211.85.57:8080/api/image?type=albums&image_name="+img[gridCount++],img[k],k, img, gv, length, name);
+        }
+    }
+    //2
+    public void getAlbumArt(String[] img, GridView gv, int length, String[][] name){
+        Log.i(TAG,"GetAlbumArt");
+        gridCount = 0;
+        String[] unique = new HashSet<String>(Arrays.asList(img)).toArray(new String[0]);
+        for (int k = 0; k < unique.length; k++){
+            Log.i(TAG,unique[gridCount]);
+            getImageReq("http://52.211.85.57:8080/api/image?type=albums&image_name="+unique[gridCount++],unique[k],k, img, gv, length, name);
+        }
+    }
+    //3
+    private void getImageReq(String imageUrl,final String name, final int k, final String[] img, final GridView gv, final int length, final String[][] nameText){
+        Log.i(TAG,"getImageReq");
         final serverLink sender = new serverLink(this);
         sender.getImage(imageUrl,new serverLink.OnDownloadCompleted() {
             @Override
             public void onTaskCompleted(Bitmap result, boolean error, String message) {
                 try {
-                    albumImage[k] = result;
-                    if (k == 19){
-                        setGridView();
-                    }
+                    tempBitmap[k] = result;
+                    setOtherImages(name, k, img, gv, length, nameText);
                 }
                 catch (Exception e){
-                    Log.i(TAG,message);
+                    Log.i(TAG,e.getMessage().toString());
                 }
             }
         });
+    }
+    //4
+    public void setOtherImages(String name, int k, String[] img, GridView gv, int length, String[][] nameText){
+        Log.i(TAG,"setOtherImages");
+        for(int l = 0; l<20; l++){
+            if(name.equals(img[l])){
+                albumImage[l] = Bitmap.createBitmap(tempBitmap[k]);
+                Log.i(TAG,"l: " + l + "name: " + name  + " img: " + img[l] + " k: " + k);
+            }
+        }
+        setGridView(gv, length, nameText);
+    }
+    //5
+    private void setGridView(GridView gv,int length, String[][] name){
+        Log.i(TAG,"setGridView");
+        Adapter adapter = new Adapter(this,getAlbums(length,name));
+        gv.setAdapter(adapter);
+        loaded = true;
+    }
+    //6
+    private ArrayList<Albums> getAlbums(int length, String[][] name)
+    { Log.i(TAG,"getAlbums");
+        ArrayList<Albums> albums = new ArrayList<Albums>();
+        for (int i=0;i<length;i++)
+        {
+            albums.add(new Albums(name[i][0],albumImage[i]));
+        }
+
+        return  albums;
     }
 
     @Override
@@ -272,20 +368,32 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
             if(v.getId() == R.id.playmini){
                 if(paused){
                     mp.start();
+                    play.setImageResource(R.drawable.pauseorange);
                 }
                 else{
                     mp.pause();
+                    play.setImageResource(R.drawable.playorange);
                 }
                 paused = !paused;
             }
             else if (v.getId() == R.id.backmin){
-
+                if(!paused){
+                    if(mp.getCurrentPosition() <= 0.5){
+                        previousSong();
+                    }
+                    else{
+                        mp.reset();
+                    }
+                }
             }
             else if (v.getId() == R.id.imageView5){
-
+                if(!paused){
+                    nextSong();
+                }
             }
-            else if (v.getId() == R.id.tabHost){
-
+            else if (v.getId() == R.id.currentplayingimg){
+                Intent intent = new Intent(new Intent(musicexplorer.this,musicplayer.class));
+                startActivity(intent);
             }
         }
     }
@@ -295,6 +403,7 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
             if(mp != null){
                 mp.stop();
             }
+            paused = false;
             mp = new MediaPlayer(/*Your-Context*/);
             mp.setDataSource(url);
             mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
@@ -320,6 +429,34 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
 
     }
 
+    public void previousSong(){
+        if (songPos>0){
+            mp.stop();
+            sendSongRequest(songPos-1);
+        }
+    }
+
+    public void nextSong(){
+        if(songPos < 18){
+            mp.stop();
+            sendSongRequest(songPos+1);
+        }
+    }
+
+    public void sendSongRequest(int pos){
+        if(mp!=null){
+            mp.stop();
+        }
+        imageView.setImageBitmap(albumImage[pos]);
+        String songUrl = "http://52.211.85.57:8080/api/music?token=" + token + "&song=" + song[pos][0] + "&artist=" + song[pos][1] + "&album=" + song[pos][2];
+        songUrl = songUrl.replaceAll(" ","%20");
+        playSong(songUrl);
+        songView.setText(song[pos][0]);
+        artistView.setText(song[pos][1]);
+        Log.i(TAG,songUrl);
+        songPos = pos;
+    }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -335,4 +472,5 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
                     }
                 }).create().show();
     }
+
 }
