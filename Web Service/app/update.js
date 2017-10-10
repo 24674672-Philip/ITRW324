@@ -11,15 +11,11 @@ module.exports = function(sql, val, con, res){
     console.log(val);
     connection.query(sql,val,function(err,result){
       connection.release();
-      if(!err) {
+      if(err){res.json(err);}
+      else {
         console.log(result);
         res.json({result: "success"});
       }
-    });
-
-    connection.on('error', function(err) {
-          res.json({"code" : 100, "status" : "Error in connection database", "err" : err});
-          return;
     });
   });
 }

@@ -25,20 +25,20 @@ module.exports = function(con, res, req){
     console.log('connected as id ' + connection.threadId);
 
     connection.query(sql,val,function(err,rows){
-      if(!err) {
+      if(err) {
+        connection.release();
+        res.json(err);
+      }
+      else {
         connection.query(sql2,val,function(err,result){
           connection.release();
-          if(!err) {
+          if(err) {res.json(err);}
+          else {
             res.json({artist: rows,
                       albums: result});
           }
         });
       }
-    });
-
-    connection.on('error', function(err) {
-          res.json({"code" : 100, "status" : "Error in connection database"});
-          return;
     });
   });
 }

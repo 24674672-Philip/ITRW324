@@ -14,14 +14,12 @@ module.exports = function(con, res, req){
 
     connection.query(sql,[val1,val2],function(err,result){
       connection.release();
-      if(!err) {
+      if(err){
+        console.log({result: err});
+      }
+      else {
         console.log({result: "success"});
       }
-    });
-
-    connection.on('error', function(err) {
-          console.log({"code" : 100, "status" : "Error in connection database", "err" : err});
-          return;
     });
   });
 }

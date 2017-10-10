@@ -15,14 +15,10 @@ module.exports = function(req, res, con){
 
     connection.query(sql,[val1,val2],function(err,result){
       connection.release();
-      if(!err) {
+      if(err){res.json(err);}
+      else {
         res.json({result: "success"});
       }
-    });
-
-    connection.on('error', function(err) {
-          res.json({"code" : 100, "status" : "Error in connection database", "err" : err});
-          return;
     });
   });
 }

@@ -12,7 +12,8 @@ module.exports = function(req, res, con, jwt){
     }
 
   connection.query(sql, [valP, valU], function (err, result) {
-    if(result[0] == undefined) res.json({login: "failed"});
+    if(err){res.json(err);}
+    else if(result[0] == undefined) res.json({login: "failed"});
     else{
       if (result[0].isActivated !== 0) {
         console.log(result[0].name);
@@ -35,11 +36,6 @@ module.exports = function(req, res, con, jwt){
         });
       }
     }
-  });
-
-  connection.on('error', function(err) {
-        res.json({"code" : 100, "status" : "Error in connection database"});
-        return;
   });
 });
 }

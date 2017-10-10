@@ -15,6 +15,7 @@ module.exports = function(req, res, con){
     console.log('connected as id ' + connection.threadId);
 
     connection.query(sql,email,function(err,resul){
+      if(err){res.redirect('http://reddit.com');}
       else if (resul[0].emailHash === hash) {
         sql = 'UPDATE users SET isActivated = 1 WHERE email = ?';
         connection.query(sql,email,function(err, result){
@@ -26,11 +27,6 @@ module.exports = function(req, res, con){
           //res.redirect('http://mydomain.com'+req.url)
         });
       }
-    });
-
-    connection.on('error', function(err) {
-          res.redirect('http://reddit.com');
-          return;
     });
   });
 }

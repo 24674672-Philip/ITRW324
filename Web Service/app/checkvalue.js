@@ -11,7 +11,10 @@ module.exports = function(sql, val, con, res){
 
     connection.query(sql,val,function(err,result){
       connection.release();
-      if(result[0] === undefined){
+      if(err){
+        res.json(err);
+      }
+      else if(result[0] === undefined){
         res.json({
           username: 'available'
         });
@@ -21,11 +24,6 @@ module.exports = function(sql, val, con, res){
           username: 'taken'
         });
       }
-    });
-
-    connection.on('error', function(err) {
-          res.json({"code" : 100, "status" : "Error in connection database"});
-          return;
     });
   });
 }

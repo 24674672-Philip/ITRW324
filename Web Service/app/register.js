@@ -20,9 +20,7 @@ module.exports = function(req, res, con){
         res.json({"code" : 100, "status" : "Error in connection database"});
         return;
       }
-
       console.log('connected as id ' + connection.threadId);
-
       connection.query(sql,val,function(err,result){
         console.log('inserted val: ' + val);
         var link = hash;
@@ -35,11 +33,6 @@ module.exports = function(req, res, con){
             userid: resul[0].user_id});
           }
         });
-      });
-
-      connection.on('error', function(err) {
-            res.json({"code" : 100, "status" : "Error in connection database"});
-            return;
       });
     });
 
