@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -364,44 +365,64 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v){
-        if (loaded){
-            if(v.getId() == R.id.playmini){
-                if(paused){
-                    mp.start();
-                    play.setImageResource(R.drawable.pauseorange);
-                }
-                else{
-                    mp.pause();
-                    play.setImageResource(R.drawable.playorange);
-                }
-                paused = !paused;
-            }
-            else if (v.getId() == R.id.backmin){
-                if(!paused){
-                    if(mp.getCurrentPosition() <= 0.5){
-                        previousSong();
+        try {
+            if (loaded){
+                if(v.getId() == R.id.playmini){
+                    if(paused){
+                        mp.start();
+                        play.setImageResource(R.drawable.pauseorange);
                     }
                     else{
-                        mp.reset();
+                        mp.pause();
+                        play.setImageResource(R.drawable.playorange);
+                    }
+                    paused = !paused;
+                }
+                else if (v.getId() == R.id.backmin){
+                    if(!paused){
+                        if(mp.getCurrentPosition() <= 0.5){
+                            previousSong();
+                        }
+                        else{
+                            mp.reset();
+                        }
                     }
                 }
-            }
-            else if (v.getId() == R.id.imageView5){
-                if(!paused){
-                    nextSong();
+                else if (v.getId() == R.id.imageView5){
+                    if(!paused){
+                        nextSong();
+                    }
+                }
+                else if (v.getId() == R.id.currentplayingimg){
+
+                    mp.stop();
+                    Intent intent = new Intent(new Intent(musicexplorer.this,musicplayer.class));
+                    /*Gson gson = new Gson();
+                    String info2 = gson.toJson(albumImage);
+                    intent.putExtra("imgArr", info2);
+                    intent.putExtra("mp", info);
+                    intent.putExtra("song",song[0]);
+                    intent.putExtra("artist",song[1]);
+                    intent.putExtra("album",song[2]);
+                    intent.putExtra("songPos", songPos);
+                    intent.putExtra("currentPos", mp.getCurrentPosition());
+                    intent.putExtra("length", mp.getDuration());
+                    intent.putExtra("token", token);*/
+                    stopPlaying();
+                    startActivity(intent);
+
                 }
             }
-            else if (v.getId() == R.id.currentplayingimg){
-                Intent intent = new Intent(new Intent(musicexplorer.this,musicplayer.class));
-                startActivity(intent);
-            }
+        }
+        catch (Exception ex){
+            Log.i("error: ",ex.getMessage().toString());
         }
     }
 
     public void playSong(String url){
         try {
             if(mp != null){
-                mp.stop();
+                stopPlaying();
             }
             paused = false;
             mp = new MediaPlayer(/*Your-Context*/);
@@ -431,21 +452,21 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
 
     public void previousSong(){
         if (songPos>0){
-            mp.stop();
+            stopPlaying();
             sendSongRequest(songPos-1);
         }
     }
 
     public void nextSong(){
         if(songPos < 18){
-            mp.stop();
+            stopPlaying();
             sendSongRequest(songPos+1);
         }
     }
 
     public void sendSongRequest(int pos){
         if(mp!=null){
-            mp.stop();
+            stopPlaying();
         }
         imageView.setImageBitmap(albumImage[pos]);
         String songUrl = "http://52.211.85.57:8080/api/music?token=" + token + "&song=" + song[pos][0] + "&artist=" + song[pos][1] + "&album=" + song[pos][2];
@@ -455,6 +476,12 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         artistView.setText(song[pos][1]);
         Log.i(TAG,songUrl);
         songPos = pos;
+    }
+
+    public void stopPlaying(){
+        mp.stop();
+        mp.release();
+        mp = null;
     }
 
     @Override
