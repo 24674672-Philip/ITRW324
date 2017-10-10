@@ -19,8 +19,10 @@ export class ArtistDescriptionComponent implements OnInit {
   isEditingDetails: boolean;
   newArtistBio: string;
   updatedBioSuccessfully: boolean;
+  isEditingContent: boolean;
   albumToManage: Album;
   openModalButton: HTMLButtonElement;
+
 //TODO: fix and build album edit modal
   constructor(private authService: AuthService,
               private serverService: ServerService,
@@ -52,10 +54,15 @@ export class ArtistDescriptionComponent implements OnInit {
         (fragment)=> {
           if(fragment == 'editingDetails' && this.isOwnProfile){
             this.isEditingDetails = true;
+          }else if(fragment == 'editingContent' && this.isOwnProfile){
+            this.isEditingContent = true;
           }
           else{
             this.isEditingDetails = false;
+            this.isEditingContent = false;
           }
+
+
         }
       );
     this.openModalButton = <HTMLButtonElement>document.getElementById('toggle-modal');
@@ -80,7 +87,7 @@ export class ArtistDescriptionComponent implements OnInit {
   }
 
   manageContent(){
-
+    window.location.hash = '#editingContent';
   }
 
 
