@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Album} from "../../../../classes/album.class";
 import {Router} from "@angular/router";
+import {DataEmitterService} from "../../../../services/data-emitter.service.service";
 
 @Component({
   selector: 'app-album-list-item',
@@ -8,9 +9,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./album-list-item.component.css']
 })
 export class AlbumListItemComponent implements OnInit {
-
+  @Output('onOpen') open = new EventEmitter<Album>();
   @Input('albumItem') albumItem: Album;
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private dataService: DataEmitterService) { }
 
   ngOnInit() {
   }
@@ -25,6 +27,10 @@ export class AlbumListItemComponent implements OnInit {
 
   artistClicked(){
 
+  }
+
+  itemClicked(){
+    this.open.emit(this.albumItem);
   }
 
 }

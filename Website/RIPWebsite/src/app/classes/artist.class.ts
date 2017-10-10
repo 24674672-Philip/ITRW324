@@ -31,4 +31,8 @@ export class Artist {
   getArtistImagePath(): string{
     return this.artistImagePath;
   }
+
+  setArtistBio(bio: string){
+    this.artistBio = bio;
+  }
 }

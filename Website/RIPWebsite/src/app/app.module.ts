@@ -32,6 +32,7 @@ import { ShowVolumeDirective } from './directives/show-volume.directive';
 import { ArtistDescriptionComponent } from './ripComponents/artists-container/artist-description.component/artist-description.component';
 import { AlbumListComponent } from './ripComponents/artists-container/album-list.component/album-list.component';
 import { AlbumListItemComponent } from './ripComponents/artists-container/album-list.component/album-list-item.component/album-list-item.component';
+import {DataEmitterService} from "./services/data-emitter.service.service";
 
 const router: Routes = [
   {path: '', component: LandingPageContainerComponent},
@@ -79,7 +80,8 @@ const router: Routes = [
   providers: [
     ServerService,
     AuthService,
-    MusicPlayerService
+    MusicPlayerService,
+    DataEmitterService
   ],
   bootstrap: [AppComponent],
 })

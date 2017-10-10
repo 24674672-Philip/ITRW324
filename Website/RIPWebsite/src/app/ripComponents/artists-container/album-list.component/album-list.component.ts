@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Album} from "../../../classes/album.class";
 import {ActivatedRoute} from "@angular/router";
 import {ServerService} from "../../../services/server.service";
+import {DataEmitterService} from "../../../services/data-emitter.service.service";
 
 @Component({
   selector: 'app-album-list',
@@ -11,7 +12,9 @@ import {ServerService} from "../../../services/server.service";
 export class AlbumListComponent implements OnInit {
   albums: Album[] = new Array<Album>();
   artistID: number;
-  constructor(private activeRoute: ActivatedRoute, private serverService: ServerService) {
+  constructor(private activeRoute: ActivatedRoute,
+              private serverService: ServerService,
+              private dataServer: DataEmitterService) {
     this.artistID = this.activeRoute.snapshot.queryParams['id'];
   }
 
@@ -25,6 +28,10 @@ export class AlbumListComponent implements OnInit {
         this.albums.push(tempObj);
       }
     });
+  }
+
+  openAlbum(album: Album){
+    this.dataServer.editContentEmitter.emit(album);
   }
 
 

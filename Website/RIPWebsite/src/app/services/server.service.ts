@@ -164,4 +164,13 @@ export class ServerService {
       );
   }
 
+  editUserBio(username: string, bio: string, callback){
+    let headers = new Headers();
+    headers.append('username',username);
+    headers.append('bio',bio)
+    this.http.post(this.url+'edituserbio',null, {headers: headers})
+      .subscribe(
+        (response)=>callback.json()
+      )
+  }
 }
