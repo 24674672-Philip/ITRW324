@@ -15,3 +15,9 @@
 .img-responsive{
   display: inline-block;
 }
+
+.pannel-style{
+  color: #DFDFDF;
+  background-color: #212121;
+  border-radius: 16px;
+}

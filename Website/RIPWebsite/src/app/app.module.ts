@@ -34,6 +34,7 @@ import { AlbumListComponent } from './ripComponents/artists-container/album-list
 import { AlbumListItemComponent } from './ripComponents/artists-container/album-list.component/album-list-item.component/album-list-item.component';
 import {DataEmitterService} from "./services/data-emitter.service.service";
 
+
 const router: Routes = [
   {path: '', component: LandingPageContainerComponent},
   {path: 'login', component: LoginContainerComponent},
