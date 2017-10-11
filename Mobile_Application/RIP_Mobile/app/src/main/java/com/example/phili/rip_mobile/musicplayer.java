@@ -2,121 +2,116 @@ package com.example.phili.rip_mobile;
 
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class musicplayer extends AppCompatActivity {
 
-    private MediaPlayer mediaPlayer;
     private String[] songArr, artistArr, albumArr;
-    private double startTime = 0;
-    private double finalTime = 0;
-    private int oneTimeOnly = 0;
-    private boolean paused = false;
     private int songPos;
     private String token;
     private ImageView imageView;
     private TextView artistView, songView, timebar;
-    private Bitmap[] albumImage;
+    private SeekBar mSeekBar;
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musicplayer2);
-        Gson gson = new Gson();
 
-        /*String mpString = getIntent().getExtras().getString("mp");
-        token = getIntent().getExtras().getString("token");
-        mediaPlayer = gson.fromJson(mpString, MediaPlayer.class);
-        mediaPlayer.start();
-        String bitmapString = getIntent().getExtras().getString("mp");
-        albumImage = gson.fromJson(bitmapString,Bitmap[].class);*/
-        //songArr = getIntent().getExtras().getStringArray("song");
-        //artistArr = getIntent().getExtras().getStringArray("artist");
-        //albumArr = getIntent().getExtras().getStringArray("album");
-        songPos = getIntent().getExtras().getInt("songPos");
-        startTime = getIntent().getExtras().getInt("currentPos");
-        finalTime = getIntent().getExtras().getInt("length");
+        try{
+            token = getIntent().getExtras().getString("token");
+            songArr = getIntent().getExtras().getStringArray("song");
+            albumArr = getIntent().getExtras().getStringArray("album");
+            artistArr = getIntent().getExtras().getStringArray("artist");
+            songPos = getIntent().getExtras().getInt("songPos");
+            Log.i("musicplayer: ","gets");
+            imageView = (ImageView) findViewById(R.id.albumart);
+            artistView = (TextView) findViewById(R.id.txtArtist);
+            songView = (TextView) findViewById(R.id.txtSong);
+            timebar = (TextView) findViewById(R.id.timeBar);
+            mSeekBar = (SeekBar) findViewById(R.id.seekBar);
+            Log.i("musicplayer: ","Init");
 
-        imageView = (ImageView) findViewById(R.id.albumart);
-        artistView = (TextView) findViewById(R.id.txtArtist);
-        songView = (TextView) findViewById(R.id.txtSong);
-        timebar = (TextView) findViewById(R.id.timeBar);
+            imageView.setImageBitmap(musicexplorer.albumImage[songPos]);
+            artistView.setText(artistArr[songPos]);
+            songView.setText(songArr[songPos]);
 
-        timebar.setText("" + startTime + "/" + finalTime);
-        //artistView.setText(artistArr[songPos]);
-        //songView.setText(songArr[songPos]);
+            mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-    }
-
-    public void playSong(String url){
-        try {
-            if(mediaPlayer != null){
-                stopPlaying();
-            }
-            paused = false;
-            mediaPlayer = new MediaPlayer(/*Your-Context*/);
-            mediaPlayer.setDataSource(url);
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
                 @Override
-                public void onPrepared(MediaPlayer mp)
-                {
-                    mp.start();
+                public void onStopTrackingTouch(SeekBar seekBar) {
 
-                    finalTime = mp.getDuration();
-                    startTime = mp.getCurrentPosition();
+                }
 
-                    if (oneTimeOnly == 0) {
-                        //sBar.setMax((int) finalTime);
-                        oneTimeOnly = 1;
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    if(musicexplorer.mp != null && fromUser){
+                        musicexplorer.mp.seekTo(progress * 1000);
                     }
-                    //sBar.setProgress((int)startTime);
                 }
             });
-            mediaPlayer.prepareAsync();
-        } catch (Exception e) {
-            Toast.makeText(this,e.getMessage().toString(),Toast.LENGTH_LONG);
+
+            final int duration = musicexplorer.mp.getDuration();
+            final int amoungToupdate = duration / 1000;
+            Log.i("amoungToupdate: ", "" + amoungToupdate);
+            final int initPos = musicexplorer.mp.getCurrentPosition();
+            mSeekBar.setProgress((initPos/duration)*100);
+            mSeekBar.setMax(amoungToupdate);
+            Log.i("amoungToupdate: ", "" + ((initPos/duration)*100));
+            //Make sure you update Seekbar on UI thread
+            musicplayer.this.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    if (!(amoungToupdate * mSeekBar.getProgress() >= duration)) {
+                        int p = mSeekBar.getProgress();
+                        p += 1;
+                        timebar.setText(getTimer());
+                        mSeekBar.setProgress(p);
+                        Log.i("Seekbar: ", "" + p);
+                    }
+                    mHandler.postDelayed(this, 1000);
+                }
+            });
+
+
+        }
+        catch (Exception ex){
+            Log.i("ERROR, musicplayer: ",ex.getMessage().toString());
         }
 
     }
 
-    public void previousSong(){
-        if (songPos>0){
-            stopPlaying();
-            sendSongRequest(songPos-1);
-        }
+    public String getTimer(){
+        int secondsL = (musicexplorer.mp.getCurrentPosition() / 1000) % 60;
+        int minL = (musicexplorer.mp.getCurrentPosition() / 60000);
+
+        int secondsR = (musicexplorer.mp.getDuration() / 1000) % 60;
+        int minR = (musicexplorer.mp.getDuration() / 60000);
+
+        String timer = "" + minL + ":" + secondsL + "/" + minR + ":" + secondsR;//("%.2d/%.2d",,(double)musicexplorer.mp.getDuration()/60000);
+        return  timer;
     }
 
-    public void nextSong(){
-        if(songPos < 18){
-            stopPlaying();
-            sendSongRequest(songPos+1);
-        }
-    }
-
-    public void sendSongRequest(int pos){
-        if(mediaPlayer!=null){
-            stopPlaying();
-        }
-        imageView.setImageBitmap(albumImage[pos]);
-        String songUrl = "http://52.211.85.57:8080/api/music?token=" + token + "&song=" + songArr[pos] + "&artist=" + artistArr[pos] + "&album=" + albumArr[pos];
-        songUrl = songUrl.replaceAll(" ","%20");
-        playSong(songUrl);
-        songView.setText(songArr[pos]);
-        artistView.setText(artistArr[pos]);
-        Log.i("My activity: ",songUrl);
-        songPos = pos;
-    }
-
-    public void stopPlaying(){
-        mediaPlayer.stop();
-        mediaPlayer.release();
-        mediaPlayer = null;
-    }
 }

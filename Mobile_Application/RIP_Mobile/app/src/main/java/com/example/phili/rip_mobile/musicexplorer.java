@@ -55,14 +55,11 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
     private String[] songImg, artistImg, musicAlbumImg;
     private TabHost mTabHost;
     private GridView gv1, gv2, gv3, gv4;
-    private Context context;
-    private Bitmap[] albumImage, tempBitmap;
+    public static Bitmap[] albumImage, tempBitmap;
     private boolean loaded, paused, loadSong, loadArt, loadAlb;
-    private MediaPlayer mp;
-    private double startTime = 0;
-    private double finalTime = 0;
+    public static MediaPlayer mp;
     public static int oneTimeOnly = 0;
-    private String token, currentSong;
+    private String token;
     private ImageView play, next, back, imageView, currPlay;
     private TextView artistView, songView;
     private DrawerLayout mDrawerlayout;
@@ -92,7 +89,6 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         loaded = false;
         paused = false;
         token = getIntent().getExtras().getString("token");
-        currentSong = null;
         gridCount = 0;
         loadSong = false;
         loadArt = false;
@@ -122,8 +118,6 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         next.setOnClickListener(this);
 
         TabHost.TabSpec spec;
-
-        context = this;
 
         //Album
 
@@ -394,23 +388,13 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
                     }
                 }
                 else if (v.getId() == R.id.currentplayingimg){
-
-                    mp.stop();
                     Intent intent = new Intent(new Intent(musicexplorer.this,musicplayer.class));
-                    /*Gson gson = new Gson();
-                    String info2 = gson.toJson(albumImage);
-                    intent.putExtra("imgArr", info2);
-                    intent.putExtra("mp", info);
+                    intent.putExtra("songPos",songPos);
+                    intent.putExtra("token",token);
                     intent.putExtra("song",song[0]);
-                    intent.putExtra("artist",song[1]);
                     intent.putExtra("album",song[2]);
-                    intent.putExtra("songPos", songPos);
-                    intent.putExtra("currentPos", mp.getCurrentPosition());
-                    intent.putExtra("length", mp.getDuration());
-                    intent.putExtra("token", token);*/
-                    stopPlaying();
+                    intent.putExtra("artist",song[1]);
                     startActivity(intent);
-
                 }
             }
         }
@@ -419,12 +403,11 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void playSong(String url){
+    public static void playSong(String url, Context context){
         try {
             if(mp != null){
                 stopPlaying();
             }
-            paused = false;
             mp = new MediaPlayer(/*Your-Context*/);
             mp.setDataSource(url);
             mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
@@ -432,20 +415,12 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
                 public void onPrepared(MediaPlayer mp)
                 {
                     mp.start();
-
-                    finalTime = mp.getDuration();
-                    startTime = mp.getCurrentPosition();
-
-                    if (oneTimeOnly == 0) {
-                        //sBar.setMax((int) finalTime);
-                        oneTimeOnly = 1;
-                    }
-                    //sBar.setProgress((int)startTime);
                 }
+
             });
             mp.prepareAsync();
         } catch (Exception e) {
-            Toast.makeText(this,e.getMessage().toString(),Toast.LENGTH_LONG);
+            Toast.makeText(context,e.getMessage().toString(),Toast.LENGTH_LONG);
         }
 
     }
@@ -471,14 +446,27 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
         imageView.setImageBitmap(albumImage[pos]);
         String songUrl = "http://52.211.85.57:8080/api/music?token=" + token + "&song=" + song[pos][0] + "&artist=" + song[pos][1] + "&album=" + song[pos][2];
         songUrl = songUrl.replaceAll(" ","%20");
-        playSong(songUrl);
+        playSong(songUrl, this);
         songView.setText(song[pos][0]);
         artistView.setText(song[pos][1]);
         Log.i(TAG,songUrl);
         songPos = pos;
     }
 
-    public void stopPlaying(){
+    public static void sendSongRequest(int pos, String[] song, String[] artist, String[] album, String token, ImageView imageView, TextView songView, TextView artistView, Context context){
+        if(mp!=null){
+            stopPlaying();
+        }
+        imageView.setImageBitmap(albumImage[pos]);
+        String songUrl = "http://52.211.85.57:8080/api/music?token=" + token + "&song=" + song[pos] + "&artist=" + artist[pos] + "&album=" + album[pos];
+        songUrl = songUrl.replaceAll(" ","%20");
+        playSong(songUrl, context);
+        songView.setText(song[pos]);
+        artistView.setText(artist[pos]);
+        Log.i(TAG,songUrl);
+    }
+
+    public static void stopPlaying(){
         mp.stop();
         mp.release();
         mp = null;
