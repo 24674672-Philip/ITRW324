@@ -11,7 +11,7 @@ export class PopupShadowDirective {
   @HostListener('mouseover') mouseOver(event: Event){
     this.renderer.setStyle(this.elementRef.nativeElement, 'box-shadow','0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)');
     this.renderer.setStyle(this.elementRef.nativeElement,'margin','10 10 10 10');
-    this.renderer.setStyle(this.elementRef.nativeElement,'backgroundColor','rgb(65, 65, 65)');
+    this.renderer.setStyle(this.elementRef.nativeElement,'backgroundColor','rgba(65, 65, 65,0.5)');
     // this.renderer.setStyle(this.elementRef.nativeElement,'backgroundColor','rgb(30,30,30)');
   }
 
