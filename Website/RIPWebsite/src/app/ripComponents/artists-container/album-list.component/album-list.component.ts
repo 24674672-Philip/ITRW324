@@ -30,9 +30,7 @@ export class AlbumListComponent implements OnInit {
     });
   }
 
-  openAlbum(album: Album){
-    this.dataServer.editContentEmitter.emit(album);
-  }
+
 
 
 

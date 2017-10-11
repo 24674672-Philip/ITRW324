@@ -9,7 +9,7 @@
     <input *ngIf="isEditingDetails" id="newBio" class="form-control" [value]="artistObj.getArtistBio()"/>
     <button *ngIf="isEditingDetails" (click)="saveChanges()" class="btn btn-success">Save Changes</button>
     <button *ngIf="isEditingDetails" (click)="discardChanges()" class="btn btn-danger">Discard Changes</button>
-    <p *ngIf="updatedBioSuccessfully" class="panel-success"><span class="glyphicon glyphicon-check"> </span> Changes saved</p>
+    <p *ngIf="updatedBioSuccessfully && isEditingDetails" class="panel-success"><span class="glyphicon glyphicon-check"> </span> Changes saved</p>
 
     <div *ngIf="isOwnProfile == true" class="panel-group pull-right">
       <div class="panel panel-default">
@@ -39,8 +39,7 @@
 <!-- Modal -->
 <div id="editAlbumModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
-    <!-- Modal content-->
+    <!--TODO: Add editing capabilities for the albumToManage-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -53,6 +52,5 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>

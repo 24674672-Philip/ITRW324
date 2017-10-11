@@ -4,17 +4,16 @@
       <div class="panel-heading text-center">
         <img class="img-responsive center-block"
              [src]="albumItem.getAlbumImagePath()"
-             style="min-height: 50%; max-height: 125px"
-             (click)="artworkClicked()">
+             style="min-height: 50%; max-height: 125px">
       </div>
 
       <div class="panel-body" style="padding-top: 0; cursor: pointer">
         <div class="row" style="margin-right: 0; margin-left: 0;">
-          <h4 style="padding: 2px; margin: 2px"><a style="text-emphasis: none; color: lightgrey; cursor: pointer" (click)="albumNameClicked()">{{albumItem.getAlbumName()}}</a></h4>
+          <h4 style="padding: 2px; margin: 2px"><a style="text-emphasis: none; color: lightgrey; cursor: pointer" >{{albumItem.getAlbumName()}}</a></h4>
         </div>
 
         <div class="row" style="margin-right: 0; margin-left: 0;" >
-          <h5 (click)="artistClicked()" ><a style="text-emphasis: none; color: lightgrey; cursor: pointer; padding: 2px; margin: 2px;">{{albumItem.getAlbumArtist()}}</a></h5>
+          <h5 ><a style="text-emphasis: none; color: lightgrey; cursor: pointer; padding: 2px; margin: 2px;">{{albumItem.getAlbumArtist()}}</a></h5>
         </div>
 
       </div>

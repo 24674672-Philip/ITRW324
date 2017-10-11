@@ -27,17 +27,9 @@ export class ArtistDescriptionComponent implements OnInit {
   constructor(private authService: AuthService,
               private serverService: ServerService,
               private activeRoute: ActivatedRoute,
-              private dataService: DataEmitterService) {
+              private dataService: DataEmitterService,
+              private router: Router) {
 
-
-    this.dataService.editContentEmitter.subscribe(
-      (album)=>{
-        if(this.isEditingDetails){
-          this.albumToManage = album;
-          this.openModalButton.click();
-        }
-      }
-    );
 
   }
 
@@ -54,24 +46,46 @@ export class ArtistDescriptionComponent implements OnInit {
         (fragment)=> {
           if(fragment == 'editingDetails' && this.isOwnProfile){
             this.isEditingDetails = true;
+            this.isEditingContent = false;
           }else if(fragment == 'editingContent' && this.isOwnProfile){
             this.isEditingContent = true;
+            this.isEditingDetails = false;
           }
           else{
             this.isEditingDetails = false;
             this.isEditingContent = false;
           }
-
-
         }
       );
+
     this.openModalButton = <HTMLButtonElement>document.getElementById('toggle-modal');
 
-
+    this.dataService.editContentEmitter.subscribe(
+      (album)=>{
+        if(this.isEditingContent){
+          this.albumToManage = album;
+          this.openModalButton.click();
+        }else{
+          this.router.navigate(['album'], {queryParams:{id: album.getAlbumID()}});
+        }
+      }
+    );
   }
 
   editDetails(){
-    window.location.hash = '#editingDetails';
+    if(window.location.hash == '#editingDetails'){
+      window.location.hash = '';
+    }else{
+      window.location.hash = '#editingDetails';
+    }
+  }
+
+  manageContent(){
+    if(window.location.hash == '#editingContent'){
+      window.location.hash = '';
+    }else{
+      window.location.hash = '#editingContent';
+    }
   }
 
   saveChanges(){
@@ -80,28 +94,20 @@ export class ArtistDescriptionComponent implements OnInit {
       if(response['result'].toString() == 'success'){
         this.updatedBioSuccessfully = true;
         this.artistObj.setArtistBio(this.newArtistBio);
+        setTimeout(()=>{this.isEditingDetails = false},2000);
       }else{
         this.updatedBioSuccessfully = false;
       }
     });
   }
 
-  manageContent(){
-    window.location.hash = '#editingContent';
-  }
-
-
   discardChanges(){
     window.location.hash='';
   }
-
-
-
 
   checkIsOwnProfile(){
     if(this.artistObj.getArtistName().toString() == this.authService.getUsername().toString()){
       this.isOwnProfile = true;
     }
   }
-
 }

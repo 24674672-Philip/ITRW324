@@ -170,7 +170,7 @@ export class ServerService {
     headers.append('bio',bio)
     this.http.post(this.url+'edituserbio',null, {headers: headers})
       .subscribe(
-        (response)=>callback.json()
+        (response)=>callback(response.json())
       )
   }
 }

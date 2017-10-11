@@ -9,7 +9,7 @@ import {DataEmitterService} from "../../../../services/data-emitter.service.serv
   styleUrls: ['./album-list-item.component.css']
 })
 export class AlbumListItemComponent implements OnInit {
-  @Output('onOpen') open = new EventEmitter<Album>();
+
   @Input('albumItem') albumItem: Album;
   constructor(private router: Router,
               private dataService: DataEmitterService) { }
@@ -17,20 +17,10 @@ export class AlbumListItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  artworkClicked(){
-    this.router.navigate(['album'], {queryParams:{id: this.albumItem.getAlbumID()}});
-  }
 
-  albumNameClicked(){
-    this.router.navigate(['album'], {queryParams:{id: this.albumItem.getAlbumID()}});
-  }
-
-  artistClicked(){
-
-  }
 
   itemClicked(){
-    this.open.emit(this.albumItem);
+    this.dataService.editContentEmitter.emit(this.albumItem);
   }
 
 }
