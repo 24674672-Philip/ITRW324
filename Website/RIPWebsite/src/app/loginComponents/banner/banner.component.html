@@ -1,16 +1,19 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" style="margin: 0 0 0 0">
+<nav class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
-    <div class="navbar-header center-block text-center">
-      <div class="row">
-        <div class="col-md-3 col-lg-3"></div>
-        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 text-center center-block">
-          <h3 class="navbar-text " style="color: white;">RIP</h3>
-        </div>
-        <div class="col-md-4 col-lg-4 text-center center-block ">
-          <h3 class="navbar-text text-nowrap">Registered Intellectual Property</h3>
-        </div>
-        <div class="col-md-3 col-lg-3"></div>
-      </div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#hamMenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand hidden-xs hidden-sm">Registered Intellectual Property</a>
+      <a class="navbar-brand hidden-md hidden-lg">RIP</a>
+    </div>
+    <div class="collapse navbar-collapse" id="hamMenu">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a (click)="registerClicked()" style="cursor: pointer"><span class="glyphicon glyphicon-user" ></span> Register</a></li>
+        <li><a (click)="loginClicked()" style="cursor: pointer"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
     </div>
   </div>
 </nav>

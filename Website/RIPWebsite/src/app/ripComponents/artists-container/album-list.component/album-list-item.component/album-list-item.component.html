@@ -1,0 +1,30 @@
+<div class="container-fluid" (click)="itemClicked()">
+  <div class="row" style="margin-left: 0; margin-right: 0">
+    <div class="panel  text-center" appPopupShadow style="height: 250px">
+      <div class="panel-heading text-center">
+        <img class="img-responsive center-block"
+             [src]="albumItem.getAlbumImagePath()"
+             style="min-height: 50%; max-height: 125px"
+             (click)="artworkClicked()">
+      </div>
+
+      <div class="panel-body" style="padding-top: 0; cursor: pointer">
+        <div class="row" style="margin-right: 0; margin-left: 0;">
+          <h4 style="padding: 2px; margin: 2px"><a style="text-emphasis: none; color: grey; cursor: pointer" (click)="albumNameClicked()">{{albumItem.getAlbumName()}}</a></h4>
+        </div>
+
+        <div class="row" style="margin-right: 0; margin-left: 0;" >
+          <h5 (click)="artistClicked()" ><a style="text-emphasis: none; color: grey; cursor: pointer; padding: 2px; margin: 2px;">{{albumItem.getAlbumArtist()}}</a></h5>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

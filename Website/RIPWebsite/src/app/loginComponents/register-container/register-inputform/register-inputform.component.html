@@ -1,0 +1,151 @@
+<div class="container-fluid">
+  <div class="center-block text-center">
+    <h1 class="jumbotron hidden-xs hidden-sm" style=" background: transparent; color: white; padding:0;">Never Worry About Pirates Again</h1>
+    <div class="row">
+      <div class="hidden-xs col-sm-2 col-md-3 col-lg-3"></div>
+      <div class="panel col-sm-8 col-md-6 col-lg-6 box-shadow" style="padding-top: 0;">
+
+        <div class="panel-heading"><h1 style="margin-bottom: 0">Register A New Account</h1></div>
+
+        <div class="panel-body" style="padding-top: 0">
+
+
+          <h2>Holder Information</h2>
+          <h3>First Name</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Insert Your First Name" [(ngModel)]="fName" style="text-align: center;" class="form-control"/>
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+          <h3>Last Name</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Insert Your Last Name" [(ngModel)]="lName"  style="text-align: center;" class="form-control"/>
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+          <h3>Date of Birth</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <input class="form-control" type="date" [(ngModel)]="dob" placeholder="Insert date of birth">
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+          <br><br><br>
+
+          <h2>Location Information</h2>
+          <h3>Country</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <input class="form-control" placeholder="Insert Your Country" [(ngModel)]="country">
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+          <h3>City</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <input class="form-control" placeholder="Input Your City" [(ngModel)]="city">
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+          <h3>Postal Code</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <input class="form-control" placeholder="Input Your Postal Code" [(ngModel)]="postal">
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+          <h3>Address Line 1</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Insert Your Address" [(ngModel)]="adLine1"  style="text-align: center;" class="form-control"/>
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+          <h3>Address Line 2</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Insert Your Address" [(ngModel)]="adLine2"  style="text-align: center;" class="form-control"/>
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+          <br><br><br>
+
+          <h2 style="text-align: center;">Account Information</h2>
+          <h3>Email</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Insert a valid email address" (blur)="checkEmail()"  [(ngModel)]="email" (input)="validateEmail($event)" style="text-align: center;" class="form-control"/>
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2">
+              <p *ngIf="!emailValid" style="text-wrap: none">Invalid</p>
+              <p *ngIf="emailValid" style="text-wrap: none">Valid</p>
+              <p *ngIf="!emailAvailable && emailValid" class="alert-danger text-nowrap">Email Taken</p>
+            </div>
+          </div>
+
+
+          <h3>Username</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Insert username" (blur)="checkUsername()" [(ngModel)]="username" style="text-align: center;" class="form-control"/>
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2">
+              <p class="text-nowrap" *ngIf="!usernameAvailable" class="alert-danger">Username already in use!</p>
+            </div>
+          </div>
+
+
+          <h3>Password</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Must be longer than 8 characters" [(ngModel)]="password" (input)="validatePassword($event)" style="text-align: center;" class="form-control" type="password"/>
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2">
+              <p *ngIf="!passwordValid" style="text-wrap: none">Invalid</p>
+              <p *ngIf="passwordValid" style="text-wrap: none">Valid</p>
+            </div>
+          </div>
+
+
+          <h3>Confirm Password</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-8 col-md-8 col-lg-8">
+              <input placeholder="Retype password" [(ngModel)]="confirmPassword"  style="text-align: center;" class="form-control" type="password"/>
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+
+          <div class="row">
+            <button class="btn btn-success" (click)="registerClicked()" [disabled]="!valid()"  style="margin: 20px 0 0 0;">Create New Account</button>
+          </div>
+          <div class="alert-success" *ngIf="success">Registration was successful. Please verify your email address.</div>
+        </div>
+      </div>
+      <div class="hidden-xs col-sm-2 col-md-3 col-lg-3"></div>
+    </div>
+  </div>
+</div>
+
