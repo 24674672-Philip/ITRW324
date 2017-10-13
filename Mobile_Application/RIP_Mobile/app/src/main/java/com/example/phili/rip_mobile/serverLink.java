@@ -50,7 +50,12 @@ public class serverLink{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                taskCompleted.onTaskCompleted(null,false,error.getMessage());
+                if(error.equals(null)){
+                    taskCompleted.onTaskCompleted(null,false,error.getMessage().toString());
+                }
+                else{
+                    taskCompleted.onTaskCompleted(null,false,"Connection error");
+                }
             }
         }){
             @Override
@@ -86,7 +91,7 @@ public class serverLink{
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        taskCompleted.onTaskCompleted(null,false,error.getMessage());
+                        taskCompleted.onTaskCompleted(null,false,error.getMessage().toString());
                     }
                 }
         );

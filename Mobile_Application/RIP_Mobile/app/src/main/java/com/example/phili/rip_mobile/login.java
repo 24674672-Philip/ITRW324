@@ -101,7 +101,10 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                     }
                 }
                 catch (JSONException e){
-                    tvReturn.setText(e.getMessage());
+                    tvReturn.setText(e.getMessage().toString());
+                }
+                catch (Exception e){
+                    tvReturn.setText(e.getMessage().toString());
                 }
             }
         });
