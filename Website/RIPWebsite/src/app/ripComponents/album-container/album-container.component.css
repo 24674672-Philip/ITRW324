@@ -13,7 +13,10 @@
   }
 
   .pannel-style{
-    color: #3E3E3E;
-    background-color: rgba(204, 204, 204, 0.20); 
-    border-radius: 16px;
+    color: lightgrey;
+    background-color: rgb(33, 33, 33);  
+    /* border-radius: 6px; */
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    padding: 50px;
 }
