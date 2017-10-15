@@ -28,7 +28,7 @@ export class AlbumDescriptionComponent implements OnInit {
       let xy = response['result'];
       for(let x of xy){
         console.log();
-        let tempObject = new Song(x['musicID'],x['albumID'], x['artistID'],x['Artist'],x['Album'],x['Title'], this.authService.getAuthToken());
+        let tempObject = new Song(x['musicID'],x['albumID'], x['artistID'],x['Artist'],x['Album'],x['Title'],0,false, this.authService.getAuthToken()); //TODO: replace parameters
         tempObject.setSongImagePath('albums',x['album_image']);
         this.songList.push(tempObject);
       }

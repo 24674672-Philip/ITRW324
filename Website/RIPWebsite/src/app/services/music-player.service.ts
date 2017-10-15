@@ -9,7 +9,7 @@ export class MusicPlayerService {
   currentPlaylist: Array<Song> = new Array<Song>();
   currentSongChanged: EventEmitter<Song> = new EventEmitter<Song>();
   currentPlaylistChanged: EventEmitter<Song[]> = new EventEmitter<Song[]>();
-  currentSong: Song = new Song(-1,-1,-1,'', '', '','');
+  currentSong: Song = new Song(-1,-1,-1,'', '', '',0,false,'');//TODO: change parameters
   songFinished: EventEmitter<Song> = new EventEmitter<Song>();
   currentPlaylistIndex: number = 0;
 

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Album} from "../../../classes/album.class";
 import {ActivatedRoute} from "@angular/router";
 import {ServerService} from "../../../services/server.service";
 import {DataEmitterService} from "../../../services/data-emitter.service.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-album-list',
@@ -12,10 +13,11 @@ import {DataEmitterService} from "../../../services/data-emitter.service.service
 export class AlbumListComponent implements OnInit {
   albums: Album[] = new Array<Album>();
   artistID: number;
+
   constructor(private activeRoute: ActivatedRoute,
               private serverService: ServerService,
               private dataServer: DataEmitterService) {
-    this.artistID = this.activeRoute.snapshot.queryParams['id'];
+      this.artistID = this.activeRoute.snapshot.queryParams['id'];
   }
 
   ngOnInit() {

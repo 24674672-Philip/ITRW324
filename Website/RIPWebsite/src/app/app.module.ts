@@ -33,6 +33,8 @@ import { ArtistDescriptionComponent } from './ripComponents/artists-container/ar
 import { AlbumListComponent } from './ripComponents/artists-container/album-list.component/album-list.component';
 import { AlbumListItemComponent } from './ripComponents/artists-container/album-list.component/album-list-item.component/album-list-item.component';
 import {DataEmitterService} from "./services/data-emitter.service.service";
+import { EditAlbumListComponent } from './ripComponents/artists-container/artist-description.component/edit-album-list/edit-album-list.component';
+import { EditAlbumListItemComponent } from './ripComponents/artists-container/artist-description.component/edit-album-list/edit-album-list-item/edit-album-list-item.component';
 
 
 const router: Routes = [
@@ -71,6 +73,8 @@ const router: Routes = [
     ArtistDescriptionComponent,
     AlbumListComponent,
     AlbumListItemComponent,
+    EditAlbumListComponent,
+    EditAlbumListItemComponent,
   ],
   imports: [
     BrowserModule,

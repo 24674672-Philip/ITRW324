@@ -8,7 +8,8 @@ export class Song {
                     private artist: string,
                     private album: string,
                     private songName: string,
-
+                    private price: number,
+                    private isBought: boolean,
                     private token: string){
     this.setSongUrl(token);
   }
@@ -55,6 +56,22 @@ export class Song {
 
   getArtistID():number{
     return this.artistID;
+  }
+
+  setPrice(price: number){
+    this.price = price;
+  }
+
+  getPrice(): number{
+    return this.price;
+  }
+
+  setIsBought(isBought: boolean){
+    this.isBought = isBought;
+  }
+
+  getIsBought(): boolean{
+    return this.isBought;
   }
 
 

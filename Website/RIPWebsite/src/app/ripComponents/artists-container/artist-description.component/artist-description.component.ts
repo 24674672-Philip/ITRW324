@@ -20,10 +20,10 @@ export class ArtistDescriptionComponent implements OnInit {
   newArtistBio: string;
   updatedBioSuccessfully: boolean;
   isEditingContent: boolean;
-  albumToManage: Album;
+  albumToManage: Album = new Album(-1,"","",-1);
   openModalButton: HTMLButtonElement;
 
-//TODO: fix and build album edit modal
+
   constructor(private authService: AuthService,
               private serverService: ServerService,
               private activeRoute: ActivatedRoute,
