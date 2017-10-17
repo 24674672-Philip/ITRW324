@@ -60,7 +60,7 @@ app.post('/api/registeruser', function(req, res){
 app.post('/api/registeraddress', function(req, res){
   console.log("/api/registeruser");
 
-  var sql2 = 'INSERT INTO user_address (Country, City, AddressLine1, AddressLine2, PostalCode, user_id) VALUES ?';
+  var sql2 = 'INSERT INTO user_address (Country, City, AddressLine1, AddressLine2, PostalCode, user_id) VALUES (?)';
   var valAddress = [[
     req.headers["country"],
     req.headers["city"],
@@ -83,7 +83,7 @@ app.get('/api/protected', ensureToken, function(req, res){
     else {
       var qry = require('./app/api')('SELECT * FROM users','',con, res);
     }
-  })
+  });
 });
 
 app.get('/api/activate', function(req, res){
@@ -324,90 +324,178 @@ app.post('/api/userplaylists', function(req, res){
   var qry = require('./app/api')(sql,req.headers["username"],con, res);
 });
 
-app.post('/api/edituserbio', function(req, res){
+app.post('/api/edituserbio', ensureToken, function(req, res){
   console.log("/api/edituser");
-  var qry = require('./app/edituser')(req, res, con);
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+        var qry = require('./app/edituser')(req, res, con);
+    }
+  });
 });
 
-app.post('/api/createalbum', function(req, res){
+app.post('/api/createalbum', ensureToken, function(req, res){
   console.log("/api/createalbum");
-  var sql = 'INSERT INTO album (album_name, userid) VALUES (?);';
-  var val = [[
-    req.headers["albumname"],
-    req.headers["userid"]
-  ]];
-  var qry = require('./app/update')(sql, val, con, res);
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var sql = 'INSERT INTO album (album_name, userid) VALUES (?);';
+      var val = [[
+        req.headers["albumname"],
+        req.headers["userid"]
+      ]];
+      var qry = require('./app/update')(sql, val, con, res);
+    }
+  });
 });
 
-app.post('/api/editalbum', function(req, res){
-  var val3 = 0;
+app.post('/api/editalbum', ensureToken, function(req, res){
   console.log("/api/editalbum");
-  var sql = "UPDATE album SET album_name = ?, price = ? WHERE albumID = ?;";
-  var val1 = req.headers["albumname"];
-  var val2 = req.headers["price"];
-  val3 = req.headers["id"];
-  var qry = require('./app/update')(sql, [val1, val2, val3], con, res);
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var val3 = 0;
+      var sql = "UPDATE album SET album_name = ?, price = ? WHERE albumID = ?;";
+      var val1 = req.headers["albumname"];
+      var val2 = req.headers["price"];
+      val3 = req.headers["id"];
+      var qry = require('./app/update')(sql, [val1, val2, val3], con, res);
+    }
+  });
 });
 
-app.post('/api/releasealbum', function(req, res){
+app.post('/api/releasealbum', ensureToken, function(req, res){
   console.log("/api/releasealbum");
-  var sql = "UPDATE album SET released = ?, `release date` = CURRENT_TIMESTAMP WHERE albumID = ?;";
-  var val1 = 1;
-  var val2 = req.headers["id"];
-  var qry = require('./app/update')(sql, [val1, val2], con, res);
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var sql = "UPDATE album SET released = ?, `release date` = CURRENT_TIMESTAMP WHERE albumID = ?;";
+      var val1 = 1;
+      var val2 = req.headers["id"];
+      var qry = require('./app/update')(sql, [val1, val2], con, res);
+    }
+  });
 });
 
-app.post('/api/deletealbum', function(req, res){
+app.post('/api/deletealbum', ensureToken, function(req, res){
   console.log("/api/deletealbum");
-  var sql = "DELETE FROM album WHERE albumID = ?;";
-  var val = req.headers["id"];
-  var qry = require('./app/update')(sql, val, con, res);
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var sql = "DELETE FROM album WHERE albumID = ?;";
+      var val = req.headers["id"];
+      var qry = require('./app/update')(sql, val, con, res);
+    }
+  });
 });
 
-app.post('/api/createsong', function(req, res){
+app.post('/api/createsong', ensureToken, function(req, res){
   console.log("/api/createsong");
-  var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID) VALUES (?);';
-  var val = [[
-    req.headers["title"],
-    req.headers["explicit"],
-    req.headers["albumid"],
-    req.headers["userid"]
-  ]];
-  var qry = require('./app/update')(sql, val, con, res);
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID) VALUES (?);';
+      var val = [[
+        req.headers["title"],
+        req.headers["explicit"],
+        req.headers["albumid"],
+        req.headers["userid"]
+      ]];
+      var qry = require('./app/update')(sql, val, con, res);
+    }
+  });
 });
 
-app.post('/api/editsong', function(req, res){
+app.post('/api/editsong', ensureToken, function(req, res){
   console.log("/api/editsong");
-  var sql = "UPDATE song SET title = ?, price = ? WHERE musicID = ?;";
-  var val1 = req.headers["title"];
-  var val2 = req.headers["price"];
-  var val3 = req.headers["musicid"];
-  var qry = require('./app/update')(sql, [val1, val2, val3], con, res);
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var sql = "UPDATE song SET title = ?, price = ? WHERE musicID = ?;";
+      var val1 = req.headers["title"];
+      var val2 = req.headers["price"];
+      var val3 = req.headers["musicid"];
+      var qry = require('./app/update')(sql, [val1, val2, val3], con, res);
+    }
+  });
 });
 
-app.post('/api/deletesong', function(req, res){
+app.post('/api/deletesong', ensureToken, function(req, res){
   console.log("/api/deletesong");
-  var sql = "DELETE FROM song WHERE musicID = ?;";
-  var val = req.headers["musicid"];
-  var qry = require('./app/update')(sql, val, con, res);
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var sql = "DELETE FROM song WHERE musicID = ?;";
+      var val = req.headers["musicid"];
+      var qry = require('./app/update')(sql, val, con, res);
+    }
+  });
 });
 
-app.post('/api/buycoins', function(req, res){
+app.post('/api/buycoins', ensureToken, function(req, res){
   console.log("/api/buycoins");
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+        var qry = require('./app/edituser')(req, res, con);
+    }
+  });
 
 });
 
-app.post('/api/buysong', function(req, res){
+app.post('/api/buysong', ensureToken, function(req, res){
   console.log("/api/buysong");
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+        var qry = require('./app/edituser')(req, res, con);
+    }
+  });
 });
 
-app.get('/api/songsbought', function(req, res){
+app.get('/api/songsbought', ensureToken, function(req, res){
   console.log("/api/songsbought");
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+        var qry = require('./app/edituser')(req, res, con);
+    }
+  });
 
 });
 
-app.get('/api/boughtsongdetails', function(req, res){
+app.get('/api/boughtsongdetails', ensureToken, function(req, res){
   console.log("/api/boughtsongdetails");
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+        var qry = require('./app/edituser')(req, res, con);
+    }
+  });
 
 });
 
