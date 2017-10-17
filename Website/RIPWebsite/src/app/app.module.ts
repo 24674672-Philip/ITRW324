@@ -35,6 +35,7 @@ import { AlbumListItemComponent } from './ripComponents/artists-container/album-
 import {DataEmitterService} from "./services/data-emitter.service.service";
 import { EditAlbumListComponent } from './ripComponents/artists-container/artist-description.component/edit-album-list/edit-album-list.component';
 import { EditAlbumListItemComponent } from './ripComponents/artists-container/artist-description.component/edit-album-list/edit-album-list-item/edit-album-list-item.component';
+import { WalletComponent } from './ripComponents/home-container/nav-bar/wallet/wallet.component';
 
 
 const router: Routes = [
@@ -75,6 +76,7 @@ const router: Routes = [
     AlbumListItemComponent,
     EditAlbumListComponent,
     EditAlbumListItemComponent,
+    WalletComponent,
   ],
   imports: [
     BrowserModule,

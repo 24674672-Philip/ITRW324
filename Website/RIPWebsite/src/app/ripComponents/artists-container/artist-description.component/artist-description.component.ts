@@ -5,6 +5,7 @@ import {ServerService} from "../../../services/server.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataEmitterService} from "../../../services/data-emitter.service.service";
 import {Album} from "../../../classes/album.class";
+import {Song} from "../../../classes/song.class";
 
 @Component({
   selector: 'app-artist-description',
@@ -22,6 +23,11 @@ export class ArtistDescriptionComponent implements OnInit {
   isEditingContent: boolean;
   albumToManage: Album = new Album(-1,"","",-1);
   openModalButton: HTMLButtonElement;
+  editingSong: boolean = false;
+  songToEdit: Song;
+  editSongName: string;
+  editSongPrice: string;
+
 
 
   constructor(private authService: AuthService,
@@ -30,6 +36,12 @@ export class ArtistDescriptionComponent implements OnInit {
               private dataService: DataEmitterService,
               private router: Router) {
 
+    this.dataService.getEditSong.subscribe((song: Song)=>{
+      this.songToEdit = song;
+      this.editSongName = song.getSongName();
+      this.editSongPrice = song.getPrice().toString();
+      this.editingSong = true;
+    });
 
   }
 
@@ -64,12 +76,25 @@ export class ArtistDescriptionComponent implements OnInit {
       (album)=>{
         if(this.isEditingContent){
           this.albumToManage = album;
+          this.dataService.getEditContentAlbumList.emit(this.albumToManage);
           this.openModalButton.click();
         }else{
           this.router.navigate(['album'], {queryParams:{id: album.getAlbumID()}});
         }
       }
     );
+  }
+
+  releaseAlbum(){
+
+  }
+
+  editAlbum(){
+
+  }
+
+  deleteAlbum(){
+
   }
 
   editDetails(){
