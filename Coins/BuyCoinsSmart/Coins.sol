@@ -8,12 +8,12 @@ contract Coin{
 
     event Sent(address from, address to, uint amount);
 
-    Coin.Sent().Watch({},''. function(error,result){
+    /*Coin.Sent().Watch({},''. function(error,result){
         if(!error){
           console.log("Coin Transfer: " + result.args.amount + " coins were sent from " + result.args.from + " to " + result.args.to + ".");
           console.log("New Balances:\n" + "Sender: " + Coin.balances.call(result.args.from) + "\nReceiver: " + Coin.balances.call(result.args.to));
         }
-      })
+      })*/
 
     function Coin(){
         minter = msg.sender;
