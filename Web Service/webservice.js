@@ -392,6 +392,25 @@ app.post('/api/deletesong', function(req, res){
   var qry = require('./app/update')(sql, val, con, res);
 });
 
+app.post('/api/buycoins', function(req, res){
+  console.log("/api/buycoins");
+
+});
+
+app.post('/api/buysong', function(req, res){
+  console.log("/api/buysong");
+});
+
+app.get('/api/songsbought', function(req, res){
+  console.log("/api/songsbought");
+
+});
+
+app.get('/api/boughtsongdetails', function(req, res){
+  console.log("/api/boughtsongdetails");
+
+});
+
 app.post('/api/upload',function(req, res){
   console.log('/api/upload');
   if(req.files){
