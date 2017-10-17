@@ -1,0 +1,65 @@
+#container{
+    padding: 0;
+    margin: 0;
+    background-image: url("../../../assets/loginBackground.png");
+    /* Set a specific height */
+    height: 500px; 
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center;
+    background-size: cover;
+    height: 150vh;
+  }
+
+  .btnstyle{
+    color: white;
+    background-image: url("../../../assets/loginBackground.png");
+    border-radius: 100px;
+    border-color: black;
+    border-width: 2px;
+    font-weight: bold;
+  }
+
+  .box-shadow{
+
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* background: rgba(23, 23, 23, 0.76); */
+    background: rgba(225, 225, 225, .8);
+    border-radius: 16px;
+  }
+
+
+  h1, h2, h3{
+      /* color: white; */
+      color: black;
+      text-align: justify;
+      font-weight: bold;
+  }
+
+  h1{
+    text-align: left;
+  }
+
+  p{
+      font-size: 17px;
+      color: black;
+      text-align: justify;
+
+
+  }
+
+  footer{
+      padding: 10px;
+  }
+
+ li{
+     text-align: left;
+     color: black;
+     font-weight: Bold;
+     font-size: 17px;
+
+ }
+

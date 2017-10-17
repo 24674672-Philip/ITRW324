@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="center-block text-center">
+
+    <h1 class="jumbotron hidden-xs hidden-sm" style=" background: transparent; color: white; padding: 0">Never Worry About Pirates Again</h1>
+
+
+    <div class="row">
+      <div class="hidden-xs col-sm-3 col-md-4 col-lg-4"></div>
+      <div class="panel col-sm-6 col-md-4 col-lg-4 box-shadow" style="padding-top: 0;">
+
+        <div class="panel-heading"><h1 style="margin-bottom: 0">Sign In To Your Account</h1></div>
+
+        <div class="panel-body" style="padding-top: 0">
+
+
+          <!--TODO: Handle a successful and failed login here and check if the selected username's email has been verified or not and handle that too-->
+          <h2 style="text-align: center;">Credentials</h2>
+          <h3>Username</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <input class="form-control" placeholder="Insert Your Username" [(ngModel)]="username">
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+
+          <h3>Password</h3>
+          <div class="row">
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-8 col-lg-8">
+              <input class="form-control" type="password" placeholder="Insert Your Password" [(ngModel)]="password">
+            </div>
+            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+          </div>
+
+
+          <div class="row">
+            <button class="btn btn-success" [disabled]="!validate()" (click)="login()"   style="margin: 20px 0 0 0;">
+              Login
+            </button>
+          </div>
+
+          <div class="row">
+            <!--Only shows if login was successful-->
+            <div class="panel panel-success" *ngIf="loginSuccessFlag">Login Successful</div>
+
+            <!--Only shows if login failed due to email not verified-->
+            <div class="panel panel-warning" *ngIf="loginNotVerifiedFlag">
+              <p>Email not verified yet. Please check your email or if you did not receive the email</p>
+              <button class="btn btn-primary" (click)="resendVerificationEmail()">Resend Email</button> <!--TODO: implement resend email method-->
+              <p *ngIf="verificationSent">Email verification sent again</p>
+            </div>
+
+            <!--Only shows if login was incorrect-->
+            <div class="panel panel-danger" *ngIf="loginFailedFlag" >
+              <p>Incorrect username and password combination</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="hidden-xs col-sm-3 col-md-4 col-lg-4"></div>
+    </div>
+  </div>
+</div>
+
