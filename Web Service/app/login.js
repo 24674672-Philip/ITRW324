@@ -26,7 +26,8 @@ module.exports = function(req, res, con, jwt){
             user: result[0].username,
             fname: result[0].name,
             lname: result[0].surname,
-            email: result[0].email
+            email: result[0].email,
+            coins: result[0].coins
           });
       }
       else {
