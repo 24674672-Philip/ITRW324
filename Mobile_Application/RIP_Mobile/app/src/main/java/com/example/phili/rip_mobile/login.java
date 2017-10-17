@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -71,8 +72,12 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v){
         if(v.getId() == R.id.btnSend) {
             try {
-                tvReturn.setText("Loading...");
-                sendLoginRequest();
+                if(etUsername.getText().equals("") || etPass.getText().equals(""))
+                    Toast.makeText(this, "Your ID or Password is empty", Toast.LENGTH_SHORT).show();
+                else {
+                    tvReturn.setText("Loading...");
+                    sendLoginRequest();
+                }
             }
             catch (Exception e){
 

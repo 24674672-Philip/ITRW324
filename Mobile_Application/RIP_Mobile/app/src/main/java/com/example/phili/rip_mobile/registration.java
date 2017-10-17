@@ -165,11 +165,66 @@ public class registration extends AppCompatActivity implements View.OnClickListe
 
         if(etPass.getText().toString().equals(etPass2.getText().toString()))
             isValidated = true;
-        else
+
+        else if (etFname.getText().toString().matches("")){
             isValidated = false;
+            Toast.makeText(this, "Missing: Name", Toast.LENGTH_SHORT).show();
+        }
+        else if (etLname.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Surname", Toast.LENGTH_SHORT).show();
+        }
+        else if (etEmail.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Email Address", Toast.LENGTH_SHORT).show();
+        }
+        else if (etDOB.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Date of Birth", Toast.LENGTH_SHORT).show();
+        }
+        else if (etAdd1.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Address 1", Toast.LENGTH_SHORT).show();
+        }
+        else if (etAdd2.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Address 2", Toast.LENGTH_SHORT).show();
+        }
+        else if (etCountry.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Country", Toast.LENGTH_SHORT).show();
+        }
+        else if (etCity.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: City", Toast.LENGTH_SHORT).show();
+        }
+        else if (etPostal.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Postal Code", Toast.LENGTH_SHORT).show();
+        }
+        else if (etPass.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Password 1", Toast.LENGTH_SHORT).show();
+        }
+        else if (etPass2.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Password 2", Toast.LENGTH_SHORT).show();
+        }
+        else if (etUsername.getText().toString().matches("")){
+            isValidated = false;
+            Toast.makeText(this, "Missing: Username", Toast.LENGTH_SHORT).show();
+        }
+        else if (etPass.length() != 8){
+            isValidated = false;
+            Toast.makeText(this, "The password can only be 8 length", Toast.LENGTH_SHORT).show();
+        }
 
-
+        else{
+            isValidated = false;
+        }
         return isValidated;
     }
+
+
 
 }
