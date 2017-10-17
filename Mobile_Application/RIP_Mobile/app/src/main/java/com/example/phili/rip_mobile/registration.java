@@ -1,6 +1,7 @@
 package com.example.phili.rip_mobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -36,11 +38,26 @@ public class registration extends AppCompatActivity implements View.OnClickListe
 
     Context contxt;
     ImageView btnRegister;
+    EditText etFname, etLname, etPass, etPass2, etUsername, etEmail, etDOB,  etAdd1, etAdd2, etCountry, etCity, etPostal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        etFname = (EditText) findViewById(R.id.etName);
+        etLname = (EditText) findViewById(R.id.etSurname);
+        etPass = (EditText) findViewById(R.id.etPass);
+        etPass2 = (EditText) findViewById(R.id.etRetypePass);
+        etUsername = (EditText) findViewById(R.id.etUsername);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etDOB = (EditText) findViewById(R.id.etDOB);
+        etAdd1 = (EditText) findViewById(R.id.etAdl1);
+        etAdd2 = (EditText) findViewById(R.id.etAdl2);
+        etCountry = (EditText) findViewById(R.id.etCity);
+        etCity = (EditText) findViewById(R.id.etCountry);
+        etPostal = (EditText) findViewById(R.id.etPostalCodes);
+
 
         contxt = this;
         btnRegister = (ImageView) findViewById(R.id.btnRegister);
@@ -51,32 +68,108 @@ public class registration extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         if(v.getId() == R.id.btnRegister) {
             try {
-                sendRegisterRequest();
+                if(textValidator()){
+                    sendRegisterRequest();
+                }
+                else{
+                    Toast toast = Toast.makeText(this, "Please enter the correct details", Toast.LENGTH_SHORT);
+                }
             }
             catch (Exception e){
-
+                Log.i("onclick",e.getMessage().toString());
             }
         }
     }
 
     private void sendRegisterRequest(){
+
+        String[] headersType = new String[2];
+        String[] headersVal = new String[2];
+        headersType[0] = "username";
+        headersType[1] = "password";
+        headersType[2] = "fname";
+        headersType[3] = "lname";
+        headersType[4] = "email";
+        headersType[5] = "birthdate";
+        headersVal[0] = etUsername.getText().toString();
+        headersVal[1] = etPass.getText().toString();
+        headersVal[2] = etFname.getText().toString();
+        headersVal[3] = etLname.getText().toString();
+        headersVal[4] = etEmail.getText().toString();
+        headersVal[5] = etDOB.getText().toString();
+
+
+
         final serverLink sender = new serverLink(this);
-        /*sender.sendServerRequest(,,"",true,new serverLink.OnDownloadTaskCompleted() {
+        sender.sendServerRequest(headersType, headersVal, "/api/registeruser", true,new serverLink.OnDownloadTaskCompleted() {
             @Override
             public void onTaskCompleted(JSONObject result, boolean error, String message) {
                 try {
-                    if (result.getString("register").equals("success")){
-
+                    if(result.getString("register").contains("success")){
+                        //registeruser success
+                        sendRegisterAdressRequest(result.get("userid").toString());
+                    }
+                    else{
+                        //register failed
+                        Toast toast = Toast.makeText(contxt, "Something went wrong", Toast.LENGTH_SHORT);
                     }
                 }
-                /*catch (JSONException e){
-                    //tvReturn.setText("Welp");
+                catch (JSONException e){
+                    Log.i("reg",e.getMessage().toString());
                 }
-                catch(Exception e){
-
+                catch (Exception e){
+                    Log.i("reg",e.getMessage().toString());
                 }
             }
-        });*/
+        });
+    }
+
+    private void sendRegisterAdressRequest(String userid){
+
+        String[] headersType = new String[2];
+        String[] headersVal = new String[2];
+        headersType[0] = "addline1";
+        headersType[1] = "addline2";
+        headersType[2] = "country";
+        headersType[3] = "city";
+        headersType[4] = "postalcode";
+        headersType[5] = "userid";
+        headersVal[0] = etAdd1.getText().toString();
+        headersVal[1] = etAdd2.getText().toString();
+        headersVal[2] = etCountry.getText().toString();
+        headersVal[3] = etCity.getText().toString();
+        headersVal[4] = etPostal.getText().toString();
+        headersVal[5] = userid;
+
+        final serverLink sender = new serverLink(this);
+        sender.sendServerRequest(headersType, headersVal, "/api/registeraddress", true,new serverLink.OnDownloadTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result, boolean error, String message) {
+                try {
+                    if(!result.getString("result").isEmpty()){
+                        registration.super.onBackPressed();//Success
+                    }
+                }
+                catch (JSONException e){
+                    Log.i("regAdress",e.getMessage().toString());
+                }
+                catch (Exception e){
+                    Log.i("regAdress",e.getMessage().toString());
+                }
+            }
+        });
+    }
+
+    public boolean textValidator(){
+        boolean isValidated = false;
+
+        if(etPass.getText().toString().equals(etPass2.getText().toString()))
+            isValidated = true;
+        else
+            isValidated = false;
+
+
+        return isValidated;
     }
 
 }
