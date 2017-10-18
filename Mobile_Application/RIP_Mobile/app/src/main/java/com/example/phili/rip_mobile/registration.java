@@ -38,7 +38,7 @@ public class registration extends AppCompatActivity implements View.OnClickListe
 
     Context contxt;
     ImageView btnRegister;
-    EditText etFname, etLname, etPass, etPass2, etUsername, etEmail, etDOB,  etAdd1, etAdd2, etCountry, etCity, etPostal;
+    EditText etFname, etLname, etPassword2, etPassword, etUsername, etEmail, etDOB,  etAdd1, etAdd2, etCountry, etCity, etPostal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,8 @@ public class registration extends AppCompatActivity implements View.OnClickListe
 
         etFname = (EditText) findViewById(R.id.etName);
         etLname = (EditText) findViewById(R.id.etSurname);
-        etPass = (EditText) findViewById(R.id.etPass);
-        etPass2 = (EditText) findViewById(R.id.etRetypePass);
+        etPassword = (EditText) findViewById(R.id.etPass);
+        etPassword2 = (EditText) findViewById(R.id.etRetypePass);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etDOB = (EditText) findViewById(R.id.etDOB);
@@ -92,7 +92,7 @@ public class registration extends AppCompatActivity implements View.OnClickListe
         headersType[4] = "email";
         headersType[5] = "birthdate";
         headersVal[0] = etUsername.getText().toString();
-        headersVal[1] = etPass.getText().toString();
+        headersVal[1] = etPassword.getText().toString();
         headersVal[2] = etFname.getText().toString();
         headersVal[3] = etLname.getText().toString();
         headersVal[4] = etEmail.getText().toString();
@@ -163,7 +163,7 @@ public class registration extends AppCompatActivity implements View.OnClickListe
     public boolean textValidator(){
         boolean isValidated = false;
 
-        if(etPass.getText().toString().equals(etPass2.getText().toString()))
+        if(etPassword.getText().toString().equals(etPassword2.getText().toString()))
             isValidated = true;
 
         else if (etFname.getText().toString().matches("")){
@@ -202,11 +202,11 @@ public class registration extends AppCompatActivity implements View.OnClickListe
             isValidated = false;
             Toast.makeText(this, "Missing: Postal Code", Toast.LENGTH_SHORT).show();
         }
-        else if (etPass.getText().toString().matches("")){
+        else if (etPassword.getText().toString().matches("")){
             isValidated = false;
             Toast.makeText(this, "Missing: Password 1", Toast.LENGTH_SHORT).show();
         }
-        else if (etPass2.getText().toString().matches("")){
+        else if (etPassword2.getText().toString().matches("")){
             isValidated = false;
             Toast.makeText(this, "Missing: Password 2", Toast.LENGTH_SHORT).show();
         }
@@ -214,7 +214,7 @@ public class registration extends AppCompatActivity implements View.OnClickListe
             isValidated = false;
             Toast.makeText(this, "Missing: Username", Toast.LENGTH_SHORT).show();
         }
-        else if (etPass.length() != 8){
+        else if (etPassword.length() != 8){
             isValidated = false;
             Toast.makeText(this, "The password can only be 8 length", Toast.LENGTH_SHORT).show();
         }

@@ -41,10 +41,10 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public static String TOKEN = "";
     public static String USERNAME = "";
     public static String COINS = "";
-    Button btnSend;
-    EditText etUsername, etPass;
-    TextView tvReturn,tvNew;
-    Context contxt;
+    private Button btnSend;
+    private EditText etUsername, etPass;
+    private TextView tvReturn,tvNew;
+    private Context contxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                 }
             }
             catch (Exception e){
-
+                tvReturn.setText(e.getMessage().toString());
             }
         }
     }
@@ -88,8 +88,8 @@ public class login extends AppCompatActivity implements View.OnClickListener{
 
     private void sendLoginRequest(){
 
-        String[] headersType = new String[11];
-        String[] headersVal = new String[11];
+        String[] headersType = new String[2];
+        String[] headersVal = new String[2];
         headersType[0] = "username";
         headersType[1] = "password";
         headersVal[0] = etUsername.getText().toString();

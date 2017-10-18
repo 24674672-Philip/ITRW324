@@ -40,7 +40,6 @@ public class serverLink{
 
     public void sendServerRequest(final String[] headerKey, final String[] headerVal, final String apiType, final boolean sendType, final OnDownloadTaskCompleted taskCompleted){
         reqQ = Volley.newRequestQueue(contxt);
-
         jsonReq = new JsonObjectRequest(sendType?(Request.Method.POST):(Request.Method.GET),url + apiType,null ,
                 new Response.Listener<JSONObject>() {
             @Override
@@ -50,6 +49,7 @@ public class serverLink{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                taskCompleted.onTaskCompleted(null,false,"gaaaaaaaaaaaaaawsh");
                 if(error.equals(null)){
                     taskCompleted.onTaskCompleted(null,false,error.getMessage().toString());
                 }
@@ -61,12 +61,10 @@ public class serverLink{
             @Override
             public Map<String,String> getHeaders(){
                 Map<String,String> params = new HashMap<String, String>();
-
                 for (int i = 0; i < headerKey.length; i++){
                     params.put(headerKey[i],headerVal[i]);
                     Log.i(TAG, "getHeaders: " + headerKey[i]+headerVal[i]);
                 }
-
                 return params;
             }
         };
