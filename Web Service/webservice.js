@@ -496,7 +496,6 @@ app.get('/api/boughtsongdetails', ensureToken, function(req, res){
 
     }
   });
-
 });
 
 app.get('/api/getavgsongcost', function(req, res){
@@ -511,6 +510,19 @@ app.get('/api/getavgalbumcost', function(req, res){
   var qry = require('./app/apisend')(sql, '', con, res);
 });
 
+app.get('/api/userbalance',ensureToken, function(req, res){
+  console.log("/api/userbalance");
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var val = req.headers["username"];
+      var sql = 'SELECT coins as result FROM users WHERE username = ?';
+      var qry = require('./app/apisend')(sql, val, con, res);
+    }
+  });
+});
 
 app.post('/api/upload',function(req, res){
   console.log('/api/upload');
