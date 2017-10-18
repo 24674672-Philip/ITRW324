@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WalletComponent implements OnInit {
 
+  balance: number = 0;
+  avgSongs: number = 0;
   constructor() { }
 
   ngOnInit() {
+    //TODO: get the user's current balance and average song cost
   }
 
 }
