@@ -32,10 +32,12 @@ import { ShowVolumeDirective } from './directives/show-volume.directive';
 import { ArtistDescriptionComponent } from './ripComponents/artists-container/artist-description.component/artist-description.component';
 import { AlbumListComponent } from './ripComponents/artists-container/album-list.component/album-list.component';
 import { AlbumListItemComponent } from './ripComponents/artists-container/album-list.component/album-list-item.component/album-list-item.component';
-import {DataEmitterService} from "./services/data-emitter.service.service";
+import { DataEmitterService } from "./services/data-emitter.service.service";
 import { EditAlbumListComponent } from './ripComponents/artists-container/artist-description.component/edit-album-list/edit-album-list.component';
 import { EditAlbumListItemComponent } from './ripComponents/artists-container/artist-description.component/edit-album-list/edit-album-list-item/edit-album-list-item.component';
-import { WalletComponent } from './ripComponents/home-container/nav-bar/wallet/wallet.component';
+import { WalletComponentNav} from './ripComponents/home-container/nav-bar/wallet/wallet.component';
+import { BuyContainerComponent } from './ripComponents/buy-container/buy-container.component';
+import { WalletComponent } from "./ripComponents/buy-container/wallet/wallet.component";
 
 
 const router: Routes = [
@@ -44,7 +46,8 @@ const router: Routes = [
   {path: 'register', component: RegisterContainerComponent},
   {path: 'home', component: HomeContainerComponent},
   {path: 'artist', component: ArtistsContainerComponent},
-  {path: 'album', component: AlbumContainerComponent}
+  {path: 'album', component: AlbumContainerComponent},
+  {path: 'wallet', component: BuyContainerComponent}
 ];
 
 @NgModule({
@@ -77,6 +80,8 @@ const router: Routes = [
     EditAlbumListComponent,
     EditAlbumListItemComponent,
     WalletComponent,
+    BuyContainerComponent,
+    WalletComponentNav
   ],
   imports: [
     BrowserModule,

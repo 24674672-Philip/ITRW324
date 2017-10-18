@@ -115,11 +115,11 @@ export class ArtistDescriptionComponent implements OnInit {
 
   saveChanges(){
     this.newArtistBio = (<HTMLInputElement> document.getElementById('newBio')).value;
-    this.serverService.editUserBio(this.artistObj.getArtistName(), this.newArtistBio, (response)=>{
+    this.serverService.editUserBio(this.artistObj.getArtistName(),this.authService.getAuthToken(), this.newArtistBio, (response)=>{
       if(response['result'].toString() == 'success'){
         this.updatedBioSuccessfully = true;
         this.artistObj.setArtistBio(this.newArtistBio);
-        setTimeout(()=>{this.isEditingDetails = false},2000);
+        setTimeout(()=>{this.isEditingDetails = false; this.updatedBioSuccessfully = false},2000);
       }else{
         this.updatedBioSuccessfully = false;
       }

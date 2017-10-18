@@ -3,13 +3,13 @@ import {ServerService} from "../../../../services/server.service";
 import {AuthService} from "../../../../services/auth.service";
 
 @Component({
-  selector: 'app-wallet',
+  selector: 'app-wallet-nav',
   templateUrl: './wallet.component.html',
   styleUrls: ['./wallet.component.css']
 })
-export class WalletComponent implements OnInit {
+export class WalletComponentNav implements OnInit {
 
-  private balance:number;
+  balance:number = 0;
   constructor(private serverService: ServerService,
               private authService: AuthService) { }
 
