@@ -524,6 +524,29 @@ app.get('/api/userbalance',ensureToken, function(req, res){
   });
 });
 
+app.post('/api/sendpasswordreset', function(req, res){
+  console.log("/api/sendpasswordreset");
+  var emailResetPassword = require('./app/resetpassword')(req.headers["email"],jwt);
+});
+
+app.post('/api/passwordreset', function(req, res){
+  console.log("/api/sendpasswordreset");
+  jwt.verify(req.headers["token"],'passreset',function(err,data){
+    var val1 = req.headers["email"];
+    if(err){res.json({error: err});}
+    else{
+      if(data.user.email === val1){
+        var sql = "UPDATE users SET password = ? WHERE email = ?";
+        var val = req.headers["username"];
+        var qry = require('./app/update')(sql, [val,val1], con, res);
+      }
+      else {
+        res.json({result: "error"});
+      }
+    }
+  });
+});
+
 app.post('/api/upload',function(req, res){
   console.log('/api/upload');
   if(req.files){
