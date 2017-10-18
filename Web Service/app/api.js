@@ -10,7 +10,7 @@ module.exports = function(sql, val, con, res){
     connection.query(sql,val,function(err,rows){
             connection.release();
             if(err) {res.json(err);}
-            else(!err) {
+            else if(!err) {
                 res.json({result: rows});
             }
     });
