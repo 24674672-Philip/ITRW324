@@ -500,13 +500,13 @@ app.get('/api/boughtsongdetails', ensureToken, function(req, res){
 
 app.get('/api/getavgsongcost', function(req, res){
   console.log("/api/getavgsongcost");
-  var sql = 'SELECT AVG(price) as result FROM song';
+  var sql = 'SELECT ROUND(AVG(price),2) as result FROM song';
   var qry = require('./app/apisend')(sql, '', con, res);
 });
 
 app.get('/api/getavgalbumcost', function(req, res){
   console.log("/api/getavgalbumcost");
-  var sql = 'SELECT AVG(price) as result FROM album';
+  var sql = 'SELECT ROUND(AVG(price),2) as result FROM album';
   var qry = require('./app/apisend')(sql, '', con, res);
 });
 
