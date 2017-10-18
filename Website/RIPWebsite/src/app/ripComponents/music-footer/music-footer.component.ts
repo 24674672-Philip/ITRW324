@@ -131,10 +131,10 @@ export class MusicFooterComponent implements OnInit {
   playPressed() {
     if(!this.audio.paused){
       this.audio.pause();
-      document.getElementById('playButton').className = 'glyphicon glyphicon-play'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pausengs
+      document.getElementById('playButton').className = 'glyphicon glyphicon-play';
     }else{
       this.audio.play();
-      document.getElementById('playButton').className = 'glyphicon glyphicon-pause'; //TODO: Add addiional code to restart when pressed again and change glyphicon back to pausengs
+      document.getElementById('playButton').className = 'glyphicon glyphicon-pause';
     }
 
   }

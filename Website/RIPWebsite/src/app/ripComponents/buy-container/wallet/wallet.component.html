@@ -10,20 +10,34 @@
         </div>
 
         <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-6 col-lg-6">
+              <h4>Average Song Cost</h4>
+              <h3>{{avgSongs}}</h3>
+              <h4>Souls</h4>
+            </div>
+            <div class="col-md-6 col-lg-6">
+              <h4>Average Album Cost</h4>
+              <h3>{{avgAlbums}}</h3>
+              <h4>Souls</h4>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-md-6 col-lg-6">
               <h4>Your Current Balance Is</h4>
               <h3>{{balance}}</h3>
-              <h4>Dabloons</h4>
+              <h4>Souls</h4>
             </div>
             <div class="col-md-6 col-lg-6">
               <h4>On Average You Can Buy</h4>
-              <h3>{{avgSongs}}</h3>
+              <h3>{{getBuyPower()}}</h3>
               <h4>Songs</h4>
             </div>
           </div>
 
-          <div class="btn-group">
+          <div class="btn-group" style="padding-top: 20px">
             <button class="btn btn-primary">Buy Coins</button>
             <button class="btn btn-success">Go Spend</button>
           </div>

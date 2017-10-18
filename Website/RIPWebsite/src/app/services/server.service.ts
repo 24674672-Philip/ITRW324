@@ -174,4 +174,30 @@ export class ServerService {
         (response)=>callback(response.json())
       )
   }
+
+  getAverageSongCost(callback){
+    this.http.get(this.url +'getavgsongcost')
+      .subscribe(
+        (response) => callback(response.json())
+      );
+  }
+
+  getAverageAlbumCost(callback){
+    this.http.get(this.url+'getavgalbumcost')
+      .subscribe((response=>{
+        callback(response.json())
+      }));
+  }
+
+  getUserbalance(username: string, token: string, callback){
+    let headers = new Headers();
+    headers.append('username',username);
+    headers.append('authentication','bearer '+token);
+    this.http.get(this.url+'userbalance',{headers:headers})
+      .subscribe((response)=>{
+        callback(response.json())
+      });
+  }
+
+
 }

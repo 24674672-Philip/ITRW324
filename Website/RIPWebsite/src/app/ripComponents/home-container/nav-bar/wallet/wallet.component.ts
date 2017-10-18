@@ -14,7 +14,9 @@ export class WalletComponentNav implements OnInit {
               private authService: AuthService) { }
 
   ngOnInit() {
-    //TODO: get balance of user
+    this.serverService.getUserbalance(this.authService.getUsername(),this.authService.getAuthToken(),(response)=>{
+      this.balance = response['result'];
+    })
   }
 
 }

@@ -7,6 +7,8 @@ export class Album {
               private albumName: string,
               private albumArtist: string,
               private albumReleaseDate: number,
+              private isBought: boolean,
+              private price: number
               ){
 
   }
@@ -18,7 +20,6 @@ export class Album {
   setArtistImagePath(type: string, image_name: string){
     this.artistImagePath = 'http://52.211.85.57:8080/api/image?type='+type.replace(' ','%20')+ '&image_name='+image_name.replace(' ', '%20');
   }
-
 
   getAlbumID(): number{
     return this.albumID;
@@ -43,6 +44,22 @@ export class Album {
 
   getArtistImagePath(): string{
     return this.artistImagePath;
+  }
+
+  setIsBought(isBought: boolean){
+    this.isBought = isBought;
+  }
+
+  getIsBought(): boolean{
+    return this.isBought;
+  }
+
+  setPrice(price:number){
+    this.price = price;
+  }
+
+  getPrice(): number{
+    return this.price;
   }
 
 }

@@ -73,9 +73,4 @@ export class Song {
   getIsBought(): boolean{
     return this.isBought;
   }
-
-
-
-
-
 }
