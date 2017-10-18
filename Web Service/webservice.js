@@ -455,7 +455,7 @@ app.post('/api/buycoins', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-        var qry = require('./app/edituser')(req, res, con);
+
     }
   });
 
@@ -468,7 +468,7 @@ app.post('/api/buysong', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-        var qry = require('./app/edituser')(req, res, con);
+
     }
   });
 });
@@ -480,7 +480,7 @@ app.get('/api/songsbought', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-        var qry = require('./app/edituser')(req, res, con);
+
     }
   });
 
@@ -493,11 +493,24 @@ app.get('/api/boughtsongdetails', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-        var qry = require('./app/edituser')(req, res, con);
+
     }
   });
 
 });
+
+app.get('/api/getavgsongcost', function(req, res){
+  console.log("/api/getavgsongcost");
+  var sql = 'SELECT AVG(price) as result FROM song';
+  var qry = require('./app/apisend')(sql, '', con, res);
+});
+
+app.get('/api/getavgalbumcost', function(req, res){
+  console.log("/api/getavgalbumcost");
+  var sql = 'SELECT AVG(price) as result FROM album';
+  var qry = require('./app/apisend')(sql, '', con, res);
+});
+
 
 app.post('/api/upload',function(req, res){
   console.log('/api/upload');

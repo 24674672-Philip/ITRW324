@@ -12,7 +12,7 @@ module.exports = function(con, res, req){
 
     console.log('connected as id ' + connection.threadId);
 
-    connection.query(sql,[val1,val2],function(err,result){
+    connection.query(sql,val2,function(err,result){
       connection.release();
       if(err){
         console.log({result: err});
