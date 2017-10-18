@@ -36,9 +36,9 @@ import java.util.Map;
 
 public class registration extends AppCompatActivity implements View.OnClickListener{
 
-    Context contxt;
-    ImageView btnRegister;
-    EditText etFname, etLname, etPassword2, etPassword, etUsername, etEmail, etDOB,  etAdd1, etAdd2, etCountry, etCity, etPostal;
+    private Context contxt;
+    private ImageView btnRegister;
+    private EditText etFname, etLname, etPassword2, etPassword, etUsername, etEmail, etDOB,  etAdd1, etAdd2, etCountry, etCity, etPostal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +67,14 @@ public class registration extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         if(v.getId() == R.id.btnRegister) {
+            Log.i("onclick","click");
             try {
                 if(textValidator()){
-                    sendRegisterRequest();
+                    Log.i("onclick","request");
+                    //sendRegisterRequest();
                 }
                 else{
+                    Log.i("onclick","toast");
                     Toast toast = Toast.makeText(this, "Please enter the correct details", Toast.LENGTH_SHORT);
                 }
             }
@@ -83,8 +86,8 @@ public class registration extends AppCompatActivity implements View.OnClickListe
 
     private void sendRegisterRequest(){
 
-        String[] headersType = new String[2];
-        String[] headersVal = new String[2];
+        String[] headersType = new String[6];
+        String[] headersVal = new String[6];
         headersType[0] = "username";
         headersType[1] = "password";
         headersType[2] = "fname";
@@ -92,7 +95,8 @@ public class registration extends AppCompatActivity implements View.OnClickListe
         headersType[4] = "email";
         headersType[5] = "birthdate";
         headersVal[0] = etUsername.getText().toString();
-        headersVal[1] = etPassword.getText().toString();
+        HashClass hasher = new HashClass();
+        headersVal[1] = hasher.md5(etPassword.getText().toString());
         headersVal[2] = etFname.getText().toString();
         headersVal[3] = etLname.getText().toString();
         headersVal[4] = etEmail.getText().toString();
@@ -126,8 +130,8 @@ public class registration extends AppCompatActivity implements View.OnClickListe
 
     private void sendRegisterAdressRequest(String userid){
 
-        String[] headersType = new String[2];
-        String[] headersVal = new String[2];
+        String[] headersType = new String[6];
+        String[] headersVal = new String[6];
         headersType[0] = "addline1";
         headersType[1] = "addline2";
         headersType[2] = "country";
@@ -161,67 +165,73 @@ public class registration extends AppCompatActivity implements View.OnClickListe
     }
 
     public boolean textValidator(){
-        boolean isValidated = false;
+        boolean isValidated;
+        String message;
 
-        if(etPassword.getText().toString().equals(etPassword2.getText().toString()))
-            isValidated = true;
-
+        if(etPassword.getText().toString().equals(etPassword2.getText().toString())){
+            isValidated = false;
+            message = "passwords not matching";
+        }
         else if (etFname.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Name", Toast.LENGTH_SHORT).show();
+            message = "Missing: Name";
         }
         else if (etLname.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Surname", Toast.LENGTH_SHORT).show();
+            message = "Missing: Surname";
         }
         else if (etEmail.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Email Address", Toast.LENGTH_SHORT).show();
+            message = "Missing: Email Address";
         }
         else if (etDOB.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Date of Birth", Toast.LENGTH_SHORT).show();
+            message = "Missing: Date of Birth";
         }
         else if (etAdd1.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Address 1", Toast.LENGTH_SHORT).show();
+            message = "Missing: Address 1";
         }
         else if (etAdd2.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Address 2", Toast.LENGTH_SHORT).show();
+            message = "Missing: Address 2";
         }
         else if (etCountry.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Country", Toast.LENGTH_SHORT).show();
+            message = "Missing: Country";
         }
         else if (etCity.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: City", Toast.LENGTH_SHORT).show();
+            message = "Missing: City";
         }
         else if (etPostal.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Postal Code", Toast.LENGTH_SHORT).show();
+            message = "Missing: Postal Code";
         }
         else if (etPassword.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Password 1", Toast.LENGTH_SHORT).show();
+            message = "Missing: Password 1";
         }
         else if (etPassword2.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Password 2", Toast.LENGTH_SHORT).show();
+            message = "Missing: Password 2";
         }
         else if (etUsername.getText().toString().matches("")){
             isValidated = false;
-            Toast.makeText(this, "Missing: Username", Toast.LENGTH_SHORT).show();
+            message = "Missing: Username";
         }
-        else if (etPassword.length() != 8){
+        else if (etPassword.length() <= 8){
             isValidated = false;
-            Toast.makeText(this, "The password can only be 8 length", Toast.LENGTH_SHORT).show();
+            message = "The password must be longer than 8";
+        }
+        else{
+            isValidated = true;
+            message = "success";
         }
 
-        else{
-            isValidated = false;
-        }
+        Log.i("onclick",message);
+        Toast toast = Toast.makeText(this,message,Toast.LENGTH_LONG);
+        toast.show();
         return isValidated;
     }
 
