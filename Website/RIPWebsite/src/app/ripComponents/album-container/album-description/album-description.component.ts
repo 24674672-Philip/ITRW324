@@ -34,7 +34,8 @@ export class AlbumDescriptionComponent implements OnInit {
         tempObject.setSongImagePath('albums',x['album_image']);
         this.songList.push(tempObject);
       }
-      this.responseReceived(xy[0]['albumID'],xy[0]['Album'], xy[0]['Artist'], xy[0]['Released'],xy[0]['artist_image'],xy[0]['album_image'],false,0);//TODO: replace with parameters
+
+      this.responseReceived(xy[0]['albumID'],xy[0]['Album'], xy[0]['Artist'], xy[0]['Released'],xy[0]['artist_image'],xy[0]['album_image'], true,0);//TODO: replace with parameters
     });
   }
 
@@ -42,9 +43,6 @@ export class AlbumDescriptionComponent implements OnInit {
     this.albumObj = new Album(albumID,albumName, albumArtist, releaseDate, isBought, price);
     this.albumObj.setAlbumImagePath('albums',albumImage);
     this.albumObj.setArtistImagePath('users', artistImage);
-    let x:HTMLImageElement = (<HTMLImageElement>document.getElementById('artist_image'));
-    let y: HTMLImageElement =(<HTMLImageElement>document.getElementById('album_image'));
-
   }
 
 }

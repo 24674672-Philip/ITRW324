@@ -25,7 +25,7 @@ export class AlbumListComponent implements OnInit {
       let artistJSON = response['artist']['0'];
       let albumsJSON = response['albums'];
       for(let y of albumsJSON){
-        let tempObj: Album = new Album(y['AlbumID'].toString(),y['Album'].toString(), artistJSON['Artist'].toString(),y['Released']);
+        let tempObj: Album = new Album(y['AlbumID'].toString(),y['Album'].toString(), artistJSON['Artist'].toString(),y['Released'],false,0);//TODO: replace parameters
         tempObj.setAlbumImagePath('albums', y['image_name'].toString());
         this.albums.push(tempObj);
       }

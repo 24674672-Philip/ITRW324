@@ -16,6 +16,9 @@
       <div class="row">
         <p>{{'Released:'+albumObj.getAlbumReleaseDate().toString().substr(0,4)}} <span class="glyphicon glyphicon-fire"></span></p>
       </div>
+      <div *ngIf="albumObj.getIsBought()" class="row">
+        <p>You own this album</p>
+      </div>
     </div>
   </div>
 
@@ -24,12 +27,12 @@
     <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3" style="font-weight: bold">Title</div>
     <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2" style="font-weight: bold">Artist</div>
     <div class="hidden-xs hidden-sm col-md-4 col-lg-3" style="font-weight: bold">Album</div>
-    <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3" style="font-weight: bold">Price</div>
+    <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" style="font-weight: bold">Price</div>
   </div>
 
   <div class="row">
     <div class="list-group text-center">
-      <app-track-list-item *ngFor="let x of songList; let i = index" [song]="x" [trackNumber]="i" [potentialPlaylist]="songList" ></app-track-list-item>
+      <app-track-list-item *ngFor="let x of songList; let i = index" [song]="x" [trackNumber]="i+1" [potentialPlaylist]="songList" ></app-track-list-item>
     </div>
   </div>
 

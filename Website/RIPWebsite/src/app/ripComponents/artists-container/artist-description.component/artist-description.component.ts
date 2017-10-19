@@ -21,7 +21,7 @@ export class ArtistDescriptionComponent implements OnInit {
   newArtistBio: string;
   updatedBioSuccessfully: boolean;
   isEditingContent: boolean;
-  albumToManage: Album = new Album(-1,"","",-1);
+  albumToManage: Album = new Album(-1,"","",-1, false, 0);//TODO: replace parameters
   openModalButton: HTMLButtonElement;
   editingSong: boolean = false;
   songToEdit: Song;

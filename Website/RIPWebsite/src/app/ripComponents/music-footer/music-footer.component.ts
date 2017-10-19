@@ -26,6 +26,8 @@ export class MusicFooterComponent implements OnInit {
   volume: number = 0;
   element: Element;
   isMuted: boolean = false;
+  isOwned: boolean = false;
+  showBuy: boolean = false;
 
 
   constructor(private serverService: ServerService, private musicServer: MusicPlayerService) {
@@ -35,6 +37,8 @@ export class MusicFooterComponent implements OnInit {
         this.audio.src=this.currentlyPlaying.getSongUrl();
         this.audio.load();
         this.volume = this.audio.volume*100;
+        this.isOwned = emittedSong.getIsBought();
+        this.showBuy = false;
       }
     )
   }
@@ -57,16 +61,11 @@ export class MusicFooterComponent implements OnInit {
     this.musicServer.songFinished.emit(this.currentlyPlaying);
   }
 
-
-
-
   ngOnInit() {
     this.audio = (<HTMLAudioElement>document.getElementById('music'));
     this.volume = this.audio.volume;
     this.element = document.getElementById('volumeContainer');
   }
-
-
 
   displayMetaData(){
     this.duration = this.audio.duration;
@@ -78,7 +77,6 @@ export class MusicFooterComponent implements OnInit {
 
   canPlay(){
     this.audio.play();
-
   }
 
 
@@ -95,6 +93,12 @@ export class MusicFooterComponent implements OnInit {
     console.log(this.progressSeconds);
     this.progressMinutesString = ( "0" + this.progressMinutes.toString()).slice(-2);
     this.progressSecondsString = ( "0" + this.progressSeconds.toString()).slice(-2);
+    if(!this.isOwned && this.currentTime>=30){
+      this.showBuy = true;
+      this.playPressed(); //TODO: not pausing. Fix this.
+      this.audio.currentTime = 0;
+
+    }
   }
 
   setCurrentTime(currentTime: number){
@@ -125,7 +129,7 @@ export class MusicFooterComponent implements OnInit {
   }
 
   rewindPressed(){
-    //set source to previous track.. The list will be kept in the musicplayer service
+    this.musicServer.getPreviousSong();
   }
 
   playPressed() {
@@ -140,7 +144,7 @@ export class MusicFooterComponent implements OnInit {
   }
 
   forwardPressed(){
-    //set source to next track.. The list will be kept in the musicplayer service
+    this.musicServer.getNextSong();
   }
 
 

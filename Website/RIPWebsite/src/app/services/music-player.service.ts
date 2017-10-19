@@ -13,7 +13,8 @@ export class MusicPlayerService {
   songFinished: EventEmitter<Song> = new EventEmitter<Song>();
   currentPlaylistIndex: number = 0;
 
-  constructor(private authService: AuthService, private serverService: ServerService) {
+  constructor(private authService: AuthService,
+              private serverService: ServerService) {
     this.currentSong.setSongImageString('../../favicon.ico');
 
     this.currentSongChanged.subscribe(
@@ -32,13 +33,22 @@ export class MusicPlayerService {
 
   getNextSong(){
     if(this.currentPlaylist.length != 0) {
-      this.currentSongChanged.emit(this.currentPlaylist[++this.currentPlaylistIndex]);
+      if(this.currentPlaylistIndex>=this.currentPlaylist.length-1){
+
+      }else{
+        this.currentSongChanged.emit(this.currentPlaylist[++this.currentPlaylistIndex]);
+      }
     }
   }
 
  getPreviousSong(){
     if(this.currentPlaylist.length != 0){
-      this.currentSongChanged.emit(this.currentPlaylist[--this.currentPlaylistIndex]);
+      if(this.currentPlaylistIndex<=0){
+
+      }else{
+        this.currentSongChanged.emit(this.currentPlaylist[--this.currentPlaylistIndex]);
+      }
+
     }
  }
 }

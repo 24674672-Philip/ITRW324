@@ -1,12 +1,13 @@
 <div class="container-fluid">
-  <a class="list-group-item track-list-item-style">
+  <a class="list-group-item track-list-item-style" style="cursor: pointer" (click)="songNameClicked()">
     <div class="row" style="margin-right: 0; margin-left: 0;">
       <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 text-center">{{trackNumber}}</div>
       <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3" (click)="songNameClicked()">{{song.getSongName()}}</div>
-      <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2" (click)="artistNameClicked()">{{song.getArtist()}}</div>
+      <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2" (click)="artistNameClicked()"><a style="color: inherit">{{song.getArtist()}}</a></div>
       <div class="hidden-xs hidden-sm col-md-4 col-lg-3">{{song.getAlbum()}}</div>
-      <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3" *ngIf="!song.getIsBought()">{{song.getPrice()}}</div>
-      <div class="col-xs-3 col-sm-3 col-md-2 col-lg-3 panel-success" *ngIf="song.getIsBought()">Owned</div>
+      <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" *ngIf="!song.getIsBought()">{{song.getPrice()}}</div>
+      <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 panel-success" *ngIf="song.getIsBought()">Owned</div>
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button *ngIf="!song.getIsBought()" class="btn btn-success">Buy</button></div>
     </div>
   </a>
 </div>

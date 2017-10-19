@@ -28,6 +28,10 @@
         <div class="row">
           <p *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getArtist()}}</p>
         </div>
+        <div *ngIf="showBuy" class="row">
+          <p class="alert-danger">To listen the whole song</p>
+          <button class="btn btn-success">Buy</button>
+        </div>
       </div>
 
       <!--TODO: Insert dynamic artist album and track name from currentlyPlaying-->
