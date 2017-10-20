@@ -7,6 +7,6 @@ app.get('/test', function(req, res){
   res.json({result: "output"});
 });
 
-app.listen(8080, function(){
-  console.log('App is listening on port 8080!');
+app.listen(8081, function(){
+  console.log('App is listening on port 8081!');
 });
