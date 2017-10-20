@@ -88,12 +88,13 @@ public class login extends AppCompatActivity implements View.OnClickListener{
 
     private void sendLoginRequest(){
 
+        HashClass temp = new HashClass();
         String[] headersType = new String[2];
         String[] headersVal = new String[2];
         headersType[0] = "username";
         headersType[1] = "password";
         headersVal[0] = etUsername.getText().toString();
-        headersVal[1] = etPass.getText().toString();
+        headersVal[1] = temp.md5(etPass.getText().toString());
 
         final serverLink sender = new serverLink(this);
         sender.sendServerRequest(headersType, headersVal, "/api/login", true,new serverLink.OnDownloadTaskCompleted() {
