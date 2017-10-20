@@ -19,4 +19,8 @@ export class NavBarComponent implements OnInit {
     this. serverService.upload(x);
   }
 
+  search(event: Event){
+
+  }
+
 }

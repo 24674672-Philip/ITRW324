@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http} from "@angular/http";
-import {HttpHeaders} from "@angular/common/http";
+import {Md5} from 'ts-md5/dist/md5';
 
 
 @Injectable()
@@ -13,9 +13,8 @@ export class ServerService {
   login(username: string, password: string, callback){
     const header = new Headers();
     header.set('username',username);
-    header.append('password',password);
-
-    console.log(header.keys());
+    header.append('password', Md5.hashAsciiStr(password,false).toString());
+    console.log(header.values());
     this.http.post(this.url+'login', null, { headers: header})
       .subscribe(
         (response) => callback(response.json())
@@ -35,7 +34,7 @@ export class ServerService {
     userHeaders.append('lname',lname.trim());
     userHeaders.append('username',username.trim());
     userHeaders.append('email',email);
-    userHeaders.append('password',password);
+    userHeaders.append('password',Md5.hashAsciiStr(password,false).toString());
     userHeaders.append('birthdate',birthdate);
     this.http.post(this.url+'registeruser', null, {headers: userHeaders})
       .subscribe(
