@@ -41,7 +41,7 @@ export class SearchItemComponent implements OnInit {
   }
 
   hasSecondaryText(): boolean{
-    return isNullOrUndefined(this.secondaryText);
+    return !isNullOrUndefined(this.secondaryText);
   }
 
   itemClicked(){
