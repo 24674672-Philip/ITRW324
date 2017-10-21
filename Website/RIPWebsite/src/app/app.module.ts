@@ -37,6 +37,7 @@ import { EditAlbumListItemComponent } from './ripComponents/artists-container/ar
 import { WalletComponentNav} from './ripComponents/home-container/nav-bar/wallet/wallet.component';
 import { BuyContainerComponent } from './ripComponents/buy-container/buy-container.component';
 import { WalletComponent } from "./ripComponents/buy-container/wallet/wallet.component";
+import { SearchItemComponent } from './ripComponents/home-container/nav-bar/search-item/search-item.component';
 
 
 const router: Routes = [
@@ -80,7 +81,8 @@ const router: Routes = [
     EditAlbumListItemComponent,
     WalletComponent,
     BuyContainerComponent,
-    WalletComponentNav
+    WalletComponentNav,
+    SearchItemComponent
   ],
   imports: [
     BrowserModule,

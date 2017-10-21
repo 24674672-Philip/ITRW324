@@ -23,10 +23,6 @@ export class ServerService {
 
   }
 
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Register transaction start
-
   register(fname: string, lname: string, birthdate: string, country: string, city: string, adressline1: string
     ,addressline2: string,postalcode: string, email: string, username: string, password: string, callback){
     let userHeaders: Headers = new Headers();
@@ -196,6 +192,36 @@ export class ServerService {
       .subscribe((response)=>{
         callback(response.json())
       });
+  }
+
+  searchSongs(searchTerm: string, page: number, callback){
+    let headers = new Headers();
+    headers.append('searchterm', searchTerm);
+    headers.append('page', page.toString());
+    this.http.post(this.url + 'searchsongs',null, {headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      )
+  }
+
+  searchArtists(searchTerm: string, page: number, callback){
+    let headers = new Headers();
+    headers.append('searchterm', searchTerm);
+    headers.append('page', page.toString());
+    this.http.post(this.url + 'searchartists',null, {headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      )
+  }
+
+  searchAlbums(searchTerm: string, page: number, callback){
+    let headers = new Headers();
+    headers.append('searchalbums', searchTerm);
+    headers.append('page', page.toString());
+    this.http.post(this.url + 'searchsongs',null, {headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      )
   }
 
 

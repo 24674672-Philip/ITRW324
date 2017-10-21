@@ -1,0 +1,9 @@
+<div appPopupShadow class="row" style="margin-right: 0; margin-left: 0; cursor: pointer" (click)="itemClicked()" >
+  <div class="col-xs-2 col-sm-2 col-md-3 col-lg-3">
+    <img [src]="imgPath" class="img-responsive" style="max-height: 50px"/>
+  </div>
+  <div class="col-xs-10 col-sm-10 col-md-9 col-lg-9">
+    <h4 style="color: black;">{{titleText}}</h4>
+    <p *ngIf="hasSecondaryText()">{{secondaryText}}</p>
+  </div>
+</div>

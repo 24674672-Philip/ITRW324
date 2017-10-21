@@ -20,6 +20,28 @@
         <li><a [routerLink]="['../home']" class="hidden-sm hidden-md hidden-lg">Sign Out</a></li>
       </ul>
 
+      <div class="navbar-text" style="width: 40%;" >
+        <input class="form-control" placeholder="Search" (input)="search($event)" (focus)="isSearching = true" />
+        <div class="text-left" *ngIf="isSearching" style="background-color: white;" (click)="closeSearchBar()">
+
+          <div style="border-bottom: solid 1px black;">
+            <p style="font-weight: bold;color: black">Song Search Results</p>
+            <app-search-item *ngFor="let x of searchSongs" [songObj]="x"></app-search-item>
+          </div>
+
+          <div style="border-bottom: solid 1px black">
+            <p style="font-weight: bold;color: black">Album Search Results</p>
+            <app-search-item *ngFor="let x of searchAlbums" [albumObj]="x"></app-search-item>
+          </div>
+
+          <div style="border-bottom: solid 1px black">
+            <p style="font-weight: bold;color: black">Artist Search Results</p>
+            <app-search-item *ngFor="let x of searchArtists" [artistObj]="x"></app-search-item>
+
+          </div>
+
+        </div>
+      </div>
 
       <ul class="nav navbar-nav navbar-right">
         <li><app-wallet-nav></app-wallet-nav></li>

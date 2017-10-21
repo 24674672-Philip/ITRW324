@@ -7,8 +7,8 @@ export class Artist {
 
   }
 
-  setArtistImagePath(type: string, imageName: number){
-      this.artistImagePath = 'http://52.211.85.57:8080/api/image?type='+type+'&'+'image_name='+imageName;
+  setArtistImagePath(type: string, imageName: string){
+      this.artistImagePath = 'http://52.211.85.57:8080/api/image?type='+type+'&'+'image_name='+imageName.replace(' ','%20');
   }
 
   setArtistImageUrl(url: string){

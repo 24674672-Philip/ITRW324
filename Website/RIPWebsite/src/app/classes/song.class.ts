@@ -18,7 +18,7 @@ export class Song {
     this.songUrl = 'http://52.211.85.57:8080/api/music?token='+token+"&song="+this.getSongName().replace(' ','%20')+"&album="+this.getAlbum().replace(' ','%20')+"&artist="+this.getArtist().replace(' ', '%20');
   }
 
-  setSongImagePath(type: string, imageName: number){
+  setSongImagePath(type: string, imageName: string){
     this.imagePath = 'http://52.211.85.57:8080/api/image?type='+type+'&'+'image_name='+imageName;
   }
 
