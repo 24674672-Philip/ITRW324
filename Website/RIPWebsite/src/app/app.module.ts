@@ -38,7 +38,7 @@ import { WalletComponentNav} from './ripComponents/home-container/nav-bar/wallet
 import { BuyContainerComponent } from './ripComponents/buy-container/buy-container.component';
 import { WalletComponent } from "./ripComponents/buy-container/wallet/wallet.component";
 import { SearchItemComponent } from './ripComponents/home-container/nav-bar/search-item/search-item.component';
-import { AuthGuard } from './services/auth-guard.service';
+//import { AuthGuard } from './services/auth-guard.service';
 import { Error403Component } from './alerts/error-403/error-403.component';
 
 
@@ -46,10 +46,10 @@ const router: Routes = [
   {path: '', component: LandingPageContainerComponent},
   {path: 'login', component: LoginContainerComponent},
   {path: 'register', component: RegisterContainerComponent},
-  {path: 'home', component: HomeContainerComponent, canActivate: [AuthGuard]},
-  {path: 'artist', component: ArtistsContainerComponent, canActivate: [AuthGuard]},
-  {path: 'album', component: AlbumContainerComponent, canActivate: [AuthGuard]},
-  {path: 'wallet', component: BuyContainerComponent, canActivate: [AuthGuard]},
+  {path: 'home', component: HomeContainerComponent},//, canActivate: [AuthGuard]},
+  {path: 'artist', component: ArtistsContainerComponent},//, canActivate: [AuthGuard]},
+  {path: 'album', component: AlbumContainerComponent},//, canActivate: [AuthGuard]},
+  {path: 'wallet', component: BuyContainerComponent},//, canActivate: [AuthGuard]},
   {path: 'error403', component: Error403Component}
 ];
 
@@ -99,7 +99,7 @@ const router: Routes = [
     AuthService,
     MusicPlayerService,
     DataEmitterService,
-    AuthGuard
+    //AuthGuard
   ],
   bootstrap: [AppComponent],
 })

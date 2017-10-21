@@ -40,21 +40,21 @@
               Login
             </button>
           </div>
-
+          <br>
           <div class="row">
             <!--Only shows if login was successful-->
-            <div class="panel panel-success" *ngIf="loginSuccessFlag">Login Successful</div>
+            <div class="alert alert-success" *ngIf="loginSuccessFlag"><img src="../../../assets/success.png" width="25" height="25" alt="success" >Login Successful</div>
 
             <!--Only shows if login failed due to email not verified-->
-            <div class="panel panel-warning" *ngIf="loginNotVerifiedFlag">
-              <p>Email not verified yet. Please check your email or if you did not receive the email</p>
+            <div class="alert alert-warning" *ngIf="loginNotVerifiedFlag">
+              <p><img src="../../../assets/warning.png" width="25" height="25" alt="warning" >Email not verified yet. Please check your email or if you did not receive the email</p>
               <button class="btn btn-primary" (click)="resendVerificationEmail()">Resend Email</button> <!--TODO: implement resend email method-->
               <p *ngIf="verificationSent">Email verification sent again</p>
             </div>
 
             <!--Only shows if login was incorrect-->
-            <div class="panel panel-danger" *ngIf="loginFailedFlag" >
-              <p>Incorrect username and password combination</p>
+            <div class="alert alert-danger" *ngIf="loginFailedFlag" >
+              <p><img src="../../../assets/danger.png" width="25" height="25" alt="danger" > Incorrect username and password combination</p> 
             </div>
           </div>
 
