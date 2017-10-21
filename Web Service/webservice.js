@@ -6,6 +6,9 @@ var fs = require('fs');
 var ms = require('mediaserver');
 var cors = require('cors');
 var upload = require('express-fileupload')
+var path = require('path');
+var os = require('os');
+var Busboy = require('busboy');
 
 const app = express();
 
@@ -260,7 +263,7 @@ app.post('/api/getalbums', function(req, res){
 
 app.post('/api/getartists', function(req, res){
   console.log("/api/getartists");
-  var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists LIMIT ?,20;'
+  var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists LIMIT ?,3;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
 });
@@ -269,7 +272,7 @@ app.post('/api/searchsongs', function(req, res){
   console.log("/api/searchsongs");
   var val2 = req.headers['page'] * 20;
   var val1 = req.headers['searchterm'];
-  var sql = "SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details WHERE Title LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,20;"
+  var sql = "SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details WHERE Title LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,3;"
   var qry = require('./app/api')(sql,val2,con, res);
 });
 
@@ -277,7 +280,7 @@ app.post('/api/searchalbums', function(req, res){
   console.log("/api/searchalbums");
   var val2 = req.headers['page'] * 20;
   var val1 = req.headers['searchterm'];
-  var sql = "SELECT AlbumID, ArtistID, Artist, Album, image_name, profilepicture FROM artist_albums WHERE Album LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,20;"
+  var sql = "SELECT AlbumID, ArtistID, Artist, Album, image_name, profilepicture FROM artist_albums WHERE Album LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,3;"
   var qry = require('./app/api')(sql,val2,con, res);
 });
 
@@ -547,18 +550,31 @@ app.post('/api/passwordreset', function(req, res){
   });
 });
 
-app.post('/api/upload',function(req, res){
-  console.log('/api/upload');
-  if(req.files){
-    var file = req.files.filetoupload;
-    var filename = file.name;
-    file.mv("./images/" + filename, function(err){
-      if(err) res.send('error');
-      else {
-        res.send('done');
-      }
-    })
-  }
+app.get('/upload', function (req, res) {
+    res.send('<html><head></head><body>\
+               <form method="POST" enctype="multipart/form-data">\
+                <input type="text" name="textfield"><br />\
+                <input type="file" name="filefield"><br />\
+                <input type="submit">\
+              </form>\
+            </body></html>');
+  res.end();
+});
+
+// accept POST request on the homepage
+app.post('/upload', function (req, res) {
+    var busboy = new Busboy({ headers: req.headers });
+    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+      var saveTo = path.join('.', filename);
+      console.log('Uploading: ' + saveTo);
+      file.pipe(fs.createWriteStream(saveTo));
+    });
+    busboy.on('finish', function() {
+      console.log('Upload complete');
+      res.writeHead(200, { 'Connection': 'close' });
+      res.end("done biatches");
+    });
+    return req.pipe(busboy);
 });
 
 app.listen(8080, function(){
