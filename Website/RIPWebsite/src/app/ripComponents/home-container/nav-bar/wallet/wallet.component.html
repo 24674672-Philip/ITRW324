@@ -1,1 +1,11 @@
-<a [routerLink]="['../wallet']" class="navbar-text">{{balance+' Souls'}}</a>
+<a [routerLink]="['../wallet']" class="navbar-text">
+  <div class="row" style="margin-right: 0; margin-left: 0">
+    <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6" style="margin-left: 0; margin-right: 0; padding-left: 1px; padding-right: 0;">
+      {{balance}}
+    </div>
+    <div class="col-sm-6 col-xs-6 col-md-6 col-lg-6" style="padding-left: 1px; padding-right: 0;">
+      <img src="../../../../../assets/currency.png" style="height: 20px; width: 20px; "/>
+    </div>
+  </div>
+
+</a>

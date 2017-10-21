@@ -29,8 +29,6 @@ export class AuthService {
     this.email = email;
   }
 
-
-
   getAuthToken(){
     return this.authToken;
   }
@@ -69,6 +67,4 @@ export class AuthService {
       return true;
     }
   }
-
-
 }
