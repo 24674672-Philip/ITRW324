@@ -1,0 +1,32 @@
+#container{
+    padding: 0;
+    margin: 0;
+    background-image: url("../../../assets/loginBackground.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .box-alert-warning{
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 150px;
+    height: 170px;
+    border-radius: 16px;
+  }
+
+  .btnstyle{
+    color: white;
+    
+    border-radius: 100px;
+    border-color: #E59D9D;
+    border-width: 2px;
+    font-weight: bold;
+  }
+
+  p{
+     
+      font-size: 18px;
+      font-weight: bold;
+  }
