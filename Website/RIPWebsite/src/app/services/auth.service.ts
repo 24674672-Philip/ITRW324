@@ -51,7 +51,24 @@ export class AuthService {
     return this.email;
   }
 
+  signOut(){
+    this.setAuthToken(null);
+    this.setUsername(null);
+    this.setLName(null);
+    this.setFName(null);
+    this.setEmail(null);
+  }
 
+  isAuthenticated(){
+    if(this.authToken == null)
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
 
 
 }

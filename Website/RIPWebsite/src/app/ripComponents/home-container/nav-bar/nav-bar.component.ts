@@ -70,4 +70,7 @@ export class NavBarComponent implements OnInit {
     this.isSearching = false;
   }
 
+  onSignOut(){
+    this.authService.signOut();
+  }
 }
