@@ -103,7 +103,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                 try {
                     tvReturn.setText(result.getString("login"));
                     if(result.getString("login").contains("success")){
-                        Intent intent = new Intent(new Intent(login.this,musicexplorer.class));
+                        Intent intent = new Intent(new Intent(login.this,MainActivity.class));
                         intent.putExtra("token",result.getString("token"));
                         startActivity(intent);
                     }

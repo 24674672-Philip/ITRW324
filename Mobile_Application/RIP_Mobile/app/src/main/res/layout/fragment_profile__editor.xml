@@ -5,7 +5,7 @@
     android:background="@drawable/bg_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tcjvr.ripmobile.MainActivity">
+    tools:context="com.example.phili.rip_mobile.MainActivity">
 
 
     <TextView

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_myplaylist"
     android:orientation="vertical"
-    tools:context="com.example.tcjvr.ripmobile.MainActivity"
+    tools:context="com.example.phili.rip_mobile.MainActivity"
     android:weightSum="1">
 
     <SearchView
