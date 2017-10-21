@@ -3,7 +3,7 @@
     android:id="@+id/LinearLayout01"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/mplayerback2"
+    android:background="@drawable/bg_musicplayer"
     android:orientation="vertical"
     android:weightSum="20"
 
@@ -19,7 +19,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="5dp"
-       >
+        >
         <TextView
             android:id="@+id/txtSong"
             android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
             android:id="@+id/albumart"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:background="@drawable/defaultsong"
+            android:background="@drawable/img_default_song"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="19dp" />
@@ -61,7 +61,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/playlist"
+            android:background="@drawable/ic_playlist"
             android:layout_marginEnd="21dp"
             android:layout_marginBottom="17dp"
             android:layout_alignParentBottom="true"
@@ -98,35 +98,35 @@
         android:layout_below="@+id/seekBar"
         android:layout_alignParentStart="true">
 
-            <ImageButton
-                android:id="@+id/backwards"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/backorange"
-                android:layout_alignTop="@+id/fastforward"
-                android:layout_toStartOf="@+id/play2" />
+        <ImageButton
+            android:id="@+id/backwards"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/btn_backward"
+            android:layout_alignTop="@+id/fastforward"
+            android:layout_toStartOf="@+id/play2" />
 
 
-            <ImageButton
-                android:id="@+id/play2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/playorange"
-                />
+        <ImageButton
+            android:id="@+id/play2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_play"
+            />
 
 
 
-            <ImageButton
-                android:id="@+id/fastforward"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:padding="10dp"
-                android:background="@drawable/orangeff"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/play2" />
+        <ImageButton
+            android:id="@+id/fastforward"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="10dp"
+            android:background="@drawable/btn_forward"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/play2" />
 
 
 

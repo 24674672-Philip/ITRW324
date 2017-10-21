@@ -27,7 +27,6 @@
         <activity
             android:name=".registration"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".main" />
         <activity
             android:name=".musicplayer"
             android:theme="@style/AppTheme" />

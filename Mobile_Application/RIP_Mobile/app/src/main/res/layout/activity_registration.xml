@@ -5,108 +5,106 @@
     android:layout_width="fill_parent"
     android:isScrollContainer="false"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_op3">
-
-        <LinearLayout
-            android:id="@+id/LinearLayout01"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="288dp"
-                android:layout_height="240dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_borders_black"
-                android:orientation="vertical"
-                android:padding="20dp"
-                android:layout_marginTop="50dp"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:text="Personal Details:"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="25dp" />
-
-                <EditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/rounded_edttext"
-                    android:hint="Name"
-                    android:paddingLeft="10dp"
-                    android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray"
-                    android:layout_weight="0.02" />
-
-                <EditText
-                    android:id="@+id/etSurname"
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/rounded_edttext"
-                    android:paddingLeft="10dp"
-                    android:hint="Surname"
-                    android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray"
-                   />
-
-
-                <EditText
-                    android:id="@+id/etDOB"
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/rounded_edttext"
-                    android:paddingLeft="10dp"
-                    android:hint="Date of Birth"
-                    android:inputType="date"
-                    android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray"
-                />
-            </LinearLayout>
-
-
-
+    android:background="@drawable/bg_register">
 
     <LinearLayout
-        android:layout_width="284dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_borders_black"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:layout_marginTop="20dp">
+        android:id="@+id/LinearLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="288dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_borders_black"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="Personal Details:"
+                android:textColor="@color/colorWhite"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rounded_edttext"
+                android:hint="Name"
+                android:paddingLeft="10dp"
+                android:textColor="#36454f"
+                android:textColorHighlight="@color/colorGray" />
+
+            <EditText
+                android:id="@+id/etSurname"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rounded_edttext"
+                android:paddingLeft="10dp"
+                android:hint="Surname"
+                android:textColor="#36454f"
+                android:textColorHighlight="@color/colorGray"
+                />
+
+
+            <EditText
+                android:id="@+id/etDOB"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rounded_edttext"
+                android:paddingLeft="10dp"
+                android:hint="Date of Birth"
+                android:inputType="date"
+                android:textColor="#36454f"
+                android:textColorHighlight="@color/colorGray"
+                />
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="284dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Address Details:"
-            android:textColor="@color/colorWhite"
-            android:layout_margin="10dp"
-            android:textSize="25dp"
-            android:typeface="sans" />
+            android:background="@drawable/rounded_borders_black"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="20dp">
 
-        <EditText
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Address Details:"
+                android:textColor="@color/colorWhite"
+                android:layout_margin="10dp"
+                android:textSize="25dp"
+                android:typeface="sans" />
+
+            <EditText
                 android:id="@+id/etCountry"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
@@ -119,9 +117,9 @@
                 android:hint="Country"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-                 />
+                />
 
-        <EditText
+            <EditText
                 android:id="@+id/etCity"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
@@ -134,9 +132,9 @@
                 android:hint="City"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-           />
+                />
 
-        <EditText
+            <EditText
                 android:id="@+id/etPostalCodes"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
@@ -149,9 +147,9 @@
                 android:hint="Postal Code"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-          />
+                />
 
-        <EditText
+            <EditText
                 android:id="@+id/etAdl1"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
@@ -164,9 +162,9 @@
                 android:hint="Address Line 1"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-      />
+                />
 
-        <EditText
+            <EditText
                 android:id="@+id/etAdl2"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
@@ -179,105 +177,101 @@
                 android:hint="Address Line 2"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
-         />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="282dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/rounded_borders_black"
-                android:orientation="vertical"
-                android:padding="20dp"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Login Details:"
-                    android:textColor="@color/colorWhite"
-                    android:layout_margin="10dp"
-                    android:textSize="25dp"
-                   />
-
-                <EditText
-                    android:id="@+id/etUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/rounded_edttext"
-                    android:drawableLeft="@drawable/iconuser"
-                    android:paddingLeft="10dp"
-                    android:hint="Username"
-                    android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray"
-                  />
-
-                <EditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal"
-                    android:drawableLeft="@drawable/iconemail"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="0.25"
-                    android:background="@drawable/rounded_edttext"
-                    android:paddingLeft="10dp"
-                    android:hint="Email"
-                    android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray"
-                     />
-
-                <EditText
-                    android:id="@+id/etPass"
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal"
-                    android:drawableLeft="@drawable/iconpassword"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="0.25"
-                    android:background="@drawable/rounded_edttext"
-                    android:paddingLeft="10dp"
-                    android:hint="Password"
-                    android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray"
-               />
-
-                <EditText
-                    android:id="@+id/etRetypePass"
-                    android:layout_width="match_parent"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal"
-                    android:drawableLeft="@drawable/iconpassword"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="0.25"
-                    android:background="@drawable/rounded_edttext"
-                    android:paddingLeft="10dp"
-                    android:hint="Retype Password"
-                    android:textColor="#36454f"
-                    android:textColorHighlight="@color/colorGray" />
-            </LinearLayout>
-
-
-            <ImageView
-                android:id="@+id/btnRegister"
-                android:layout_width="100dp"
-                android:layout_margin="30dp"
-                android:layout_height="100dp"
-                android:src="@drawable/done"
-
-
-                android:layout_gravity="center_horizontal"
-
-               />
+                />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="282dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_borders_black"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Login Details:"
+                android:textColor="@color/colorWhite"
+                android:layout_margin="10dp"
+                android:textSize="25dp"
+                />
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/rounded_edttext"
+                android:drawableLeft="@drawable/sml_ic_user"
+                android:paddingLeft="10dp"
+                android:hint="Username"
+                android:textColor="#36454f"
+                android:textColorHighlight="@color/colorGray"
+                />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:drawableLeft="@drawable/sml_icn_email"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/rounded_edttext"
+                android:paddingLeft="10dp"
+                android:hint="Email"
+                android:textColor="#36454f"
+                android:textColorHighlight="@color/colorGray"
+                />
+
+            <EditText
+                android:id="@+id/etPass"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:drawableLeft="@drawable/sml_ic_password"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/rounded_edttext"
+                android:paddingLeft="10dp"
+                android:hint="Password"
+                android:textColor="#36454f"
+                android:textColorHighlight="@color/colorGray"
+                />
+
+            <EditText
+                android:id="@+id/etRetypePass"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:drawableLeft="@drawable/sml_ic_password"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/rounded_edttext"
+                android:paddingLeft="10dp"
+                android:hint="Retype Password"
+                android:textColor="#36454f"
+                android:textColorHighlight="@color/colorGray" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/btnRegister"
+            android:layout_width="100dp"
+            android:layout_margin="30dp"
+            android:layout_height="100dp"
+            android:src="@drawable/btn_done"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
 
 
 </ScrollView>
