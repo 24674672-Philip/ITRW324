@@ -96,9 +96,11 @@
               <input placeholder="Insert a valid email address" (blur)="checkEmail()"  [(ngModel)]="email" (input)="validateEmail($event)" style="text-align: center;" class="form-control"/>
             </div>
             <div class=" col-sm-2 col-md-2 col-lg-2">
-              <p *ngIf="!emailValid" style="text-wrap: none">Invalid</p>
-              <p *ngIf="emailValid" style="text-wrap: none">Valid</p>
-              <p *ngIf="!emailAvailable && emailValid" class="alert-danger text-nowrap">Email Taken</p>
+                <p *ngIf="!emailAvailable && emailValid" class="text-nowrap"><img src="../../../assets/danger.png" width="32" height="32" alt="danger"></p>
+            </div>
+            <div class=" col-sm-12 col-md-12 col-lg-12">
+              <p *ngIf="!emailValid" style="text-wrap: none;" class="text-danger">Invalid email entered</p>
+              <p *ngIf="emailValid" style="text-wrap: none;" class="text-success">Valid email entered</p>   
             </div>
           </div>
 
@@ -110,7 +112,7 @@
               <input placeholder="Insert username" (blur)="checkUsername()" [(ngModel)]="username" style="text-align: center;" class="form-control"/>
             </div>
             <div class=" col-sm-2 col-md-2 col-lg-2">
-              <p class="text-nowrap" *ngIf="!usernameAvailable" class="alert-danger">Username already in use!</p>
+              <p class="text-nowrap" *ngIf="!usernameAvailable" ><img src="../../../assets/danger.png" width="32" height="32" alt="danger"></p>
             </div>
           </div>
 
@@ -122,8 +124,11 @@
               <input placeholder="Must be longer than 8 characters" [(ngModel)]="password" (input)="validatePassword($event)" style="text-align: center;" class="form-control" type="password"/>
             </div>
             <div class=" col-sm-2 col-md-2 col-lg-2">
-              <p *ngIf="!passwordValid" style="text-wrap: none">Invalid</p>
-              <p *ngIf="passwordValid" style="text-wrap: none">Valid</p>
+              <p *ngIf="passwordValid"><img src="../../../assets/success.png" width="32" height="32" alt="success" ></p>
+            </div>
+            <div class=" col-sm-12 col-md-12 col-lg-12">
+              <p *ngIf="!passwordValid" style="text-wrap: none;" class="text-danger">Invalid password entered</p>
+              <p *ngIf="passwordValid" style="text-wrap: none;" class="text-success">Valid password entered</p>
             </div>
           </div>
 
@@ -132,9 +137,16 @@
           <div class="row">
             <div class=" col-sm-2 col-md-2 col-lg-2"></div>
             <div class=" col-sm-8 col-md-8 col-lg-8">
-              <input placeholder="Retype password" [(ngModel)]="confirmPassword"  style="text-align: center;" class="form-control" type="password"/>
+              <input (input)="confirmPasswords()" placeholder="Retype password" [(ngModel)]="confirmPassword"  style="text-align: center;" class="form-control" type="password"/>
             </div>
-            <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+            <div class=" col-sm-2 col-md-2 col-lg-2">
+                <p *ngIf="confirmedPassword"><img src="../../../assets/success.png" width="32" height="32" alt="success" ></p>
+                <p *ngIf="!confirmedPassword"><img src="../../../assets/danger.png" width="32" height="32" alt="danger" ></p>
+            </div>
+            <div class=" col-sm-12 col-md-12 col-lg-12">
+                <p *ngIf="!confirmedPassword" style="text-wrap: none;" class="text-danger">Password don't match</p>
+                <p *ngIf="confirmedPassword" style="text-wrap: none;" class="text-success">Password matches</p>
+            </div>
           </div>
 
 

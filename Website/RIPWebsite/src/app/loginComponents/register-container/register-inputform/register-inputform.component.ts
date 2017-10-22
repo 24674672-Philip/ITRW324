@@ -26,7 +26,7 @@ export class RegisterInputFormComponent implements OnInit {
   emailValid: boolean;
   emailAvailable:boolean;
   usernameAvailable: boolean;
-
+  confirmedPassword: boolean;
 
   constructor(private serverService: ServerService, private router: Router) {
     this.username='';
@@ -45,7 +45,7 @@ export class RegisterInputFormComponent implements OnInit {
     this.country = '';
     this.emailAvailable=true;
     this.usernameAvailable=true;
-
+    this.confirmedPassword=false;
   }
 
   ngOnInit() {
@@ -81,6 +81,14 @@ export class RegisterInputFormComponent implements OnInit {
     return false;
   }
 
+  confirmPasswords(){
+    if(this.password == this.confirmPassword){
+      this.confirmedPassword = true;
+    }
+    else{
+      this.confirmedPassword = false;
+    }
+  }
 
 
 //This code is needed for the login inputform and not for the register form
