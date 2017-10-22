@@ -49,7 +49,6 @@ public class serverLink{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                taskCompleted.onTaskCompleted(null,false,"gaaaaaaaaaaaaaawsh");
                 if(error.equals(null)){
                     taskCompleted.onTaskCompleted(null,false,error.getMessage().toString());
                 }
