@@ -97,7 +97,7 @@ app.post('/api/setaddress', function(req, res){
   var sql = 'UPDATE song SET Country = ?, City = ?, AddressLine1 = ?, AddressLine2 = ?, PostalCode = ? WHERE userid = ?;';
   var val1 = req.headers["country"];
   var val2 = req.headers["city"];
-  var val3 = req.headers["addline1";
+  var val3 = req.headers["addline1"];
   var val4 = req.headers["addline2"];
   var val5 = req.headers["postalcode"];
   var val6 = req.headers["userid"];
@@ -635,7 +635,9 @@ app.post('/api/uploadImage', function(req, res) {
         if (err)
           return res.sendStatus(500);
 
-        res.json({result: 'File uploaded!'});
+          var sql = "UPDATE users SET profilepicture = ? WHERE user_id = ?";
+          var val = req.headers["userid"];
+          var qry = require('./app/update')(sql,  [uploadedFile.name,val], con, res);
       });
     }
     else if(req.headers["type"] === "album"){//album image
@@ -643,7 +645,9 @@ app.post('/api/uploadImage', function(req, res) {
         if (err)
           return res.sendStatus(500);
 
-        res.json({result: 'File uploaded!'});
+          var sql = "UPDATE album SET image_name = ? WHERE albumID = ?";
+          var val = req.headers["albumID"];
+          var qry = require('./app/update')(sql, [uploadedFile.name,val], con, res);
       });
     }
     else {
