@@ -186,6 +186,7 @@
                         android:layout_centerHorizontal="true">
 
                         <TextView
+                            android:id="@+id/bio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -197,7 +198,7 @@
                             android:typeface="sans" />
 
                         <EditText
-                            android:id="@+id/etName"
+                            android:id="@+id/etBio"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
