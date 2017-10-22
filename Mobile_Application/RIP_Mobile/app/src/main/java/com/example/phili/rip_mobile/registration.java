@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,7 @@ public class registration extends AppCompatActivity implements View.OnClickListe
                 Log.i("onclick",e.getMessage().toString());
             }
         }
+
     }
 
     private void sendRegisterRequest(){
@@ -101,8 +103,6 @@ public class registration extends AppCompatActivity implements View.OnClickListe
         headersVal[3] = etLname.getText().toString();
         headersVal[4] = etEmail.getText().toString();
         headersVal[5] = etDOB.getText().toString();
-
-
 
         final serverLink sender = new serverLink(this);
         sender.sendServerRequest(headersType, headersVal, "/api/registeruser", true,new serverLink.OnDownloadTaskCompleted() {
@@ -167,13 +167,19 @@ public class registration extends AppCompatActivity implements View.OnClickListe
     public boolean textValidator(){
         boolean isValidated;
         String message;
+        //String handling for the DOB
         String sDOB = etDOB.getText().toString();
         char first = sDOB.charAt(4);
         char second = sDOB.charAt(7);
-
+        if ((first == '-') & (second == '-'))
+        {
+            isValidated = false;
+            message = "";
+        }
         if(!etPassword.getText().toString().matches(etPassword2.getText().toString())){
             isValidated = false;
-            message = "passwords not matching";
+            message = "passwords are not matching";
+
         }
         else if (etFname.getText().toString().matches("")){
             isValidated = false;
@@ -213,11 +219,11 @@ public class registration extends AppCompatActivity implements View.OnClickListe
         }
         else if (etPassword.getText().toString().matches("")){
             isValidated = false;
-            message = "Missing: Password 1";
+            message = "Missing: Password";
         }
         else if (etPassword2.getText().toString().matches("")){
             isValidated = false;
-            message = "Missing: Password 2";
+            message = "Please confirm your password";
         }
         else if ((first != '-') && (second != '-'))
         {
@@ -236,13 +242,10 @@ public class registration extends AppCompatActivity implements View.OnClickListe
             isValidated = true;
             message = "success";
         }
-
         Log.i("onclick",message);
         Toast toast = Toast.makeText(this,message,Toast.LENGTH_LONG);
         toast.show();
         return isValidated;
     }
-
-
 
 }
