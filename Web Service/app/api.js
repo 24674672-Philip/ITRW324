@@ -11,7 +11,7 @@ module.exports = function(sql, val, con, res){
             connection.release();
             if(err) {res.json(err);}
             else if(!err) {
-                res.json({result: rows});
+                res.json({result: rows});//returns array
             }
     });
   });

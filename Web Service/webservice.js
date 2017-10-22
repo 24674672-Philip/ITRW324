@@ -1,3 +1,4 @@
+//packages used
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var mysql = require('mysql');
@@ -10,11 +11,14 @@ var path = require('path');
 var os = require('os');
 var Busboy = require('busboy');
 
+//creates app object of express
 const app = express();
 
+//Allows headers from this ip/adderss and uses fileUpload
 app.use(cors({origin: 'http://ripmusic.tk/'}));
 app.use(fileUpload());
 
+//creates connection pool limiting to 30 concurrent conenctions
 var con = mysql.createPool({
   connectionLimit : 30,
   host: "52.211.85.57",
@@ -25,6 +29,7 @@ var con = mysql.createPool({
   debug: true
 });
 
+//ensures that the authentication header is there
 function ensureToken(req, res, next){
   const bearerHeader = req.headers["authentication"];
   if(typeof bearerHeader !== 'undefined'){
@@ -38,11 +43,7 @@ function ensureToken(req, res, next){
   }
 }
 
-app.get('/api', function(req, res){
-  console.log("/api");
-  var qry = require('./app/api')('SELECT * FROM users','',con, res);
-});
-
+//test to see if webservice is online
 app.get('/test', function(req, res){
   console.log('test');
   res.json({
@@ -50,16 +51,19 @@ app.get('/test', function(req, res){
   });
 });
 
+//calls login module
 app.post('/api/login', function(req, res){
   console.log("/api/login");
   var qry = require('./app/login')(req, res, con, jwt);
 });
 
+//calls register module
 app.post('/api/registeruser', function(req, res){
   console.log("/api/registeruser");
   var qry = require('./app/register')(req, res, con);
 });
 
+//registers user address
 app.post('/api/registeraddress', function(req, res){
   console.log("/api/registeruser");
 
@@ -77,23 +81,13 @@ app.post('/api/registeraddress', function(req, res){
 
 });
 
-app.get('/api/protected', ensureToken, function(req, res){
-  console.log("/api/protected");
-  jwt.verify(req.token, 'blockchain', function(err, data){
-    if(err){
-      res.sendStatus(403);
-    }
-    else {
-      var qry = require('./app/api')('SELECT * FROM users','',con, res);
-    }
-  });
-});
-
+//Activate user account from email link
 app.get('/api/activate', function(req, res){
   console.log("/api/activate");
   var qry = require('./app/activate')(req, res, con);
 });
 
+//Gets music from server
 app.get('/api/music', function(req, res){
   console.log("/api/music");
   var token = req.query.token;
@@ -101,14 +95,14 @@ app.get('/api/music', function(req, res){
     if(err){
       res.sendStatus(403);
     }
-    else {
+    else {//Where music is located on the server
       var songName = req.query.song;
       var songAlbum = req.query.album;
       var songArtist = req.query.artist;
     	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
     	fs.exists(file,function(exists){
     		if(exists)
-    		{
+    		{//if music exists it will pipe
           ms.pipe(req,res,file);
           var qry = require('./app/songplayed')(con, res, req);
     		}
@@ -121,6 +115,7 @@ app.get('/api/music', function(req, res){
   })
 });
 
+//download music file
 app.get('/api/download', function(req, res){
   console.log("/api/download");
   var token = req.query.token;
@@ -135,7 +130,7 @@ app.get('/api/download', function(req, res){
     	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
       fs.exists(file,function(exists){
     		if(exists)
-    		{
+    		{//sends the file with headers
     			res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
     			res.setHeader('Content-Type', 'application/audio/mpeg3')
     			var rstream = fs.createReadStream(file);
@@ -151,6 +146,7 @@ app.get('/api/download', function(req, res){
   })
 });
 
+//checks if username exists
 app.post('/api/checkusername', function(req, res){
   console.log("/api/checkusername");
   var uName = req.headers["username"];
@@ -165,6 +161,7 @@ app.post('/api/checkusername', function(req, res){
   }
 });
 
+//checks if email exists
 app.post('/api/checkemail', function(req, res){
   console.log("/api/checkemail");
   var emailA = req.headers["email"];
@@ -179,23 +176,25 @@ app.post('/api/checkemail', function(req, res){
   }
 });
 
+//resends validation email
 app.post('/api/resendemail', function(req, res){
   console.log("/api/resendemail");
   var user = req.headers["username"];
   var sql = 'SELECT emailHash, email FROM users WHERE username = ?';
-  if(user !== undefined || user !== ""){
+  if(user !== undefined || user !== ""){//checks if user exists
     var qry = require('./app/resendemail')(sql,user,con, res);
   }
   else {res.json({error: "welp"});}
 });
 
+//sends image
 app.get('/api/image', function(req, res){
   console.log("/api/image");
   if (req.query.type == "users") {
     var fileName = req.query.image_name;
     console.log("filename: " + fileName);
     var file = __dirname + '\\images\\users\\' + fileName;
-    fs.exists(file,function(exists){
+    fs.exists(file,function(exists){//if user and exists
       if(exists)
       {
         ms.pipe(req,res,file);
@@ -209,7 +208,7 @@ app.get('/api/image', function(req, res){
     var fileName = req.query.image_name;
     console.log("filename: " + fileName);
     var file = __dirname + '\\images\\albums\\' + fileName;
-    fs.exists(file,function(exists){
+    fs.exists(file,function(exists){//if album image and exists
       if(exists)
       {
         ms.pipe(req,res,file);
@@ -225,6 +224,7 @@ app.get('/api/image', function(req, res){
   }
 });
 
+//gets the name of the profilepicture or album art
 app.get('/api/getimagename', function(req, res){
   console.log("/api/getimagename");
   if (req.headers["type"] == "albums") {
@@ -236,6 +236,7 @@ app.get('/api/getimagename', function(req, res){
   }
 });
 
+//checks if token is still active
 app.get('/api/validtoken',ensureToken, function(req, res){
   jwt.verify(req.token, 'blockchain', function(err, data){
     if (err) {
@@ -247,6 +248,7 @@ app.get('/api/validtoken',ensureToken, function(req, res){
   });
 });
 
+//returns song info
 app.post('/api/getsongs', function(req, res){
   console.log("/api/getsongs");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details LIMIT ?,20;'
@@ -254,6 +256,7 @@ app.post('/api/getsongs', function(req, res){
   var qry = require('./app/api')(sql,val,con, res);
 });
 
+//returns album info
 app.post('/api/getalbums', function(req, res){
   console.log("/api/getalbums");
   var sql = 'SELECT AlbumID, ArtistID, Artist, Album, image_name, profilepicture FROM artist_albums LIMIT ?,20;'
@@ -261,6 +264,7 @@ app.post('/api/getalbums', function(req, res){
   var qry = require('./app/api')(sql,val,con, res);
 });
 
+//returns artist info
 app.post('/api/getartists', function(req, res){
   console.log("/api/getartists");
   var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists LIMIT ?,3;'
@@ -268,6 +272,7 @@ app.post('/api/getartists', function(req, res){
   var qry = require('./app/api')(sql,val,con, res);
 });
 
+//returns song search results
 app.post('/api/searchsongs', function(req, res){
   console.log("/api/searchsongs");
   var val2 = req.headers['page'] * 20;
@@ -276,6 +281,7 @@ app.post('/api/searchsongs', function(req, res){
   var qry = require('./app/api')(sql,val2,con, res);
 });
 
+//returns album search results
 app.post('/api/searchalbums', function(req, res){
   console.log("/api/searchalbums");
   var val2 = req.headers['page'] * 20;
@@ -284,6 +290,7 @@ app.post('/api/searchalbums', function(req, res){
   var qry = require('./app/api')(sql,val2,con, res);
 });
 
+//returns artist search results
 app.post('/api/searchartists', function(req, res){
   console.log("/api/searchartists");
   var val2 = req.headers['page'] * 20;
@@ -292,41 +299,48 @@ app.post('/api/searchartists', function(req, res){
   var qry = require('./app/api')(sql,val2,con, res);
 });
 
+//calls artist module
 app.post('/api/getartist', function(req, res){
   console.log("/api/getartist");
   var qry = require('./app/artist')(con, res, req);
 });
 
+//returns spesific song details
 app.post('/api/getsongdetails', function(req, res){
   console.log("/api/getsongdetails");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details WHERE Title = ?;'
   var qry = require('./app/api')(sql,req.headers["songname"],con, res);
 });
 
+//returns spesific albums songs
 app.post('/api/getalbumsongs', function(req, res){
   console.log("/api/getalbumsongs");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, artist_image, Explicit, Released FROM song_details WHERE AlbumID = ?;'
   var qry = require('./app/api')(sql,req.headers["albumid"],con, res);
 });
 
+//returns spesific artists albums
 app.post('/api/artistalbums', function(req, res){
   console.log("/api/artistalbums");
   var sql = 'SELECT AlbumID, ArtistID, Artist, Album, image_name, Released FROM artist_albums WHERE ArtistID = ?;'
   var qry = require('./app/api')(sql,req.headers["artistid"],con, res);
 });
 
+//returns items in playlist
 app.post('/api/playlistitems', function(req, res){
   console.log("/api/playlistitems");
   var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM playlist_items WHERE playlistid = ?;'
   var qry = require('./app/api')(sql,req.headers["playlistid"],con, res);
 });
 
+//returns users playlists
 app.post('/api/userplaylists', function(req, res){
   console.log("/api/userplaylists");
   var sql = 'SELECT Playlist, Created, Items_in_playlist, idplaylist_details AS playlistid FROM user_playlists WHERE Username = ? ORDER BY Created DESC;'
   var qry = require('./app/api')(sql,req.headers["username"],con, res);
 });
 
+//allows it to edit user bio
 app.post('/api/edituserbio', ensureToken, function(req, res){
   console.log("/api/edituser");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -339,6 +353,7 @@ app.post('/api/edituserbio', ensureToken, function(req, res){
   });
 });
 
+//creatoin of new albunm
 app.post('/api/createalbum', ensureToken, function(req, res){
   console.log("/api/createalbum");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -356,6 +371,7 @@ app.post('/api/createalbum', ensureToken, function(req, res){
   });
 });
 
+//edit album details
 app.post('/api/editalbum', ensureToken, function(req, res){
   console.log("/api/editalbum");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -373,6 +389,7 @@ app.post('/api/editalbum', ensureToken, function(req, res){
   });
 });
 
+//release an album
 app.post('/api/releasealbum', ensureToken, function(req, res){
   console.log("/api/releasealbum");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -388,6 +405,7 @@ app.post('/api/releasealbum', ensureToken, function(req, res){
   });
 });
 
+//delete an album
 app.post('/api/deletealbum', ensureToken, function(req, res){
   console.log("/api/deletealbum");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -402,6 +420,7 @@ app.post('/api/deletealbum', ensureToken, function(req, res){
   });
 });
 
+//add a song (without upload)
 app.post('/api/createsong', ensureToken, function(req, res){
   console.log("/api/createsong");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -421,6 +440,7 @@ app.post('/api/createsong', ensureToken, function(req, res){
   });
 });
 
+//edit a songs details such as names
 app.post('/api/editsong', ensureToken, function(req, res){
   console.log("/api/editsong");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -437,6 +457,7 @@ app.post('/api/editsong', ensureToken, function(req, res){
   });
 });
 
+//deteles song
 app.post('/api/deletesong', ensureToken, function(req, res){
   console.log("/api/deletesong");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -451,6 +472,7 @@ app.post('/api/deletesong', ensureToken, function(req, res){
   });
 });
 
+//buy coins from blockchain network
 app.post('/api/buycoins', ensureToken, function(req, res){
   console.log("/api/buycoins");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -461,9 +483,9 @@ app.post('/api/buycoins', ensureToken, function(req, res){
 
     }
   });
-
 });
 
+//buys song on blockchain network
 app.post('/api/buysong', ensureToken, function(req, res){
   console.log("/api/buysong");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -476,6 +498,7 @@ app.post('/api/buysong', ensureToken, function(req, res){
   });
 });
 
+//gets the songs bought on the network
 app.get('/api/songsbought', ensureToken, function(req, res){
   console.log("/api/songsbought");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -489,6 +512,7 @@ app.get('/api/songsbought', ensureToken, function(req, res){
 
 });
 
+//gets details of the purchase
 app.get('/api/boughtsongdetails', ensureToken, function(req, res){
   console.log("/api/boughtsongdetails");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -501,18 +525,21 @@ app.get('/api/boughtsongdetails', ensureToken, function(req, res){
   });
 });
 
+//gets the avg cost of songs
 app.get('/api/getavgsongcost', function(req, res){
   console.log("/api/getavgsongcost");
   var sql = 'SELECT ROUND(AVG(price),2) as result FROM song';
   var qry = require('./app/apisend')(sql, '', con, res);
 });
 
+//gets the avg costs of albums
 app.get('/api/getavgalbumcost', function(req, res){
   console.log("/api/getavgalbumcost");
   var sql = 'SELECT ROUND(AVG(price),2) as result FROM album';
   var qry = require('./app/apisend')(sql, '', con, res);
 });
 
+//gets the users balance of coins
 app.get('/api/userbalance',ensureToken, function(req, res){
   console.log("/api/userbalance");
   jwt.verify(req.token, 'blockchain', function(err, data){
@@ -527,11 +554,13 @@ app.get('/api/userbalance',ensureToken, function(req, res){
   });
 });
 
+//password reset email
 app.post('/api/sendpasswordreset', function(req, res){
   console.log("/api/sendpasswordreset");
   var emailResetPassword = require('./app/resetpassword')(req.headers["email"],jwt);
 });
 
+//checks code and if true resets password
 app.post('/api/passwordreset', function(req, res){
   console.log("/api/sendpasswordreset");
   jwt.verify(req.headers["token"],'passreset',function(err,data){
@@ -550,48 +579,13 @@ app.post('/api/passwordreset', function(req, res){
   });
 });
 
-app.get('/upload', function (req, res) {
-    res.sendFile(__dirname + "/upload.html");
-});
-
-//Image upload, checks for type (user or album)
-app.post('/uploadImage', function(req, res) {
-  if (!req.files)
-    return res.status(400).send('No files were uploaded.');
-
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let uploadedFile = req.files.uploadedFile;
-
-  //Is an image
-  if(uploadedFile.mimetype.indexOf("image") > -1){
-    if(req.query.type === "user"){//user image
-      uploadedFile.mv('./images/users' + uploadedFile.name, function(err) {
-        if (err)
-          return res.sendStatus(500);
-
-        res.json({result: 'File uploaded!'});
-      });
-    }
-    else if(req.query.type === "album"){//album image
-      uploadedFile.mv('./images/albums/' + uploadedFile.name, function(err) {
-        if (err)
-          return res.sendStatus(500);
-
-        res.json({result: 'File uploaded!'});
-      });
-    }
-    else {
-      res.json({result: 'Incorrect type'});
-    }
-  }
-});
-
+//uploads a new image (change pp or album image)
 app.post('/api/uploadImage', function(req, res) {
   console.log("/api/uploadImage");
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+
   let uploadedFile = req.files.artPicture;
   console.log(req.files.artPicture);
   //Is an image
@@ -618,6 +612,7 @@ app.post('/api/uploadImage', function(req, res) {
   }
 });
 
+//for uploading an album (adds image for album and song array)
 app.post('/api/uploadalbum', function(req, res) {
   console.log("/api/uploadalbum");
   if (!req.files)
@@ -665,7 +660,7 @@ app.post('/api/uploadalbum', function(req, res) {
   res.json({result: 'Files uploaded!'});
 });
 
-
+//listens on this port of the local machine
 app.listen(8080, function(){
   console.log('App is listening on port 8080!');
 });
