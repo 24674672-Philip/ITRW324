@@ -58,7 +58,7 @@
             android:background="@drawable/rounded_edttext"
             android:drawableLeft="@drawable/sml_ic_user"
             android:paddingLeft="10dp"
-            android:hint="Username"
+            android:hint=" Username"
             android:textColor="@color/colorBlack" />
 
 
@@ -67,12 +67,12 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:drawableLeft="@drawable/sml_ic_password"
+            android:drawableLeft="@drawable/sml_ic_pass"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_edttext"
             android:paddingLeft="10dp"
-            android:hint="Password"
+            android:hint=" Password"
             android:textColor="@color/colorBlack"
             />
 
