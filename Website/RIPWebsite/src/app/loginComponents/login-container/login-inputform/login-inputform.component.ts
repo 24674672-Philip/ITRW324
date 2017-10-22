@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./login-inputform.component.css']
 })
 export class LoginInputformComponent implements OnInit {
-//TODO: fix ugly alerts when login was nog successful
+
   username: string;
   password: string;
   loginSuccessFlag: boolean;

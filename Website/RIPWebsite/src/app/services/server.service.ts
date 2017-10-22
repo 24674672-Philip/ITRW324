@@ -223,4 +223,16 @@ export class ServerService {
         (response)=> callback(response.json())
       )
   }
+
+  uploadImage(formData: FormData,album_title: string,length:number, username: string,  callback){
+    let headers = new Headers();
+    headers.append('title', album_title);
+    headers.append('length', length.toString());
+    headers.append('username', username)
+
+    this.http.post(this.url+'uploadalbum', formData, {headers: headers})
+      .subscribe(
+        (response)=>{callback(response.json())}
+      )
+  }
 }

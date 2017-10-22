@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DataEmitterService} from "../../../services/data-emitter.service.service";
 import {Album} from "../../../classes/album.class";
 import {Song} from "../../../classes/song.class";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-artist-description',
@@ -28,6 +29,7 @@ export class ArtistDescriptionComponent implements OnInit {
   editSongName: string;
   editSongPrice: string;
   imgPath: string = this.serverService.url+'image?type=albums&image_name=Default.png';
+  uploadAlbumTitle: string;//TODO: fix undefined
 
 
 
@@ -47,12 +49,22 @@ export class ArtistDescriptionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.artistID=this.activeRoute.snapshot.queryParams['id'].toString();
-    this.serverService.getArtistByID(this.artistID.toString(),(response)=>{
-      this.artistObj = new Artist(this.artistID, response['artist']['0']['Artist'].toString(),response['artist']['0']['bio'].toString());
-      this.artistObj.setArtistImagePath('users',response['artist']['0']['profilepicture'].toString());
-      this.checkIsOwnProfile();
-    });
+    if(!isNullOrUndefined(this.activeRoute.snapshot.queryParams['id'])){
+      this.artistID=this.activeRoute.snapshot.queryParams['id'].toString();
+      this.serverService.getArtistByID(this.artistID.toString(),(response)=>{
+        this.artistObj = new Artist(this.artistID, response['artist']['0']['Artist'].toString(),response['artist']['0']['bio'].toString());
+        this.artistObj.setArtistImagePath('users',response['artist']['0']['profilepicture'].toString());
+        this.checkIsOwnProfile();
+      });
+    }else{
+      this.serverService.getArtistByName(this.activeRoute.snapshot.queryParams['name'],(response)=>{
+        this.artistObj = new Artist(this.artistID, response['artist']['0']['Artist'].toString(),response['artist']['0']['bio'].toString());
+        this.artistObj.setArtistImagePath('users',response['artist']['0']['profilepicture'].toString());
+        this.artistID
+        this.checkIsOwnProfile();
+      })
+    }
+
 
     this.activeRoute.fragment
       .subscribe(
@@ -140,7 +152,13 @@ export class ArtistDescriptionComponent implements OnInit {
   uploadWithRelease(){
     let form: HTMLFormElement = <HTMLFormElement> document.getElementById('uploadForm');
     let formData: FormData = new FormData(form);
-    //TODO: send form data to server
+    let inputElement: HTMLInputElement = <HTMLInputElement> document.getElementById('songInput');
+    let length = inputElement.files.length;
+
+    this.serverService.uploadImage(formData,this.uploadAlbumTitle,length,this.authService.getUsername(),(response)=>{
+      //TODO: handle the response
+    });
+
   }
 
   uploadWithoutRelease(){
