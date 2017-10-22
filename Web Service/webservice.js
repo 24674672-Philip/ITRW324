@@ -586,16 +586,17 @@ app.post('/uploadImage', function(req, res) {
   }
 });
 
-app.post('/uploadImage', function(req, res) {
+app.post('/api/uploadImage', function(req, res) {
+  console.log("/api/uploadImage");
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   let uploadedFile = req.files.artPicture;
-
+  console.log(req.files.artPicture);
   //Is an image
   if(uploadedFile.mimetype.indexOf("image") > -1){
-    if(req.query.type === "user"){//user image
+    if(req.headers["type"] === "user"){//user image
       uploadedFile.mv('./images/users' + uploadedFile.name, function(err) {
         if (err)
           return res.sendStatus(500);
@@ -603,7 +604,7 @@ app.post('/uploadImage', function(req, res) {
         res.json({result: 'File uploaded!'});
       });
     }
-    else if(req.query.type === "album"){//album image
+    else if(req.headers["type"] === "album"){//album image
       uploadedFile.mv('./images/albums/' + uploadedFile.name, function(err) {
         if (err)
           return res.sendStatus(500);
@@ -615,6 +616,53 @@ app.post('/uploadImage', function(req, res) {
       res.json({result: 'Incorrect type'});
     }
   }
+});
+
+app.post('/api/uploadalbum', function(req, res) {
+  console.log("/api/uploadalbum");
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let uploadedArt = req.files.artPicture;
+  console.log(req.files.artPicture);
+  let uploadedSongs = req.files.songs;
+  console.log(req.files.songs);
+
+  var amountOfSongs = req.headers["length"];
+  console.log('Length: ' + amountOfSongs);
+  var albumTitle = req.headers["title"];
+  console.log('album title: ' + albumTitle);
+  var artist = req.headers["username"];
+  console.log('Artist: ' + artist);
+
+
+  var path = __dirname + '/music/' + artist + '/' + album;
+
+  if(fs.existsSync(path)){
+    fs.mkdirSync(path);
+  }
+
+  for (var i = 0; i < uploadedSongs.length; i++) {
+    if(fs.existsSync(path+'/'+uploadedSongs[i].name)){
+      console.log('added song: ' + uploadedSongs.name);
+      uploadedSongs[i].mv(path + '/' + uploadedSongs.name, function(err) {
+        if (err)
+          return res.sendStatus(500);
+      });
+    }
+  }
+
+  if(uploadedArt.name !== undefined){
+    uploadedArt.mv('./images/albums/' + uploadedArt.name, function(err) {
+      if (err)
+        return res.sendStatus(500);
+
+      res.json({result: 'Files uploaded!'});
+    });
+  }
+
+  res.json({result: 'Files uploaded!'});
 });
 
 
