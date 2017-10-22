@@ -10,6 +10,7 @@ var fileUpload = require('express-fileupload')
 var path = require('path');
 var os = require('os');
 var Busboy = require('busboy');
+const NodeID3 = require('node-id3')
 
 //creates app object of express
 const app = express();
@@ -46,6 +47,7 @@ function ensureToken(req, res, next){
 //test to see if webservice is online
 app.get('/test', function(req, res){
   console.log('test');
+
   res.json({
     test: 'test success',
   });
@@ -131,6 +133,13 @@ app.get('/api/download', function(req, res){
       fs.exists(file,function(exists){
     		if(exists)
     		{//sends the file with headers
+
+          let tags = {
+            poese: "RIP hash" //get hash from Keagan
+          }
+
+          let success = NodeID3.update(tags, file) //  Returns true/false
+          NodeID3.update(tags, file, function(err) {  })
     			res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
     			res.setHeader('Content-Type', 'application/audio/mpeg3')
     			var rstream = fs.createReadStream(file);
@@ -261,7 +270,7 @@ app.post('/api/userbio', function(req, res){
   console.log("/api/userbio");
   var sql = 'SELECT bio FROM users WHERE username = ?'
   var val = req.headers["username"];
-  var qry = require('./app/api')(sql,val,con, res);
+  var qry = require('./app/apisend')(sql,val,con, res);
 });
 
 //returns album info
@@ -374,7 +383,7 @@ app.post('/api/createalbum', ensureToken, function(req, res){
         req.headers["albumname"],
         req.headers["userid"]
       ]];
-      var qry = require('./app/update')(sql, val, con, res);
+      var qry = require('./app/newalbum')(sql, val, con, res, req);
     }
   });
 });
