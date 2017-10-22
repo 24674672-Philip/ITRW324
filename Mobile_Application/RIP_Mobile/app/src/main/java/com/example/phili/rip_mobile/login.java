@@ -84,11 +84,14 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                    if (etUsername.getText().equals("") || etPass.getText().equals(""))
                        Toast.makeText(this, "Your ID or Password is empty", Toast.LENGTH_SHORT).show();
                    else {
-                       tvReturn.setText("Loading...");
+                       //tvReturn.setText("Loading...");
+                       Toast.makeText(login.this,"Loading...", Toast.LENGTH_SHORT).show();
                        sendLoginRequest();
                    }
                } catch (Exception e) {
-                   tvReturn.setText(e.getMessage().toString());
+
+                   Toast.makeText(login.this,e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                   //tvReturn.setText(e.getMessage().toString());
                }
            }
            else
@@ -146,16 +149,19 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                 @Override
                 public void onTaskCompleted(JSONObject result, boolean error, String message) {
                     try {
-                        tvReturn.setText(result.getString("login"));
+                        //tvReturn.setText(result.getString("login"));
+                        Toast.makeText(login.this,result.getString("login") , Toast.LENGTH_SHORT).show();
                         if (result.getString("login").contains("success")) {
                             Intent intent = new Intent(new Intent(login.this, MainActivity.class));
                             intent.putExtra("token", result.getString("token"));
                             startActivity(intent);
                         }
                     } catch (JSONException e) {
-                        tvReturn.setText(e.getMessage().toString());
+                        Toast.makeText(login.this,e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                       // tvReturn.setText(e.getMessage().toString());
                     } catch (Exception e) {
-                        tvReturn.setText(e.getMessage().toString());
+                        Toast.makeText(login.this,e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                       // tvReturn.setText(e.getMessage().toString());
                     }
                 }
             });

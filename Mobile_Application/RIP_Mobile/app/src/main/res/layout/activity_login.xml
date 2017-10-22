@@ -114,7 +114,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:text=""
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:textStyle="bold"
             android:typeface="serif"
