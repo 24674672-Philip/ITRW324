@@ -25,25 +25,99 @@ android:weightSum="1">
     android:layout_marginEnd="8dp"
     android:id="@+id/textView4" />
 
-<ScrollView
-    android:layout_width="349dp"
-    android:layout_height="487dp"
-    android:background="@drawable/rounded_borders_black"
-    android:layout_marginRight="8dp"
-    app:layout_constraintRight_toRightOf="parent"
-    android:layout_marginLeft="8dp"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_marginTop="8dp"
-    app:layout_constraintTop_toBottomOf="@+id/textView4"
-    tools:layout_editor_absoluteX="-23dp">
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:padding="10dp"
+        android:background="@drawable/rounded_borders_black"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:textSize="20dp"
-        android:text="...................dddddsds........"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
 
-</ScrollView>
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Welcome to Registered Intellectual Property."
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="29sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="Never Worry About Pirates Again!"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="Created by the Abstract Team."
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="What's Registered Intellectual Property?"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Registered Intellectual Property (RIP) is a Blockchain based distribution and consumption platform for music. It's built for the artists and consumers of this content."
+                android:textAlignment="textStart"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Artists are you tired of the middle man always taking 'their' cut? Well RIP gives you the power and opportunity to cut out the corporate middle men such as record labels, publishers, etc. allowing you to publish your work fast and independently."
+                android:textAlignment="textStart"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"  />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
+                android:text="As a customer you already know what you like, or maybe not? With RIP you can easily find you favorite songs and/or artists, or discover something or someone entirely new."
+                android:textAlignment="textStart"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"  />
+
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
 

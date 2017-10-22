@@ -10,8 +10,8 @@
         android:weightSum="1">
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="110dp"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="43dp"
             android:layout_alignParentEnd="true"
             android:background="@drawable/rounded_borders_black"
             android:drawableStart="@drawable/ic_moneybag"
@@ -20,13 +20,14 @@
             android:paddingEnd="9dp"
             android:paddingStart="5dp"
             android:text="100000"
+            android:gravity="center_vertical"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             tools:layout_constraintTop_creator="1"
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintBottom_creator="1"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/searchsong"
             android:layout_marginEnd="10dp"
             app:layout_constraintRight_toRightOf="parent"
@@ -34,8 +35,8 @@
             tools:layout_constraintLeft_creator="1"
             android:layout_marginBottom="7dp"
             app:layout_constraintTop_toTopOf="@+id/searchsong"
-            app:layout_constraintLeft_toRightOf="@+id/searchsong"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:layout_marginRight="8dp" />
 
         <SearchView
             android:id="@+id/searchsong"

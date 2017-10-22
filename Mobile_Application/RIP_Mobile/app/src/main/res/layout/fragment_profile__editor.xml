@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="126dp"
+        android:layout_width="0dp"
         android:layout_height="43dp"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
@@ -25,6 +25,7 @@
         android:paddingStart="5dp"
         android:text="100000"
         android:textAlignment="center"
+        android:gravity="center_vertical"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_constraintLeft_toRightOf="@+id/relativeLayout3"
@@ -35,9 +36,9 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="10dp"
         app:layout_constraintHorizontal_bias="1.0" />
 
     <RelativeLayout
@@ -53,7 +54,8 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginLeft="8dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp">
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="100dp"
@@ -69,6 +71,7 @@
             android:id="@+id/icon_edteimage"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:padding="5dp"
             android:src="@drawable/ic_edit"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/imageView4" />
@@ -103,13 +106,15 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1">
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
 
         <ImageView
             android:id="@+id/edtprofile"
             android:layout_width="50dp"
             android:layout_height="50dp"
-
+            android:padding="2dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -125,33 +130,35 @@
             android:id="@+id/savprofile"
             android:layout_width="49dp"
             android:layout_height="48dp"
-
+            android:padding="2dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/ic_save"
-            app:layout_constraintHorizontal_bias="0.031"
+            app:layout_constraintHorizontal_bias="0.032"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/edtprofile"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="368dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/savprofile">
+            app:layout_constraintTop_toBottomOf="@+id/savprofile"
+            android:layout_marginStart="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent">
 
             <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 
                 android:id="@+id/ScrollView01"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="match_parent"
                 android:isScrollContainer="false"
 
                 app:layout_constraintHorizontal_bias="0.0"
@@ -161,16 +168,17 @@
 
                 <RelativeLayout
                     android:id="@+id/LinearLayout01"
+                    android:layout_gravity=""
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
-                        android:layout_width="300dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="14dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:background="@drawable/rounded_borders_purple"
                         android:orientation="vertical"
                         android:padding="10dp"
@@ -181,6 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
+
                             android:text="Bio:"
                             android:textColor="@color/colorWhite"
                             android:textSize="20dp"
@@ -191,7 +200,7 @@
                             android:id="@+id/etName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:layout_gravity="center"
                             android:layout_marginBottom="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginVertical="10dp"
@@ -208,11 +217,10 @@
 
                     <LinearLayout
                         android:id="@+id/linearLayout2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="60dp"
-                        android:layout_marginRight="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                       android:layout_margin="20dp"
                         android:background="@drawable/rounded_borders_purple"
                         android:orientation="vertical"
                         android:padding="10dp"
