@@ -86,7 +86,7 @@
 
 
 <div id="uploadModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width:80%">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -108,23 +108,46 @@
           <h4>Album Details</h4>
           <div class="row center-block" style="margin-left: 0; margin-right: 0;">
             <p style="font-weight: bold">Album Title</p>
-            <input name="album_name" class="form-control" placeholder="Album Title"/>
+            <input name="album_name" class="form-control" placeholder="Album Title" id="album_name"/>
           </div>
 
           <h4>Album Songs</h4>
           <div class="row center-block" style="margin-right: 0; margin-left: 0;">
-            <input class="btn btn-success center-block" [(ngModel)]="uploadAlbumTitle" type="file" name="songs" multiple id="songInput"/>
+            <input class="btn btn-success center-block" type="file" name="songs" multiple id="songInput" (change)="listSongs()"/>
+            <app-create-songs [songList]="createSongsList"></app-create-songs>
           </div>
 
+
           <div class="btn-group" style="padding-top: 20px">
-            <button class="btn btn-success" (click)="uploadWithRelease()">Upload+Release</button>
-            <button class="btn btn-primary" (click)="uploadWithoutRelease()">Upload</button>
+            <button class="btn btn-success" [disabled]="!uploadActive" (click)="uploadWithRelease()">Upload+Release</button>
+            <p>NOTE: The album is not released on upload. To enable others to see your content go to manage content, click on the album and release it.</p>
           </div>
         </form>
 
 
       </div>
       <div class="modal-footer">
+        <div class="row" style="margin-left: 0; margin-right: 0">
+          <div *ngIf="isUploading"
+               class="progress"
+               style="width: 100%"
+               aria-valuemax="100"
+               aria-valuemin="0"
+               style="margin-bottom: 0;
+                      border: solid rgba(1,1,1,.2) 1px;
+                      background-color:grey">
+            <div
+              class="progress-bar"
+              [ngStyle]="{'width':progress+'%'}"
+              role="progressbar">
+
+            </div>
+          </div>
+          <div *ngIf="uploadSuccess" class="panel-success"><h4>Content Uploaded</h4></div>
+          <div *ngIf="uploadError || !creatingSongsSuccess" class="panel-success"><h4>Upload Failed</h4></div>
+        </div>
+
+
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

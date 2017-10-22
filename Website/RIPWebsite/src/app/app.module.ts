@@ -40,6 +40,9 @@ import { WalletComponent } from "./ripComponents/buy-container/wallet/wallet.com
 import { SearchItemComponent } from './ripComponents/home-container/nav-bar/search-item/search-item.component';
 //import { AuthGuard } from './services/auth-guard.service';
 import { Error403Component } from './alerts/error-403/error-403.component';
+import { HttpClientModule} from "@angular/common/http";
+import { CreateSongsComponent } from './ripComponents/artists-container/artist-description.component/create-songs/create-songs.component';
+import { CreateSongsItemComponent } from './ripComponents/artists-container/artist-description.component/create-songs/create-songs-item/create-songs-item.component';
 
 
 const router: Routes = [
@@ -86,13 +89,17 @@ const router: Routes = [
     BuyContainerComponent,
     WalletComponentNav,
     SearchItemComponent,
-    Error403Component
+    Error403Component,
+    CreateSongsComponent,
+    CreateSongsItemComponent,
+
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     RouterModule.forRoot(router),
+    HttpClientModule
   ],
   providers: [
     ServerService,

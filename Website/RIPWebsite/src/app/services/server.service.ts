@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import {Headers, Http} from "@angular/http";
 import {Md5} from 'ts-md5/dist/md5';
+import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from "@angular/common/http";
 
 
 @Injectable()
 export class ServerService {
 
   url: string = 'http://52.211.85.57:8080/api/';
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private http2: HttpClient) { }
 
 
   login(username: string, password: string, callback){
@@ -224,15 +226,49 @@ export class ServerService {
       )
   }
 
-  uploadImage(formData: FormData,album_title: string,length:number, username: string,  callback){
-    let headers = new Headers();
-    headers.append('title', album_title);
-    headers.append('length', length.toString());
-    headers.append('username', username)
-
-    this.http.post(this.url+'uploadalbum', formData, {headers: headers})
+  uploadAlbum(formData: FormData,album_title: string,length:number, username: string,  callback, onProgress){
+    const req = new HttpRequest('POST',this.url+'uploadalbum',formData,{headers: new HttpHeaders().set('title', album_title).set('length', length.toString()).set('username', username), reportProgress: true});
+    this.http2.request(req)
       .subscribe(
-        (response)=>{callback(response.json())}
+        (event)=>{
+          if(event.type == HttpEventType.UploadProgress){
+            const percentDone = Math.round(100 * event.loaded / event.total);
+            onProgress(percentDone);
+          }else if(event instanceof HttpResponse){
+            callback(event.body['result']);
+          }
+        }
       )
   }
+
+  createAlbum(albumName: string, userid:number, token:string, callback){
+    let headers = new Headers();
+    headers.append('authentication','bearer '+ token);
+    headers.append('albumname',albumName);
+    headers.append('userid',userid.toString());
+    this.http.post(this.url+'createalbum',null, {headers: headers})
+      .subscribe(
+        (response)=>callback(response.json())
+      )
+  }
+
+  createSongs(title: string, explicit: string, albumid: number, userid: number, file_name: string, token: string,price: number, callback){
+    let headers = new Headers();
+    headers.append('title', title);
+    headers.append('explicit', explicit);
+    headers.append('albumid', albumid.toString());
+    headers.append('userid', userid.toString());
+    headers.append('file_name', file_name);
+    headers.append('authentication','bearer '+ token);
+    headers.append('price', price.toString());
+
+    this.http.post(this.url+'createsong', null, {headers: headers})
+      .subscribe((response)=>{
+      callback(response.json())
+      });
+  }
+
+
+
+
 }

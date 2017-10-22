@@ -9,6 +9,7 @@ export class AuthService {
   private fName: string;
   private lName: string;
   private email: string;
+  private userId: number;
 
 
   constructor() { }
@@ -47,6 +48,14 @@ export class AuthService {
 
   getEmail(){
     return this.email;
+  }
+
+  setUserID(userid: number){
+    this.userId = userid;
+  }
+
+  getUserId(): number{
+    return this.userId
   }
 
   signOut(){

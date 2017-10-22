@@ -29,7 +29,16 @@ export class ArtistDescriptionComponent implements OnInit {
   editSongName: string;
   editSongPrice: string;
   imgPath: string = this.serverService.url+'image?type=albums&image_name=Default.png';
-  uploadAlbumTitle: string;//TODO: fix undefined
+  uploadAlbumTitle: string;
+  isUploading: boolean = false;
+  progress: number = 0;
+  uploadSuccess: boolean = false;
+  uploadError: boolean = false;
+  createSongsList: Array<String>;
+  songListLength: number;
+  finalSongList: Array<{songName:string, explicit:number, price: number}> = new Array<{songName:string, explicit:number, price: number}>();
+  uploadActive: boolean = false;
+  creatingSongsSuccess: boolean = true;
 
 
 
@@ -96,6 +105,13 @@ export class ArtistDescriptionComponent implements OnInit {
         }
       }
     );
+
+    this.dataService.songConfirmed.subscribe((confirmedSong:{songName:string, explicit:number, price: number})=>{
+      this.finalSongList.push(confirmedSong);
+      if(this.finalSongList.length == this.songListLength){
+        this.uploadActive = true;
+      }
+    })
   }
 
   releaseAlbum(){
@@ -150,21 +166,61 @@ export class ArtistDescriptionComponent implements OnInit {
   }
 
   uploadWithRelease(){
+    this.isUploading = true;
+    let album_name = <HTMLInputElement> document.getElementById('album_name');
+    this.serverService.createAlbum(album_name.value,this.authService.getUserId(),this.authService.getAuthToken(),(response)=>{
+      if(response['result'].toString() == 'success'){
+        this.uploadSongs(response['albumid']);
+      }
+    });
+  }
+
+  uploadSongs(albumid: number){
+    this.creatingSongsSuccess = true;
     let form: HTMLFormElement = <HTMLFormElement> document.getElementById('uploadForm');
     let formData: FormData = new FormData(form);
     let inputElement: HTMLInputElement = <HTMLInputElement> document.getElementById('songInput');
     let length = inputElement.files.length;
-
-    this.serverService.uploadImage(formData,this.uploadAlbumTitle,length,this.authService.getUsername(),(response)=>{
-      //TODO: handle the response
+    this.uploadAlbumTitle = (<HTMLInputElement>document.getElementById('album_name')).value;
+    this.serverService.uploadAlbum(formData,this.uploadAlbumTitle,length,this.authService.getUsername(),(response)=>{
+      if(response == 'success'){
+        this.uploadSuccess = true;
+        this.isUploading = false;
+      }else{
+        this.uploadError = true;
+        this.isUploading = false;
+      }
+    },(progress: number)=>{
+      this.progress = progress;
     });
 
+    let index: number = 0;
+
+    for(let song of this.finalSongList){
+      let songName: string = song.songName;
+      let explicit: string = song.explicit ? 'true':'false';
+      let price: number = song.price;
+
+      this.serverService.createSongs(songName, explicit,
+                                      albumid, this.authService.getUserId(),
+                                      inputElement.files[index++].name, this.authService.getAuthToken(),price,
+                                      (response)=>
+                                      {
+                                        if(response['result'].toString() != 'success'){
+                                          this.creatingSongsSuccess = false;
+                                        }
+                                      });
+    }
   }
 
-  uploadWithoutRelease(){
-    let form: HTMLFormElement = <HTMLFormElement> document.getElementById('uploadForm');
-    let formData: FormData = new FormData(form);
-    //TODO: send form data to server
+  listSongs(){
+    let inputElement: HTMLInputElement = <HTMLInputElement> document.getElementById('songInput');
+    this.createSongsList = new Array();
+    for(let i=0; i<inputElement.files.length; i++){
+      let name = inputElement.files[i].name;
+      this.createSongsList.push(name.replace('.mp3',''));
+    }
+    this.songListLength = this.createSongsList.length;
   }
 
 }
