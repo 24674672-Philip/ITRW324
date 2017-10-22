@@ -71,7 +71,7 @@ public class registration extends AppCompatActivity implements View.OnClickListe
             try {
                 if(textValidator()){
                     Log.i("onclick","request");
-                    //sendRegisterRequest();
+                    sendRegisterRequest();
                 }
                 else{
                     Log.i("onclick","toast");
@@ -167,8 +167,11 @@ public class registration extends AppCompatActivity implements View.OnClickListe
     public boolean textValidator(){
         boolean isValidated;
         String message;
+        String sDOB = etDOB.getText().toString();
+        char first = sDOB.charAt(4);
+        char second = sDOB.charAt(7);
 
-        if(etPassword.getText().toString().equals(etPassword2.getText().toString())){
+        if(!etPassword.getText().toString().matches(etPassword2.getText().toString())){
             isValidated = false;
             message = "passwords not matching";
         }
@@ -215,6 +218,11 @@ public class registration extends AppCompatActivity implements View.OnClickListe
         else if (etPassword2.getText().toString().matches("")){
             isValidated = false;
             message = "Missing: Password 2";
+        }
+        else if ((first != '-') && (second != '-'))
+        {
+            isValidated = false;
+            message = "Date of birth is not in the correct format";
         }
         else if (etUsername.getText().toString().matches("")){
             isValidated = false;
