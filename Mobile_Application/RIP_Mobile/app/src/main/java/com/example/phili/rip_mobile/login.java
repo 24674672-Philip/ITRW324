@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.android.volley.VolleyLog.TAG;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 
 public class login extends AppCompatActivity implements View.OnClickListener{
@@ -50,7 +52,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        checkConnection();
         contxt = this;
         btnSend = (Button) findViewById(R.id.btnSend);
         etUsername  = (EditText) findViewById(R.id.etUsername);
@@ -59,63 +61,110 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         tvReturn.setText("");
         tvNew = (TextView)  findViewById(R.id.txNew);
         btnSend.setOnClickListener(this);
-        tvNew.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(new Intent(login.this,registration.class));
-                startActivity(intent);
-            }
-        });
+        if (isOnline()==true) {
+            tvNew.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(new Intent(login.this, registration.class));
+                    startActivity(intent);
+                }
+            });
+        }else
+        {
+            Toast.makeText(login.this, "You are not connected to Internet", Toast.LENGTH_LONG).show();
+        }
 
     }
 
     @Override
     public void onClick(View v){
         if(v.getId() == R.id.btnSend) {
-            try {
-                if(etUsername.getText().equals("") || etPass.getText().equals(""))
-                    Toast.makeText(this, "Your ID or Password is empty", Toast.LENGTH_SHORT).show();
-                else {
-                    tvReturn.setText("Loading...");
-                    sendLoginRequest();
-                }
-            }
-            catch (Exception e){
-                tvReturn.setText(e.getMessage().toString());
-            }
+
+           if (isOnline()==true) {
+               try {
+                   if (etUsername.getText().equals("") || etPass.getText().equals(""))
+                       Toast.makeText(this, "Your ID or Password is empty", Toast.LENGTH_SHORT).show();
+                   else {
+                       tvReturn.setText("Loading...");
+                       sendLoginRequest();
+                   }
+               } catch (Exception e) {
+                   tvReturn.setText(e.getMessage().toString());
+               }
+           }
+           else
+           {
+               Toast.makeText(login.this, "You are not connected to Internet", Toast.LENGTH_LONG).show();
+           }
         }
     }
 
+    protected boolean isOnline() {
 
-    private void sendLoginRequest(){
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        HashClass temp = new HashClass();
-        String[] headersType = new String[2];
-        String[] headersVal = new String[2];
-        headersType[0] = "username";
-        headersType[1] = "password";
-        headersVal[0] = etUsername.getText().toString();
-        headersVal[1] = temp.md5(etPass.getText().toString());
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
-        final serverLink sender = new serverLink(this);
-        sender.sendServerRequest(headersType, headersVal, "/api/login", true,new serverLink.OnDownloadTaskCompleted() {
-            @Override
-            public void onTaskCompleted(JSONObject result, boolean error, String message) {
-                try {
-                    tvReturn.setText(result.getString("login"));
-                    if(result.getString("login").contains("success")){
-                        Intent intent = new Intent(new Intent(login.this,MainActivity.class));
-                        intent.putExtra("token",result.getString("token"));
-                        startActivity(intent);
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+    public void checkConnection(){
+
+        if(isOnline()){
+
+            Toast.makeText(login.this, "You are connected to Internet", Toast.LENGTH_LONG).show();
+
+        }else{
+
+            Toast.makeText(login.this, "You are not connected to Internet", Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+    private void sendLoginRequest() {
+
+        if (isOnline() == true) {
+            HashClass temp = new HashClass();
+            String[] headersType = new String[2];
+            String[] headersVal = new String[2];
+            headersType[0] = "username";
+            headersType[1] = "password";
+            headersVal[0] = etUsername.getText().toString();
+            headersVal[1] = temp.md5(etPass.getText().toString());
+
+            final serverLink sender = new serverLink(this);
+            sender.sendServerRequest(headersType, headersVal, "/api/login", true, new serverLink.OnDownloadTaskCompleted() {
+                @Override
+                public void onTaskCompleted(JSONObject result, boolean error, String message) {
+                    try {
+                        tvReturn.setText(result.getString("login"));
+                        if (result.getString("login").contains("success")) {
+                            Intent intent = new Intent(new Intent(login.this, MainActivity.class));
+                            intent.putExtra("token", result.getString("token"));
+                            startActivity(intent);
+                        }
+                    } catch (JSONException e) {
+                        tvReturn.setText(e.getMessage().toString());
+                    } catch (Exception e) {
+                        tvReturn.setText(e.getMessage().toString());
                     }
                 }
-                catch (JSONException e){
-                    tvReturn.setText(e.getMessage().toString());
-                }
-                catch (Exception e){
-                    tvReturn.setText(e.getMessage().toString());
-                }
-            }
-        });
+            });
+        }
+        else
+        {
+            Toast.makeText(login.this, "You are not connected to Internet", Toast.LENGTH_LONG).show();
+        }
     }
+
 
 }
