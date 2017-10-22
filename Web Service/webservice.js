@@ -251,7 +251,7 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 //returns song info
 app.post('/api/getsongs', function(req, res){
   console.log("/api/getsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details LIMIT ?,20;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit, Path AS file_name FROM song_details LIMIT ?,20;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
 });
@@ -428,12 +428,13 @@ app.post('/api/createsong', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-      var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID) VALUES (?);';
+      var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID, Path) VALUES (?);';
       var val = [[
         req.headers["title"],
         req.headers["explicit"],
         req.headers["albumid"],
-        req.headers["userid"]
+        req.headers["userid"],
+        req.headers["file_name"]
       ]];
       var qry = require('./app/update')(sql, val, con, res);
     }
@@ -623,6 +624,8 @@ app.post('/api/uploadalbum', function(req, res) {
   console.log(req.files.artPicture);
   let uploadedSongs = req.files.songs;
   console.log(req.files.songs);
+  let songDetailsArray = req.files.songdetails;
+  console.log(songDetailsArray);
 
   var amountOfSongs = req.headers["length"];
   console.log('Length: ' + amountOfSongs);
@@ -630,7 +633,6 @@ app.post('/api/uploadalbum', function(req, res) {
   console.log('album title: ' + albumTitle);
   var artist = req.headers["username"];
   console.log('Artist: ' + artist);
-
 
   var path = __dirname + '/music/' + artist + '/' + albumTitle;
 

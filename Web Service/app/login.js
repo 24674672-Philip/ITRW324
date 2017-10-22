@@ -4,6 +4,7 @@ module.exports = function(req, res, con, jwt){
   var valU = req.headers["password"];
   console.log('name: ' + valP, ' pass: ' + valU);
 
+//gets DB connection
   con.getConnection(function(err, connection){
     if (err) {
       connection.release();
@@ -11,6 +12,7 @@ module.exports = function(req, res, con, jwt){
       return;
     }
 
+//sends query
   connection.query(sql, [valP, valU], function (err, result) {
     if(err){res.json(err);}
     else if(result[0] == undefined) res.json({login: "failed"});
@@ -20,13 +22,14 @@ module.exports = function(req, res, con, jwt){
           const user = { name: result[0].name,
                          id: result[0].id};
           const token = jwt.sign({ user }, 'blockchain', { expiresIn: 18000 });
-          res.json({
+          res.json({//return values
             login: 'success',
             token: token,
             user: result[0].username,
             fname: result[0].name,
             lname: result[0].surname,
             email: result[0].email,
+            user_id: result[0].user_id,
             coins: result[0].coins
           });
       }
