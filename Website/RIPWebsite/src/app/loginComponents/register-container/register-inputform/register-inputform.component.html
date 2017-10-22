@@ -124,7 +124,7 @@
               <input placeholder="Must be longer than 8 characters" [(ngModel)]="password" (input)="validatePassword($event)" style="text-align: center;" class="form-control" type="password"/>
             </div>
             <div class=" col-sm-2 col-md-2 col-lg-2">
-              <p *ngIf="confirmedPassword"><img src="../../../assets/success.png" width="32" height="32" alt="success" ></p>
+              <p *ngIf="passwordValid"><img src="../../../assets/success.png" width="32" height="32" alt="success" ></p>
             </div>
             <div class=" col-sm-12 col-md-12 col-lg-12">
               <p *ngIf="!passwordValid" style="text-wrap: none;" class="text-danger">Invalid password entered</p>
