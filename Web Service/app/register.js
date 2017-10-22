@@ -2,7 +2,7 @@ module.exports = function(req, res, con){
 
     var emailAddress = req.headers['email'];
     var hash = randtoken.generate(16);
-    var sql = 'INSERT INTO users (name, surname, email, dateOfBirth, password,username,isActivated,emailHash) VALUES ?';
+    var sql = 'INSERT INTO users (name, surname, email, dateOfBirth, password,username,isActivated,emailHash) VALUES (?)';
     var val = [[
       req.headers["fname"],
       req.headers["lname"],

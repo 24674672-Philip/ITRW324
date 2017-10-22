@@ -10,6 +10,7 @@ var fileUpload = require('express-fileupload')
 var path = require('path');
 var os = require('os');
 var Busboy = require('busboy');
+const NodeID3 = require('node-id3')
 
 //creates app object of express
 const app = express();
@@ -46,6 +47,7 @@ function ensureToken(req, res, next){
 //test to see if webservice is online
 app.get('/test', function(req, res){
   console.log('test');
+
   res.json({
     test: 'test success',
   });
@@ -79,6 +81,27 @@ app.post('/api/registeraddress', function(req, res){
 
   var qry = require('./app/api')(sql2,valAddress,con, res);
 
+});
+
+//get adderss per user
+app.get('/api/getaddress', function(req, res){
+  console.log("/api/getaddress");
+  var sql = 'SELECT * FROM user_address WHERE user_id = ?;'
+  var val = req.headers['userid'];
+  var qry = require('./app/api')(sql,val,con, res);
+});
+
+//set user address per user
+app.post('/api/setaddress', function(req, res){
+  console.log("/api/setaddress");
+  var sql = 'UPDATE song SET Country = ?, City = ?, AddressLine1 = ?, AddressLine2 = ?, PostalCode = ? WHERE userid = ?;';
+  var val1 = req.headers["country"];
+  var val2 = req.headers["city"];
+  var val3 = req.headers["addline1"];
+  var val4 = req.headers["addline2"];
+  var val5 = req.headers["postalcode"];
+  var val6 = req.headers["userid"];
+  var qry = require('./app/update')(sql,[val1, val2, val3, val4, val5, val6],con,res);
 });
 
 //Activate user account from email link
@@ -131,6 +154,13 @@ app.get('/api/download', function(req, res){
       fs.exists(file,function(exists){
     		if(exists)
     		{//sends the file with headers
+
+          let tags = {
+            poese: "RIP hash" //get hash from Keagan
+          }
+
+          let success = NodeID3.update(tags, file) //  Returns true/false
+          NodeID3.update(tags, file, function(err) {  })
     			res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
     			res.setHeader('Content-Type', 'application/audio/mpeg3')
     			var rstream = fs.createReadStream(file);
@@ -251,9 +281,17 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 //returns song info
 app.post('/api/getsongs', function(req, res){
   console.log("/api/getsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit FROM song_details LIMIT ?,20;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit, Path AS file_name FROM song_details LIMIT ?,20;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
+});
+
+//returns song info
+app.post('/api/userbio', function(req, res){
+  console.log("/api/userbio");
+  var sql = 'SELECT bio FROM users WHERE username = ?'
+  var val = req.headers["username"];
+  var qry = require('./app/apisend')(sql,val,con, res);
 });
 
 //returns album info
@@ -366,7 +404,7 @@ app.post('/api/createalbum', ensureToken, function(req, res){
         req.headers["albumname"],
         req.headers["userid"]
       ]];
-      var qry = require('./app/update')(sql, val, con, res);
+      var qry = require('./app/newalbum')(sql, val, con, res, req);
     }
   });
 });
@@ -428,12 +466,14 @@ app.post('/api/createsong', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-      var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID) VALUES (?);';
+      var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID, Path, price) VALUES (?);';
       var val = [[
         req.headers["title"],
         req.headers["explicit"],
         req.headers["albumid"],
-        req.headers["userid"]
+        req.headers["userid"],
+        req.headers["file_name"],
+        req.headers["price"],
       ]];
       var qry = require('./app/update')(sql, val, con, res);
     }
@@ -595,7 +635,9 @@ app.post('/api/uploadImage', function(req, res) {
         if (err)
           return res.sendStatus(500);
 
-        res.json({result: 'File uploaded!'});
+          var sql = "UPDATE users SET profilepicture = ? WHERE user_id = ?";
+          var val = req.headers["userid"];
+          var qry = require('./app/update')(sql,  [uploadedFile.name,val], con, res);
       });
     }
     else if(req.headers["type"] === "album"){//album image
@@ -603,7 +645,9 @@ app.post('/api/uploadImage', function(req, res) {
         if (err)
           return res.sendStatus(500);
 
-        res.json({result: 'File uploaded!'});
+          var sql = "UPDATE album SET image_name = ? WHERE albumID = ?";
+          var val = req.headers["albumID"];
+          var qry = require('./app/update')(sql, [uploadedFile.name,val], con, res);
       });
     }
     else {
@@ -623,6 +667,8 @@ app.post('/api/uploadalbum', function(req, res) {
   console.log(req.files.artPicture);
   let uploadedSongs = req.files.songs;
   console.log(req.files.songs);
+  let songDetailsArray = req.files.songdetails;
+  console.log(songDetailsArray);
 
   var amountOfSongs = req.headers["length"];
   console.log('Length: ' + amountOfSongs);
@@ -630,7 +676,6 @@ app.post('/api/uploadalbum', function(req, res) {
   console.log('album title: ' + albumTitle);
   var artist = req.headers["username"];
   console.log('Artist: ' + artist);
-
 
   var path = __dirname + '/music/' + artist + '/' + albumTitle;
 
