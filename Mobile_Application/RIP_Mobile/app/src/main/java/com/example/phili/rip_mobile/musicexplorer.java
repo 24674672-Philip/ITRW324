@@ -364,11 +364,11 @@ public class musicexplorer extends AppCompatActivity implements View.OnClickList
                 if(v.getId() == R.id.playmini){
                     if(paused){
                         mp.start();
-                        play.setImageResource(R.drawable.pauseorange);
+                        play.setImageResource(R.drawable.btn_play);
                     }
                     else{
                         mp.pause();
-                        play.setImageResource(R.drawable.playorange);
+                        play.setImageResource(R.drawable.btn_pause);
                     }
                     paused = !paused;
                 }

@@ -102,7 +102,7 @@
                 android:id="@+id/backwards"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="@drawable/backorange"
+                android:background="@drawable/btn_backward"
                 android:layout_alignTop="@+id/fastforward"
                 android:layout_toStartOf="@+id/play2" />
 
@@ -114,7 +114,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/playorange"
+                android:background="@drawable/btn_play"
                 />
 
 
@@ -124,7 +124,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:padding="10dp"
-                android:background="@drawable/orangeff"
+                android:background="@drawable/btn_forward"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/play2" />
 
