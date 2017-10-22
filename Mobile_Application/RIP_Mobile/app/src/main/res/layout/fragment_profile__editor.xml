@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="126dp"
+        android:layout_width="0dp"
         android:layout_height="43dp"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
@@ -25,6 +25,7 @@
         android:paddingStart="5dp"
         android:text="100000"
         android:textAlignment="center"
+        android:gravity="center_vertical"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         app:layout_constraintLeft_toRightOf="@+id/relativeLayout3"
@@ -70,6 +71,7 @@
             android:id="@+id/icon_edteimage"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:padding="5dp"
             android:src="@drawable/ic_edit"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/imageView4" />
@@ -112,7 +114,7 @@
             android:id="@+id/edtprofile"
             android:layout_width="50dp"
             android:layout_height="50dp"
-
+            android:padding="2dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -128,14 +130,14 @@
             android:id="@+id/savprofile"
             android:layout_width="49dp"
             android:layout_height="48dp"
-
+            android:padding="2dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/ic_save"
-            app:layout_constraintHorizontal_bias="0.031"
+            app:layout_constraintHorizontal_bias="0.032"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/edtprofile"
             app:layout_constraintTop_toTopOf="parent" />

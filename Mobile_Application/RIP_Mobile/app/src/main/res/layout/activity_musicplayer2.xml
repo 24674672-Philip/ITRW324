@@ -3,7 +3,7 @@
     android:id="@+id/LinearLayout01"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/mplayerback2"
+    android:background="@drawable/bg_musicplayer"
     android:orientation="vertical"
     android:weightSum="20"
 
