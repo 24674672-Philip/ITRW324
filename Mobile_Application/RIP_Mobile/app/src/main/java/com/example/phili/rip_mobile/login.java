@@ -81,9 +81,6 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         {
             Toast.makeText(login.this, "You are not connected to Internet", Toast.LENGTH_LONG).show();
         }
-
-
-
     }
 
     @Override
