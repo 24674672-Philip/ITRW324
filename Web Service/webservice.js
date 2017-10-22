@@ -256,6 +256,14 @@ app.post('/api/getsongs', function(req, res){
   var qry = require('./app/api')(sql,val,con, res);
 });
 
+//returns song info
+app.post('/api/userbio', function(req, res){
+  console.log("/api/userbio");
+  var sql = 'SELECT bio FROM users WHERE username = ?'
+  var val = req.headers["username"];
+  var qry = require('./app/api')(sql,val,con, res);
+});
+
 //returns album info
 app.post('/api/getalbums', function(req, res){
   console.log("/api/getalbums");
