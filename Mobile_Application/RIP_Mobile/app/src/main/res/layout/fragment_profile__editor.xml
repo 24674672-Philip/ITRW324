@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tvCoins"
         android:layout_width="0dp"
         android:layout_height="43dp"
         android:layout_alignParentEnd="true"

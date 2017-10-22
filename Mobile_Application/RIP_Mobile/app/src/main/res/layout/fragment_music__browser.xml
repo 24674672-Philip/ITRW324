@@ -9,7 +9,7 @@
         tools:context="com.example.phili.rip_mobile.MainActivity"
         android:weightSum="1">
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvCoins1"
             android:layout_width="0dp"
             android:layout_height="43dp"
             android:layout_alignParentEnd="true"
@@ -50,7 +50,7 @@
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginRight="3dp"
-            app:layout_constraintRight_toLeftOf="@+id/textView2"
+            app:layout_constraintRight_toLeftOf="@+id/tvCoins1"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="6dp"
             android:layout_marginStart="8dp"
@@ -60,99 +60,7 @@
             app:layout_constraintHorizontal_bias="0.0" />
 
 
-        <RelativeLayout
-            android:id="@+id/gridcontainer"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_below="@id/searchsong"
-            android:layout_marginBottom="1dp"
-            app:layout_constraintBottom_toTopOf="@+id/musicplayermin"
-            android:layout_marginRight="1dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="1dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginTop="1dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="1.0"
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintTop_toBottomOf="@+id/searchsong">
-
-            <TabHost
-                android:id="@+id/tabHost"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_margin="5dp"
-                android:background="@drawable/rounded_borders_black">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TabWidget
-                        android:id="@android:id/tabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_borders_white"
-                        android:orientation="horizontal"
-                        android:showDividers="none"
-                        android:tabStripEnabled="false" />
-
-                    <FrameLayout
-                        android:id="@android:id/tabcontent"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-
-                        <GridView
-                            android:id="@+id/albumsgrid"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:horizontalSpacing="5dp"
-                            android:numColumns="3"
-                            android:scrollbars="horizontal"
-                            android:verticalSpacing="10dp"
-                            android:visibility="visible">
-
-                        </GridView>
-
-                        <GridView
-                            android:id="@+id/artistsgrid"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:horizontalSpacing="10dp"
-                            android:numColumns="3"
-                            android:scrollbars="horizontal"
-                            android:verticalSpacing="10dp"></GridView>
-
-
-                        <GridView
-                            android:id="@+id/songsgrid"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:horizontalSpacing="10dp"
-                            android:numColumns="3"
-                            android:scrollbars="horizontal"
-                            android:verticalSpacing="10dp"
-                            android:visibility="visible"></GridView>
-
-
-                    </FrameLayout>
-                </LinearLayout>
-            </TabHost>
-
-
-        </RelativeLayout>
-
-        <android.support.constraint.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
             android:id="@+id/musicplayermin"
             android:layout_width="0dp"
             android:layout_height="70dp"
@@ -168,7 +76,7 @@
             app:layout_constraintRight_toRightOf="parent"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="-2dp">
 
             <ImageView
                 android:id="@+id/currentplayingimg"
@@ -264,14 +172,14 @@
                 tools:layout_constraintBottom_creator="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginEnd="50dp"
-                app:layout_constraintRight_toRightOf="@+id/imageView5"
+                app:layout_constraintRight_toRightOf="@+id/forwardmin"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/forwardmin"
                 android:layout_width="50dp"
 
                 android:layout_height="0dp"
@@ -292,5 +200,97 @@
 
         </android.support.constraint.ConstraintLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/gridcontainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/searchsong"
+        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/musicplayermin"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchsong"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+        <TabHost
+            android:id="@+id/tabHost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_borders_black">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_borders_white"
+                    android:orientation="horizontal"
+                    android:showDividers="none"
+                    android:tabStripEnabled="false" />
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <GridView
+                        android:id="@+id/albumsgrid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:horizontalSpacing="5dp"
+                        android:numColumns="3"
+                        android:scrollbars="horizontal"
+                        android:verticalSpacing="10dp"
+                        android:visibility="visible">
+
+                    </GridView>
+
+                    <GridView
+                        android:id="@+id/artistsgrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="3"
+                        android:scrollbars="horizontal"
+                        android:verticalSpacing="10dp"></GridView>
+
+
+                    <GridView
+                        android:id="@+id/songsgrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="3"
+                        android:scrollbars="horizontal"
+                        android:verticalSpacing="10dp"
+                        android:visibility="visible"></GridView>
+
+
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
 

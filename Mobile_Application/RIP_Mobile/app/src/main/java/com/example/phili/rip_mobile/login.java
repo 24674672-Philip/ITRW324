@@ -46,6 +46,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public static String USERNAME = "";
     public static String COINS = "";
     public static String EMAIL = "";
+    public  static String USERID = "";
     private Button btnSend;
     private EditText etUsername, etPass;
     private TextView tvReturn,tvNew,tvForgot;
@@ -167,6 +168,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                             USERNAME = result.getString("user");
                             COINS = result.getString("coins");
                             EMAIL = result.getString("email");
+                            USERID = result.getString("user_id");
                             Intent intent = new Intent(new Intent(login.this, MainActivity.class));
                             intent.putExtra("token", result.getString("token"));
                             startActivity(intent);

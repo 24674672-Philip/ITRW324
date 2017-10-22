@@ -4,6 +4,8 @@ package com.example.phili.rip_mobile;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -31,6 +33,8 @@ import java.util.HashSet;
 
 public class Music_Browser extends Fragment {
 
+
+    private TextView coins;
     private static final String TAG = "MyActivity";
     private String[][] song, artist, musicAlbum;
     private String[] songImg, artistImg, musicAlbumImg;
@@ -73,18 +77,25 @@ public class Music_Browser extends Fragment {
         loadAlb = false;
         songPos = 0;
 
-        mTabHost = (TabHost)v.findViewById(R.id.tabHost);
+        coins = v.findViewById(R.id.tvCoins1);
+        coins.setText(login.COINS);
+
+        mTabHost = v.findViewById(R.id.tabHost);
         mTabHost.setup();
 
-        imageView = (ImageView) v.findViewById(R.id.currentplayingimg);
-        play = (ImageView) v.findViewById(R.id.playmini);
-        back = (ImageView) v.findViewById(R.id.backmin);
-        next = (ImageView) v.findViewById(R.id.imageView5);
-        artistView = (TextView) v.findViewById(R.id.artistmin);
-        songView = (TextView) v.findViewById(R.id.songmin);
-        currPlay = (ImageView) v.findViewById(R.id.currentplayingimg);
+        imageView =  v.findViewById(R.id.currentplayingimg);
+        play =  v.findViewById(R.id.playmini);
+        back =  v.findViewById(R.id.backmin);
+        next =  v.findViewById(R.id.forwardmin);
+        artistView =  v.findViewById(R.id.artistmin);
+        songView =  v.findViewById(R.id.songmin);
+        currPlay =  v.findViewById(R.id.currentplayingimg);
 
-     //   currPlay.setOnClickListener();
+
+
+
+
+
      //   play.setOnClickListener(this);
      //  back.setOnClickListener(this);
      //   next.setOnClickListener(this);
@@ -154,6 +165,65 @@ public class Music_Browser extends Fragment {
             }
         });
         getMusicAlbums(gv1);
+
+
+            if (isOnline() == true) {
+                currPlay.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        getActivity().setTitle("Music Player");
+                        Music_Player music_player = new Music_Player();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.fragment_container, music_player).commit();
+
+                        getActivity().getIntent().putExtra("songPos", songPos);
+                        getActivity().getIntent().putExtra("token", token);
+                        getActivity().getIntent().putExtra("song", song[0]);
+                        getActivity().getIntent().putExtra("album", song[2]);
+                        getActivity().getIntent().putExtra("artist", song[1]);
+                        startActivity(getActivity().getIntent());
+                    }
+                });
+                play.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        if (paused) {
+                            mp.start();
+                            play.setImageResource(R.drawable.btn_pause);
+                        } else {
+                            mp.pause();
+                            play.setImageResource(R.drawable.btn_play);
+                        }
+                        paused = !paused;
+                    }
+                });
+
+                back.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        if (!paused) {
+                            if (mp.getCurrentPosition() <= 0.5) {
+                                previousSong();
+                            } else {
+                                mp.reset();
+                            }
+                        }
+                    }
+                });
+
+                next.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        if (!paused) {
+                            nextSong();
+                        }
+                    }
+                });
+
+            } else {
+                Toast.makeText(getActivity(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
+            }
+
+
+
+
+
         return v;}
 
 //========================================================================================================================
@@ -345,7 +415,7 @@ public void onClick(View v){
                     }
                 }
             }
-            else if (v.getId() == R.id.imageView5){
+            else if (v.getId() == R.id.forwardmin){
                 if(!paused){
                     nextSong();
                 }
@@ -440,7 +510,23 @@ public static void sendSongRequest(int pos, String[] song, String[] artist, Stri
     Log.i(TAG,songUrl);
 }
 // ==========================================================================================================================
+protected boolean isOnline() {
 
+    ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+
+        return true;
+
+    } else {
+
+        return false;
+
+    }
+
+}
 // ==========================================================================================================================
 // ==========================================================================================================================
 }
