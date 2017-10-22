@@ -158,6 +158,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:isScrollContainer="false"
+
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -175,7 +176,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="20dp"
+                        android:layout_margin="10dp"
                         android:background="@drawable/rounded_borders_purple"
                         android:orientation="vertical"
                         android:padding="10dp"
@@ -186,6 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
+
                             android:text="Bio:"
                             android:textColor="@color/colorWhite"
                             android:textSize="20dp"

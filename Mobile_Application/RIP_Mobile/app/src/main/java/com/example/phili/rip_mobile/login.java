@@ -45,7 +45,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public static String COINS = "";
     private Button btnSend;
     private EditText etUsername, etPass;
-    private TextView tvReturn,tvNew;
+    private TextView tvReturn,tvNew,tvForgot;
     private Context contxt;
 
     @Override
@@ -60,6 +60,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         tvReturn = (TextView) findViewById(R.id.tvReturnMessage);
         tvReturn.setText("");
         tvNew = (TextView)  findViewById(R.id.txNew);
+        tvForgot = (TextView) findViewById(R.id.tvForgot);
         btnSend.setOnClickListener(this);
         if (isOnline()==true) {
             tvNew.setOnClickListener(new View.OnClickListener() {
@@ -68,10 +69,19 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                     startActivity(intent);
                 }
             });
+
+            tvForgot.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(new Intent(login.this, forgot_password.class));
+                    startActivity(intent);
+                }
+            });
         }else
         {
             Toast.makeText(login.this, "You are not connected to Internet", Toast.LENGTH_LONG).show();
         }
+
+
 
     }
 
