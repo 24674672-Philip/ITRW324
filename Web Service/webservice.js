@@ -83,6 +83,27 @@ app.post('/api/registeraddress', function(req, res){
 
 });
 
+//get adderss per user
+app.get('/api/getaddress', function(req, res){
+  console.log("/api/getaddress");
+  var sql = 'SELECT * FROM user_address WHERE user_id = ?;'
+  var val = req.headers['userid'];
+  var qry = require('./app/api')(sql,val,con, res);
+});
+
+//set user address per user
+app.post('/api/setaddress', function(req, res){
+  console.log("/api/setaddress");
+  var sql = 'UPDATE song SET Country = ?, City = ?, AddressLine1 = ?, AddressLine2 = ?, PostalCode = ? WHERE userid = ?;';
+  var val1 = req.headers["country"];
+  var val2 = req.headers["city"];
+  var val3 = req.headers["addline1";
+  var val4 = req.headers["addline2"];
+  var val5 = req.headers["postalcode"];
+  var val6 = req.headers["userid"];
+  var qry = require('./app/update')(sql,[val1, val2, val3, val4, val5, val6],con,res);
+});
+
 //Activate user account from email link
 app.get('/api/activate', function(req, res){
   console.log("/api/activate");
@@ -445,13 +466,14 @@ app.post('/api/createsong', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-      var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID, Path) VALUES (?);';
+      var sql = 'INSERT INTO song (Title, Explicit, album_ID, artistID, Path, price) VALUES (?);';
       var val = [[
         req.headers["title"],
         req.headers["explicit"],
         req.headers["albumid"],
         req.headers["userid"],
-        req.headers["file_name"]
+        req.headers["file_name"],
+        req.headers["price"],
       ]];
       var qry = require('./app/update')(sql, val, con, res);
     }
