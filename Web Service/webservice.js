@@ -5,7 +5,7 @@ var randtoken = require('rand-token');
 var fs = require('fs');
 var ms = require('mediaserver');
 var cors = require('cors');
-var upload = require('express-fileupload')
+var fileUpload = require('express-fileupload')
 var path = require('path');
 var os = require('os');
 var Busboy = require('busboy');
@@ -13,7 +13,7 @@ var Busboy = require('busboy');
 const app = express();
 
 app.use(cors({origin: 'http://ripmusic.tk/'}));
-app.use(upload());
+app.use(fileUpload());
 
 var con = mysql.createPool({
   connectionLimit : 30,
@@ -551,31 +551,72 @@ app.post('/api/passwordreset', function(req, res){
 });
 
 app.get('/upload', function (req, res) {
-    res.send('<html><head></head><body>\
-               <form method="POST" enctype="multipart/form-data">\
-                <input type="text" name="textfield"><br />\
-                <input type="file" name="filefield"><br />\
-                <input type="submit">\
-              </form>\
-            </body></html>');
-  res.end();
+    res.sendFile(__dirname + "/upload.html");
 });
 
-// accept POST request on the homepage
-app.post('/upload', function (req, res) {
-    var busboy = new Busboy({ headers: req.headers });
-    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-      var saveTo = path.join('.', filename);
-      console.log('Uploading: ' + saveTo);
-      file.pipe(fs.createWriteStream(saveTo));
-    });
-    busboy.on('finish', function() {
-      console.log('Upload complete');
-      res.writeHead(200, { 'Connection': 'close' });
-      res.end("done biatches");
-    });
-    return req.pipe(busboy);
+//Image upload, checks for type (user or album)
+app.post('/uploadImage', function(req, res) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let uploadedFile = req.files.uploadedFile;
+
+  //Is an image
+  if(uploadedFile.mimetype.indexOf("image") > -1){
+    if(req.query.type === "user"){//user image
+      uploadedFile.mv('./images/users' + uploadedFile.name, function(err) {
+        if (err)
+          return res.sendStatus(500);
+
+        res.json({result: 'File uploaded!'});
+      });
+    }
+    else if(req.query.type === "album"){//album image
+      uploadedFile.mv('./images/albums/' + uploadedFile.name, function(err) {
+        if (err)
+          return res.sendStatus(500);
+
+        res.json({result: 'File uploaded!'});
+      });
+    }
+    else {
+      res.json({result: 'Incorrect type'});
+    }
+  }
 });
+
+app.post('/uploadImage', function(req, res) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let uploadedFile = req.files.artPicture;
+
+  //Is an image
+  if(uploadedFile.mimetype.indexOf("image") > -1){
+    if(req.query.type === "user"){//user image
+      uploadedFile.mv('./images/users' + uploadedFile.name, function(err) {
+        if (err)
+          return res.sendStatus(500);
+
+        res.json({result: 'File uploaded!'});
+      });
+    }
+    else if(req.query.type === "album"){//album image
+      uploadedFile.mv('./images/albums/' + uploadedFile.name, function(err) {
+        if (err)
+          return res.sendStatus(500);
+
+        res.json({result: 'File uploaded!'});
+      });
+    }
+    else {
+      res.json({result: 'Incorrect type'});
+    }
+  }
+});
+
 
 app.listen(8080, function(){
   console.log('App is listening on port 8080!');
