@@ -1,12 +1,14 @@
 package com.example.phili.rip_mobile;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -81,8 +83,6 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         {
             Toast.makeText(login.this, "You are not connected to Internet", Toast.LENGTH_LONG).show();
         }
-
-
 
     }
 
@@ -171,6 +171,10 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                             intent.putExtra("token", result.getString("token"));
                             startActivity(intent);
                         }
+                        else if(result.getString("login").contains("not")){
+                            Log.i("result","not registered");
+                            createAndShowAlertDialog();
+                        }
                     } catch (JSONException e) {
                         Toast.makeText(login.this,e.getMessage().toString() , Toast.LENGTH_LONG).show();
                        // tvReturn.setText(e.getMessage().toString());
@@ -187,5 +191,52 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+    private void createAndShowAlertDialog() {
+        Log.i("createdialog","oikhioh");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Email not registered.\nResend verification email?");
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                resendEmail();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
+    private void resendEmail() {
+
+        if (isOnline() == true) {
+            String[] headersType = new String[1];
+            String[] headersVal = new String[1];
+            headersType[0] = "username";
+            headersVal[0] = etUsername.getText().toString();
+
+            final serverLink sender = new serverLink(this);
+            sender.sendServerRequest(headersType, headersVal, "/api/resendemail", true, new serverLink.OnDownloadTaskCompleted() {
+                @Override
+                public void onTaskCompleted(JSONObject result, boolean error, String message) {
+                    try {
+                        if (result.getString("status").contains("sent")) {
+                            Toast.makeText(login.this,"email sent" , Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(login.this,e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(login.this,e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(login.this, "You are not connected to Internet", Toast.LENGTH_LONG).show();
+        }
+    }
 }
