@@ -26,7 +26,7 @@ var con = mysql.createPool({
   password: "blockchain",
   database: "blockchainDB",
   multipleStatements: true,
-  debug: true
+  //debug: true
 });
 
 //ensures that the authentication header is there
@@ -60,7 +60,7 @@ app.post('/api/login', function(req, res){
 //calls register module
 app.post('/api/registeruser', function(req, res){
   console.log("/api/registeruser");
-  var qry = require('./app/register')(req, res, con);
+  var qry = require('./app/register')(req, res, con, randtoken);
 });
 
 //registers user address
@@ -569,7 +569,7 @@ app.post('/api/passwordreset', function(req, res){
     else{
       if(data.user.email === val1){
         var sql = "UPDATE users SET password = ? WHERE email = ?";
-        var val = req.headers["username"];
+        var val = req.headers["password"];
         var qry = require('./app/update')(sql, [val,val1], con, res);
       }
       else {
@@ -632,16 +632,17 @@ app.post('/api/uploadalbum', function(req, res) {
   console.log('Artist: ' + artist);
 
 
-  var path = __dirname + '/music/' + artist + '/' + album;
+  var path = __dirname + '/music/' + artist + '/' + albumTitle;
 
-  if(fs.existsSync(path)){
+  if(!fs.existsSync(path)){
     fs.mkdirSync(path);
   }
 
-  for (var i = 0; i < uploadedSongs.length; i++) {
-    if(fs.existsSync(path+'/'+uploadedSongs[i].name)){
-      console.log('added song: ' + uploadedSongs.name);
-      uploadedSongs[i].mv(path + '/' + uploadedSongs.name, function(err) {
+  for (let songs of uploadedSongs) {
+    if(!fs.existsSync(path+'/'+songs.name)){
+	  console.log(songs);
+      console.log('added song: ' + songs.name);
+      songs.mv(path + '/' + songs.name, function(err) {
         if (err)
           return res.sendStatus(500);
       });
@@ -653,11 +654,9 @@ app.post('/api/uploadalbum', function(req, res) {
       if (err)
         return res.sendStatus(500);
 
-      res.json({result: 'Files uploaded!'});
+      res.json({result: 'success'});
     });
   }
-
-  res.json({result: 'Files uploaded!'});
 });
 
 //listens on this port of the local machine
