@@ -225,6 +225,11 @@ public class registration extends AppCompatActivity implements View.OnClickListe
             isValidated = false;
             message = "Please confirm your password";
         }
+        else if ((first != '-') && (second != '-'))
+        {
+            isValidated = false;
+            message = "Date of birth is not in the correct format";
+        }
         else if (etUsername.getText().toString().matches("")){
             isValidated = false;
             message = "Missing: Username";
