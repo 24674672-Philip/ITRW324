@@ -1,6 +1,6 @@
 var nodemailer = require('nodemailer');
 var fs = require('fs');
-
+//our mail account
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -8,7 +8,7 @@ var transporter = nodemailer.createTransport({
     pass: 'Blockchain1'
   }
 });
-
+//mail layout and options
 module.exports = function(link, emailAddress){
   var mailOptions = {
     from: 'rip.donotreply@gmail.com',
@@ -33,7 +33,7 @@ module.exports = function(link, emailAddress){
         cid: 'kek@kek.com'
     }]
   };
-
+//sending the mail
   transporter.sendMail(mailOptions, function(error, info){
 	if (error) {
       console.log(error);
