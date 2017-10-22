@@ -216,13 +216,11 @@ export class ServerService {
 
   searchAlbums(searchTerm: string, page: number, callback){
     let headers = new Headers();
-    headers.append('searchalbums', searchTerm);
+    headers.append('searchterm', searchTerm);
     headers.append('page', page.toString());
-    this.http.post(this.url + 'searchsongs',null, {headers: headers})
+    this.http.post(this.url + 'searchalbums',null, {headers: headers})
       .subscribe(
         (response)=> callback(response.json())
       )
   }
-
-
 }

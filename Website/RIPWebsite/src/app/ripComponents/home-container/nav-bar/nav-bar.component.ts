@@ -34,15 +34,14 @@ export class NavBarComponent implements OnInit {
   }
 
   search(event: Event){
-    this.albumsExist = false;
-    this.artistExists = false;
-    this.songsExist = false;
     let searchTerm: string = (<HTMLInputElement>event.target).value;
 
     if(searchTerm.length != 0){
+      console.log('searchAlbums executed');
       this.serverService.searchAlbums(searchTerm,0,
         (response)=>{
           let x = response['result'];
+          console.log(x);
           this.searchAlbums = new Array<Album>();
           if(x.length!=0) {
             this.albumsExist = true;
@@ -51,6 +50,8 @@ export class NavBarComponent implements OnInit {
               temp.setAlbumImagePath('albums', y['image_name'].toString());
               this.searchAlbums.push(temp);
             }
+          }else{
+            this.albumsExist = false;
           }
         });
 
@@ -65,6 +66,8 @@ export class NavBarComponent implements OnInit {
               temp.setArtistImagePath('users',y['profilepicture']);
               this.searchArtists.push(temp);
             }
+          }else{
+            this.artistExists = false;
           }
 
         });
@@ -80,6 +83,8 @@ export class NavBarComponent implements OnInit {
               temp.setSongImagePath('albums', y['album_image'].toString());
               this.searchSongs.push(temp);
             }
+          }else{
+            this.songsExist = false;
           }
         });
     }

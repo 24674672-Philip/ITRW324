@@ -27,6 +27,7 @@ export class ArtistDescriptionComponent implements OnInit {
   songToEdit: Song;
   editSongName: string;
   editSongPrice: string;
+  imgPath: string = this.serverService.url+'image?type=albums&image_name=Default.png';
 
 
 
@@ -135,4 +136,17 @@ export class ArtistDescriptionComponent implements OnInit {
       this.isOwnProfile = true;
     }
   }
+
+  uploadWithRelease(){
+    let form: HTMLFormElement = <HTMLFormElement> document.getElementById('uploadForm');
+    let formData: FormData = new FormData(form);
+    //TODO: send form data to server
+  }
+
+  uploadWithoutRelease(){
+    let form: HTMLFormElement = <HTMLFormElement> document.getElementById('uploadForm');
+    let formData: FormData = new FormData(form);
+    //TODO: send form data to server
+  }
+
 }

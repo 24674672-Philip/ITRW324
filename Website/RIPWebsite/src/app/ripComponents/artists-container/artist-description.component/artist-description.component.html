@@ -23,7 +23,7 @@
             <div class="btn-group-vertical">
               <button class="btn btn-primary" (click)="editDetails()"><span class="glyphicon glyphicon-pencil" > </span> Edit Profile</button>
               <button class="btn btn-primary" (click)="manageContent()"><span class="glyphicon glyphicon-music"> </span> Manage Content </button>
-              <button class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"> </span> Upload New Content</button>
+              <button class="btn btn-success" data-toggle="modal" data-target="#uploadModal"><span class="glyphicon glyphicon-plus-sign"> </span> Upload New Content</button>
               <button class="btn btn-danger"><span class="glyphicon glyphicon-remove"> </span> Delete Content</button>
             </div>
           </div>
@@ -81,5 +81,53 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
+  </div>
+</div>
+
+
+<div id="uploadModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Upload New Content</h2>
+      </div>
+      <div class="modal-body center-block">
+
+        <form class="form-group" id="uploadForm">
+          <h4>Album Cover</h4>
+          <div class="row center-block" style="margin-left: 0; margin-right: 0; padding-bottom: 10px">
+            <div class="text-center">
+              <img [src]="imgPath" class="img-responsive center-block" style="max-height: 75px"/>
+              <input id="artUpload" type="file" class="btn btn-success center-block" name="artPicture"/>
+            </div>
+          </div>
+
+          <h4>Album Details</h4>
+          <div class="row center-block" style="margin-left: 0; margin-right: 0;">
+            <p style="font-weight: bold">Album Title</p>
+            <input name="album_name" class="form-control" placeholder="Album Title"/>
+          </div>
+
+          <h4>Album Songs</h4>
+          <div class="row center-block" style="margin-right: 0; margin-left: 0;">
+            <input class="btn btn-success center-block" type="file" name="songs" multiple/>
+          </div>
+
+          <div class="btn-group" style="padding-top: 20px">
+            <button class="btn btn-success" (click)="uploadWithRelease()">Upload+Release</button>
+            <button class="btn btn-primary" (click)="uploadWithoutRelease()">Upload</button>
+          </div>
+        </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>
