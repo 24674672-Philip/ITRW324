@@ -43,6 +43,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
     public static String TOKEN = "";
     public static String USERNAME = "";
     public static String COINS = "";
+    public static String EMAIL = "";
     private Button btnSend;
     private EditText etUsername, etPass;
     private TextView tvReturn,tvNew,tvForgot;
@@ -113,7 +114,7 @@ public class login extends AppCompatActivity implements View.OnClickListener{
 
     protected boolean isOnline() {
 
-        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
@@ -162,6 +163,10 @@ public class login extends AppCompatActivity implements View.OnClickListener{
                         //tvReturn.setText(result.getString("login"));
                         Toast.makeText(login.this,result.getString("login") , Toast.LENGTH_SHORT).show();
                         if (result.getString("login").contains("success")) {
+                            TOKEN = result.getString("token");
+                            USERNAME = result.getString("user");
+                            COINS = result.getString("coins");
+                            EMAIL = result.getString("email");
                             Intent intent = new Intent(new Intent(login.this, MainActivity.class));
                             intent.putExtra("token", result.getString("token"));
                             startActivity(intent);
