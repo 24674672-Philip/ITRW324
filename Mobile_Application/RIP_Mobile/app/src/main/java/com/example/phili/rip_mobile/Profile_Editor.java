@@ -18,13 +18,10 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Profile_Editor extends Fragment {
 
 
+    TextView username;
     EditText etBio;
     TextView coins;
     ImageView enableEdit;
@@ -45,34 +42,38 @@ public class Profile_Editor extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_profile__editor, container, false);
-
         enableEdit = v.findViewById(R.id.edtprofile);
         etBio = v.findViewById(R.id.etBio);
         coins = v.findViewById(R.id.tvCoins);
+        username = v.findViewById(R.id.uname);
         ivSave = v.findViewById(R.id.savprofile);
         etCountry = v.findViewById(R.id.etCountry);
         etCity = v.findViewById(R.id.etCity);
         etPostal = v.findViewById(R.id.etPostalCodes);
         etAdline1 = v.findViewById(R.id.etAdl1);
         etAdline2= v.findViewById(R.id.etAdl2);
+        username.setText(login.USERNAME);
+        getBio();
+        getAddress();
+        disableText();
+
         enableEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               if (useable== false)
-               {
-                  enableText();
-               }
-               else
-                   Toast.makeText(getActivity(), "Already enabled", Toast.LENGTH_SHORT).show();
+                if (useable== false)
+                {
+                    enableText();
+                }
+                else
+                    Toast.makeText(getActivity(), "Already enabled", Toast.LENGTH_SHORT).show();
             }
         });
 
         coins.setText(login.COINS);
-        getBio();
-        getAddress();
+
 
         if (isOnline()==true) {
 
-            if(useable== true)
+
             ivSave.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     if (etBio.getText().toString().matches(""))
@@ -95,17 +96,14 @@ public class Profile_Editor extends Fragment {
                     if (etAdline2.getText().toString().matches(""))
                         Toast.makeText(getActivity(), "Please enter a addressline 2", Toast.LENGTH_SHORT).show();
                     else
-                    setAddress();
+                        setAddress();
 
                     disableText();
                 }
-            });
-            else
-                Toast.makeText(getActivity(), "Please enable edit", Toast.LENGTH_LONG).show();
-        }else
-        {
+            });}
+        else
             Toast.makeText(getActivity(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
-        }
+
         return v;
     }
 
@@ -130,19 +128,20 @@ public class Profile_Editor extends Fragment {
 
 
     private void enableText(){
-        etBio.setFocusable(true);
+        etBio.setFocusableInTouchMode(true);
         etBio.setClickable(true);
-        etCountry.setFocusable(true);
+        etCountry.setFocusableInTouchMode(true);
         etCountry.setClickable(true);
-        etCity.setFocusable(true);
+        etCity.setFocusableInTouchMode(true);
         etCity.setClickable(true);
-        etPostal.setFocusable(true);
+        etPostal.setFocusableInTouchMode(true);
         etPostal.setClickable(true);
-        etAdline1.setFocusable(true);
+        etAdline1.setFocusableInTouchMode(true);
         etAdline1.setClickable(true);
-        etAdline2.setFocusable(true);
+        etAdline2.setFocusableInTouchMode(true);
         etAdline2.setClickable(true);
         useable = true;
+        Toast.makeText(getActivity(), "Enabled", Toast.LENGTH_LONG).show();
 
     }
     private void getAddress()
@@ -160,8 +159,8 @@ public class Profile_Editor extends Fragment {
                         etCountry.setText(result.get("Country").toString());
                         etCity.setText(result.get("City").toString());
                         etPostal.setText(result.get("PostalCode").toString());
-                       etAdline1.setText(result.get("AddressLine1").toString());
-                       etAdline2.setText(result.get("AddressLine2").toString());
+                        etAdline1.setText(result.get("AddressLine1").toString());
+                        etAdline2.setText(result.get("AddressLine2").toString());
                     } catch (JSONException e) {
                         Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
@@ -246,7 +245,7 @@ public class Profile_Editor extends Fragment {
         }
     }
 
-   private void setBio() {
+    private void setBio() {
         if (isOnline() == true) {
             String[] headersType = new String[3];
             String[] headersVal = new String[3];
@@ -261,9 +260,9 @@ public class Profile_Editor extends Fragment {
                 @Override
                 public void onTaskCompleted(JSONObject result, boolean error, String message) {
                     try {
-                         if (result.getString("result").contains("success")) {
-                        Toast.makeText(getActivity(),"Bio updated", Toast.LENGTH_LONG).show();
-                         }
+                        if (result.getString("result").contains("success")) {
+                            Toast.makeText(getActivity(),"Bio updated", Toast.LENGTH_LONG).show();
+                        }
                     } catch (JSONException e) {
                         Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
                     } catch (Exception e) {

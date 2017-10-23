@@ -94,34 +94,18 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.fragment_container,profile_editor).commit();
             fragmentManager.beginTransaction().addToBackStack(null);
         }
-        else if (id == R.id.nav_redeem) {
-            setTitle("Redeem Voucher");
-            Redeem_Voucher redeem_voucher = new Redeem_Voucher();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,redeem_voucher).commit();
-            fragmentManager.beginTransaction().addToBackStack(null);
-        } else if (id == R.id.nav_playlist) {
-            setTitle("My Playlist");
-            Song_List song_list = new Song_List();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,song_list).commit();
-            fragmentManager.beginTransaction().addToBackStack(null);
 
-        } else if (id == R.id.nav_about) {
-            setTitle("About");
-            About about = new About();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,about).commit();
-            fragmentManager.beginTransaction().addToBackStack(null);
 
-        } else if (id == R.id.nav_cart) {
-            setTitle("My Cart");
-            Cart cart = new Cart();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,cart).commit();
-            fragmentManager.beginTransaction().addToBackStack(null);
+         else if (id == R.id.nav_about)
 
-        }
+    {
+        setTitle("About");
+        About about = new About();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, about).commit();
+        fragmentManager.beginTransaction().addToBackStack(null);
+
+    }
         else if (id == R.id.nav_logout)
         {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

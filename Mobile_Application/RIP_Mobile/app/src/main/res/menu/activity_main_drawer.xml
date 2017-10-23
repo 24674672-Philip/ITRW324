@@ -10,18 +10,7 @@
             android:id="@+id/nav_bmusic"
             android:icon="@drawable/ic_menu_browse"
             android:title="Browse Music" />
-        <item
-            android:id="@+id/nav_playlist"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="My Playlist" />
-        <item
-            android:id="@+id/nav_cart"
-            android:icon="@drawable/ic_cart"
-            android:title="My Cart" />
-        <item
-            android:id="@+id/nav_redeem"
-            android:icon="@drawable/ic_card"
-            android:title="Redeem Voucher" />
+
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_manage"
