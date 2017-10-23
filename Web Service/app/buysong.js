@@ -19,14 +19,13 @@ module.exports = function(req, res, con, randtoken){
         if(!err){
           console.log('inserted val: ' + val);
           var link = hash;
-          var email = require('./app/email')(link,emailAddress);
           var sql2 = 'UPDATE users SET coins = coins - ? WHERE user_id = ?;'
           connection.query(sql2,[req.headers["price"],req.headers["userid"]],function(err, resul){
             if(!err){
               connection.query("UPDATE users SET coins = coins + ? WHERE user_id = ?",[req.headers["price"],req.headers["artistid"]],function(err, resul){
                 connection.release();
                 if(!err) {
-                  res.json({register: "success"});
+                  res.json({transaction: "success"});
                 }
               });
             }

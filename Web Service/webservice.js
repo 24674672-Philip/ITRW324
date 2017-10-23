@@ -24,7 +24,7 @@ app.use(fileUpload());
 //creates connection pool limiting to 30 concurrent connections
 var con = mysql.createPool({
   connectionLimit : 30,
-  host: "localhost",
+  host: "52.211.85.57",
   user: "philip",
   password: "blockchain",
   database: "blockchainDB",
@@ -154,7 +154,7 @@ app.get('/api/download', function(req, res){
           res.json({"code" : 100, "status" : "Error in connection database"});
           return;
         }
-        connection.query("SELECT * FROM transaction WHERE user__id = ? AND song_id = ?",[req.headers["userid"],req.headers["songid"]],function(err,result){
+        connection.query("SELECT * FROM transaction WHERE user__id = ? AND song_id = ?",[req.query.userid,req.headers.songid],function(err,result){
           connection.release();
           if(err){res.json(err);}
           else {
@@ -588,7 +588,7 @@ app.post('/api/buysongs', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-      var qry = require('./app/apisend')(req, res, con, randtoken);
+      var qry = require('./app/buysong')(req, res, con, randtoken);
     }
   });
 });
