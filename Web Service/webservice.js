@@ -361,7 +361,7 @@ app.post('/api/getalbumsongs', function(req, res){
 //returns spesific albums songs
 app.post('/api/getuseralbumsongs', function(req, res){
   console.log("/api/getalbumsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, artist_image, Explicit, Released FROM user_song_details WHERE AlbumID = ?;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, artist_image, Explicit, album_price Released FROM user_song_details WHERE AlbumID = ?;'
   var qry = require('./app/api')(sql,req.headers["albumid"],con, res);
 });
 
@@ -373,7 +373,7 @@ app.post('/api/artistalbums', function(req, res){
 });
 
 //returns bought songs per user
-app.get('/api/getpurchased', ensureToken, function(req, res){
+app.post('/api/getpurchased', ensureToken, function(req, res){
   console.log("/api/getpurchased");
   jwt.verify(req.token, 'blockchain', function(err, data){
     if(err){
@@ -387,7 +387,7 @@ app.get('/api/getpurchased', ensureToken, function(req, res){
 });
 
 //returns bought songs per user
-app.get('/api/ispurchased', ensureToken, function(req, res){
+app.post('/api/ispurchased', ensureToken, function(req, res){
   console.log("/api/getpurchased");
   jwt.verify(req.token, 'blockchain', function(err, data){
     if(err){
@@ -395,7 +395,7 @@ app.get('/api/ispurchased', ensureToken, function(req, res){
     }
     else {
       var sql = 'SELECT * FROM purchased_songs WHERE user__id = ? AND song_id = ?;'
-      var qry = require('./app/update')(sql,[req.headers["userid"],req.headers["songid"]],con, res);
+      var qry = require('./app/checksong')(sql,[req.headers["userid"],req.headers["songid"]],con, res);
     }
   });
 });
