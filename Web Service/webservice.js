@@ -148,32 +148,51 @@ app.get('/api/download', function(req, res){
       res.sendStatus(403);
     }
     else {
-      var songName = req.query.song;
-      var songAlbum = req.query.album;
-      var songArtist = req.query.artist;
-    	var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
-      fs.exists(file,function(exists){
-    		if(exists)
-    		{//sends the file with headers
+      con.getConnection(function(err, connection){
+        if (err) {
+          connection.release();
+          res.json({"code" : 100, "status" : "Error in connection database"});
+          return;
+        }
+        connection.query("SELECT * FROM transaction WHERE user__id = ? AND song_id = ?",[req.headers["userid"],req.headers["songid"]],function(err,result){
+          connection.release();
+          if(err){res.json(err);}
+          else {
+            if(result !== undefined){
+              var songName = req.query.song;
+              var songAlbum = req.query.album;
+              var songArtist = req.query.artist;
+              var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
+              fs.exists(file,function(exists){
+                if(exists)
+                {//sends the file with headers
 
-          let tags = {
-            copyright: "RIP hash" //get hash from Keagan
+                  let tags = {
+                    copyright: result.hash //get hash from Keagan
+                  };
+
+                  let success = NodeID3.update(tags, file); //  Returns true/false
+                  NodeID3.update(tags, file, function(err) {  });
+                  res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
+                  res.setHeader('Content-Type', 'application/audio/mpeg3');
+                  var rstream = fs.createReadStream(file);
+                  rstream.pipe(res);
+                }
+                else
+                {
+                  res.send("Its a 404");
+                  res.end();
+                }
+              });
+              res.json({result: "success"});
+            }
+            else{
+              res.json({result: "failed"});
+            }
           }
-
-          let success = NodeID3.update(tags, file) //  Returns true/false
-          NodeID3.update(tags, file, function(err) {  })
-    			res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
-    			res.setHeader('Content-Type', 'application/audio/mpeg3')
-    			var rstream = fs.createReadStream(file);
-    			rstream.pipe(res);
-    		}
-    		else
-    		{
-    			res.send("Its a 404");
-    			res.end();
-    		}
-    	});
-     }
+        });
+      });
+    }
   })
 });
 
@@ -562,8 +581,8 @@ app.post('/api/buycoins', ensureToken, function(req, res){
 });
 
 //buys song on blockchain network
-app.post('/api/buysong', ensureToken, function(req, res){
-  console.log("/api/buysong");
+app.post('/api/buysongs', ensureToken, function(req, res){
+  console.log("/api/buysongs");
   jwt.verify(req.token, 'blockchain', function(err, data){
     if(err){
       res.sendStatus(403);
