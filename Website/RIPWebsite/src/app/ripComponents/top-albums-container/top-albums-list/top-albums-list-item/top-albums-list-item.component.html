@@ -1,0 +1,23 @@
+<div class="container-fluid" >
+  <div class="row">
+    <div class="panel  text-center pannel-style" appPopupShadow style="height: 250px">
+      <div class="panel-heading text-center">
+        <img class="img-responsive"
+             [src]="albumObj.getAlbumImagePath()"
+             style="min-height: 50%; max-height: 125px"
+        >
+      </div>
+
+      <div class="panel-body" style="padding-top: 0; cursor: pointer">
+        <div class="row" style="margin-right: 0; margin-left: 0;">
+          <h4 style="padding: 2px; margin: 2px"><a style="text-emphasis: none; color: lightgrey; cursor: pointer" (click)="albumClicked()">{{albumObj.getAlbumName()}}</a></h4>
+        </div>
+
+        <div class="row" style="margin-right: 0; margin-left: 0;" >
+          <h5 (click)="artistClicked()" ><a style="text-emphasis: none; color: lightgrey; cursor: pointer; padding: 2px; margin: 2px;">{{albumObj.getAlbumArtist()}}</a></h5>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

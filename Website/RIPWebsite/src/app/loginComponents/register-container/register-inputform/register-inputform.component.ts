@@ -8,7 +8,6 @@ import {Router} from "@angular/router";
   styleUrls: ['./register-inputform.component.css']
 })
 export class RegisterInputFormComponent implements OnInit {
-  //TODO: fix ugly form validation
   email : string;
   fName : string;
   lName : string;
@@ -66,7 +65,7 @@ export class RegisterInputFormComponent implements OnInit {
 
   validatePassword(event: Event){
     let value = (<HTMLInputElement>event.target).value;
-    if(value.length>=8){
+    if(value.length>=8 && value.match(new RegExp('[$&+,:;=?@#|\'<>.^*()%!-]'))){
       this.passwordValid = true;
     }
     else{
@@ -127,7 +126,7 @@ export class RegisterInputFormComponent implements OnInit {
   }
   checkEmail(){
     this.serverService.checkEmailAvailibility(this.email, (response)=>{
-      if(response['email'] == 'available'){
+      if(response['username'] == 'available'){
         this.emailAvailable = true;
       }
       else{

@@ -43,6 +43,12 @@ import { Error403Component } from './alerts/error-403/error-403.component';
 import { HttpClientModule} from "@angular/common/http";
 import { CreateSongsComponent } from './ripComponents/artists-container/artist-description.component/create-songs/create-songs.component';
 import { CreateSongsItemComponent } from './ripComponents/artists-container/artist-description.component/create-songs/create-songs-item/create-songs-item.component';
+import { TopArtistsContainerComponent } from './ripComponents/top-artists-container/top-artists-container.component';
+import { TopArtistsListComponent } from './ripComponents/top-artists-container/top-artists-list/top-artists-list.component';
+import { TopArtistsListItemComponent } from './ripComponents/top-artists-container/top-artists-list/top-artists-list-item/top-artists-list-item.component';
+import { TopAlbumsContainerComponent } from "./ripComponents/top-albums-container/top-albums-container.component";
+import { TopAlbumsListComponent } from './ripComponents/top-albums-container/top-albums-list/top-albums-list.component';
+import { TopAlbumsListItemComponent } from './ripComponents/top-albums-container/top-albums-list/top-albums-list-item/top-albums-list-item.component';
 
 
 const router: Routes = [
@@ -53,7 +59,9 @@ const router: Routes = [
   {path: 'artist', component: ArtistsContainerComponent},//, canActivate: [AuthGuard]},
   {path: 'album', component: AlbumContainerComponent},//, canActivate: [AuthGuard]},
   {path: 'wallet', component: BuyContainerComponent},//, canActivate: [AuthGuard]},
-  {path: 'error403', component: Error403Component}
+  {path: 'error403', component: Error403Component},//, canActivate: [AuthGuard]},
+  {path: 'topartists', component: TopArtistsContainerComponent},//, canActivate: [AuthGuard]},
+  {path: 'topalbums', component: TopAlbumsContainerComponent}//, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
@@ -92,6 +100,12 @@ const router: Routes = [
     Error403Component,
     CreateSongsComponent,
     CreateSongsItemComponent,
+    TopArtistsContainerComponent,
+    TopArtistsListComponent,
+    TopArtistsListItemComponent,
+    TopAlbumsListComponent,
+    TopAlbumsListItemComponent,
+    TopAlbumsContainerComponent
 
   ],
   imports: [
