@@ -100,7 +100,7 @@
             </div>
             <div class=" col-sm-12 col-md-12 col-lg-12">
               <p *ngIf="!emailValid" style="text-wrap: none;" class="text-danger">Invalid email entered</p>
-              <p *ngIf="emailValid" style="text-wrap: none;" class="text-success">Valid email entered</p>   
+              <p *ngIf="emailValid" style="text-wrap: none;" class="text-success">Valid email entered</p>
             </div>
           </div>
 
@@ -147,6 +147,13 @@
                 <p *ngIf="!confirmedPassword" style="text-wrap: none;" class="text-danger">Password don't match</p>
                 <p *ngIf="confirmedPassword" style="text-wrap: none;" class="text-success">Password matches</p>
             </div>
+          </div>
+
+          <div class="row" style="margin-right: 0; margin-left: 0;">
+            <h3 class="center-block">Upload Profile Picture</h3>
+            <form id="pfpForm" class="form-group">
+              <input class="center-block form-control" type="file" accept="image/png" name="artPicture"/>
+            </form>
           </div>
 
 

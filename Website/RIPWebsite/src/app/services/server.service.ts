@@ -334,7 +334,29 @@ export class ServerService {
   }
 
 
+  buyCoins(userid: string, amount: number, token: string, callback){
+    let headers = new Headers();
+    headers.append('userid',userid.toString());
+    headers.append('coins', amount.toString());
+    headers.append('authentication', 'bearer '+token);
+    this.http.post(this.url+'addtokens', null, {headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      )
 
+    //addtokens
+  }
+
+  uploadProfilePic(formData: FormData, userid: number, callback){
+    let headers = new Headers();
+    headers.append('userid', userid.toString());
+    headers.append('type', 'users');
+
+    this.http.post(this.url+'uploadimage', formData, {headers: headers})
+      .subscribe(
+        (response)=> callback(response.json)
+      )
+  }
 
 
 }

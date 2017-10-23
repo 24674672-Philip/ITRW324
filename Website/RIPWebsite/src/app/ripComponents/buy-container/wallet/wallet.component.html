@@ -38,8 +38,14 @@
           </div>
 
           <div class="btn-group" style="padding-top: 20px">
-            <button class="btn btn-primary">Buy Coins</button>
-            <button class="btn btn-success">Go Spend</button>
+            <button class="btn btn-primary" (click)="buyClicked()">Buy Coins</button>
+            <button class="btn btn-success" (click)="navigateHome()">Go Spend</button>
+          </div>
+          <div class="panel-success" *ngIf="isBuying">
+            <input [(ngModel)]="coinAmount" class="form-control">
+            <button class="btn btn-success" (click)="bought()">Buy</button>
+            <div class="panel-success" *ngIf="buySuccessful">Coins Successfully Bought</div>
+            <div class="panel-danger" *ngIf="buyError">Something Went Wrong</div>
           </div>
         </div>
 

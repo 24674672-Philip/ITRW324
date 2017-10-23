@@ -9,7 +9,7 @@ export class DataEmitterService {
   getEditContentAlbumList: EventEmitter<Album> = new EventEmitter<Album>();
   getEditSong: EventEmitter<Song> = new EventEmitter<Song>();
   songConfirmed: EventEmitter<{songName:string, explicit:number, price: number}> = new EventEmitter<{songName:string, explicit:number, price: number}>();
-
+  linkEmitter = new EventEmitter<string>();
   constructor() { }
 
 

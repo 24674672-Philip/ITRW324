@@ -5,6 +5,7 @@ import {ServerService} from "../../../services/server.service";
 import {Song} from "../../../classes/song.class";
 import {forEach} from "@angular/router/src/utils/collection";
 import {AuthService} from "../../../services/auth.service";
+import {DataEmitterService} from "../../../services/data-emitter.service.service";
 
 @Component({
   selector: 'app-album-description',
@@ -20,8 +21,12 @@ export class AlbumDescriptionComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private serverService: ServerService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private dataServer: DataEmitterService) {
 
+
+
+    this.dataServer.linkEmitter.subscribe((link)=>window.open(link,'_blank'));
   }
 
   ngOnInit() {
@@ -33,7 +38,7 @@ export class AlbumDescriptionComponent implements OnInit {
       for(let x of xy){
 
         console.log();
-        let tempObject = new Song(x['musicID'],x['albumID'], x['artistID'],x['Artist'],x['Album'],x['Title'], x['price'],false, this.authService.getAuthToken()); //TODO: replace parameters
+        let tempObject = new Song(x['musicID'],x['albumID'], x['artistID'],x['Artist'],x['Album'],x['Title'], x['price'],false, this.authService.getAuthToken());
         tempObject.setSongImagePath('albums',x['album_image']);
         this.serverService.isPurchased(this.authService.getUserId(), tempObject.getSongID(),this.authService.getAuthToken(),
           (response)=> {
@@ -47,7 +52,7 @@ export class AlbumDescriptionComponent implements OnInit {
           });
       }
 
-      this.responseReceived(xy[0]['albumID'],xy[0]['Album'], xy[0]['Artist'], xy[0]['Released'],xy[0]['artist_image'],xy[0]['album_image'], this.isBought ,xy[0]['price']);//TODO: replace with parameters
+      this.responseReceived(xy[0]['albumID'],xy[0]['Album'], xy[0]['Artist'], xy[0]['Released'],xy[0]['artist_image'],xy[0]['album_image'], this.isBought ,xy[0]['price']);
     });
   }
 

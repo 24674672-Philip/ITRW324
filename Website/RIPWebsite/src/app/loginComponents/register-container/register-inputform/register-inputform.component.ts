@@ -26,6 +26,7 @@ export class RegisterInputFormComponent implements OnInit {
   emailAvailable:boolean;
   usernameAvailable: boolean;
   confirmedPassword: boolean;
+  userid: number;
 
   constructor(private serverService: ServerService, private router: Router) {
     this.username='';
@@ -97,16 +98,26 @@ export class RegisterInputFormComponent implements OnInit {
       {
         if(response['registered'] != 'Success!'){
           this.registerFailed();
+
+
         }
         else{
           this.registerSuccess();
+          this.userid = response['userid'];
+          this.uploadProfilePic(this.userid);
         }
       });
   }
 
+  uploadProfilePic(userid: number){
+    let form = <HTMLFormElement> document.getElementById('pfpForm');
+    let formData: FormData = new FormData(form);
+    this.serverService.uploadProfilePic(formData, userid,(response)=>console.log(response));
+  }
+
   registerSuccess(){
     this.success = true;
-    this.router.navigate(['']); //Navigates back to the login page for the user to log in after verifying email address
+    this.router.navigate(['']);
 
   }
 
