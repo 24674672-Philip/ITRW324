@@ -106,9 +106,6 @@ public class Music_Player extends Fragment {
         catch (Exception ex){
             Log.i("ERROR, musicplayer: ",ex.getMessage().toString());
         }
-
-
-
         return v;
 
     }

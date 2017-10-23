@@ -230,11 +230,6 @@ public class Music_Browser extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
             }
-
-
-
-
-
         return v;}
 
 //========================================================================================================================

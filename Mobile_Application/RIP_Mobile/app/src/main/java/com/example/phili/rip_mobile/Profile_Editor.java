@@ -27,25 +27,26 @@ public class Profile_Editor extends Fragment {
 
     EditText etBio;
     TextView coins;
+    ImageView enableEdit;
     ImageView ivSave;
     EditText etCountry;
     EditText etCity;
     EditText etPostal;
     EditText etAdline1;
     EditText etAdline2;
+    boolean useable;
 
     public Profile_Editor() {
         // Required empty public constructor
 
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_profile__editor, container, false);
 
+        enableEdit = v.findViewById(R.id.edtprofile);
         etBio = v.findViewById(R.id.etBio);
         coins = v.findViewById(R.id.tvCoins);
         ivSave = v.findViewById(R.id.savprofile);
@@ -54,13 +55,24 @@ public class Profile_Editor extends Fragment {
         etPostal = v.findViewById(R.id.etPostalCodes);
         etAdline1 = v.findViewById(R.id.etAdl1);
         etAdline2= v.findViewById(R.id.etAdl2);
+        enableEdit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               if (useable== false)
+               {
+                  enableText();
+               }
+               else
+                   Toast.makeText(getActivity(), "Already enabled", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        //Toast.makeText(getActivity(),login.USERID, Toast.LENGTH_LONG).show();
         coins.setText(login.COINS);
         getBio();
         getAddress();
 
         if (isOnline()==true) {
+
+            if(useable== true)
             ivSave.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     if (etBio.getText().toString().matches(""))
@@ -68,10 +80,28 @@ public class Profile_Editor extends Fragment {
                     else
                         setBio();
 
+                    if (etCountry.getText().toString().matches(""))
+                        Toast.makeText(getActivity(), "Please enter a country", Toast.LENGTH_SHORT).show();
+                    else
+                    if (etCity.getText().toString().matches(""))
+                        Toast.makeText(getActivity(), "Please enter a city", Toast.LENGTH_SHORT).show();
+                    else
+                    if (etPostal.getText().toString().matches(""))
+                        Toast.makeText(getActivity(), "Please enter a postal code", Toast.LENGTH_SHORT).show();
+                    else
+                    if (etAdline1.getText().toString().matches(""))
+                        Toast.makeText(getActivity(), "Please enter a addressline 1", Toast.LENGTH_SHORT).show();
+                    else
+                    if (etAdline2.getText().toString().matches(""))
+                        Toast.makeText(getActivity(), "Please enter a addressline 2", Toast.LENGTH_SHORT).show();
+                    else
                     setAddress();
 
+                    disableText();
                 }
             });
+            else
+                Toast.makeText(getActivity(), "Please enable edit", Toast.LENGTH_LONG).show();
         }else
         {
             Toast.makeText(getActivity(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
@@ -79,6 +109,42 @@ public class Profile_Editor extends Fragment {
         return v;
     }
 
+
+    private void disableText()
+    {
+        etBio.setFocusable(false);
+        etBio.setClickable(false);
+        etCountry.setFocusable(false);
+        etCountry.setClickable(false);
+        etCity.setFocusable(false);
+        etCity.setClickable(false);
+        etPostal.setFocusable(false);
+        etPostal.setClickable(false);
+        etAdline1.setFocusable(false);
+        etAdline1.setClickable(false);
+        etAdline2.setFocusable(false);
+        etAdline2.setClickable(false);
+        useable = false;
+
+    }
+
+
+    private void enableText(){
+        etBio.setFocusable(true);
+        etBio.setClickable(true);
+        etCountry.setFocusable(true);
+        etCountry.setClickable(true);
+        etCity.setFocusable(true);
+        etCity.setClickable(true);
+        etPostal.setFocusable(true);
+        etPostal.setClickable(true);
+        etAdline1.setFocusable(true);
+        etAdline1.setClickable(true);
+        etAdline2.setFocusable(true);
+        etAdline2.setClickable(true);
+        useable = true;
+
+    }
     private void getAddress()
     {
         if (isOnline() == true) {

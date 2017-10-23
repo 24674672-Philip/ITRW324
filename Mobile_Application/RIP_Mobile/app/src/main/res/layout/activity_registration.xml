@@ -241,10 +241,12 @@
                 android:drawableLeft="@drawable/sml_ic_pass"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
+                android:inputType="textPassword"
                 android:layout_weight="0.25"
                 android:background="@drawable/rounded_edttext"
                 android:paddingLeft="10dp"
                 android:hint="Password"
+
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray"
                 />
@@ -261,6 +263,7 @@
                 android:background="@drawable/rounded_edttext"
                 android:paddingLeft="10dp"
                 android:hint="Retype Password"
+                android:inputType="textPassword"
                 android:textColor="#36454f"
                 android:textColorHighlight="@color/colorGray" />
         </LinearLayout>
