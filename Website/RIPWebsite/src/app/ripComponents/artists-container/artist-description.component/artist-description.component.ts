@@ -165,7 +165,7 @@ export class ArtistDescriptionComponent implements OnInit {
     }
   }
 
-  uploadWithRelease(){
+  upload(){
     this.isUploading = true;
     let album_name = <HTMLInputElement> document.getElementById('album_name');
     this.serverService.createAlbum(album_name.value,this.authService.getUserId(),this.authService.getAuthToken(),(response)=>{

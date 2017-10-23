@@ -23,7 +23,7 @@ export class CreateSongsItemComponent implements OnInit {
     if(this.songName.length !=0 && !isNullOrUndefined(this.price)){
       this.buttonEnabled = false;
       let checkBox = <HTMLInputElement> document.getElementById('songExplicitInput');
-      this.dataEmitterService.songConfirmed.emit({songName:this.songName,explicit:checkBox.checkeds?1:0,price:this.price});
+      this.dataEmitterService.songConfirmed.emit({songName:this.songName,explicit:checkBox.checked?1:0,price:this.price});
     }
   }
 

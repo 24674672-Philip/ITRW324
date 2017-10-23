@@ -17,7 +17,6 @@ export class LoginInputformComponent implements OnInit {
   loginNotVerifiedFlag: boolean;
   verificationSent: boolean;
 
-
   constructor(private serverService: ServerService, private authService: AuthService, private router: Router) {
     this.username = '';
     this.password='';

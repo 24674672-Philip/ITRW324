@@ -88,14 +88,13 @@ export class MusicFooterComponent implements OnInit {
     this.currentTime = this.audio.currentTime;
     console.log(this.audio.currentTime);
     this.setProgress();
-    this.progressMinutes = Math.trunc(this.currentTime/60);//TODO: fix the progress timer
+    this.progressMinutes = Math.trunc(this.currentTime/60);
     this.progressSeconds = Math.trunc(this.currentTime % 60);
     console.log(this.progressSeconds);
     this.progressMinutesString = ( "0" + this.progressMinutes.toString()).slice(-2);
     this.progressSecondsString = ( "0" + this.progressSeconds.toString()).slice(-2);
     if(!this.isOwned && this.currentTime>=30){
       this.showBuy = true;
-      this.playPressed(); //TODO: not pausing. Fix this.
       this.audio.currentTime = 0;
 
     }

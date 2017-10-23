@@ -22,7 +22,6 @@ export class ServerService {
         (response) => callback(response.json())
         ,
         (error) => callback(error.json()));
-
   }
 
   register(fname: string, lname: string, birthdate: string, country: string, city: string, adressline1: string
@@ -227,7 +226,12 @@ export class ServerService {
   }
 
   uploadAlbum(formData: FormData,album_title: string,length:number, username: string,  callback, onProgress){
-    const req = new HttpRequest('POST',this.url+'uploadalbum',formData,{headers: new HttpHeaders().set('title', album_title).set('length', length.toString()).set('username', username), reportProgress: true});
+    const req = new HttpRequest('POST',this.url+'uploadalbum',
+                                formData,
+                                {headers: new HttpHeaders().set('title', album_title)
+                                  .set('length', length.toString())
+                                  .set('username', username),
+                                reportProgress: true});
     this.http2.request(req)
       .subscribe(
         (event)=>{
@@ -274,8 +278,5 @@ export class ServerService {
       callback(response.json())
       });
   }
-
-
-
 
 }
