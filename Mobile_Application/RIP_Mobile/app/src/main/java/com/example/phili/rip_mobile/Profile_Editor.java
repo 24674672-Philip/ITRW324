@@ -79,7 +79,7 @@ public class Profile_Editor extends Fragment {
         return v;
     }
 
-    private  void getAddress()
+    private void getAddress()
     {
         if (isOnline() == true) {
             String[] headersType = new String[1];
@@ -91,11 +91,11 @@ public class Profile_Editor extends Fragment {
                 @Override
                 public void onTaskCompleted(JSONObject result, boolean error, String message) {
                     try {
-                        etCountry.setText(result.get("country").toString());
-                        etCity.setText(result.get("city").toString());
-                        etPostal.setText(result.get("postalCode").toString());
-                       etAdline1.setText(result.get("addline1").toString());
-                       etAdline2.setText(result.get("addline2").toString());
+                        etCountry.setText(result.get("Country").toString());
+                        etCity.setText(result.get("City").toString());
+                        etPostal.setText(result.get("PostalCode").toString());
+                       etAdline1.setText(result.get("AddressLine1").toString());
+                       etAdline2.setText(result.get("AddressLine2").toString());
                     } catch (JSONException e) {
                         Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
@@ -140,15 +140,15 @@ public class Profile_Editor extends Fragment {
 
     private void setAddress() {
         if (isOnline() == true) {
-            String[] headersType = new String[7];
-            String[] headersVal = new String[7];
+            String[] headersType = new String[6];
+            String[] headersVal = new String[6];
             headersVal[0] = login.USERID;
             headersVal[1] = etCountry.getText().toString();
             headersVal[2] = etCity.getText().toString();
             headersVal[3] = etPostal.getText().toString();
             headersVal[4] = etAdline1.getText().toString();
             headersVal[5] =  etAdline2.getText().toString();
-            headersVal[6] =  "bearer " + login.TOKEN;
+
 
             headersType[0] = "userid";
             headersType[1] = "country";
@@ -156,10 +156,10 @@ public class Profile_Editor extends Fragment {
             headersType[3] = "postalcode";
             headersType[4] = "addline1";
             headersType[5] = "addline2";
-            headersType[6] = "authentication";
+
 
             final serverLink sender = new serverLink(getActivity());
-            sender.sendServerRequest(headersType, headersVal, "/api/edituserbio", true, new serverLink.OnDownloadTaskCompleted() {
+            sender.sendServerRequest(headersType, headersVal, "/api/setaddress", true, new serverLink.OnDownloadTaskCompleted() {
                 @Override
                 public void onTaskCompleted(JSONObject result, boolean error, String message) {
                     try {
