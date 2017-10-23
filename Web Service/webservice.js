@@ -154,7 +154,7 @@ app.get('/api/download', function(req, res){
           res.json({"code" : 100, "status" : "Error in connection database"});
           return;
         }
-        connection.query("SELECT * FROM transaction WHERE user__id = ? AND song_id = ?",[req.query.userid,req.headers.songid],function(err,result){
+        connection.query("SELECT hash FROM transaction WHERE user__id = ? AND song_id = ?",[req.query.userid,req.query.songid],function(err,result){
           connection.release();
           if(err){res.json(err);}
           else {
@@ -166,19 +166,12 @@ app.get('/api/download', function(req, res){
               fs.exists(file,function(exists){
                 if(exists)
                 {//sends the file with headers
-
-                  console.log(result.hash);
-
                   let tags = {
-                    encodedBy: "RIP",
                     copyright: result.hash
                   };
-
                   let ID3FrameBuffer = NodeID3.create(tags)
-
                   let success = NodeID3.update(tags, file); //  Returns true/false
                   NodeID3.update(tags, file, function(err) {  });
-
                   res.download(file);
                 }
                 else
@@ -303,7 +296,7 @@ app.get('/api/validtoken',ensureToken, function(req, res){
 //returns song info
 app.post('/api/getsongs', function(req, res){
   console.log("/api/getsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit, Path AS file_name FROM song_details LIMIT ?,20;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, Explicit, Path AS file_name, song_price FROM song_details LIMIT ?,20;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
 });
