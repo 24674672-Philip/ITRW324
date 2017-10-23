@@ -16,7 +16,7 @@
       <div class="row">
         <p>{{'Released:'+albumObj.getAlbumReleaseDate().toString().substr(0,4)}} <span class="glyphicon glyphicon-fire"></span></p>
       </div>
-      <div *ngIf="albumObj.getIsBought()" class="row">
+      <div *ngIf="isBought" class="row">
         <p>You own this album</p>
       </div>
     </div>

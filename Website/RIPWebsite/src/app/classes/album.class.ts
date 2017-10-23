@@ -38,6 +38,10 @@ export class Album {
     return this.albumReleaseDate;
   }
 
+  setAlbumReleaseDate(releaseDate: number){
+    this.albumReleaseDate = releaseDate;
+  }
+
   getAlbumImagePath(): string{
     return this.albumImagePath;
   }

@@ -126,6 +126,15 @@ export class ServerService {
       );
   }
 
+  getUserAlbumSongs(id: string, callback){
+    let headers = new Headers();
+    headers.append('albumid',id);
+    this.http.post(this.url +'getuseralbumsongs',null,{headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      );
+  }
+
   upload(formData: FormData){
     this.http.post(this.url+'upload', formData,{headers: new Headers({'Content-type': 'undefined'})})
       .subscribe(
@@ -286,6 +295,42 @@ export class ServerService {
       .subscribe((response)=>{
       callback(response.json())
       });
+  }
+
+  releaseAlbum(albumid: number, token: string, callback){
+    let headers = new Headers();
+    headers.append('authentication','bearer '+token);
+    headers.append('id', albumid.toString());
+
+    this.http.post(this.url+'releasealbum', null, {headers: headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      )
+  }
+
+  isPurchased(userid: number, songid: number, token: string, callback) {
+    let headers = new Headers();
+    headers.append('authentication', 'bearer ' + token);
+    headers.append('userid', userid.toString());
+    headers.append('songid', songid.toString());
+
+    this.http.post(this.url+'ispurchased', null, {headers:headers})
+      .subscribe(
+        (response)=> callback(response.json())
+      )
+  }
+
+  buySong(userid: number, songid: number, price: number, artistid:number,token: string, callback){
+    let headers = new Headers();
+    headers.append('userid', userid.toString());
+    headers.append('songid', songid.toString());
+    headers.append('price', price.toString());
+    headers.append('artistid', artistid.toString());
+    headers.append('authentication', 'bearer '+token)
+    this.http.post(this.url+'buysongs', null,{headers:headers})
+      .subscribe(
+        (response)=>{callback(response.json())}
+      );
   }
 
 

@@ -1,9 +1,9 @@
 #container{
-  padding: 0;
+  padding: 0 0 500px 0;
   margin: 0;
   background-image: url("../../../assets/Blurrywall.png");
   /* Set a specific height */
-  height: 500px;
+
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;

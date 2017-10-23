@@ -53,10 +53,10 @@
           </div>
           <div class="col-md-12 col-lg-12" >
             <h4>{{albumToManage.getAlbumName()}}</h4>
-            <h4>{{albumToManage.getAlbumReleaseDate().toString().substr(0,4)}}</h4>
+            <h4>{{albumToManage.getAlbumReleaseDate()}}</h4>
             <app-edit-album-list [album]="albumToManage"></app-edit-album-list>
             <div class="btn-group">
-              <button class="btn btn-success" (click)="releaseAlbum()">Release album</button>
+              <button *ngIf="albumNotReleased" class="btn btn-success" (click)="releaseAlbum()">{{releasedSuccess?'Success':'Release Album'}}</button>
               <button class="btn btn-default" (click)="editAlbum()">Edit Album</button>
               <button class="btn btn-danger" (click)="deleteAlbum()">Delete Album</button>
             </div>

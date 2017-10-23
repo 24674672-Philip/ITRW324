@@ -30,5 +30,9 @@ export class TrackListItemComponent implements OnInit {
     this.musicServer.currentPlaylistIndex = this.trackNumber;
   }
 
+  buySong(){
+
+  }
+
 
 }

@@ -39,6 +39,8 @@ export class ArtistDescriptionComponent implements OnInit {
   finalSongList: Array<{songName:string, explicit:number, price: number}> = new Array<{songName:string, explicit:number, price: number}>();
   uploadActive: boolean = false;
   creatingSongsSuccess: boolean = true;
+  albumNotReleased: boolean = false;
+  releasedSuccess: boolean= false;
 
 
 
@@ -69,7 +71,7 @@ export class ArtistDescriptionComponent implements OnInit {
       this.serverService.getArtistByName(this.activeRoute.snapshot.queryParams['name'],(response)=>{
         this.artistObj = new Artist(this.artistID, response['artist']['0']['Artist'].toString(),response['artist']['0']['bio'].toString());
         this.artistObj.setArtistImagePath('users',response['artist']['0']['profilepicture'].toString());
-        this.artistID
+
         this.checkIsOwnProfile();
       })
     }
@@ -97,6 +99,11 @@ export class ArtistDescriptionComponent implements OnInit {
     this.dataService.editContentEmitter.subscribe(
       (album)=>{
         if(this.isEditingContent){
+          console.log(album);
+          if(isNullOrUndefined(album.getAlbumReleaseDate())){
+            album.setAlbumReleaseDate(-1);
+            this.albumNotReleased = true;
+          }
           this.albumToManage = album;
           this.dataService.getEditContentAlbumList.emit(this.albumToManage);
           this.openModalButton.click();
@@ -115,7 +122,14 @@ export class ArtistDescriptionComponent implements OnInit {
   }
 
   releaseAlbum(){
-
+    this.serverService.releaseAlbum(this.albumToManage.getAlbumID(), this.authService.getAuthToken(),
+      (response)=>{
+      if(response['result']=='success'){
+        this.releasedSuccess = true;
+        this.albumNotReleased = false;
+        setTimeout(()=>this.releasedSuccess = false,3000);
+      }
+      });
   }
 
   editAlbum(){
