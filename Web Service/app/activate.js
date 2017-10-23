@@ -15,12 +15,12 @@ module.exports = function(req, res, con){
     console.log('connected as id ' + connection.threadId);
 
     connection.query(sql,email,function(err,resul){
-      if(err){res.redirect('http://reddit.com');}
+      if(err){res.redirect('http://ripmusic.tk/efail');}
       else if (resul[0].emailHash === hash) {
         sql = 'UPDATE users SET isActivated = 1 WHERE email = ?';
         connection.query(sql,email,function(err, result){
           connection.release();
-          if(err) res.redirect('http://reddit.com');
+          if(err) res.redirect('http://ripmusic.tk/esuccess');
           else res.json({
             result: 'Successfully verified account!'
           });

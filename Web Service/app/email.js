@@ -23,7 +23,7 @@ module.exports = function(link, emailAddress){
                   + link + '&email=' + emailAddress+'"> click here</a></strong></td>'+
             '</tr>'+
             '<tr>'+
-                  '<td align="center"><p><a href="https://reddit.com">Feel free to visit our site, and thanks for registering!</a></p></td>'+
+                  '<td align="center"><p><a href="http://ripmusic.tk/">Feel free to visit our site, and thanks for registering!</a></p></td>'+
             '</tr>'+
       '</table>',
     attachments: [
