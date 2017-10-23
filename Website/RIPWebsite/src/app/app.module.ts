@@ -38,7 +38,7 @@ import { WalletComponentNav} from './ripComponents/home-container/nav-bar/wallet
 import { BuyContainerComponent } from './ripComponents/buy-container/buy-container.component';
 import { WalletComponent } from "./ripComponents/buy-container/wallet/wallet.component";
 import { SearchItemComponent } from './ripComponents/home-container/nav-bar/search-item/search-item.component';
-//import { AuthGuard } from './services/auth-guard.service';
+import { AuthGuard } from './services/auth-guard.service';
 import { Error403Component } from './alerts/error-403/error-403.component';
 import { HttpClientModule} from "@angular/common/http";
 import { CreateSongsComponent } from './ripComponents/artists-container/artist-description.component/create-songs/create-songs.component';
@@ -55,13 +55,13 @@ const router: Routes = [
   {path: '', component: LandingPageContainerComponent},
   {path: 'login', component: LoginContainerComponent},
   {path: 'register', component: RegisterContainerComponent},
-  {path: 'home', component: HomeContainerComponent},//, canActivate: [AuthGuard]},
-  {path: 'artist', component: ArtistsContainerComponent},//, canActivate: [AuthGuard]},
-  {path: 'album', component: AlbumContainerComponent},//, canActivate: [AuthGuard]},
-  {path: 'wallet', component: BuyContainerComponent},//, canActivate: [AuthGuard]},
-  {path: 'error403', component: Error403Component},//, canActivate: [AuthGuard]},
-  {path: 'topartists', component: TopArtistsContainerComponent},//, canActivate: [AuthGuard]},
-  {path: 'topalbums', component: TopAlbumsContainerComponent},//, canActivate: [AuthGuard]},
+  {path: 'home', component: HomeContainerComponent, canActivate: [AuthGuard]},
+  {path: 'artist', component: ArtistsContainerComponent, canActivate: [AuthGuard]},
+  {path: 'album', component: AlbumContainerComponent, canActivate: [AuthGuard]},
+  {path: 'wallet', component: BuyContainerComponent, canActivate: [AuthGuard]},
+  {path: 'error403', component: Error403Component, canActivate: [AuthGuard]},
+  {path: 'topartists', component: TopArtistsContainerComponent, canActivate: [AuthGuard]},
+  {path: 'topalbums', component: TopAlbumsContainerComponent, canActivate: [AuthGuard]},
   {path: 'esuccess', component: EmailSuccessAlertComponent},
   {path: 'efail', component: EmailWarningAlertComponent},
 ];
@@ -122,7 +122,7 @@ const router: Routes = [
     AuthService,
     MusicPlayerService,
     DataEmitterService,
-    //AuthGuard
+    AuthGuard
   ],
   bootstrap: [AppComponent],
 })
