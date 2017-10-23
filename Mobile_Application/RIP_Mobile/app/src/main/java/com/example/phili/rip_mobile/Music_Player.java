@@ -42,11 +42,11 @@ public class Music_Player extends Fragment {
             artistArr = getActivity().getIntent().getExtras().getStringArray("artist");
             songPos = getActivity().getIntent().getExtras().getInt("songPos");
             Log.i("musicplayer: ","gets");
-            imageView = (ImageView) v.findViewById(R.id.albumart);
-            artistView = (TextView) v.findViewById(R.id.txtArtist);
-            songView = (TextView) v.findViewById(R.id.txtSong);
-            timebar = (TextView) v.findViewById(R.id.timeBar);
-            mSeekBar = (SeekBar) v.findViewById(R.id.seekBar);
+            imageView =  v.findViewById(R.id.albumart);
+            artistView =  v.findViewById(R.id.txtArtist);
+            songView =  v.findViewById(R.id.txtSong);
+            timebar =  v.findViewById(R.id.timeBar);
+            mSeekBar =  v.findViewById(R.id.seekBar);
             Log.i("musicplayer: ","Init");
 
             imageView.setImageBitmap(Music_Browser.albumImage[songPos]);

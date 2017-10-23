@@ -28,6 +28,11 @@ public class Profile_Editor extends Fragment {
     EditText etBio;
     TextView coins;
     ImageView ivSave;
+    EditText etCountry;
+    EditText etCity;
+    EditText etPostal;
+    EditText etAdline1;
+    EditText etAdline2;
 
     public Profile_Editor() {
         // Required empty public constructor
@@ -44,8 +49,16 @@ public class Profile_Editor extends Fragment {
         etBio = v.findViewById(R.id.etBio);
         coins = v.findViewById(R.id.tvCoins);
         ivSave = v.findViewById(R.id.savprofile);
+        etCountry = v.findViewById(R.id.etCountry);
+        etCity = v.findViewById(R.id.etCity);
+        etPostal = v.findViewById(R.id.etPostalCodes);
+        etAdline1 = v.findViewById(R.id.etAdl1);
+        etAdline2= v.findViewById(R.id.etAdl2);
+
+        //Toast.makeText(getActivity(),login.USERID, Toast.LENGTH_LONG).show();
         coins.setText(login.COINS);
         getBio();
+        getAddress();
 
         if (isOnline()==true) {
             ivSave.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +68,8 @@ public class Profile_Editor extends Fragment {
                     else
                         setBio();
 
+                    setAddress();
+
                 }
             });
         }else
@@ -63,6 +78,40 @@ public class Profile_Editor extends Fragment {
         }
         return v;
     }
+
+    private  void getAddress()
+    {
+        if (isOnline() == true) {
+            String[] headersType = new String[1];
+            String[] headersVal = new String[1];
+            headersVal[0] = login.USERID;
+            headersType[0] = "user_id";
+            final serverLink sender = new serverLink(getActivity());
+            sender.sendServerRequest(headersType, headersVal, "/api/getaddress", false, new serverLink.OnDownloadTaskCompleted() {
+                @Override
+                public void onTaskCompleted(JSONObject result, boolean error, String message) {
+                    try {
+                        etCountry.setText(result.get("country").toString());
+                        etCity.setText(result.get("city").toString());
+                        etPostal.setText(result.get("postalCode").toString());
+                       etAdline1.setText(result.get("addline1").toString());
+                       etAdline2.setText(result.get("addline2").toString());
+                    } catch (JSONException e) {
+                        Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
 
     private void getBio() {
         if (isOnline() == true) {
@@ -90,6 +139,46 @@ public class Profile_Editor extends Fragment {
         }
     }
 
+    private void setAddress() {
+        if (isOnline() == true) {
+            String[] headersType = new String[7];
+            String[] headersVal = new String[7];
+            headersVal[0] = login.USERID;
+            headersVal[1] = etCountry.getText().toString();
+            headersVal[2] = etCity.getText().toString();
+            headersVal[3] = etPostal.getText().toString();
+            headersVal[4] = etAdline1.getText().toString();
+            headersVal[5] =  etAdline2.getText().toString();
+            headersVal[6] =  "bearer " + login.TOKEN;
+
+            headersType[0] = "userid";
+            headersType[1] = "country";
+            headersType[2] = "city";
+            headersType[3] = "postalcode";
+            headersType[4] = "addline1";
+            headersType[5] = "addline2";
+            headersType[6] = "authentication";
+            final serverLink sender = new serverLink(getActivity());
+            sender.sendServerRequest(headersType, headersVal, "/api/edituserbio", true, new serverLink.OnDownloadTaskCompleted() {
+                @Override
+                public void onTaskCompleted(JSONObject result, boolean error, String message) {
+                    try {
+                        if (result.getString("result").contains("success")) {
+                            Toast.makeText(getActivity(),"Address Updated", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
+        }
+    }
 
    private void setBio() {
         if (isOnline() == true) {
@@ -107,14 +196,12 @@ public class Profile_Editor extends Fragment {
                 public void onTaskCompleted(JSONObject result, boolean error, String message) {
                     try {
                          if (result.getString("result").contains("success")) {
-                        Toast.makeText(getActivity(),result.getString("result"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"Bio updated", Toast.LENGTH_LONG).show();
                          }
                     } catch (JSONException e) {
                         Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
-                        // tvReturn.setText(e.getMessage().toString());
                     } catch (Exception e) {
                         Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
-                        // tvReturn.setText(e.getMessage().toString());
                     }
                 }
             });
