@@ -253,9 +253,16 @@ export class ServerService {
   }
 
   createSongs(title: string, explicit: string, albumid: number, userid: number, file_name: string, token: string,price: number, callback){
+    let newExplicit: number;
+    if(explicit=='true'){
+      newExplicit=1;
+    }else{
+      newExplicit=0;
+    }
+
     let headers = new Headers();
     headers.append('title', title);
-    headers.append('explicit', explicit);
+    headers.append('explicit', newExplicit.toString());
     headers.append('albumid', albumid.toString());
     headers.append('userid', userid.toString());
     headers.append('file_name', file_name);
