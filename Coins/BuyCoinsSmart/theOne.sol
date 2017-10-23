@@ -1,7 +1,7 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.16;
 
 interface Regulator{
-    function checkValue(uint amount) returns (bool);
+    function checkValue(uint amount) public returns (bool);
 }
 
 contract coinBank is Regulator{//Contarct for the buying of coins and songs
@@ -14,26 +14,26 @@ contract coinBank is Regulator{//Contarct for the buying of coins and songs
         _;
     }
 
-    function coinBank(uint amount){
+    function coinBank(uint amount) public{
         value = amount;
         owner = msg.sender;
     }
 
-    function deposit(uint amount) ownerFunc{
+    function deposit(uint amount) ownerFunc public{
         value += amount;
     }
 
-    function withdraw(uint amount) ownerFunc{
+    function withdraw(uint amount) ownerFunc payable public{
         if(checkValue(amount)){
             value -= amount;
         }
     }
 
-    function coinBalance() ownerFunc returns (uint){
+    function coinBalance() ownerFunc public returns (uint){
         return value;
     }
 
-    function checkValue(uint amount) returns (bool){
+    function checkValue(uint amount) public returns (bool){
         return value >= amount;
     }
 }
@@ -42,6 +42,22 @@ contract userDetails is coinBank(2){//Creation and storing of the users details
                                     //User starts with 2 coins i.e. 1 free song
     string private userName;
     uint private userID;
+    uint private y = 0;
+    bytes32 private song;
+    bytes32[] private ownedSongs;
+
+    function buySong(bytes32 song) payable{
+        ownedSongs[y] = song;
+        y++;
+        withdraw(2);
+    }
+
+    function getOwned() returns (bytes32){
+        uint x = 0;
+        while(x < ownedSongs.length){
+             return ownedSongs[x];
+        }
+    }
 
     function setName(string nName){
         userName = nName;
@@ -58,74 +74,41 @@ contract userDetails is coinBank(2){//Creation and storing of the users details
     function getID() returns (uint){
         return userID;
     }
+
 }
 
-contract buySong is coinBank(0){
+/*contract buySong is coinBank(){
 
     uint private quantity;
-    //uint private x;
+    uint private y;
+    bytes32 private songName;
+    bytes32[] private songs;
     uint public cost;
-     // bytes32 private songName;
-    //bytes32[] public ownedSongs;
 
-
-    /*function setSongName(bytes32 nSong){
-        songName = nSong;
-        addToArray(songName);
+    function setSong(bytes32 nSName){
+        songName = nSName;
     }
 
-    function addToArray(bytes32 addSongName){
-        ownedSongs[x] = addSongName;
-        x++;
+    function addToArr(bytes32 songName){
+        songs[y] = songName;
     }
-
-    function getArray() returns (bytes32)
-    {
-        uint y;
-        while(y < ownedSongs.length)
-        {
-           return ownedSongs[y];
-           y++;
-        }
-
-    }*/
 
     function setQuantity(uint nQuan){
         quantity = nQuan;
     }
+    function getSong() returns (bytes32){
+        return songName;
+    }
 
-    function setCost(){
+    function setCost()public{
         cost = 2;
     }
 
-    function totalCost() returns (uint){
+    function totalCost() internal returns (uint){
         return cost * quantity;
     }
 
-    function confirm(){
-            withdraw(totalCost());
-    }
-
-    function buySong(){
+    function buySong() public {
         setCost();
     }
-}
-
-contract testThrows{
-
-    function testAssert(){
-        assert(false);
-    }
-
-    function testRequire(){
-        require(false);
-    }
-
-    function testRevert(){
-        revert();
-    }
-
-    function testThrows(){
-        throw;
-    }
-}
+}*/
