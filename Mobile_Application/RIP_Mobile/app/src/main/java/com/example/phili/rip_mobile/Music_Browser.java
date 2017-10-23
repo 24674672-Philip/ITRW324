@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
@@ -171,16 +172,21 @@ public class Music_Browser extends Fragment {
                 currPlay.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         getActivity().setTitle("Music Player");
+
                         Music_Player music_player = new Music_Player();
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container, music_player).commit();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, music_player).commit();
+                        fragmentTransaction.addToBackStack(null);
+
+
 
                         getActivity().getIntent().putExtra("songPos", songPos);
                         getActivity().getIntent().putExtra("token", token);
                         getActivity().getIntent().putExtra("song", song[0]);
                         getActivity().getIntent().putExtra("album", song[2]);
                         getActivity().getIntent().putExtra("artist", song[1]);
-                        startActivity(getActivity().getIntent());
+                        //startActivity(getActivity().getIntent());
                     }
                 });
                 play.setOnClickListener(new View.OnClickListener() {

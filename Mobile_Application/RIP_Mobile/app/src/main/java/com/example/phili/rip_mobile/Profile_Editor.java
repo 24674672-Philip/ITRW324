@@ -85,7 +85,7 @@ public class Profile_Editor extends Fragment {
             String[] headersType = new String[1];
             String[] headersVal = new String[1];
             headersVal[0] = login.USERID;
-            headersType[0] = "user_id";
+            headersType[0] = "userid";
             final serverLink sender = new serverLink(getActivity());
             sender.sendServerRequest(headersType, headersVal, "/api/getaddress", false, new serverLink.OnDownloadTaskCompleted() {
                 @Override
@@ -111,12 +111,11 @@ public class Profile_Editor extends Fragment {
     }
 
 
-
-
     private void getBio() {
         if (isOnline() == true) {
             String[] headersType = new String[1];
             String[] headersVal = new String[1];
+
             headersVal[0] = login.USERNAME;
             headersType[0] = "username";
             final serverLink sender = new serverLink(getActivity());
@@ -158,6 +157,7 @@ public class Profile_Editor extends Fragment {
             headersType[4] = "addline1";
             headersType[5] = "addline2";
             headersType[6] = "authentication";
+
             final serverLink sender = new serverLink(getActivity());
             sender.sendServerRequest(headersType, headersVal, "/api/edituserbio", true, new serverLink.OnDownloadTaskCompleted() {
                 @Override
