@@ -354,7 +354,7 @@ app.post('/api/getsongdetails', function(req, res){
 //returns spesific albums songs
 app.post('/api/getalbumsongs', function(req, res){
   console.log("/api/getalbumsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, artist_image, Explicit, Released FROM song_details WHERE AlbumID = ?;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, artist_image, Explicit, Released, album_price AS price FROM song_details WHERE AlbumID = ?;'
   var qry = require('./app/api')(sql,req.headers["albumid"],con, res);
 });
 
@@ -569,7 +569,7 @@ app.post('/api/buysong', ensureToken, function(req, res){
       res.sendStatus(403);
     }
     else {
-
+      var qry = require('./app/apisend')(req, res, con, randtoken);
     }
   });
 });

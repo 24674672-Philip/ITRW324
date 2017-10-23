@@ -1,4 +1,4 @@
-module.exports = function(req, res, con){
+module.exports = function(req, res, con, randtoken){
 
     var emailAddress = req.headers['email'];
     var hash = randtoken.generate(16);

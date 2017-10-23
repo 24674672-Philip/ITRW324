@@ -15,10 +15,10 @@ module.exports = function(sql, val, con, res){
       else {
         console.log(result);
         if(result === undefined){
-          res.json({result: "failed"});
+          res.json({result: "success"});
         }
         else{
-          res.json({result: "success"});
+          res.json({result: "failed"});
         }
       }
     });
