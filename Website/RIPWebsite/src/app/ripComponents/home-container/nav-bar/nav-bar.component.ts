@@ -103,6 +103,7 @@ export class NavBarComponent implements OnInit {
 
 
   onSignOut(){
+    this.authService.isLoggedIn.emit(false);
     this.authService.signOut();
   }
 

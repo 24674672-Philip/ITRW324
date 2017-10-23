@@ -57,6 +57,7 @@ export class LoginInputformComponent implements OnInit {
     this.authService.setLName(response['lname'].toString());
     this.authService.setUsername(response['user'].toString());
     this.authService.setUserID(response['user_id'].toString());
+    this.authService.setUserbalance(response['coins']);
     this.authService.isLoggedIn.emit(true);
     this.router.navigate(['home']);
     console.log('Login Success')

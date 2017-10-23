@@ -7,12 +7,41 @@
       <div class="hidden-xs hidden-sm col-md-4 col-lg-3">{{song.getAlbum()}}</div>
       <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" *ngIf="!song.getIsBought()">{{song.getPrice()}}<img src="../../../../../assets/currency.png" style="height:20px; width:20px;"></div>
       <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 panel-success" *ngIf="song.getIsBought()">Owned</div>
-      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button *ngIf="!song.getIsBought()" class="btn btn-success" (click)="buySong()">Buy</button></div>
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button *ngIf="!song.getIsBought()" class="btn btn-success" data-toggle="modal" data-target="#buyModal">Buy</button></div>
     </div>
   </a>
 </div>
 
 
+<div id="buyModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h1 style="color: black" class="modal-title">Wallet</h1>
+      </div>
+      <div class="modal-body">
+        <div class="row center-block" style="margin-left: 0; margin-right: 0; border: solid black 1px">
+          <h4 class="center-block">Current Balance</h4>
+          <h2 style="color: black" class="center-block">{{balance}}</h2>
+        </div>
+
+        <div class="row center-block" style="margin-left: 0; margin-right: 0;">
+          <h2 class="center-block">{{song.getSongName()}}</h2>
+          <h4 class="center-block">{{song.getArtist()}}</h4>
+        </div>
+        <button class="btn btn-primary center-block" [disabled]="buySuccessful" (click)="buySong()">Buy Song</button>
+        <div *ngIf="buySuccessful" class="panel-success">Song Successfully Bought</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 

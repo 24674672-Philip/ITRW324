@@ -10,12 +10,21 @@ export class AuthService {
   private lName: string;
   private email: string;
   private userId: number;
+  private userBalance: number = 0;
 
 
   constructor() { }
 
   setAuthToken(token: string){
     this.authToken = token;
+  }
+
+  setUserbalance(coins: number){
+    this.userBalance = coins;
+  }
+
+  getUserBalanca(): number{
+    return this.userBalance;
   }
   setUsername(username: string){
     this.username = username;
