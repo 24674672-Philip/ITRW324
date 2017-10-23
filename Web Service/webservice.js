@@ -167,16 +167,19 @@ app.get('/api/download', function(req, res){
                 if(exists)
                 {//sends the file with headers
 
+
+
                   let tags = {
+                    encodedBy: "RIP",
                     copyright: result.hash //get hash from Keagan
                   };
 
+                  let ID3FrameBuffer = NodeID3.create(tags)
+
                   let success = NodeID3.update(tags, file); //  Returns true/false
                   NodeID3.update(tags, file, function(err) {  });
-                  res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
-                  res.setHeader('Content-Type', 'application/audio/mpeg3');
-                  var rstream = fs.createReadStream(file);
-                  rstream.pipe(res);
+
+                  res.download(file);
                 }
                 else
                 {
@@ -184,7 +187,6 @@ app.get('/api/download', function(req, res){
                   res.end();
                 }
               });
-              res.json({result: "success"});
             }
             else{
               res.json({result: "failed"});
