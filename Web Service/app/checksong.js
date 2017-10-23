@@ -14,7 +14,7 @@ module.exports = function(sql, val, con, res){
       if(err){res.json(err);}
       else {
         console.log(result);
-        if(result === undefined){
+        if(result[0] !== undefined){
           res.json({result: "success"});
         }
         else{

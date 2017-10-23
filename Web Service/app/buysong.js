@@ -25,7 +25,7 @@ module.exports = function(req, res, con, randtoken){
               connection.query("UPDATE users SET coins = coins + ? WHERE user_id = ?",[req.headers["price"],req.headers["artistid"]],function(err, resul){
                 connection.release();
                 if(!err) {
-                  res.json({transaction: "success"});
+                  res.json({result: "success"});
                 }
               });
             }
