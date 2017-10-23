@@ -167,11 +167,11 @@ app.get('/api/download', function(req, res){
                 if(exists)
                 {//sends the file with headers
 
-
+                  console.log(result.hash);
 
                   let tags = {
                     encodedBy: "RIP",
-                    copyright: result.hash //get hash from Keagan
+                    copyright: result.hash
                   };
 
                   let ID3FrameBuffer = NodeID3.create(tags)
@@ -382,7 +382,7 @@ app.post('/api/getalbumsongs', function(req, res){
 //returns spesific albums songs
 app.post('/api/getuseralbumsongs', function(req, res){
   console.log("/api/getalbumsongs");
-  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, artist_image, Explicit, album_price Released FROM user_song_details WHERE AlbumID = ?;'
+  var sql = 'SELECT musicID, AlbumID, artistID, Artist, Album, Title, album_image, artist_image, Explicit, song_price, Released FROM user_song_details WHERE AlbumID = ?;'
   var qry = require('./app/api')(sql,req.headers["albumid"],con, res);
 });
 
@@ -544,7 +544,7 @@ app.post('/api/createsong', ensureToken, function(req, res){
         req.headers["albumid"],
         req.headers["userid"],
         req.headers["file_name"],
-        req.headers["price"],
+        req.headers["price"]
       ]];
       var qry = require('./app/update')(sql, val, con, res);
     }
@@ -766,7 +766,7 @@ app.post('/api/uploadalbum', function(req, res) {
     if(!fs.existsSync(path+'/'+uploadedSongs.name)){
     console.log(uploadedSongs);
       console.log('added song: ' + uploadedSongs.name);
-      songs.mv(path + '/' + uploadedSongs.name, function(err) {
+      uploadedSongs.mv(path + '/' + uploadedSongs.name, function(err) {
         if (err)
           return res.sendStatus(500);
       });
@@ -778,7 +778,7 @@ app.post('/api/uploadalbum', function(req, res) {
       if (err)
         return res.sendStatus(500);
 
-      res.json({result: 'success'});
+      var qry = require('./app/update')("UPDATE album SET image_name = ? WHERE album_name = ?", [uploadedArt.name,req.headers["title"]], con, res);
     });
   }
 });
