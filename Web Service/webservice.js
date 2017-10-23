@@ -386,6 +386,20 @@ app.get('/api/getpurchased', ensureToken, function(req, res){
   });
 });
 
+//returns bought songs per user
+app.get('/api/ispurchased', ensureToken, function(req, res){
+  console.log("/api/getpurchased");
+  jwt.verify(req.token, 'blockchain', function(err, data){
+    if(err){
+      res.sendStatus(403);
+    }
+    else {
+      var sql = 'SELECT * FROM purchased_songs WHERE user__id = ? AND song_id = ?;'
+      var qry = require('./app/update')(sql,[req.headers["userid"],req.headers["songid"]],con, res);
+    }
+  });
+});
+
 //returns items in playlist
 app.post('/api/playlistitems', function(req, res){
   console.log("/api/playlistitems");
