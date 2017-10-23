@@ -61,7 +61,9 @@ const router: Routes = [
   {path: 'wallet', component: BuyContainerComponent},//, canActivate: [AuthGuard]},
   {path: 'error403', component: Error403Component},//, canActivate: [AuthGuard]},
   {path: 'topartists', component: TopArtistsContainerComponent},//, canActivate: [AuthGuard]},
-  {path: 'topalbums', component: TopAlbumsContainerComponent}//, canActivate: [AuthGuard]},
+  {path: 'topalbums', component: TopAlbumsContainerComponent},//, canActivate: [AuthGuard]},
+  {path: 'esuccess', component: EmailSuccessAlertComponent},
+  {path: 'efail', component: EmailWarningAlertComponent},
 ];
 
 @NgModule({
