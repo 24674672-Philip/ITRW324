@@ -17,8 +17,9 @@ module.exports = function(sql, val, con, res, req){
           connection.release();
           if(err){res.json(err);}
           else {
-            console.log(result);
-            res.json({result: result[0].albumID});
+            console.log(resul);
+            res.json({result: "success",
+					  albumid: resul[0].albumID});
           }
         });
       }

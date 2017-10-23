@@ -3,11 +3,11 @@ module.exports = function(con, res, req){
 
   if (req.headers["artistname"] !== undefined) {
     var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists WHERE Artist = ?;'
-    var sql2 = 'SELECT AlbumID, Album, image_name, Released FROM artist_albums WHERE Artist = ?;'
+    var sql2 = 'SELECT AlbumID, Album, image_name, Released FROM user_albums WHERE Artist = ?;'
     val = req.headers["artistname"];
   } else if(req.headers["artistid"] !== undefined) {
     var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists WHERE ArtistID = ?;'
-    var sql2 = 'SELECT AlbumID, Album, image_name, Released FROM artist_albums WHERE ArtistID = ?;'
+    var sql2 = 'SELECT AlbumID, Album, image_name, Released FROM user_albums WHERE ArtistID = ?;'
     val = req.headers["artistid"];
   }
   else {

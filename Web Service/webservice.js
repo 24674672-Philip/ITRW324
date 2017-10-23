@@ -29,7 +29,7 @@ var con = mysql.createPool({
   password: "blockchain",
   database: "blockchainDB",
   multipleStatements: true,
-  //debug: true
+  debug: true
 });
 
 //ensures that the authentication header is there
@@ -48,47 +48,7 @@ function ensureToken(req, res, next){
 
 //test to see if webservice is online
 app.get('/test', function(req, res){
-  console.log('test');
-
-/*
-  const ethereumUri = 'http://52.211.85.57:8545';
-  const address = '0x1126947cE9d3D511dfcA0E93CfD8d876714c0bCE'; // user
-
-  let web3 = new Web3();
-  web3.setProvider(new web3.providers.HttpProvider(ethereumUri));
-
-  if(!web3.isConnected()){
-      throw new Error('unable to connect to ethereum node at ' + ethereumUri);
-  }else{
-      console.log('connected to ehterum node at ' + ethereumUri);
-      let coinbase = web3.eth.coinbase;
-      console.log('coinbase:' + coinbase);
-      let balance = web3.eth.getBalance(coinbase);
-      console.log('balance:' + web3.fromWei(balance, 'ether') + " ETH");
-      let accounts = web3.eth.accounts;
-      console.log(accounts);
-
-      if (web3.personal.unlockAccount(address, 'Account1')) {
-          console.log(`${address} is unlocaked`);
-      }else{
-          console.log(`unlock failed, ${address}`);
-      }
-  }
-
-  let source = fs.readFileSync("Token.sol", 'utf8');
-
-console.log('compiling contract...');
-let compiledContract = solc.compile(source);
-console.log('done');
-
-for (let contractName in compiledContract.contracts) {
-    // code and ABI that are needed by web3
-    // console.log(contractName + ': ' + compiledContract.contracts[contractName].bytecode);
-    // console.log(contractName + '; ' + JSON.parse(compiledContract.contracts[contractName].interface));
-    var bytecode = compiledContract.contracts[contractName].bytecode;
-    var abi = JSON.parse(compiledContract.contracts[contractName].interface);
-}
-*/
+  console.log('test')
   res.json({
     test: 'test success',
   });
@@ -129,13 +89,13 @@ app.get('/api/getaddress', function(req, res){
   console.log("/api/getaddress");
   var sql = 'SELECT * FROM user_address WHERE user_id = ?;'
   var val = req.headers['userid'];
-  var qry = require('./app/api')(sql,val,con, res);
+  var qry = require('./app/apisend')(sql,val,con, res);
 });
 
 //set user address per user
 app.post('/api/setaddress', function(req, res){
   console.log("/api/setaddress");
-  var sql = 'UPDATE song SET Country = ?, City = ?, AddressLine1 = ?, AddressLine2 = ?, PostalCode = ? WHERE userid = ?;';
+  var sql = 'UPDATE user_address SET Country = ?, City = ?, AddressLine1 = ?, AddressLine2 = ?, PostalCode = ? WHERE user_id = ?;';
   var val1 = req.headers["country"];
   var val2 = req.headers["city"];
   var val3 = req.headers["addline1"];
@@ -223,7 +183,7 @@ app.post('/api/checkusername', function(req, res){
   var uName = req.headers["username"];
   var sql = 'SELECT username FROM users WHERE username = ?';
   if (uName !== undefined) {
-    var qry = require('./app/api')(sql,uName,con, res);
+    var qry = require('./app/checkvalue')(sql,uName,con, res);
   }
   else {
     res.json({
@@ -238,7 +198,7 @@ app.post('/api/checkemail', function(req, res){
   var emailA = req.headers["email"];
   var sql = 'SELECT email FROM users WHERE email = ?';
   if (emailA !== undefined) {
-    var qry = require('./app/api')(sql,emailA,con, res);
+    var qry = require('./app/checkvalue')(sql,emailA,con, res);
   }
   else {
     res.json({
@@ -720,11 +680,23 @@ app.post('/api/uploadalbum', function(req, res) {
     fs.mkdirSync(path);
   }
 
-  for (let songs of uploadedSongs) {
-    if(!fs.existsSync(path+'/'+songs.name)){
-	  console.log(songs);
-      console.log('added song: ' + songs.name);
-      songs.mv(path + '/' + songs.name, function(err) {
+  if(amountOfSongs > 1){
+    for (let songs of uploadedSongs) {
+      if(!fs.existsSync(path+'/'+songs.name)){
+      console.log(songs);
+        console.log('added song: ' + songs.name);
+        songs.mv(path + '/' + songs.name, function(err) {
+          if (err)
+            return res.sendStatus(500);
+        });
+      }
+    }
+  }
+  else {
+    if(!fs.existsSync(path+'/'+uploadedSongs.name)){
+    console.log(uploadedSongs);
+      console.log('added song: ' + uploadedSongs.name);
+      songs.mv(path + '/' + uploadedSongs.name, function(err) {
         if (err)
           return res.sendStatus(500);
       });
