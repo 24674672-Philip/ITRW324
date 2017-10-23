@@ -1,4 +1,17 @@
 
+<<<<<<< HEAD
 Web Service/
 
+=======
+<<<<<<< develop
+Web Service/node_modules/
+Mobile_Application/
+
+=======
+Mobile_Application/
+
+Web Service/
+
+>>>>>>> MYSQL dumps
+>>>>>>> develop
 node_modules/

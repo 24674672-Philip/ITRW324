@@ -1,0 +1,69 @@
+<div class="container-fluid navbar-fixed-bottom"  style="max-height:150px; bottom: 0;  width: 100%; padding:0; margin:0;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+  <div class="panel-footer" style="border-left: 1px; border-bottom-right: 1px;">
+    <div class="row">
+      <div class="progress" (click)="progressChanged($event)" id="progressContainer" style="margin-bottom: 0; border: solid rgba(1,1,1,.2) 1px">
+        <div
+             class="progress-bar"
+             role="progressbar"
+             [attr.aria-valuenow]="currentTime"
+             aria-valuemin="0"
+             attr.aria-valuemax="1"
+             id="progressBar"
+             [ngStyle]="{'width': progress+'%'}"
+
+             >
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 5px">
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        <img class="img-responsive" style="max-height: 100px" [src]="currentlyPlaying.getImagePath()">
+      </div>
+
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <div class="row">
+          <h3 *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getSongName()}}</h3>
+        </div>
+        <div class="row">
+          <p *ngIf="currentlyPlaying.getSongName()!='Default'" style="margin: 0">{{currentlyPlaying.getArtist()}}</p>
+        </div>
+      </div>
+
+      <!--TODO: Insert dynamic artist album and track name from currentlyPlaying-->
+
+      <!--Hidden audio track that connects with music footer-->
+      <audio controls id="music" (timeupdate)="timeUpdated()" (loadedmetadata)="displayMetaData()" (canplay)="canPlay()" hidden (ended)="songFinished()">
+        <source src="" type="audio/mp3" />
+      </audio>
+
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center" style="font-size: 2em; letter-spacing: 10px">
+        <span class="glyphicon glyphicon-backward" style="cursor: pointer" (click)="rewindPressed()" ></span>
+        <span class="glyphicon glyphicon-pause" style="font-size: 1.3em" style="cursor: pointer"  (click)="playPressed()" id="playButton"></span>
+        <span class="glyphicon glyphicon-forward" style="cursor: pointer" (click)="forwardPressed()"></span>
+      </div>
+
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 pull-right">
+        <div class="row">
+          <p class="pull-right" style="padding: 0 20px 0 0">{{progressMinutesString==undefined? '':progressMinutesString+":"+progressSecondsString+"/"+ durationMinutesString+":"+durationSecondsString}}</p>
+        </div>
+        <div class="row" appShowVolume [element]="element" >
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding: 0"><span (click)="mute()" class="glyphicon" [ngClass]="{'glyphicon-volume-up':!isMuted,'glyphicon-volume-off' :isMuted}" style="font-size: 1.3em"></span></div>
+          <div class="progress col-xs-10 col-sm-10 col-md-10 col-lg-10" (click)="volumeChanged($event)" id="volumeContainer" style="margin-bottom: 0; border: solid rgba(1,1,1,.2) 1px; padding: 0; height: 5px; top:7px; visibility: hidden">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              aria-valuemin="0"
+              attr.aria-valuemax="1"
+              id="volumeProgressBar"
+              [ngStyle]="isMuteVolume()"
+            >
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+</div>
