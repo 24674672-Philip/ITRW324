@@ -8,6 +8,8 @@ var ms = require('mediaserver');
 var cors = require('cors');
 var fileUpload = require('express-fileupload')
 var path = require('path');
+const Web3 = require('web3');
+const solc = require('solc');
 var os = require('os');
 var Busboy = require('busboy');
 const NodeID3 = require('node-id3')
@@ -19,10 +21,10 @@ const app = express();
 app.use(cors({origin: 'http://ripmusic.tk/'}));
 app.use(fileUpload());
 
-//creates connection pool limiting to 30 concurrent conenctions
+//creates connection pool limiting to 30 concurrent connections
 var con = mysql.createPool({
   connectionLimit : 30,
-  host: "52.211.85.57",
+  host: "localhost",
   user: "philip",
   password: "blockchain",
   database: "blockchainDB",
@@ -48,6 +50,45 @@ function ensureToken(req, res, next){
 app.get('/test', function(req, res){
   console.log('test');
 
+/*
+  const ethereumUri = 'http://52.211.85.57:8545';
+  const address = '0x1126947cE9d3D511dfcA0E93CfD8d876714c0bCE'; // user
+
+  let web3 = new Web3();
+  web3.setProvider(new web3.providers.HttpProvider(ethereumUri));
+
+  if(!web3.isConnected()){
+      throw new Error('unable to connect to ethereum node at ' + ethereumUri);
+  }else{
+      console.log('connected to ehterum node at ' + ethereumUri);
+      let coinbase = web3.eth.coinbase;
+      console.log('coinbase:' + coinbase);
+      let balance = web3.eth.getBalance(coinbase);
+      console.log('balance:' + web3.fromWei(balance, 'ether') + " ETH");
+      let accounts = web3.eth.accounts;
+      console.log(accounts);
+
+      if (web3.personal.unlockAccount(address, 'Account1')) {
+          console.log(`${address} is unlocaked`);
+      }else{
+          console.log(`unlock failed, ${address}`);
+      }
+  }
+
+  let source = fs.readFileSync("Token.sol", 'utf8');
+
+console.log('compiling contract...');
+let compiledContract = solc.compile(source);
+console.log('done');
+
+for (let contractName in compiledContract.contracts) {
+    // code and ABI that are needed by web3
+    // console.log(contractName + ': ' + compiledContract.contracts[contractName].bytecode);
+    // console.log(contractName + '; ' + JSON.parse(compiledContract.contracts[contractName].interface));
+    var bytecode = compiledContract.contracts[contractName].bytecode;
+    var abi = JSON.parse(compiledContract.contracts[contractName].interface);
+}
+*/
   res.json({
     test: 'test success',
   });
@@ -156,7 +197,7 @@ app.get('/api/download', function(req, res){
     		{//sends the file with headers
 
           let tags = {
-            poese: "RIP hash" //get hash from Keagan
+            copyright: "RIP hash" //get hash from Keagan
           }
 
           let success = NodeID3.update(tags, file) //  Returns true/false
@@ -305,7 +346,7 @@ app.post('/api/getalbums', function(req, res){
 //returns artist info
 app.post('/api/getartists', function(req, res){
   console.log("/api/getartists");
-  var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists LIMIT ?,3;'
+  var sql = 'SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists LIMIT ?,20;'
   var val = req.headers['page'] * 20;
   var qry = require('./app/api')(sql,val,con, res);
 });
@@ -333,7 +374,7 @@ app.post('/api/searchartists', function(req, res){
   console.log("/api/searchartists");
   var val2 = req.headers['page'] * 20;
   var val1 = req.headers['searchterm'];
-  var sql = "SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists WHERE Artist LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,20;"
+  var sql = "SELECT ArtistID, Artist, profilepicture, bio, number_of_albums FROM artists WHERE Artist LIKE "+mysql.escape('%' + val1 + '%')+" LIMIT ?,3;"
   var qry = require('./app/api')(sql,val2,con, res);
 });
 
@@ -662,13 +703,9 @@ app.post('/api/uploadalbum', function(req, res) {
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   let uploadedArt = req.files.artPicture;
-  console.log(req.files.artPicture);
   let uploadedSongs = req.files.songs;
-  console.log(req.files.songs);
   let songDetailsArray = req.files.songdetails;
-  console.log(songDetailsArray);
 
   var amountOfSongs = req.headers["length"];
   console.log('Length: ' + amountOfSongs);
