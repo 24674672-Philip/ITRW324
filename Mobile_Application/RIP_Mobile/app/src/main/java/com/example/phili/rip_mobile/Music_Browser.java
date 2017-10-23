@@ -248,7 +248,7 @@ public class Music_Browser extends Fragment {
                     JSONArray temp = result.getJSONArray("result");
                     for (int k = 0; k<temp.length(); k++){
                         Log.i(TAG,"" + k + ": " + temp.getJSONObject(k).toString());
-                        song[k][0] = temp.getJSONObject(k).getString("file_name");
+                        song[k][0] = temp.getJSONObject(k).getString("Title");
                         song[k][1] = temp.getJSONObject(k).getString("Artist");
                         song[k][2] = temp.getJSONObject(k).getString("Album");
                         songImg[k] = temp.getJSONObject(k).getString("album_image");
