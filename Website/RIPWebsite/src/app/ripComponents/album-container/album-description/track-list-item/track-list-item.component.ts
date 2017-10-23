@@ -17,6 +17,7 @@ export class TrackListItemComponent implements OnInit {
   @Input() trackNumber: number;
   balance: number = 0;
   buySuccessful: boolean = false;
+  link: string;
   constructor(private router: Router,
               private musicServer: MusicPlayerService,
               private authService: AuthService,
@@ -44,6 +45,23 @@ export class TrackListItemComponent implements OnInit {
         setTimeout(()=>this.buySuccessful = false,2000);
       }
       })
+  }
+
+  downloadSong(){
+    this.link = this.buildAlbumUrl(this.song.getArtistID(), this.song.getSongID(), this.song.getSongName(), this.song.getAlbum(), this.song.getArtist());
+    let downloadLink: HTMLAnchorElement = <HTMLAnchorElement> document.getElementById('downloadLink');
+    downloadLink.click();
+  }
+
+  buildAlbumUrl(userid: number, songid: number, song:string, album: string, artist: string): string{
+    let url = this.serverService.url+'download?';
+    url += 'userid='+userid;
+    url += 'songid='+songid;
+    url += 'song='+song.replace(' ','%20');
+    url += 'album='+album.replace(' ','%20');
+    url += 'artist='+artist.replace(' ','%20');
+    url += 'token='+ this.authService.getAuthToken();
+    return url;
   }
 
 

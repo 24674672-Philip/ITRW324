@@ -6,11 +6,13 @@
       <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2" (click)="artistNameClicked()"><a style="color: inherit">{{song.getArtist()}}</a></div>
       <div class="hidden-xs hidden-sm col-md-4 col-lg-3">{{song.getAlbum()}}</div>
       <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1" *ngIf="!song.getIsBought()">{{song.getPrice()}}<img src="../../../../../assets/currency.png" style="height:20px; width:20px;"></div>
-      <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 panel-success" *ngIf="song.getIsBought()">Owned</div>
+      <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 panel-success" *ngIf="song.getIsBought()"><button class="btn btn-default" (click)="downloadSong()">Download</button></div>
       <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button *ngIf="!song.getIsBought()" class="btn btn-success" data-toggle="modal" data-target="#buyModal">Buy</button></div>
     </div>
   </a>
 </div>
+
+<a [href]="link" id="downloadLink" hidden></a>
 
 
 <div id="buyModal" class="modal fade" role="dialog">
