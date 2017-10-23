@@ -12,11 +12,10 @@
     <div class="collapse navbar-collapse" id="hamMenu">
       <ul class="nav navbar-nav">
         <li><a [routerLink]="['../home']">Home</a></li>
-        <li><a [routerLink]="['../home']">Discover</a></li>
-        <li><a [routerLink]="['../home']">Popular Intellectuals</a></li>
-        <li><a [routerLink]="['../home']">Popular Property</a></li>
-        <li><a [routerLink]="['../home']" class="hidden-sm hidden-md hidden-lg">My Profile</a></li>
-        <li><a [routerLink]="['../home']" class="hidden-sm hidden-md hidden-lg">My Content</a></li>
+        <li><a [routerLink]="['../home']">Popular Artists</a></li>
+        <li><a [routerLink]="['../home']">Popular Albums</a></li>
+        <li><a [routerLink]="['../wallet']">My Wallet</a></li>
+        <li><a (click)="myProfileClicked()"  class="hidden-sm hidden-md hidden-lg">My Profile</a></li>
         <li><a [routerLink]="['../home']" class="hidden-sm hidden-md hidden-lg">Sign Out</a></li>
       </ul>
 
@@ -47,8 +46,7 @@
           <li class="dropdown" appDropdowntoggle>
             <a class="hidden-xs  dropdown-toggle glyphicon glyphicon-user" style="font-size: 1.7em;"><span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a [routerLink]="['../home']">My Profile</a></li>
-              <li><a [routerLink]="['../home']">My Content</a></li>
+              <li><a (click)="myProfileClicked()">My Profile</a></li>
               <li><a [routerLink]="['']" (click)="onSignOut()">Sign Out</a></li>
             </ul>
           </li>

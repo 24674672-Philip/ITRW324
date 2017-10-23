@@ -5,6 +5,7 @@ import {Album} from "../../../classes/album.class";
 import {Song} from "../../../classes/song.class";
 import {AuthService} from "../../../services/auth.service";
 import {timeout} from "rxjs/operator/timeout";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-nav-bar',
@@ -22,7 +23,8 @@ export class NavBarComponent implements OnInit {
   searchSongs: Array<Song>;
 
   constructor(private serverService: ServerService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -102,5 +104,9 @@ export class NavBarComponent implements OnInit {
 
   onSignOut(){
     this.authService.signOut();
+  }
+
+  myProfileClicked(){
+    this.router.navigate(["../../../artist"], {queryParams:{id: this.authService.getUserId()}});
   }
 }
