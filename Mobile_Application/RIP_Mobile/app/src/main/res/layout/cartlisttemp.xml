@@ -7,7 +7,8 @@
         android:id="@+id/titlesong"
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="10dp"
         android:textSize="25sp"
         android:layout_height="wrap_content"
         android:text="Name" />
@@ -16,7 +17,19 @@
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_below="@id/titlesong"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:text="Name" />
+    <TextView
+        android:id="@+id/albumsong"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/artistsong"
+        android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:layout_height="wrap_content"
         android:text="Name" />
@@ -27,9 +40,8 @@
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
         android:layout_height="wrap_content"
-        android:text="00:00"
-        android:layout_marginBottom="13dp"
-        android:layout_marginEnd="13dp"
-        android:layout_alignBottom="@+id/artistsong"
+        android:text="0"
+        android:layout_marginEnd="32dp"
+        android:layout_above="@+id/albumsong"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

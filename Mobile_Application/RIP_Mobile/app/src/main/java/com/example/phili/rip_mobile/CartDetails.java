@@ -5,7 +5,10 @@ package com.example.phili.rip_mobile;
 
 public class CartDetails {
 
-    String title, artist, price;
+    String title;
+    String artist;
+    String album;
+    String price;
 
     public String getTitle() {
         return title;
@@ -30,13 +33,21 @@ public class CartDetails {
     public void setPrice(String duration) {
         this.price = duration;
     }
+    public String getAlbum() {
+        return album;
+    }
 
-    public CartDetails(String title, String artist, String duration )
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public CartDetails(String title, String artist,String album ,String duration )
     {
 
         this.title = title;
         this.artist =artist;
         this.price = duration;
+        this.album = album;
 
     }
 }

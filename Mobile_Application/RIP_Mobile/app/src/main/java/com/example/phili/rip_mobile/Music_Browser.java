@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -36,6 +37,7 @@ public class Music_Browser extends Fragment {
 
 
     private TextView coins;
+    public ConstraintLayout music_bar;
     private static final String TAG = "MyActivity";
     private String[][] song, artist, musicAlbum;
     private String[] songImg, artistImg, musicAlbumImg;
@@ -78,12 +80,15 @@ public class Music_Browser extends Fragment {
         loadAlb = false;
         songPos = 0;
 
+
         coins = v.findViewById(R.id.tvCoins1);
         coins.setText(login.COINS);
 
         mTabHost = v.findViewById(R.id.tabHost);
         mTabHost.setup();
 
+
+        music_bar = v.findViewById(R.id.musicplayermin);
         imageView =  v.findViewById(R.id.currentplayingimg);
         play =  v.findViewById(R.id.playmini);
         back =  v.findViewById(R.id.backmin);
@@ -93,8 +98,8 @@ public class Music_Browser extends Fragment {
         currPlay =  v.findViewById(R.id.currentplayingimg);
 
 
-
-
+        play.setImageResource(R.drawable.btn_play);
+        music_bar.setVisibility(ConstraintLayout.GONE);
 
 
      //   play.setOnClickListener(this);
@@ -431,7 +436,6 @@ public void onClick(View v){
                 Music_Player music_browser = new Music_Player();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragment_container,music_browser).commit();
-
                 getActivity().getIntent().putExtra("songPos",songPos);
                 getActivity().getIntent().putExtra("token",token);
                 getActivity().getIntent().putExtra("song",song[0]);
@@ -497,6 +501,8 @@ public void sendSongRequest(int pos){
     String songUrl = "http://52.211.85.57:8080/api/music?token=" + token + "&song=" + song[pos][0] + "&artist=" + song[pos][1] + "&album=" + song[pos][2];
     songUrl = songUrl.replaceAll(" ","%20");
     playSong(songUrl, getActivity());
+    play.setImageResource(R.drawable.btn_pause);
+    music_bar.setVisibility(ConstraintLayout.VISIBLE);
     songView.setText(song[pos][0]);
     artistView.setText(song[pos][1]);
     Log.i(TAG,songUrl);

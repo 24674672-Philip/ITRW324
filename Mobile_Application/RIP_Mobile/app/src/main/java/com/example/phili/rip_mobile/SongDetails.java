@@ -5,7 +5,12 @@ package com.example.phili.rip_mobile;
 
 public class SongDetails {
 
-    String title, artist,duration;
+    String title;
+    String artist;
+    String duration;
+
+
+    String album;
 
     public String getTitle() {
         return title;
@@ -31,12 +36,21 @@ public class SongDetails {
         this.duration = duration;
     }
 
-    public SongDetails(String title, String artist, String duration )
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+
+    }
+    public SongDetails(String title, String artist, String album, String duration)
     {
 
         this.title = title;
-        this.artist =artist;
+        this.artist = artist;
         this.duration = duration;
+        this.album = album;
 
     }
 }

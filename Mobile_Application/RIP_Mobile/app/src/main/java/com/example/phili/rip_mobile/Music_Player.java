@@ -4,6 +4,8 @@ package com.example.phili.rip_mobile;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Music_Player extends Fragment {
@@ -18,11 +21,10 @@ public class Music_Player extends Fragment {
     private String[] songArr, artistArr, albumArr;
     private int songPos;
     private String token;
-    private ImageView imageView;
+    private ImageView imageView,play,next,back;
     private TextView artistView, songView, timebar;
     private SeekBar mSeekBar;
     private Handler mHandler = new Handler();
-
     public Music_Player() {
         // Required empty public constructor
     }
@@ -47,6 +49,9 @@ public class Music_Player extends Fragment {
             songView =  v.findViewById(R.id.txtSong);
             timebar =  v.findViewById(R.id.timeBar);
             mSeekBar =  v.findViewById(R.id.seekBar);
+            play = v.findViewById(R.id.play2);
+            next = v.findViewById(R.id.fastforward);
+            back = v.findViewById(R.id.backwards);
             Log.i("musicplayer: ","Init");
 
             imageView.setImageBitmap(Music_Browser.albumImage[songPos]);
@@ -101,6 +106,8 @@ public class Music_Player extends Fragment {
         catch (Exception ex){
             Log.i("ERROR, musicplayer: ",ex.getMessage().toString());
         }
+
+
 
         return v;
 

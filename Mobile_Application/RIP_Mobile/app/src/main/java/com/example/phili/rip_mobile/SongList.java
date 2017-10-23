@@ -19,7 +19,7 @@ public class SongList extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listsongs);
 
         for (int i = 0; i <= 10; i++) {
-            songs.add(new SongDetails("Title", "Artist", "00:00"));
+            songs.add(new SongDetails("Title", "Artist","Albums", "00:00"));
         }
 
         SongListAdapter adapter = new SongListAdapter(this,songs);

@@ -49,10 +49,12 @@ public class SongListAdapter extends BaseAdapter {
         TextView title = convertView.findViewById(R.id.titlesong);
         TextView artist = convertView.findViewById(R.id.artistsong);
         TextView duration = convertView.findViewById(R.id.durationsong);
+        TextView album = convertView.findViewById(R.id.albumsong);
 
         title.setText(songs.get(i).getTitle());
         artist.setText(songs.get(i).getArtist());
         duration.setText(songs.get(i).getDuration());
+        album.setText(songs.get(i).getAlbum());
 
         return convertView;
     }

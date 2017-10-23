@@ -48,10 +48,12 @@ public class CartListAdapter extends BaseAdapter {
         TextView title = convertView.findViewById(R.id.titlesong);
         TextView artist = convertView.findViewById(R.id.artistsong);
         TextView price = convertView.findViewById(R.id.price);
+        TextView album = convertView.findViewById(R.id.albumsong);
 
         title.setText(items.get(i).getTitle());
         artist.setText(items.get(i).getArtist());
         price.setText(items.get(i).getPrice());
+        album.setText(items.get(i).getAlbum());
 
         return convertView;
     }
