@@ -156,11 +156,11 @@ public class Profile_Editor extends Fragment {
                 @Override
                 public void onTaskCompleted(JSONObject result, boolean error, String message) {
                     try {
-                        etCountry.setText(result.get("Country").toString());
-                        etCity.setText(result.get("City").toString());
-                        etPostal.setText(result.get("PostalCode").toString());
-                        etAdline1.setText(result.get("AddressLine1").toString());
-                        etAdline2.setText(result.get("AddressLine2").toString());
+                        etCountry.setText(result.getString("Country"));
+                        etCity.setText(result.getString("City"));
+                        etPostal.setText(result.getString("PostalCode"));
+                        etAdline1.setText(result.getString("AddressLine1"));
+                        etAdline2.setText(result.getString("AddressLine2"));
                     } catch (JSONException e) {
                         Toast.makeText(getActivity(),e.getMessage().toString() , Toast.LENGTH_LONG).show();
                     } catch (Exception e) {

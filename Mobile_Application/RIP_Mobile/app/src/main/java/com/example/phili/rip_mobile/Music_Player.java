@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class Music_Player extends Fragment {
     private TextView artistView, songView, timebar;
     private SeekBar mSeekBar;
     private Handler mHandler = new Handler();
+    private boolean paused = false;
     public Music_Player() {
         // Required empty public constructor
     }
@@ -57,6 +60,22 @@ public class Music_Player extends Fragment {
             imageView.setImageBitmap(Music_Browser.albumImage[songPos]);
             artistView.setText(artistArr[songPos]);
             songView.setText(songArr[songPos]);
+
+            final ImageButton button = (ImageButton) v.findViewById(R.id.play2);
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if(paused){
+                        paused = !paused;
+                        Music_Browser.mp.start();
+                    }
+                    else{
+                        paused = !paused;
+                        Music_Browser.mp.pause();
+                    }
+                }
+            });
+
+
 
             mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -100,7 +119,6 @@ public class Music_Player extends Fragment {
                     mHandler.postDelayed(this, 1000);
                 }
             });
-
 
         }
         catch (Exception ex){
