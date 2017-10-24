@@ -18,7 +18,7 @@ const NodeID3 = require('node-id3')
 const app = express();
 
 //Allows headers from this ip/adderss and uses fileUpload
-app.use(cors({origin: 'http://ripmusic.tk/'}));
+app.use(cors({origin: 'http://ec2-34-248-24-29.eu-west-1.compute.amazonaws.com'}));
 app.use(fileUpload());
 
 //creates connection pool limiting to 30 concurrent connections
@@ -162,7 +162,7 @@ app.get('/api/download', function(req, res){
               var songName = req.query.song;
               var songAlbum = req.query.album;
               var songArtist = req.query.artist;
-              var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName + '.mp3';
+              var file = __dirname + '/music/' + songArtist + '/' + songAlbum + '/' + songName;
               fs.exists(file,function(exists){
                 if(exists)
                 {//sends the file with headers
