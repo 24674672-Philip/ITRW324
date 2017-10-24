@@ -40,7 +40,7 @@ import java.util.HashSet;
 public class Music_Browser extends Fragment {
 
 
-    private TextView coins;
+
     public ConstraintLayout music_bar;
     private static final String TAG = "MyActivity";
     private String[][] song, artist, musicAlbum;
@@ -85,8 +85,6 @@ public class Music_Browser extends Fragment {
         songPos = 0;
 
 
-        coins = v.findViewById(R.id.tvCoins1);
-        coins.setText(login.COINS);
 
         mTabHost = v.findViewById(R.id.tabHost);
         mTabHost.setup();
