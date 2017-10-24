@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ServerService} from "../../services/server.service";
 import {Song} from "../../classes/song.class";
 import {MusicPlayerService} from "../../services/music-player.service";
+import {AuthService} from "../../services/auth.service";
+import {DataEmitterService} from "../../services/data-emitter.service.service";
 
 
 @Component({
@@ -28,9 +30,15 @@ export class MusicFooterComponent implements OnInit {
   isMuted: boolean = false;
   isOwned: boolean = false;
   showBuy: boolean = false;
+  balance: number = 0;
+  buySuccessful: boolean = false;
 
 
-  constructor(private serverService: ServerService, private musicServer: MusicPlayerService) {
+
+  constructor(private serverService: ServerService,
+              private musicServer: MusicPlayerService,
+              private authService: AuthService,
+              private dataServer: DataEmitterService) {
     this.musicServer.currentSongChanged.subscribe(
       (emittedSong) => {
         this.currentlyPlaying = emittedSong;
@@ -41,6 +49,7 @@ export class MusicFooterComponent implements OnInit {
         this.showBuy = false;
       }
     )
+    this.balance = this.authService.getUserBalanca();
   }
 
   isMuteVolume(): {width: string}{
@@ -139,14 +148,33 @@ export class MusicFooterComponent implements OnInit {
       this.audio.play();
       document.getElementById('playButton').className = 'glyphicon glyphicon-pause';
     }
-
   }
 
   forwardPressed(){
     this.musicServer.getNextSong();
   }
 
+  buySong(){
+    this.serverService.buySong(this.authService.getUserId(), this.currentlyPlaying.getSongID(), this.currentlyPlaying.getPrice(), this.currentlyPlaying.getAlbumID(), this.authService.getAuthToken(),
+      (response)=> {
+        if(response['result'] == 'success'){
+          this.currentlyPlaying.setIsBought(true);
+          this.isOwned = true;
+          this.showBuy = false;
+          this.buySuccessful = true;
+          this.dataServer.refreshSongList.emit();
+          setTimeout(()=>this.buySuccessful = false,2000);
+        }
+      });
+  }
 
+  sufficientFunds(): boolean{
+    if(this.currentlyPlaying.getPrice()>this.authService.getUserBalanca()){
+      return false
+    }else{
+      return true;
+    }
+  }
 
 
 }

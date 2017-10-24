@@ -10,6 +10,9 @@ export class DataEmitterService {
   getEditSong: EventEmitter<Song> = new EventEmitter<Song>();
   songConfirmed: EventEmitter<{songName:string, explicit:number, price: number}> = new EventEmitter<{songName:string, explicit:number, price: number}>();
   linkEmitter = new EventEmitter<string>();
+  refreshArtistAlbums = new EventEmitter();
+  refreshCoins = new EventEmitter();
+  refreshSongList = new EventEmitter();
   constructor() { }
 
 

@@ -22,7 +22,7 @@ export class ArtistDescriptionComponent implements OnInit {
   newArtistBio: string;
   updatedBioSuccessfully: boolean;
   isEditingContent: boolean;
-  albumToManage: Album = new Album(-1,"","",-1, false, 0);//TODO: replace parameters
+  albumToManage: Album = new Album(-1,"","",-1, false, 0);
   openModalButton: HTMLButtonElement;
   editingSong: boolean = false;
   songToEdit: Song;
@@ -41,6 +41,8 @@ export class ArtistDescriptionComponent implements OnInit {
   creatingSongsSuccess: boolean = true;
   albumNotReleased: boolean = false;
   releasedSuccess: boolean= false;
+  deletedSuccess: boolean = false;
+  editedSuccess: boolean = false;
 
 
 
@@ -133,11 +135,25 @@ export class ArtistDescriptionComponent implements OnInit {
   }
 
   editAlbum(){
-
+    this.serverService.editSong(this.editSongName,this.editSongPrice, this.songToEdit.getSongID(),this.authService.getAuthToken(),
+      (response)=>{
+      if(response['result']=='success'){
+        this.editedSuccess = true;
+        setTimeout(()=>this.editedSuccess = false, 3000);
+        this.dataService.refreshArtistAlbums.emit();
+      }
+      })
   }
 
   deleteAlbum(){
-
+    this.serverService.deleteAlbum(this.albumToManage.getAlbumID(), this.authService.getAuthToken(),
+      (response)=> {
+      if(response['result']=='success'){
+        this.deletedSuccess= true;
+        setTimeout(()=>this.deletedSuccess = false, 4000);
+        this.dataService.refreshArtistAlbums.emit();
+      }
+      });
   }
 
   editDetails(){
@@ -225,6 +241,7 @@ export class ArtistDescriptionComponent implements OnInit {
                                         }
                                       });
     }
+    this.dataService.refreshArtistAlbums.emit();
   }
 
   listSongs(){

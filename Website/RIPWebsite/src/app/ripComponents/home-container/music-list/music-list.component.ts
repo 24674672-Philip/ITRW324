@@ -18,13 +18,18 @@ export class MusicListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.serverService.getTopSongs(1,(response)=>{//TODO: check page number
+    this.serverService.getTopSongs(1,(response)=>{
       let tempObject = response['result'];
       console.log(tempObject);
       for(let x of tempObject){
-        let tempSong = new Song(x['musicID'],x['albumID'],x['artistID'],x['Artist'],x['Album'],x['Title'],0,false,this.authService.getAuthToken());//TODO: change parameters
+        let tempSong = new Song(x['musicID'],x['albumID'],x['artistID'],x['Artist'],x['Album'],x['Title'], x['song_price'],false,this.authService.getAuthToken());
         tempSong.setSongImagePath('albums',x['album_image']);
-        this.topSongs.push(tempSong);
+        this.serverService.isPurchased(this.authService.getUserId(), tempSong.getSongID(), this.authService.getAuthToken(),(response)=>{
+          if(response['result'] == 'success'){
+            tempSong.setIsBought(true);
+          }
+          this.topSongs.push(tempSong);
+        })
       }
     });
   }

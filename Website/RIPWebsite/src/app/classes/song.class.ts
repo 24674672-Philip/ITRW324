@@ -2,6 +2,7 @@ export class Song {
 
   private songUrl: string;
   private imagePath: string;
+  private fileName: string;
   public constructor(private songID: number,
                     private albumID: number,
                     private artistID: number,
@@ -16,6 +17,11 @@ export class Song {
 
   setSongUrl(token: string){
     this.songUrl = 'http://52.211.85.57:8080/api/music?token='+token+"&song="+this.getSongName().replace(' ','%20')+"&album="+this.getAlbum().replace(' ','%20')+"&artist="+this.getArtist().replace(' ', '%20');
+  }
+
+  setSongPathUrl(token: string, fileName: string){
+    this.songUrl = 'http://52.211.85.57:8080/api/music?token='+token+"&song="+fileName.replace(' ','%20')+"&album="+this.getAlbum().replace(' ','%20')+"&artist="+this.getArtist().replace(' ', '%20');
+
   }
 
   setSongImagePath(type: string, imageName: string){
@@ -72,5 +78,13 @@ export class Song {
 
   getIsBought(): boolean{
     return this.isBought;
+  }
+
+  setFileName(fileName: string){
+    this.fileName = fileName;
+  }
+
+  getFileName(){
+    return this.fileName;
   }
 }

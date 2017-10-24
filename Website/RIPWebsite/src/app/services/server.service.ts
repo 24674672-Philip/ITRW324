@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Headers, Http} from "@angular/http";
 import {Md5} from 'ts-md5/dist/md5';
 import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from "@angular/common/http";
+import {callLifecycleHooksChildrenFirst} from "@angular/core/src/view/provider";
 
 
 @Injectable()
@@ -356,6 +357,32 @@ export class ServerService {
       .subscribe(
         (response)=> callback(response.json)
       )
+  }
+
+  //deletealbum
+
+  deleteAlbum(albumid: number, token: string, callback){
+    let headers = new Headers();
+    headers.append('id', albumid.toString());
+    headers.append('authentication', 'bearer '+ token);
+
+    this.http.post(this.url + 'deletealbum', null, {headers: headers})
+      .subscribe(
+        (response)=>callback(response.json())
+      )
+  }
+
+  editSong(title: string, price: string, musicid: number,  token: string, callback){
+    let headers = new Headers();
+    headers.append('title', title);
+    headers.append('price', price.toString());
+    headers.append('musicid', musicid.toString());
+    headers.append('authentication', 'bearer '+ token);
+
+    this.http.post(this.url+'editsong', null, {headers: headers}).
+      subscribe(
+      (response)=> callback(response.json())
+    )
   }
 
 

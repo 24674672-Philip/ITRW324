@@ -22,7 +22,7 @@ export class EditAlbumListComponent implements OnInit {
         console.log(response);
         for(let x of xy){
 
-          let tempObject = new Song(x['musicID'],x['albumID'], x['artistID'],x['Artist'],x['Album'],x['Title'],0,false, this.authService.getAuthToken()); //TODO: replace parameters
+          let tempObject = new Song(x['musicID'],x['albumID'], x['artistID'],x['Artist'],x['Album'],x['Title'],x['song_price'], true, this.authService.getAuthToken());
           tempObject.setSongImagePath('albums',x['album_image']);
           this.songList.push(tempObject);
         }

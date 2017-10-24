@@ -16,7 +16,7 @@ export class TopAlbumsListComponent implements OnInit {
     this.serverService.getTopAlbums(0,(response)=>{
       let x = response['result'];
       for(let y of x){
-        let tempAlbum = new Album(y['AlbumID'], y['Album'], y['Artist'], 0,false,0); //TODO check isBought parameter
+        let tempAlbum = new Album(y['AlbumID'], y['Album'], y['Artist'], 0,false,0);
         tempAlbum.setAlbumImagePath('albums', y['image_name']);
         this.topAlbums.push(tempAlbum);
         this.albumids.push(y['ArtistID']);

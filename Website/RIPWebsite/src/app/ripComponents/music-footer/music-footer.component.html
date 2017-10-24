@@ -30,7 +30,7 @@
         </div>
         <div *ngIf="showBuy" class="row">
           <p class="alert-danger">To listen the whole song</p>
-          <button class="btn btn-success">Buy</button>
+          <button class="btn btn-success" data-toggle="modal" data-target="#buyModal">Buy</button>
         </div>
       </div>
 
@@ -69,5 +69,38 @@
 
 
     </div>
+  </div>
+</div>
+
+
+
+<div id="buyModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h1 style="color: black" class="modal-title">Wallet</h1>
+      </div>
+      <div class="modal-body">
+        <div class="row center-block" style="margin-left: 0; margin-right: 0; border: solid black 1px">
+          <h4 class="center-block">Current Balance</h4>
+          <h2 style="color: black" class="center-block">{{balance}}</h2>
+        </div>
+
+        <div class="row center-block" style="margin-left: 0; margin-right: 0;">
+          <h2 class="center-block">{{currentlyPlaying.getSongName()}}</h2>
+          <h4 class="center-block">{{currentlyPlaying.getArtist()}}</h4>
+        </div>
+        <button class="btn btn-primary center-block" [disabled]="!sufficientFunds()" (click)="buySong()">Buy Song</button>
+        <div *ngIf="buySuccessful" class="panel-success">Song Successfully Bought</div>
+        <div class="panel-danger" *ngIf="!sufficientFunds()">You do not have sufficient funds to buy this song</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>

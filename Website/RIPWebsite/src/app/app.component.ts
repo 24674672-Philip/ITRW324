@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService} from "./services/auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,15 @@ import {AuthService} from "./services/auth.service";
 export class AppComponent {
   isLoggedIn: boolean;
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService,
+              private activeRoute: ActivatedRoute){
     this.authService.isLoggedIn.subscribe((event)=> this.isLoggedIn = event);
+    this.activeRoute.params.subscribe((params)=>{
+      if(params.toString() =='login' || params.toString() == 'register'){
+      this.authService.isLoggedIn.emit(false);
+    }
+
+  });
   }
 
 }

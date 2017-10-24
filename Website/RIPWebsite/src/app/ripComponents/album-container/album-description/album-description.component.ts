@@ -27,6 +27,7 @@ export class AlbumDescriptionComponent implements OnInit {
 
 
     this.dataServer.linkEmitter.subscribe((link)=>window.open(link,'_blank'));
+    this.dataServer.refreshSongList.subscribe(()=>this.ngOnInit());
   }
 
   ngOnInit() {
@@ -36,9 +37,10 @@ export class AlbumDescriptionComponent implements OnInit {
     this.serverService.getAlbumSongs(this.albumID.toString(),(response)=>{
       let xy = response['result'];
       for(let x of xy){
-
         console.log();
         let tempObject = new Song(x['musicID'],x['albumID'], x['artistID'],x['Artist'],x['Album'],x['Title'], x['price'],false, this.authService.getAuthToken());
+        tempObject.setFileName(x['Path']);
+        tempObject.setSongPathUrl(this.authService.getAuthToken(),tempObject.getFileName().replace('.mp3',''));
         tempObject.setSongImagePath('albums',x['album_image']);
         this.serverService.isPurchased(this.authService.getUserId(), tempObject.getSongID(),this.authService.getAuthToken(),
           (response)=> {

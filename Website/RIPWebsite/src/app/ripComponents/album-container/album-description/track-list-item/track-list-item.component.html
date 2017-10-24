@@ -34,9 +34,9 @@
           <h2 class="center-block">{{song.getSongName()}}</h2>
           <h4 class="center-block">{{song.getArtist()}}</h4>
         </div>
-        <button class="btn btn-primary center-block" [disabled]="disableBuy || !sufficientFunds()" (click)="buySong()">Buy Song</button>
+        <button class="btn btn-primary center-block" [disabled]="!sufficientFunds()" (click)="buySong()">Buy Song</button>
         <div *ngIf="buySuccessful" class="panel-success">Song Successfully Bought</div>
-        <div class="panel-danger" *ngIf="sufficientFunds()">You do not have sufficient funds to buy this song</div>
+        <div class="panel-danger" *ngIf="!sufficientFunds()">You do not have sufficient funds to buy this song</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

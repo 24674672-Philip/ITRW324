@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ServerService} from "../../../services/server.service";
 import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
+import {DataEmitterService} from "../../../services/data-emitter.service.service";
 
 @Component({
   selector: 'app-wallet',
@@ -21,7 +22,10 @@ export class WalletComponent implements OnInit {
 
   constructor(private serverService: ServerService,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private dataService: DataEmitterService) {
+    this.dataService.refreshCoins.subscribe(()=>this.ngOnInit());
+  }
 
   ngOnInit() {
     this.serverService.getAverageSongCost((response)=>{

@@ -1,4 +1,4 @@
-<div class="container-fluid" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div class="container-fluid" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding-top: 15px">
   <div class="row center-block">
     <img [src]="artistObj.getArtistImagePath()" class="img-responsive center-block" style="max-height: 400px"/>
   </div>
@@ -34,10 +34,10 @@
 </div>
 
 <!-- Trigger the modal with a button -->
+
 <button id="toggle-modal" data-toggle="modal" data-target="#editAlbumModal" hidden>edit</button>
 
 
-<!--TODO: add functionality for modal-->
 <!-- Modal -->
 <div id="editAlbumModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -57,21 +57,22 @@
             <app-edit-album-list [album]="albumToManage"></app-edit-album-list>
             <div class="btn-group">
               <button *ngIf="albumNotReleased" class="btn btn-success" (click)="releaseAlbum()">{{releasedSuccess?'Success':'Release Album'}}</button>
-              <button class="btn btn-default" (click)="editAlbum()">Edit Album</button>
               <button class="btn btn-danger" (click)="deleteAlbum()">Delete Album</button>
+              <div class="panel-success" *ngIf="deletedSuccess">Successfully deleted</div>
             </div>
           </div>
           <div *ngIf="editingSong" class="row" style="margin-right: 0; margin-left: 0">
             <div class="row">
-              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input class="form-control" [value]="editSongName"/></div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input class="form-control" [(ngModel)]="editSongName"/></div>
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">{{songToEdit.getArtist()}}</div>
-              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input class="form-control" [value]="editSongPrice"/></div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input class="form-control" [(ngModel)]="editSongPrice"/></div>
             </div>
 
             <div class="row">
               <div class="btn-group">
-                <button class="btn btn-success">Save Changes</button>
+                <button class="btn btn-success" (click)="editAlbum()" >Save Changes</button>
                 <button class="btn btn-danger" (click)="editingSong=false">Discard Changes</button>
+                <div class="panel-success" *ngIf="editedSuccess">Successfully edited</div>
               </div>
             </div>
           </div>
@@ -108,7 +109,7 @@
           <h4>Album Details</h4>
           <div class="row center-block" style="margin-left: 0; margin-right: 0;">
             <p style="font-weight: bold">Album Title</p>
-            <input name="album_name" class="form-control" placeholder="Album Title" id="album_name"/>
+            <input style="width: 30%" name="album_name" class="form-control center-block" placeholder="Album Title" id="album_name"/>
           </div>
 
           <h4>Album Songs</h4>
@@ -119,9 +120,9 @@
 
 
           <div class="btn-group" style="padding-top: 20px">
-            <button class="btn btn-success" [disabled]="!uploadActive" (click)="upload()">Upload+Release</button>
-            <p>NOTE: The album is not released on upload. To enable others to see your content go to manage content, click on the album and release it.</p>
+            <button class="btn btn-success center-block" [disabled]="!uploadActive" (click)="upload()">Upload+Release</button>
           </div>
+          <p>NOTE: The album is not released on upload. To enable others to see your content go to manage content, click on the album and release it.</p>
         </form>
 
 

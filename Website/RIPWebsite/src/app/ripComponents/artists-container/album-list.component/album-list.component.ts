@@ -18,6 +18,12 @@ export class AlbumListComponent implements OnInit {
               private serverService: ServerService,
               private dataServer: DataEmitterService) {
       this.artistID = this.activeRoute.snapshot.queryParams['id'];
+      this.dataServer.refreshArtistAlbums.subscribe(
+        ()=>{
+          this.albums = new Array<Album>();
+          this.ngOnInit();
+        }
+      )
   }
 
   ngOnInit() {
@@ -25,7 +31,7 @@ export class AlbumListComponent implements OnInit {
       let artistJSON = response['artist']['0'];
       let albumsJSON = response['albums'];
       for(let y of albumsJSON){
-        let tempObj: Album = new Album(y['AlbumID'].toString(),y['Album'].toString(), artistJSON['Artist'].toString(),y['Released'],false,0);//TODO: replace parameters
+        let tempObj: Album = new Album(y['AlbumID'].toString(),y['Album'].toString(), artistJSON['Artist'].toString(),y['Released'],false,0);
         tempObj.setAlbumImagePath('albums', y['image_name'].toString());
         this.albums.push(tempObj);
       }
